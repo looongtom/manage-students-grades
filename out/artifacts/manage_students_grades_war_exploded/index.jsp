@@ -17,9 +17,9 @@
     <div class="container">
         <label><b>Tên đăng nhập</b></label>
         <input type="text" placeholder="Nhập tên đăng nhập" name="username" required>
-        
+
         <label><b>Mật khẩu</b></label>
-        <input type="password" placeholder="Nhập mật khẩu" name="pass" required>
+        <input type="password" placeholder="Nhập mật khẩu" name="password" required>
 
         <button type="submit">Đăng nhập</button>
     </div>
