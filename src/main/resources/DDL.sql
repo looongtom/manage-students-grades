@@ -28,7 +28,7 @@ alter table MONHOC add primary key(id_mh);
 create table HOCKY
 (
  id_hk varchar(25) not null,
- ten_hoc_ky int
+ ten_hoc_ky varchar(100)
 );
 alter table HOCKY add primary key(id_hk);
 
