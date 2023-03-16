@@ -16,7 +16,7 @@
     <h2>Đăng nhập</h2>
     <div class="container">
         <label><b>Tên đăng nhập</b></label>
-        <input type="text" placeholder="Nhập tên đăng nhập" name="username" required>
+        <input type="text" placeholder="Nhập tên đăng nhập" name="user" required>
         
         <label><b>Mật khẩu</b></label>
         <input type="password" placeholder="Nhập mật khẩu" name="pass" required>

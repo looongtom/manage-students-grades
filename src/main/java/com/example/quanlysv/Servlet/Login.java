@@ -50,13 +50,6 @@ public class Login extends HttpServlet {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-
-//        if(username.equals("admin") && password.equals("pass")){
-//            resp.sendRedirect("home.jsp");
-//        }
-//        else{
-//            resp.sendRedirect("index.jsp");
-//        }
     }
     public void destroy() {
 
@@ -68,4 +61,3 @@ public class Login extends HttpServlet {
         }
     }
 }
-
