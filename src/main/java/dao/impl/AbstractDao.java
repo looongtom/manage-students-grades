@@ -11,7 +11,7 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
     public Connection getConnection() {
         String url = "jdbc:sqlserver://localhost:1433;databaseName=student_management";// anh em tự nhập Db của mình ở đây
         String username = "postgres"; //
-        String password = "10012001"; //
+        String password = "123456"; //
         try {
             Class.forName("org.postgresql.Driver");
             System.out.println("da ket noi thanh cong");
