@@ -6,11 +6,6 @@
     <link rel="stylesheet" href="./assets/css/login.css">
 </head>
 <body>
-<!-- <%--<form action="Login" method="post">--%>
-<%--    Tên đăng nhập: <input type="text" name = "user"><br>--%>
-<%--    Mật khẩu: <input type="password" name="pass"><br>--%>
-<%--    <input type="submit" value="Đăng nhập">--%>
-<%--</form>--%> -->
 
 <form action="Login" method="post">
     <h2>Đăng nhập</h2>
