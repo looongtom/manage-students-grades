@@ -53,7 +53,7 @@ create table SINHVIEN
  ten_sv varchar(50),
  email_sv varchar(80),
  dob_sv varchar(20),
- gender_sv int,
+ gender_sv varchar(20),
  phone_sv varchar(14),
  lop_hanh_chinh_sv varchar(50)
 );
@@ -86,7 +86,7 @@ create table GIANGVIEN
  ten_gv varchar(50),
  sdt_gv varchar(14),
  email_gv varchar(50),
- gender_gv int,
+ gender_gv varchar(20),
  id_khoa varchar(25)
 );
 alter table GIANGVIEN add primary key(id_gv);
