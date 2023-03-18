@@ -8,10 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Thêm điểm</title>
+    <%@include file="assets/include/menu_header.jsp" %>
 </head>
 <body>
-<center><h1>Nhập điểm</h1></center>
-
+<%@include file="assets/include/menu.jsp" %>
+<div>
+    Hello
+</div>
 </body>
 </html>
