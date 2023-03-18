@@ -9,6 +9,7 @@ target/
 .idea/compiler.xml
 .idea/libraries/
 out
+target
 *.iws
 *.iml
 *.ipr
