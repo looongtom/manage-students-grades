@@ -34,13 +34,14 @@ public class Delete_SV extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
 
             String sql ="DELETE from sinhvien where id_sv =?";
             PreparedStatement stmt=conn.prepareStatement(sql.toString());
             stmt.setString( 1, request.getParameter("id_sv") );
             stmt.executeUpdate();
+
             RequestDispatcher RequetsDispatcherObj =request.getRequestDispatcher("/List_SV.jsp");
             RequetsDispatcherObj.forward(request, response);
             stmt.close();
