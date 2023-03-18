@@ -14,7 +14,7 @@ public class Login extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String URL = "jdbc:postgresql://localhost:5432/quanlysinhvien";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "tr1nhtu@n";
+    private static final String PASSWORD = "mKdzvotoi47";
     private static Connection conn = null;
 
     public void init() throws ServletException {
