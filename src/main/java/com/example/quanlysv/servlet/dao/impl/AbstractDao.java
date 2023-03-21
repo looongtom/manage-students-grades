@@ -6,14 +6,17 @@ import com.example.quanlysv.servlet.mapper.IRowMapper;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public abstract class AbstractDao<T> implements IGenericDao<T> {
+
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
     public Connection getConnection() {
-        String url = "jdbc:postgresql://localhost:5432/student_management";// anh em tự nhập Db của mình ở đây
-        String username = "postgres"; //username thường để mặc định là postgres
-        String password = "10012001"; //nhập pass cua mình
+        String url = resourceBundle.getString("url");
+        String username = resourceBundle.getString("username");
+        String password = resourceBundle.getString("password");
         try {
-            Class.forName("org.postgresql.Driver");
+            Class.forName(resourceBundle.getString("driverName"));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

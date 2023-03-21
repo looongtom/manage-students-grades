@@ -3,6 +3,7 @@ package com.example.quanlysv.servlet.controller;
 import com.example.quanlysv.servlet.entity.AccountEntity;
 import com.example.quanlysv.servlet.service.IAuthService;
 import com.example.quanlysv.servlet.service.impl.AuthServiceImpl;
+import com.example.quanlysv.servlet.util.SessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,11 +31,7 @@ public class AuthController extends HttpServlet {
 
         if(accountEntity != null){
             // lưu đăng nhập vào session
-            HttpSession session = req.getSession();
-            session.setMaxInactiveInterval(60*60);
-
-            session.setAttribute("username", username);
-            session.setAttribute("role", accountEntity.getRoleId());
+            SessionUtils.getInstance().putValue(req, "ACCOUNT", accountEntity);
 
             resp.sendRedirect("/home/home.jsp");
         }
