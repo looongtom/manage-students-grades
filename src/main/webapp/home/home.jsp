@@ -7,11 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
-    <%@include file="assets/include/menu_header.jsp" %>
+    <%@include file="/assets/include/menu_header.jsp" %>
 </head>
 <body>
-    <%@include file="assets/include/menu.jsp" %>
+    <%@include file="./../assets/include/menu.jsp" %>
 </body>
-<script src="./assets/js/menu.js"></script>
+<script src="./../assets/js/menu.js"></script>
 </html>

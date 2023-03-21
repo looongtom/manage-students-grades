@@ -97,6 +97,23 @@ create table DAYHOC
  id_mh varchar(25)
 );
 
+create table taikhoan
+(
+    id bigint primary key,
+    username varchar(50),
+    password varchar(200),
+    email varchar(100),
+    role_id bigint
+);
+
+create table roles
+(
+    id bigint primary key ,
+    role_name varchar(30)
+);
+
+alter table taikhoan add foreign key(role_id) references roles(id)
+
 alter table DAYHOC add foreign key(id_gv) references GIANGVIEN(id_gv);
 alter table DAYHOC add foreign key(id_mh) references MONHOC(id_mh);
 alter table GIANGVIEN add foreign key(id_khoa) references KHOA(id_khoa);
