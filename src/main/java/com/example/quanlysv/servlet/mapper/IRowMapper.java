@@ -1,4 +1,4 @@
-package mapper;
+package com.example.quanlysv.servlet.mapper;
 
 import java.sql.ResultSet;
 

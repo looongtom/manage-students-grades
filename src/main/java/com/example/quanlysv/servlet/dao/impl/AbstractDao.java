@@ -1,19 +1,22 @@
-package dao.impl;
+package com.example.quanlysv.servlet.dao.impl;
 
-import dao.IGenericDao;
-import mapper.IRowMapper;
+import com.example.quanlysv.servlet.dao.IGenericDao;
+import com.example.quanlysv.servlet.mapper.IRowMapper;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public abstract class AbstractDao<T> implements IGenericDao<T> {
+
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
     public Connection getConnection() {
-        String url = "jdbc:postgresql://localhost:5432/quanlysinhvien";// anh em tự nhập Db của mình ở đây
-        String username = "postgres"; //username thường để mặc định là postgres
-        String password = "tr1nhtu@n"; //nhập pass cua mình
+        String url = resourceBundle.getString("url");
+        String username = resourceBundle.getString("username");
+        String password = resourceBundle.getString("password");
         try {
-            Class.forName("org.postgresql.Driver");
+            Class.forName(resourceBundle.getString("driverName"));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
