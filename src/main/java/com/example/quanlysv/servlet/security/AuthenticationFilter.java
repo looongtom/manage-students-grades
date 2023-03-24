@@ -25,20 +25,28 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String url = request.getRequestURI();
-        if(url.startsWith("/admin")){
+        if(url.startsWith("/home")){
             AccountEntity model = (AccountEntity) SessionUtils.getInstance().getValue(request, "ACCOUNT");
-
-            if(model != null){
-                 if(model.getRoleId().equals(Constant.ADMIN)){
-                     filterChain.doFilter(servletRequest, servletResponse);
-                 }
-                 else if(model.getRoleId().equals(Constant.USER)){
-                     response.sendRedirect(request.getContextPath());
-                 }
+            if(model == null){
+//                 if(model.getRoleId().equals(Constant.ADMIN)){
+//                     filterChain.doFilter(servletRequest, servletResponse);
+//                 }
+//                 else if(model.getRoleId().equals(Constant.USER)){
+//                     response.sendRedirect(request.getContextPath());
+//                 }
+                response.sendRedirect("/");
             }
             else{
-                response.sendRedirect(request.getContextPath());
+//                response.sendRedirect(request.getContextPath());
+                filterChain.doFilter(servletRequest, servletResponse);
             }
+        }
+        else if(url.startsWith("/user")){
+
+        }
+        else if(url.startsWith("/auth")){
+            // bỏ qua nếu là đăng nhập
+            filterChain.doFilter(servletRequest, servletResponse);
         }
         else{
             // đi tiếp không cần filter

@@ -32,8 +32,7 @@ public class AuthController extends HttpServlet {
         if(accountEntity != null){
             // lưu đăng nhập vào session
             SessionUtils.getInstance().putValue(req, "ACCOUNT", accountEntity);
-
-            resp.sendRedirect("/home/home.jsp");
+            resp.sendRedirect(req.getContextPath() + "/home/home.jsp");
         }
         else{
             String errorMessage = "Invalid username or password";
