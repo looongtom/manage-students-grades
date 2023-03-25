@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 
 public abstract class AbstractDao<T> implements IGenericDao<T> {
 
+    private PreparedStatement preparedStatement = null;
+
     ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
     public Connection getConnection() {
         String url = resourceBundle.getString("url");
@@ -62,7 +64,7 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
         return data;
     }
 
-    public void insert(String sql,Object... param){
+    public void insertOrUpdateOrDelete(String sql,Object... param){
         PreparedStatement preparedStatement = null;
         Connection connection = getConnection();
 
@@ -96,6 +98,8 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
             }
         }
     }
+
+
     private void setParam(PreparedStatement preparedStatement,Object... param) throws SQLException {
         for (int i = 0; i < param.length; i++) {
             int index = i + 1;
