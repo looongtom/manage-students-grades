@@ -15,9 +15,7 @@ import java.io.IOException;
 
 @WebServlet("/auth/login")
 public class AuthController extends HttpServlet {
-
     private IAuthService authService;
-
     public AuthController(){
         authService = new AuthServiceImpl();
     }
