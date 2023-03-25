@@ -1,5 +1,7 @@
 package com.example.quanlysv.servlet;
 
+import com.example.quanlysv.Connection.ConnectPostgreSql;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,30 +12,14 @@ import java.sql.*;
 
 @WebServlet("/Login")
 public class Login extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private static final String URL = "jdbc:postgresql://localhost:5432/quanlysinhvien";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "mKdzvotoi47";
-    private static Connection conn = null;
-
-    public void init() throws ServletException {
-
-        // Database connection through Driver Manager
-        try {
-            Class.forName( "org.postgresql.Driver");
-            conn = DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ConnectPostgreSql.ConnectDatabase();
         String username=req.getParameter("user");
         String password=req.getParameter("pass");
         try{
             String sql="select * from giangvien where sdt_gv=? and id_gv=?";
-            PreparedStatement stmt=conn.prepareStatement(sql);
+            PreparedStatement stmt=ConnectPostgreSql.Conn.prepareStatement(sql);
             stmt.setString( 1,username );
             stmt.setString( 2,password );
             ResultSet rs =stmt.executeQuery();
@@ -54,7 +40,7 @@ public class Login extends HttpServlet {
 
         // Close connection object.
         try {
-            conn.close();
+            ConnectPostgreSql.Conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,7 @@
 package com.example.quanlysv.servlet;
 
+import com.example.quanlysv.Connection.ConnectPostgreSql;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,30 +17,14 @@ import java.sql.SQLException;
 
 @WebServlet("/Delete_SV")
 public class Delete_SV extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private static final String URL = "jdbc:postgresql://localhost:5432/quanlysinhvien";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "tr1nhtu@n";
-    private static Connection conn = null;
-
-    public void init() throws ServletException {
-        // Database connection through Driver Manager
-        try {
-            Class.forName( "org.postgresql.Driver");
-            conn = DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ConnectPostgreSql.ConnectDatabase();
         try {
             response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
-
             String sql ="DELETE from sinhvien where id_sv =?";
-            PreparedStatement stmt=conn.prepareStatement(sql.toString());
+            PreparedStatement stmt=ConnectPostgreSql.Conn.prepareStatement(sql.toString());
             stmt.setString( 1, request.getParameter("id_sv") );
             stmt.executeUpdate();
 
@@ -50,13 +36,12 @@ public class Delete_SV extends HttpServlet {
             e.printStackTrace();
         }
     }
-
-    public void destroy() {
-        // Close connection object.
-        try {
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void destroy() {
+//        // Close connection object.
+//        try {
+//            ConnectPostgreSql.Conn.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

@@ -31,7 +31,7 @@
   <input type="text" name="dob_sv" >
 
   <l>Giới tính:</l>
-  <input type="text" name="gender_sv" >
+  <input type="text" name="gender_sv" lang="vi" >
 
   <l>Số điện thoại:</l>
   <input type="text" name="phone_sv" >

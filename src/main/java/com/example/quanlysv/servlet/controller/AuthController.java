@@ -32,7 +32,6 @@ public class AuthController extends HttpServlet {
         if(accountEntity != null){
             // lưu đăng nhập vào session
             SessionUtils.getInstance().putValue(req, "ACCOUNT", accountEntity);
-
             resp.sendRedirect("/home/home.jsp");
         }
         else{

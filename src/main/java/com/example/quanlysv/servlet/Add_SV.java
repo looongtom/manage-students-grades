@@ -1,5 +1,7 @@
 package com.example.quanlysv.servlet;
 
+import com.example.quanlysv.Connection.ConnectPostgreSql;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,26 +16,6 @@ import java.sql.SQLException;
 
 @WebServlet("/Add_SV")
 public class Add_SV extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private static final String URL = "jdbc:postgresql://localhost:5432/quanlysinhvien";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "tr1nhtu@n";
-    private static Connection conn = null;
-
-
-
-    public void init() throws ServletException {
-
-        // Database connection through Driver Manager
-        try {
-            Class.forName( "org.postgresql.Driver");
-            conn = DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     public void doFilter(HttpServletRequest request,
                          HttpServletResponse response,
                          FilterChain chain) throws ServletException, IOException {
@@ -42,14 +24,15 @@ public class Add_SV extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ConnectPostgreSql.ConnectDatabase();
         try {
             response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
 
             String sql ="INSERT INTO sinhvien(id_sv, ten_sv, email_sv, dob_sv, gender_sv, phone_sv, lop_hanh_chinh_sv)VALUES (?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement stmt=conn.prepareStatement(sql.toString());
+            PreparedStatement stmt=ConnectPostgreSql.Conn.prepareStatement(sql.toString());
             stmt.setString( 1, request.getParameter("id_sv") );
-            stmt.setString(2,new String(request.getParameter("ten_sv").getBytes("ISO-8859-1"),"UTF-8"));
+            stmt.setString(2,new String(request.getParameter("ten_sv").getBytes("ISO-8859-1"),"UTF-8") );
             stmt.setString(3, request.getParameter("email_sv") );
             stmt.setString(4, request.getParameter("dob_sv") );
             stmt.setString(5,new String(request.getParameter("gender_sv").getBytes("ISO-8859-1"),"UTF-8"));
@@ -77,10 +60,9 @@ public class Add_SV extends HttpServlet {
         }
     }
     public void destroy() {
-
         // Close connection object.
         try {
-            conn.close();
+            ConnectPostgreSql.Conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
