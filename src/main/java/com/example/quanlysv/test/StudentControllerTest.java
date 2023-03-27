@@ -4,6 +4,7 @@ package com.example.quanlysv.test;
 import com.example.quanlysv.servlet.controller.student.CreateOrEditStudentController;
 import com.example.quanlysv.servlet.controller.student.DeleteStudentController;
 import com.example.quanlysv.servlet.controller.student.DisplayStudentController;
+import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.student.StudentDTO;
 import com.example.quanlysv.servlet.service.IStudentService;
 import org.mockito.InjectMocks;
@@ -21,7 +22,7 @@ public class StudentControllerTest {
     private IStudentService serviceMock;
 
     @InjectMocks
-    private DeleteStudentController controller;
+    private DisplayStudentController controller;
 
     @BeforeClass
     public void initMocks() {
@@ -38,14 +39,14 @@ public class StudentControllerTest {
 //        request.setSortOrder("desc");
 
         // when // test lấy danh sách
-//        List<StudentDTO> actualStudents = controller.findStudent();
-//
-//        actualStudents.stream().forEach(x ->{
-//            System.out.println(x.toString());
-//        });
+        List<StudentDTO> actualStudents = controller.findStudent();
+
+        actualStudents.stream().forEach(x ->{
+            System.out.println(x.toString());
+        });
 
         // test thêm mới và sửa
-        controller.deleteStudentById();
+//        controller.deleteStudentById();
 
     }
 }

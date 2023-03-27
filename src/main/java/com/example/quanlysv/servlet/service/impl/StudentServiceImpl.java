@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentServiceImpl implements IStudentService {
-
-
     private IStudentDao studentDao;
 
     public StudentServiceImpl(){
@@ -27,13 +25,11 @@ public class StudentServiceImpl implements IStudentService {
         List<StudentDTO> result = new ArrayList<>();
         try{
             List<StudentEntity> list = studentDao.findStudent(request);
-
             for(int i=0; i< list.size(); i++){
                 result.add(Convert.convertEntityToDTO(list.get(i), StudentDTO.class));
             }
             return result;
         }catch (Exception e){
-
             return result;
         }
     }
