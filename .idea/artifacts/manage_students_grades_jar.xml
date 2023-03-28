@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="manage-students-grades:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/manage_students_grades_jar</output-path>
+    <root id="archive" name="manage-students-grades.jar">
+      <element id="module-output" name="manage-students-grades" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/checkerframework/checker-qual/3.5.0/checker-qual-3.5.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/postgresql/postgresql/42.5.4/postgresql-42.5.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
