@@ -1,0 +1,107 @@
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu{
+    width: 300px;
+    background-color: #333;
+    padding-left: 20px;
+    color: var(--white-color);
+    height: 100vh;
+}
+
+.nganCach{
+    height: 0.5px;
+    margin-left: -20px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.tieuDe {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.logo {
+    width: 30px;
+}
+
+.tenTieuDe {
+    padding-left: 10px;
+    font-size: 1.8rem;
+    line-height: 30px;
+}
+
+.taiKhoan {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.avatar {
+    height: 30px;
+}
+
+.tenTaiKhoan {
+    padding-left: 10px;
+    font-size: 1.5rem;
+    line-height: 30px;
+}
+
+.menuMuc {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 5px;
+    text-decoration: none;
+    color: var(--white-color);
+}
+
+.menuMuc:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    padding-left: 20px;
+    margin-left: -20px;
+}
+
+.bamVao,
+.bamVao:hover {
+    padding-left: 20px;
+    margin-left: -20px;
+    background-color: var(--red-color);
+}
+
+.icon-Muc {
+    width: 24px;
+}
+
+.menuMuc-tieuDe {
+    padding-left: 10px;
+    font-size: 1.4rem;
+    line-height: 24px;
+}
+
+.dangXuat {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 5px;
+    text-decoration: none;
+    color: var(--white-color);
+    background-color: var(--red-color);
+    margin-left: -20px;
+    position: fixed;
+    bottom: 0;
+    width: 300px;
+}
+
+.icon-DangXuat {
+    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+}
+
+.dangXuat-tieuDe {
+    padding-left: 12px;
+    line-height: 30px;
+    font-size: 1.6rem;
+}
