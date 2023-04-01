@@ -9,10 +9,11 @@
 <html>
 
 <head>
-    <%@include file="/assets/include/menu_header.jsp" %>
+    <%@include file="/home/admin/menu/menu_header.jsp" %>
+    <link rel="stylesheet" href="../assets/css/home.css">
+    <title>Trang chủ</title>
 </head>
 <body>
-    <%@include file="./../assets/include/menu.jsp" %>
+    <%@include file="admin/menu/menu.jsp" %>
 </body>
-<script src="./../assets/js/menu.js"></script>
 </html>
