@@ -20,7 +20,7 @@ public class DeleteStudentController extends HttpServlet {
     public void deleteStudentById(){
 
         // test delete student ==> done ==> cho ghep front end
-        String id = "SV005";
+        String id = "SV001";
         service.deleteStudentById(id);
 
         System.out.println("xoa thanh cong");

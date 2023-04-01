@@ -30,4 +30,30 @@ public class LopServiceImpl implements ILopService {
             return result;
         }
     }
+
+    @Override
+    public void deleteLopById(String id) {
+        try{
+            if(!id.trim().isEmpty()){
+                lopDao.deleteLopById(id.trim());
+            }
+        }catch (Exception e){
+            throw new RuntimeException("delete lop failed: "+ e.getMessage());
+
+        }
+    }
+
+    @Override
+    public void createOrUpdateLop(LopDTO lopDTO) {
+        try{
+            LopEntity lopEntity = Convert.convertDTOToEntity(lopDTO, LopEntity.class);
+            if(lopEntity!=null){
+                lopDao.createOrUpdateLop(lopEntity);
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -20,13 +20,13 @@ public class CreateOrEditStudentController extends HttpServlet {
         // test create student ==> done ==> chờ front-end
 
         StudentDTO studentDTO = new StudentDTO();
-        studentDTO.setIdSv("B10DCCN575");
-        studentDTO.setEmailSv("son@gmail.com");
-        studentDTO.setDobSv("aaa");
-        studentDTO.setPhoneSv("097782293");
-        studentDTO.setLopHanhChinhSv("aaaaaaa");
-        studentDTO.setGenderSv("nam");
-        studentDTO.setTenSv("sonln1");
+        studentDTO.setIdSv("SV001");
+        studentDTO.setEmailSv("tuan@gmail.com");
+        studentDTO.setDobSv("27/01/2002");
+        studentDTO.setPhoneSv("0123456789");
+        studentDTO.setLopHanhChinhSv("CN11");
+        studentDTO.setGenderSv("Nam");
+        studentDTO.setTenSv("Trịnh Minh Tuấn");
 
         service.createOrUpdateStudent(studentDTO);
         System.out.println("tao thanh cong");
