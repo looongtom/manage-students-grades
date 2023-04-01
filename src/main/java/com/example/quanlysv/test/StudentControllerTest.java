@@ -32,18 +32,18 @@ public class StudentControllerTest {
     @Test
     public void testFindStudent() {
         // given
-//        BaseRequest request = new BaseRequest();
-//        request.setPageIndex(0);
-//        request.setPageSize(7);
-//        request.setSortField("tenSv");
-//        request.setSortOrder("desc");
+        BaseRequest request = new BaseRequest();
+        request.setPageIndex(0);
+        request.setPageSize(7);
+        request.setSortField("tenSv");
+        request.setSortOrder("desc");
 
         // when // test lấy danh sách
         List<StudentDTO> actualStudents = controller.findStudent();
 
-        actualStudents.stream().forEach(x ->{
-            System.out.println(x.toString());
-        });
+//        actualStudents.stream().forEach(x ->{
+//            System.out.println(x.toString());
+//        });
 
         // test thêm mới và sửa
 //        controller.deleteStudentById();

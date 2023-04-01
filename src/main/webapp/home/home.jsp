@@ -9,7 +9,7 @@
 <html>
 
 <head>
-    <%@include file="/assets/include/menu_header.jsp" %>
+    <%@include file=".././assets/include/menu_header.jsp" %>
 </head>
 <body>
     <%@include file="./../assets/include/menu.jsp" %>

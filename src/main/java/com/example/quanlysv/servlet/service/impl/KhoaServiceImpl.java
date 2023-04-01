@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KhoaServiceImpl implements IKhoaService {
-
     private IKhoaDao khoaDao;
 
     public KhoaServiceImpl(){
