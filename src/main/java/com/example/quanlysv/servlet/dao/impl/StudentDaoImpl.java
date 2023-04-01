@@ -63,7 +63,7 @@ public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStude
             }
 
         }catch (Exception e){
-            throw new RuntimeException("create student failed: "+ e.getMessage());
+            throw new RuntimeException("delete student failed: "+ e.getMessage());
         }
     }
 }

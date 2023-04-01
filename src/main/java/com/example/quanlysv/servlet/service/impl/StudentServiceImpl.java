@@ -55,7 +55,7 @@ public class StudentServiceImpl implements IStudentService {
                 studentDao.deleteStudentById(id.trim());
             }
         }catch (Exception e){
-            throw new RuntimeException("create student failed: "+ e.getMessage());
+            throw new RuntimeException("delete student failed: "+ e.getMessage());
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.example.quanlysv.test;
 
+import com.example.quanlysv.servlet.controller.lop.CreateOrUpdateLopController;
+import com.example.quanlysv.servlet.controller.lop.DeleteLopController;
 import com.example.quanlysv.servlet.controller.lop.DisplayLopController;
 import com.example.quanlysv.servlet.dto.request.lop.LopDTO;
 import com.example.quanlysv.servlet.service.ILopService;
@@ -16,6 +18,8 @@ public class LopControllerTest {
     private ILopService lopMock;
     @InjectMocks
     private DisplayLopController controller;
+    private DeleteLopController deleteLopController;
+    private CreateOrUpdateLopController createOrUpdateLopController;
 
     @BeforeClass
     public  void initMock(){
@@ -23,9 +27,11 @@ public class LopControllerTest {
     }
     @Test
     public void testFindLop(){
-        List<LopDTO> actualLop=controller.findLop();
-        actualLop.stream().forEach(x->{
-            System.out.println(x.toString());
-        });
+//        List<LopDTO> actualLop=controller.findLop();
+//        actualLop.stream().forEach(x->{
+//            System.out.println(x.toString());
+//        });
+//        deleteLopController.deleteLopById();
+        createOrUpdateLopController.createLop();
     }
 }

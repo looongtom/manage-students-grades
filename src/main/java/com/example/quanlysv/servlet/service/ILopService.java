@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface ILopService {
     List<LopDTO> findLop(BaseRequest request);
+
+    void deleteLopById(String id);
+
+    void createOrUpdateLop(LopDTO lopDTO);
 }
