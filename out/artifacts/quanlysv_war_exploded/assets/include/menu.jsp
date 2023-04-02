@@ -14,11 +14,11 @@
     <img src="./../assets/images/home.png" alt="Trang chủ" class="icon-Muc">
     <div class="menuMuc-tieuDe">Trang chủ</div>
   </a>
-  <a class="menuMuc" href="Add_grade.jsp">
+  <a class="menuMuc" href="../../home/Add_grade.jsp">
     <img src="./../assets/images/score.png" alt="Điểm" class="icon-Muc">
     <div class="menuMuc-tieuDe">Nhập điểm</div>
   </a>
-  <a class="menuMuc" href="List_SV.jsp">
+  <a class="menuMuc" href="../../home/List_SV.jsp">
     <img src="./../assets/images/student.svg" alt="Sinh viên" class="icon-Muc">
     <div class="menuMuc-tieuDe">Sinh viên</div>
   </a>
@@ -30,7 +30,7 @@
     <img src="./../assets/images/general_info.png" alt="Thông tin chung" class="icon-Muc">
     <div class="menuMuc-tieuDe">Thông tin chung</div>
   </a>
-  <a class="menuMuc" href="List_MH.jsp">
+  <a class="menuMuc" href="../../List_MH.jsp">
     <img src="./../assets/images/subject.jpg" alt="Thông tin mon hoc" class="icon-Muc">
     <div class="menuMuc-tieuDe">Thông tin môn học</div>
   </a>

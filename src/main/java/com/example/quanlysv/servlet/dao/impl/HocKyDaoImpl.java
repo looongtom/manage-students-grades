@@ -24,6 +24,7 @@ public class HocKyDaoImpl extends AbstractDao<HocKyEntity> implements IHocKyDao 
             List<HocKyEntity> list = findByProperties(sql, new HocKyMapper(),
                     request.getPageIndex() * request.getPageSize(), request.getPageSize());
 
+
             return list.isEmpty()? null: list;
 
         }catch (Exception e){
