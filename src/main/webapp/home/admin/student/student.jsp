@@ -21,7 +21,7 @@
     <h1 class="tieuDeTrang">Danh sách sinh viên</h1>
     <div class="themVaTimKiem">
         <!-- nut them sinh vien -->
-        <button id="nut_them_SV" class="nutThemSV js-nutThemSV" type="submit">
+        <button id="nut_them_SV" onclick="showModal('modal_sinh_vien')" class="nutThemSV js-nutThemSV" type="submit" >
             <span class="nutThemSV_tieuDe">Thêm sinh viên</span>
             <i class="fa-solid fa-plus"></i>
         </button>
@@ -164,6 +164,7 @@
 
     <script src="../../../assets/js/student.js"></script>
     <script src="../../../assets/js/pagination_student.js"></script>
+    <script src="../../../assets/js/add_student.js"></script>
 </div>
 </body>
 </html>

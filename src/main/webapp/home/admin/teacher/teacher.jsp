@@ -10,6 +10,7 @@
 <head>
     <%@include file="../menu/menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/teacher.css">
+    <link rel="stylesheet" href="../../../assets/css/add-student-form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
     <link rel="stylesheet" href="../../../assets/themify-icons/themify-icons.css">
     <title>Giảng viên</title>
@@ -155,8 +156,12 @@
     </div>
 
 <%--    Them modal o day nhe quan, co gi tao file rieng roi dung include cho clean code--%>
+    <%@include file="../teacher/teacher_form.jsp" %>
 
     <script src="../../../assets/js/teacher.js"></script>
     <script src="../../../assets/js/pagination_teacher.js"></script>
+    <script src="../../../assets/js/text_error.js"></script>
+    <script src="../../../assets/js/add_teacher.js"></script>
+
 </body>
 </html>
