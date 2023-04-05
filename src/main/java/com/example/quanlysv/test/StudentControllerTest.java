@@ -39,11 +39,11 @@ public class StudentControllerTest {
 //        request.setSortOrder("desc");
 
         // when // test lấy danh sách
-        List<StudentDTO> actualStudents = controller.findStudent();
+//        List<StudentDTO> actualStudents = controller.findStudent();
 
-        actualStudents.stream().forEach(x ->{
-            System.out.println(x.toString());
-        });
+//        actualStudents.stream().forEach(x ->{
+//            System.out.println(x.toString());
+//        });
 
         // test thêm mới và sửa
 //        controller.deleteStudentById();
