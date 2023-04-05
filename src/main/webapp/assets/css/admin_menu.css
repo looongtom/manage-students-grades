@@ -4,17 +4,33 @@ body {
 }
 
 .menu{
-    width: 25%;
-    background-color: #333;
+    width: 20%;
+    height: 100%;
+    background-color: var(--menu-color);
     padding-left: 20px;
     color: var(--white-color);
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    margin: 0;
+}
+
+.manHinhChinh {
+    width: 80%;
+    padding-left: 30px;
+    margin-left: 20%;
+    margin-right: 30px;
+}
+
+.menuChinh {
+    background-color: var(--menu-color);
 }
 
 .nganCach{
     height: 0.5px;
     margin-left: -20px;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: var(--hover-color);
 }
 
 .tieuDe {
@@ -25,6 +41,7 @@ body {
 }
 
 .logo {
+    height: 30px;
     width: 30px;
 }
 
@@ -42,6 +59,7 @@ body {
 
 .avatar {
     height: 30px;
+    width: 30px;
 }
 
 .tenTaiKhoan {
@@ -59,12 +77,13 @@ body {
 }
 
 .menuMuc:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: var(--hover-color);
     padding-left: 20px;
     margin-left: -20px;
 }
 
 .icon-Muc {
+    height: 24px;
     width: 24px;
 }
 
@@ -82,9 +101,6 @@ body {
     color: var(--white-color);
     background-color: var(--red-color);
     margin-left: -20px;
-    position: fixed;
-    bottom: 0;
-    width: 25%;
 }
 
 .icon-DangXuat {
@@ -97,4 +113,33 @@ body {
     padding-left: 12px;
     line-height: 30px;
     font-size: 1.6rem;
+}
+
+.thongTin-cacMucCon,
+.monHoc-cacMucCon,
+.khoa-cacMucCon,
+.nguoiDung-cacMucCon {
+    display: none;
+    background-color: rgba(0,0,0,.85);
+    margin-left: -20px;
+    padding-left: 55px;
+}
+
+.mucCon:hover {
+    background-color: var(--hover-color);
+    margin-left: -55px;
+    padding-left: 60px;
+}
+
+.open {
+    display: flex;
+    flex-direction: column;
+}
+
+.mucCon {
+    text-decoration: none;
+    color: var(--white-color);
+    font-size: 1.4rem;
+    line-height: 24px;
+    padding: 10px 5px;
 }

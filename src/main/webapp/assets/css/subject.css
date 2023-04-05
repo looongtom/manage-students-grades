@@ -2,8 +2,8 @@ button {
     border-radius: 5px;
 }
 
-.sinhVienMuc,
-.sinhVienMuc:hover {
+.monHocMuc,
+.monHocMuc:hover {
     padding-left: 20px;
     margin-left: -20px;
     background-color: var(--red-color);
@@ -31,7 +31,7 @@ h1 {
     margin-left: 10px;
 }
 
-.nutThemSV,
+.nutThemMH,
 .nutTimKiem {
     background-color: var(--red-color);
     color: var(--white-color);
@@ -44,13 +44,13 @@ h1 {
     margin-right: 10px;
 }
 
-.nutThemSV:hover,
+.nutThemMH:hover,
 .nutTimKiem:hover {
     background-color: var(--red-color);
     opacity: 0.7;
 }
 
-.nutThemSV_tieuDe {
+.nutThemMH_tieuDe {
     margin-right: 10px;
 }
 
@@ -78,7 +78,27 @@ h1 {
     margin-right: 5px;
 }
 
+/* table */
+.hanh-dong {
+    width: 170px;
+}
+
+.cot-maMH,
+.cot-TC {
+    width: 170px;
+    text-align: center;
+}
+
+.cot-tenMH {
+    width: 350px;
+}
+
+.cot-khoa {
+    width: 250px;
+}
+
 .danhSach {
+    table-layout: fixed;
     width: 100%;
     font-size: 14px;
     color: var(--text-color);
@@ -87,8 +107,7 @@ h1 {
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.4);
 }
 
-th,
-td {
+th, td {
     padding: 10px 15px;
     font-weight: 500;
 }
