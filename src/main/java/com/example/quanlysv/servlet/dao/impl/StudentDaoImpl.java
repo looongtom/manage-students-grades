@@ -13,9 +13,13 @@ public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStude
         String sql = "SELECT sv.id_sv as idSv, sv.ten_sv as tenSv, sv.email_sv as emailSv," +
                 "sv.dob_sv as dobSv, sv.gender_sv as genderSv," +
                 "sv.phone_sv as phoneSv, sv.lop_hanh_chinh_sv as lopHanhChinhSv" +
-                " FROM sinhvien as sv ORDER BY " + request.getSortField() + " "+  request.getSortOrder() + " OFFSET ? LIMIT ?";
+                " FROM sinhvien as sv where" +
+                " lower(sv.ten_sv) like concat('%',lower(?), '%') ORDER BY " +
+                request.getSortField() + " "+  request.getSortOrder() + " OFFSET ? LIMIT ?";
+
         List<StudentEntity> studentEntities = findByProperties(sql, new StudentMapper(),
-                request.getPageIndex() * request.getPageSize(), request.getPageSize());
+                request.getSearchTerm(),
+                (request.getPageIndex()-1) * request.getPageSize(), request.getPageSize());
         return studentEntities.isEmpty() ? null : studentEntities;
     }
 

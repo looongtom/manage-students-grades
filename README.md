@@ -1,4 +1,4 @@
-# Nhóm 11:
+# Nhóm 8:
  Chủ đề: Xây dựng web quản lý điểm sinh viên
 
 Thành viên:

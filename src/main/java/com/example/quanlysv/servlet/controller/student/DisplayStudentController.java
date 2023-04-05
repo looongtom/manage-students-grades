@@ -18,14 +18,14 @@ public class DisplayStudentController extends HttpServlet {
         this.service = new StudentServiceImpl();
     }
 
-    public  List<StudentDTO> findStudent(){
-        // test find student => done ==> cho front-end
-        BaseRequest request = new BaseRequest();
-        request.setPageIndex(0);
-        request.setPageSize(7);
-        request.setSortField("tenSv");
-        request.setSortOrder("desc");
-        return service.findStudent(request);
-    }
+//    public  List<StudentDTO> findStudent(){
+//        // test find student => done ==> cho front-end
+//        BaseRequest request = new BaseRequest();
+//        request.setPageIndex(0);
+//        request.setPageSize(7);
+//        request.setSortField("tenSv");
+//        request.setSortOrder("desc");
+//        return service.findStudent(request);
+//    }
 
 }
