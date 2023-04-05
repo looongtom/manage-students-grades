@@ -4,9 +4,6 @@
     box-sizing: border-box ;
 }
 
-
-
-
 /* Common */
 
 .clear{
@@ -231,10 +228,6 @@
 .modal1.open {
     display: flex;
 }
-
-
-
-
 
 @keyframes modalFadeIn {
     from{

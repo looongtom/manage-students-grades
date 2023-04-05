@@ -6,7 +6,7 @@ body {
 .menu{
     width: 20%;
     height: 100%;
-    background-color: #001529;
+    background-color: var(--menu-color);
     padding-left: 20px;
     color: var(--white-color);
     display: flex;
@@ -14,15 +14,13 @@ body {
     justify-content: space-between;
     position: fixed;
     margin: 0;
-    overflow: auto;
 }
 
 .manHinhChinh {
     width: 80%;
     padding-left: 30px;
-    padding-right: 20px;
     margin-left: 20%;
-    overflow-x: auto;
+    margin-right: 30px;
 }
 
 .menuChinh {
@@ -32,7 +30,7 @@ body {
 .nganCach{
     height: 0.5px;
     margin-left: -20px;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: var(--hover-color);
 }
 
 .tieuDe {
@@ -79,7 +77,7 @@ body {
 }
 
 .menuMuc:hover {
-    background-color: rgba(255, 255, 255, 0.3)s;
+    background-color: var(--hover-color);
     padding-left: 20px;
     margin-left: -20px;
 }
@@ -100,7 +98,7 @@ body {
     flex-direction: row;
     padding: 10px 5px;
     text-decoration: none;
-    color: white;
+    color: var(--white-color);
     background-color: var(--red-color);
     margin-left: -20px;
 }
@@ -128,7 +126,7 @@ body {
 }
 
 .mucCon:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: var(--hover-color);
     margin-left: -55px;
     padding-left: 60px;
 }
