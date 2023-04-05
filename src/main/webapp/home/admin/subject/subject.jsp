@@ -87,8 +87,6 @@
         <ul></ul>
     </div>
 
-    <%--    Them modal o day nhe quan, co gi tao file rieng roi dung include cho clean code--%>
-
     <script src="../../../assets/js/subject.js"></script>
     <script src="../../../assets/js/pagination_subject.js"></script>
 </div>

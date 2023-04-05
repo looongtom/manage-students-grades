@@ -35,15 +35,15 @@ public class LopServiceImpl implements ILopService {
             List<LopEntity>list=lopDao.findLop(request);
 
             dtoList=list.stream().map(x->{
-               try {
-                   return Convert.convertEntityToDTO(x,LopDTO.class);
-               }catch (IllegalAccessException e){
-                   System.out.println(e.getCause());
-                   return null;
-               }catch (InstantiationException e){
-                   System.out.println(e.getCause());
-                   return null;
-               }
+                try {
+                    return Convert.convertEntityToDTO(x,LopDTO.class);
+                }catch (IllegalAccessException e){
+                    System.out.println(e.getCause());
+                    return null;
+                }catch (InstantiationException e){
+                    System.out.println(e.getCause());
+                    return null;
+                }
             }).filter(Objects::nonNull).collect(Collectors.toList());
 
             return new BaseResponse.Builder<List<LopDTO>>()

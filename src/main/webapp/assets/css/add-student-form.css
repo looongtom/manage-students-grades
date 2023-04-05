@@ -1,36 +1,39 @@
-*{
+* {
     padding: 0;
     margin: 0;
-    box-sizing: border-box ;
+    box-sizing: border-box;
 }
+
+
+
 
 /* Common */
 
-.clear{
+.clear {
     clear: both;
 }
 
 
-.text-white{
+.text-white {
     color: #fff !important;
 }
 
 
-.text-center{
+.text-center {
     text-align: center !important;
 }
 
-.pull-right{
+.pull-right {
     float: right !important;
 }
 
-.btn:hover{
+.btn:hover {
     color: #000;
     background-color: #ccc;
     cursor: pointer;
 }
 
-.btn{
+.btn {
     background-color: #000;
     text-decoration: none;
     display: inline-block;
@@ -41,18 +44,18 @@
     border: none;
 }
 
-.row{
+.row {
     margin-right: -8px;
     margin-left: -8px;
 }
 
-.row::after{
+.row::after {
     display: block;
-    content :"";
-    clear:both;
+    content: "";
+    clear: both;
 }
 
-.col{
+.col {
     float: left;
     padding-left: 8px;
     padding-right: 8px;
@@ -62,74 +65,60 @@
     width: 100%;
 }
 
-.col-half{
+.col-half {
     width: 50%;
 }
 
-.col-third{
+.col-third {
     width: calc(100%/3);
 }
 
-.mt-8{
+.mt-8 {
     margin-top: 8px !important;
 }
 
-.mt-16{
+.mt-16 {
     margin-top: 16px;
 }
 
 
 
 
-.modal-container{
+.modal-container {
     scroll-behavior: smooth;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 15px;
 }
 
-
-
-.modal{
+.boc-modal {
     position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-    background: rgba(0,0,0,0.3);
-    display: flex;
+    background: rgba(0, 0, 0, 0.3);
     align-items: center;
     justify-content: center;
     display: none;
 }
 
-
-.modal1{
-    position: fixed;
-    top: 0;
-    bottom: 0;
+.modal {
+    position: relative;
+    top: 10%;
+    bottom: 10%;
     right: 0;
     left: 0;
-    background: rgba(0,0,0,0.3);
     display: flex;
     align-items: center;
     justify-content: center;
-    display: none;
 }
+
+
 
 .modal-container {
+    position: relative;
     background-color: #fff;
     width: 600px;
-    min-height: 200px;
-    position: relative;
-    max-width: calc(100% - 32px);
-    animation: modalFadeIn ease 0.5s;
-}
-
-.modal-container1 {
-    background-color: #fff;
-    width: 600px;
-    min-height: 200px;
-    position: relative;
     max-width: calc(100% - 32px);
     animation: modalFadeIn ease 0.5s;
 }
@@ -138,7 +127,7 @@
 
 .modal-header {
     background: var(--red-color);
-    height: 129px;
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -146,7 +135,7 @@
     color: #fff;
 }
 
-.modal-heading-icon{
+.modal-heading-icon {
     padding: 15px;
 }
 
@@ -159,32 +148,27 @@
     opacity: 0.8;
 }
 
-.modal-close1 {
-    position: absolute;
-    right: 0;
-    padding: 12px;
-    color: #fff;
-    cursor: pointer;
-    opacity: 0.8;
-}
 
-.modal-close:hover{
+.modal-close:hover {
     opacity: 1;
 }
 
 
-.modal-close1:hover{
+.modal-close1:hover {
     opacity: 1;
 }
 
 .modal-body {
     padding: 15px;
+    height: 65vh;
+    overflow: auto;
 }
 
-.modal-label{
+.modal-label {
     font-size: 15px;
     display: block;
     margin-bottom: 8px;
+    margin-top: 18px;
 }
 
 
@@ -192,7 +176,8 @@
     border: 1px solid #ccc;
     padding: 10px;
     width: 100%;
-    margin-bottom: 22px;
+    margin-bottom: 5px;
+
 }
 
 
@@ -207,34 +192,39 @@
     cursor: pointer;
 }
 
-.buy-btn:hover{
+.buy-btn:hover {
     opacity: 0.7;
 }
 
 
-.modal-footer{
+.modal-footer {
     padding: 15px;
     text-align: right;
 }
+
 .modal-footer .a {
     color: #2196F3;
 }
 
-.modal.open {
-    display: flex;
+.hien-thi-modal {
+    display: flex !important;
+}
+
+.error-message {
+    display: none;
+    color: red;
+    margin: auto;
 }
 
 
-.modal1.open {
-    display: flex;
-}
 
 @keyframes modalFadeIn {
-    from{
+    from {
         opacity: 0;
         transform: translateY(-200px);
     }
-    to{
+
+    to {
         opacity: 1;
         transform: translateY(0);
     }
