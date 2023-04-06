@@ -23,8 +23,6 @@ public class LopDaoImpl extends AbstractDao<LopEntity> implements ILopDao {
             List<LopEntity> list = findByProperties(sql, new LopMapper(),
                     request.getPageIndex() * request.getPageSize(), request.getPageSize());
 
-
-
             return list.isEmpty() ? null : list;
         }catch (Exception e){
             System.out.println(e.getMessage());
