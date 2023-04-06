@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="menu">
-  <div class="menuChinh">
+  <div class="menu-phanTren">
     <div class="tieuDe">
       <img class="logo" src="../../../assets/images/ptit.png" alt="Logo PTIT">
       <div class="tenTieuDe">Quản lý điểm sinh viên</div>
@@ -44,8 +44,14 @@
       <div class="menuMuc-tieuDe">Người dùng</div>
     </a>
   </div>
-  <a href="#" class="dangXuat">
-    <img src="../../../assets/images/log-out.png" alt="Đăng xuất" class="icon-DangXuat">
-    <div class="dangXuat-tieuDe">Đăng xuất</div>
-  </a>
+  <div class="menu-phanDuoi">
+    <div class="dongMenu">
+      <img src="../../../assets/images/menu.png" alt="Đăng xuất" class="icon-DangXuat">
+      <div class="dongMenu-tieuDe">Đóng menu</div>
+    </div>
+    <a href="#" class="dangXuat">
+      <img src="../../../assets/images/log-out.png" alt="Đăng xuất" class="icon-DangXuat">
+      <div class="dangXuat-tieuDe">Đăng xuất</div>
+    </a>
+  </div>
 </div>
