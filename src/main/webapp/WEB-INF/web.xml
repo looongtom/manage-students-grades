@@ -4,6 +4,11 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <context-param>
+        <param-name>apiUrl</param-name>
+        <param-value>http://localhost:8080/api</param-value>
+    </context-param>
+
 
     <welcome-file-list>
         <welcome-file>auth/login.jsp</welcome-file>
