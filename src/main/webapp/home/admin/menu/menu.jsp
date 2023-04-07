@@ -45,8 +45,8 @@
     </a>
   </div>
   <div class="menu-phanDuoi">
-    <div class="dongMenu">
-      <img src="../../../assets/images/menu.png" alt="Đăng xuất" class="icon-DangXuat">
+    <div class="dongMenuMuc" onclick="closeMenu()">
+      <img src="../../../assets/images/menu.png" alt="Đóng menu" class="icon-Muc">
       <div class="dongMenu-tieuDe">Đóng menu</div>
     </div>
     <a href="#" class="dangXuat">

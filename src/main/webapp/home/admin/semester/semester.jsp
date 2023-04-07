@@ -8,9 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <%@include file="../menu/menu_header.jsp" %>
     <title>Học kỳ</title>
 </head>
 <body>
-
+<%@include file="../menu/menu.jsp" %>
 </body>
+<script src="../../../assets/js/menu.js"></script>
 </html>
