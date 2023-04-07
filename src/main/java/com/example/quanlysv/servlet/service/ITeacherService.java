@@ -6,7 +6,7 @@ import com.example.quanlysv.servlet.dto.request.teacher.TeacherDTO;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 
 public interface ITeacherService {
-    BaseResponse<?> createOrEdit(TeacherDTO teacherDTO);
+    BaseResponse<?> createOrEditTeacher(TeacherDTO teacherDTO);
 
     BaseResponse<?> findTeacher(BaseRequest request);
 

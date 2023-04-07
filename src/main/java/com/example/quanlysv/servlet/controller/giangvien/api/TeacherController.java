@@ -1,6 +1,7 @@
 package com.example.quanlysv.servlet.controller.giangvien.api;
 
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
+import com.example.quanlysv.servlet.dto.request.lop.LopDTO;
 import com.example.quanlysv.servlet.dto.request.teacher.TeacherDTO;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.service.ITeacherService;
@@ -36,13 +37,17 @@ public class TeacherController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         TeacherDTO teacherDTO = HttpUtil.of(req.getReader()).toModel(TeacherDTO.class);
-        BaseResponse<?> baseResponse = service.createOrEdit(teacherDTO);
+        BaseResponse<?> baseResponse = service.createOrEditTeacher(teacherDTO);
         ResponseUtils.responseApi(req,resp,baseResponse);
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
+    req.setCharacterEncoding("UTF-8");
+    resp.setContentType("application/json");
+        TeacherDTO teacherDTO = HttpUtil.of(req.getReader()).toModel(TeacherDTO.class);
+        BaseResponse<?> baseResponse = service.createOrEditTeacher(teacherDTO);
+        ResponseUtils.responseApi(req,resp,baseResponse);
     }
 
     @Override

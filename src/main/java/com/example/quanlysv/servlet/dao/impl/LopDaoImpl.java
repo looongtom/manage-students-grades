@@ -56,12 +56,13 @@ public class LopDaoImpl extends AbstractDao<LopEntity> implements ILopDao {
             if(lopEntities==null||lopEntities.isEmpty()){
                 sql.append("INSERT INTO lop (id_lop, ten_lop, id_khoa) Values (?,?,?)");
                 insertOrUpdateOrDelete(sql.toString(),lopEntity.getIdLop(),
-                        lopEntity.getTenLop(),lopEntity.getIdKhoa());
+                lopEntity.getTenLop(),lopEntity.getIdKhoa()
+                );
             }
             else{
                 sql.append("UPDATE lop SET ten_lop= ?,id_khoa= ? WHERE id_lop=?");
                 insertOrUpdateOrDelete(sql.toString(),lopEntity.getTenLop(),
-                        lopEntity.getIdKhoa(),lopEntity.getIdLop());
+                lopEntity.getIdKhoa(),lopEntity.getIdLop());
             }
         }catch (Exception e){
             throw new RuntimeException("update lop failed: "+ e.getMessage());

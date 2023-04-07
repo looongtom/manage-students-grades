@@ -1,8 +1,7 @@
 package com.example.quanlysv.servlet.service.impl;
 
 import com.example.quanlysv.servlet.dao.ITeacherDao;
-import com.example.quanlysv.servlet.dao.impl.HocKyDaoImpl;
-import com.example.quanlysv.servlet.dao.impl.TeacherImpl;
+import com.example.quanlysv.servlet.dao.impl.TeacherDaoImpl;
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.kyhoc.SemesterDTO;
 import com.example.quanlysv.servlet.dto.request.teacher.TeacherDTO;
@@ -20,17 +19,20 @@ public class TeacherServiceImpl implements ITeacherService {
     private ITeacherDao teacherDao;
 
     public TeacherServiceImpl(){
-        this.teacherDao = new TeacherImpl();
+        this.teacherDao = new TeacherDaoImpl();
     }
 
     @Override
-    public BaseResponse<?> createOrEdit(TeacherDTO teacherDTO) {
+    public BaseResponse<?> createOrEditTeacher(TeacherDTO teacherDTO) {
         try {
             TeacherEntity teacherEntity = Convert.convertDTOToEntity(teacherDTO,TeacherEntity.class);
             teacherDao.createOrEditTeacher(teacherEntity);
             BaseResponse<TeacherEntity>baseResponse=
                     new BaseResponse.Builder<TeacherEntity>()
-                            .setMessage("success").setStatus(200).build();
+                            .setMessage("success")
+                            .setStatus(200)
+                            .build();
+            System.out.println(baseResponse.getData());
             return baseResponse;
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
@@ -51,9 +53,6 @@ public class TeacherServiceImpl implements ITeacherService {
 
             List<TeacherDTO> dtoList=new ArrayList<>();
             List<TeacherEntity> list=teacherDao.findTeacher(request);
-            System.out.println("==============TeacherServiceImpl==============");
-            System.out.println(list);
-            System.out.println("==============TeacherServiceImpl==============");
             dtoList=list.stream().map(x->{
                 try{
                     return Convert.convertEntityToDTO(x,TeacherDTO.class);
