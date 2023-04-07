@@ -55,6 +55,13 @@ public class StudentServiceImpl implements IStudentService {
     @Override
     public BaseResponse<?> createOrUpdateStudent(CreateOrEditStudentDTO studentDTO) {
         try {
+            if(studentDTO.getStatus() != 0 || studentDTO.getStatus() != 1){
+                return new BaseResponse.Builder<>()
+                        .setStatus(Constant.httpStatusErrorServer)
+                        .setMessage(Constant.messageBadRequest)
+                        .build();
+            }
+            
             // status =0 ==> create; status =1 ==> update (tao flag)
             if(studentDTO.getStatus() == 0){
                 if(studentDao.existedByEmailAndIdSvAndPhone(studentDTO.getIdSv(),

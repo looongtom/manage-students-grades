@@ -20,6 +20,8 @@ public class Constant {
 
     public static final String messageFailed ="failed";
 
+    public static final String messageBadRequest ="bad request";
+
     // response api student
     public static final String messageStudentExist ="idSv, email or phone existed!";
     public static final String messageStudentNotFound="student not found!";
