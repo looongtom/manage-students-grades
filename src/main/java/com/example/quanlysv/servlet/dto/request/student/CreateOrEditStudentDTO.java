@@ -1,6 +1,7 @@
-package com.example.quanlysv.servlet.entity;
+package com.example.quanlysv.servlet.dto.request.student;
 
-public class StudentEntity {
+public class CreateOrEditStudentDTO {
+    private int status;
     private String idSv;
     private String tenSv;
     private String emailSv;
@@ -9,42 +10,16 @@ public class StudentEntity {
     private String phoneSv;
     private String lopHanhChinhSv;
 
-    private Long ngayTao;
-    private Long ngaySua;
-
-    public Long getNgayTao() {
-        return ngayTao;
-    }
-
-    public void setNgayTao(Long ngayTao) {
-        this.ngayTao = ngayTao;
-    }
-
-    public Long getNgaySua() {
-        return ngaySua;
-    }
-
-    public void setNgaySua(Long ngaySua) {
-        this.ngaySua = ngaySua;
-    }
-
-    public StudentEntity() {
-    }
-
-    public StudentEntity(String idSv, String tenSv,
-                         String emailSv, String dobSv, String genderSv,
-                         String phoneSv, String lopHanhChinhSv) {
-        this.idSv = idSv;
-        this.tenSv = tenSv;
-        this.emailSv = emailSv;
-        this.dobSv = dobSv;
-        this.genderSv = genderSv;
-        this.phoneSv = phoneSv;
-        this.lopHanhChinhSv = lopHanhChinhSv;
-    }
-
     public String getIdSv() {
         return idSv;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public void setIdSv(String idSv) {

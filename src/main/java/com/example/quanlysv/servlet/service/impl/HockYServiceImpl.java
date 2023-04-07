@@ -32,6 +32,7 @@ public class HockYServiceImpl implements IHocKyService {
                 request.setSortField("id_hk");
             }
 
+
             List<SemesterDTO> dtoList = new ArrayList<>();
             List<HocKyEntity> list = hocKyDao.findSemester(request);
 
@@ -61,7 +62,6 @@ public class HockYServiceImpl implements IHocKyService {
     public BaseResponse<?> deleteSemester(String id) {
         try{
             hocKyDao.deleteHocKy(id);
-
             return new BaseResponse.Builder<List<SemesterDTO>>()
                     .setMessage("success").setStatus(200).build();
         }catch (Exception e){
@@ -81,7 +81,6 @@ public class HockYServiceImpl implements IHocKyService {
                     new BaseResponse.Builder<HocKyEntity>()
                             .setMessage("success").setStatus(200).build();
             return baseResponse;
-
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (InstantiationException e) {

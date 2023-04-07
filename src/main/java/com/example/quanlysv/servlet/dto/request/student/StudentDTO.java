@@ -9,6 +9,25 @@ public class StudentDTO {
     private String phoneSv;
     private String lopHanhChinhSv;
 
+    private String ngayTao;
+    private String ngaySua;
+
+    public String getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(String ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public String getNgaySua() {
+        return ngaySua;
+    }
+
+    public void setNgaySua(String ngaySua) {
+        this.ngaySua = ngaySua;
+    }
+
     public String getIdSv() {
         return idSv;
     }
