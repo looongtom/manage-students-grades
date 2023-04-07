@@ -3,7 +3,6 @@ package com.example.quanlysv.servlet.service.impl;
 import com.example.quanlysv.servlet.dao.ITeacherDao;
 import com.example.quanlysv.servlet.dao.impl.TeacherDaoImpl;
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
-import com.example.quanlysv.servlet.dto.request.kyhoc.SemesterDTO;
 import com.example.quanlysv.servlet.dto.request.teacher.TeacherDTO;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.entity.TeacherEntity;
@@ -17,9 +16,8 @@ import java.util.stream.Collectors;
 
 public class TeacherServiceImpl implements ITeacherService {
     private ITeacherDao teacherDao;
-
     public TeacherServiceImpl(){
-        this.teacherDao = new TeacherDaoImpl();
+        teacherDao=new TeacherDaoImpl();
     }
 
     @Override
@@ -32,7 +30,6 @@ public class TeacherServiceImpl implements ITeacherService {
                             .setMessage("success")
                             .setStatus(200)
                             .build();
-            System.out.println(baseResponse.getData());
             return baseResponse;
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
@@ -68,13 +65,22 @@ public class TeacherServiceImpl implements ITeacherService {
             return new BaseResponse.Builder<List<TeacherDTO>>()
                     .setData(dtoList).setMessage("success").setStatus(200).build();
         } catch (Exception e) {
-            return new BaseResponse.Builder<List<SemesterDTO>>()
+            return new BaseResponse.Builder<List<TeacherDTO>>()
                     .setMessage("failed"+ e.getMessage()).setStatus(500).build();
         }
     }
 
     @Override
     public BaseResponse<?> deleteTeacher(String id) {
-        return null;
-    }
+        try{
+            teacherDao.deleteTeacher(id);
+            return new BaseResponse.Builder<List<TeacherDTO>>()
+                    .setMessage("success")
+                    .setStatus(200)
+                    .build();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new BaseResponse.Builder<List<TeacherDTO>>()
+                    .setMessage("failed"+e.getMessage()).setStatus(500).build();
+        }    }
 }

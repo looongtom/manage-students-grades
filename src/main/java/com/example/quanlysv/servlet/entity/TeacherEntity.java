@@ -1,8 +1,27 @@
 package com.example.quanlysv.servlet.entity;
 
+import java.time.Instant;
+
 public class TeacherEntity {
     private String idGv,tenGv,sdtGv,emailGv,genderGv,idKhoa;
-    private long ngayTao,ngaySua;
+    private Long ngayTao,ngaySua;
+    public Long GetCurrentTime(Instant instant){
+        Long timestamp = instant.toEpochMilli();
+        return timestamp;
+    }
+    public TeacherEntity(){
+
+    }
+    public TeacherEntity(String idGv, String tenGv, String sdtGv, String emailGv, String genderGv, String idKhoa, Long ngayTao, Long ngaySua) {
+        this.idGv = idGv;
+        this.tenGv = tenGv;
+        this.sdtGv = sdtGv;
+        this.emailGv = emailGv;
+        this.genderGv = genderGv;
+        this.idKhoa = idKhoa;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+    }
 
     public String getIdGv() {
         return idGv;
@@ -52,19 +71,19 @@ public class TeacherEntity {
         this.idKhoa = idKhoa;
     }
 
-    public long getNgayTao() {
+    public Long getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(long ngayTao) {
-        this.ngayTao = ngayTao;
+    public void setNgayTao(Instant instant) {
+        this.ngayTao = GetCurrentTime(instant);
     }
 
-    public long getNgaySua() {
+    public Long getNgaySua() {
         return ngaySua;
     }
 
-    public void setNgaySua(long ngaySua) {
-        this.ngaySua = ngaySua;
+    public void setNgaySua(Instant instant) {
+        this.ngaySua = GetCurrentTime(instant);
     }
 }

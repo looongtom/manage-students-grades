@@ -1,14 +1,12 @@
 package com.example.quanlysv.servlet.controller.lop.api;
 
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
-import com.example.quanlysv.servlet.dto.request.kyhoc.SemesterDTO;
 import com.example.quanlysv.servlet.dto.request.lop.LopDTO;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.service.ILopService;
 import com.example.quanlysv.servlet.service.impl.LopServiceImpl;
 import com.example.quanlysv.servlet.util.HttpUtil;
 import com.example.quanlysv.servlet.util.ResponseUtils;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

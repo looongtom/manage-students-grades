@@ -1,7 +1,6 @@
 package com.example.quanlysv.servlet.controller.giangvien.api;
 
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
-import com.example.quanlysv.servlet.dto.request.lop.LopDTO;
 import com.example.quanlysv.servlet.dto.request.teacher.TeacherDTO;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.service.ITeacherService;
@@ -43,15 +42,19 @@ public class TeacherController extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    req.setCharacterEncoding("UTF-8");
-    resp.setContentType("application/json");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
         TeacherDTO teacherDTO = HttpUtil.of(req.getReader()).toModel(TeacherDTO.class);
         BaseResponse<?> baseResponse = service.createOrEditTeacher(teacherDTO);
-        ResponseUtils.responseApi(req,resp,baseResponse);
+        ResponseUtils.responseApi(req, resp, baseResponse);
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        String id = req.getParameter("id");
+        BaseResponse<?> baseResponse = service.deleteTeacher(id);
+        ResponseUtils.responseApi(req, resp, baseResponse);
     }
 }

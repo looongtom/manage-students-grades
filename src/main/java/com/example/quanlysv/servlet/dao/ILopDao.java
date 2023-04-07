@@ -6,9 +6,10 @@ import com.example.quanlysv.servlet.entity.LopEntity;
 import java.util.List;
 
 public interface ILopDao extends IGenericDao<LopEntity> {
+    void createOrUpdateLop(LopEntity lopEntity);
+
     List<LopEntity>findLop(BaseRequest request);
 
     void deleteLopById(String id);
 
-    void createOrUpdateLop(LopEntity lopEntity);
 }

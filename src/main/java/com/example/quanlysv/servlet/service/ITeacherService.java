@@ -1,7 +1,6 @@
 package com.example.quanlysv.servlet.service;
 
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
-import com.example.quanlysv.servlet.dto.request.kyhoc.SemesterDTO;
 import com.example.quanlysv.servlet.dto.request.teacher.TeacherDTO;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 

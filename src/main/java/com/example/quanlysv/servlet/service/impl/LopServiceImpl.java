@@ -20,6 +20,25 @@ public class LopServiceImpl implements ILopService {
     public LopServiceImpl(){
         lopDao=new LopDaoImpl();
     }
+
+    @Override
+    public BaseResponse<?> createOrUpdateLop(LopDTO lopDTO) {
+        try{
+            LopEntity lopEntity = Convert.convertDTOToEntity(lopDTO, LopEntity.class);
+            lopDao.createOrUpdateLop(lopEntity);
+            BaseResponse<LopEntity>baseResponse=
+                    new BaseResponse.Builder<LopEntity>()
+                            .setMessage("success")
+                            .setStatus(200)
+                            .build();
+            return baseResponse;
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public BaseResponse<?> findLop(BaseRequest request) {
         try{
@@ -73,22 +92,6 @@ public class LopServiceImpl implements ILopService {
         }
     }
 
-    @Override
-    public BaseResponse<?> createOrUpdateLop(LopDTO lopDTO) {
-        try{
-            LopEntity lopEntity = Convert.convertDTOToEntity(lopDTO, LopEntity.class);
-            lopDao.createOrUpdateLop(lopEntity);
-            BaseResponse<LopEntity>baseResponse=
-                    new BaseResponse.Builder<LopEntity>()
-                            .setMessage("success")
-                            .setStatus(200)
-                            .build();
-            return baseResponse;
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
 }

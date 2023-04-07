@@ -2,7 +2,7 @@ package com.example.quanlysv.servlet.dto.request.teacher;
 
 public class TeacherDTO {
     private String idGv,tenGv,sdtGv,emailGv,genderGv,idKhoa;
-    private long ngayTao,ngaySua;
+    private Long ngayTao,ngaySua;
 
     public String getIdGv() {
         return idGv;
@@ -52,19 +52,19 @@ public class TeacherDTO {
         this.idKhoa = idKhoa;
     }
 
-    public long getNgayTao() {
+    public Long getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(long ngayTao) {
+    public void setNgayTao(Long ngayTao) {
         this.ngayTao = ngayTao;
     }
 
-    public long getNgaySua() {
+    public Long getNgaySua() {
         return ngaySua;
     }
 
-    public void setNgaySua(long ngaySua) {
+    public void setNgaySua(Long ngaySua) {
         this.ngaySua = ngaySua;
     }
 }
