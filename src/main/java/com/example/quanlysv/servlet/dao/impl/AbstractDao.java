@@ -46,22 +46,47 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            if (connection != null){
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (preparedStatement != null){
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            disconectSafe(connection, preparedStatement);
         }
         return data;
+    }
+
+    public T findOne(String sql, IRowMapper<T> mapper, Object...params){
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        T data = null;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            setParam(preparedStatement,params);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                data = mapper.mapFromDbToClass(resultSet);
+                return data;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            disconectSafe(connection, preparedStatement);
+        }
+        return data;
+    }
+
+    private static void disconectSafe(Connection connection, PreparedStatement preparedStatement) {
+        if (connection != null){
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (preparedStatement != null){
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void insertOrUpdateOrDelete(String sql,Object... param){
@@ -81,20 +106,7 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }finally {
-                if (connection != null){
-                    try {
-                        connection.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (preparedStatement != null){
-                    try {
-                        preparedStatement.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
+                disconectSafe(connection, preparedStatement);
             }
         }
     }

@@ -78,7 +78,7 @@ body {
 }
 
 .menuMuc:hover,
-.dongMenu:hover {
+.dongMenuMuc:hover {
     background-color: var(--hover-color);
     padding-left: 20px;
     margin-left: -20px;
@@ -101,7 +101,7 @@ body {
 }
 
 .dangXuat,
-.dongMenu {
+.dongMenuMuc {
     display: flex;
     flex-direction: row;
     padding: 10px 5px;
@@ -111,8 +111,9 @@ body {
     margin-left: -20px;
 }
 
-.dongMenu {
+.dongMenuMuc {
     background-color: var(--menu-color);
+    padding: 10px 20px;
 }
 
 .icon-DangXuat {
@@ -157,6 +158,45 @@ body {
     padding: 10px 5px;
 }
 
+/* menu khi đóng */
+.menu.dongMenu {
+    width: 70px;
+}
+
+.menu.dongMenu .menuMuc-tieuDe {
+    display: none;
+}
+
+.menu.dongMenu .tieuDe {
+    display: none;
+}
+
+.menu.dongMenu .tenTaiKhoan {
+    display: none;
+}
+
+.menu.dongMenu .dangXuat-tieuDe {
+    display: none;
+}
+
+.menu.dongMenu .dongMenu-tieuDe {
+    display: none;
+}
+
+.menu.dongMenu .icon-Muc {
+    width: 30px;
+    height: 30px;
+}
+
+.menu.dongMenu .dongMenuMuc {
+    padding-left: 20px;
+}
+
+.manHinhChinh.dongMenu {
+    width: 100%;
+    margin-left: 70px;
+}
+
 @media screen and (max-width: 740px) {
     .menu {
         width: 70px;
@@ -179,7 +219,7 @@ body {
         padding: 10px 0;
     }
 
-    .dongMenu:hover {
+    .dongMenuMuc:hover {
         padding: 10px 0;
     }
 
@@ -194,6 +234,7 @@ body {
     .menu {
         display: none;
     }
+
     .manHinhChinh {
         width: 96%;
         margin-left: 5px;

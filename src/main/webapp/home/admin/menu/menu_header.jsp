@@ -16,4 +16,5 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../../assets/css/base.css">
 <link rel="stylesheet" href="../../../assets/css/admin_menu.css">
+<link rel="stylesheet" href="../../../assets/themify-icons/themify-icons.css">
 <link rel="icon" type="image/x-icon" href="../../../assets/images/ptit.png">

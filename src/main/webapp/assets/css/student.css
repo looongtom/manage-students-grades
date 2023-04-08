@@ -112,20 +112,24 @@ button {
     margin-left: 10px;
 }
 
+.cot-gioiTinhSV,
+.cot-sdtSV {
+    width: 100px;
+}
+
 .cot-maSV,
 .cot-ngaySinhSV,
 .cot-sdtSV,
-.cot-lopSV,
-.cot-gioiTinhSV {
+.cot-lopSV {
     width: 150px;
 }
 
 .cot-ngayTao {
-    width: 200px;
+    width: 180px;
 }
 
 .cot-tenSV {
-    width: 250px
+    width: 200px
 }
 
 .cot-emailSV {
@@ -234,6 +238,12 @@ tr:nth-child(even) {
 
 .xoa_tieuDe {
     margin-right: 5px;
+}
+
+
+/* đóng menu */
+.manHinhChinh.dongMenu .boc-bang {
+    width: 90vw;
 }
 
 @media screen and (max-width: 740px) {

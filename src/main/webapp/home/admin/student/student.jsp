@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../../../assets/css/student.css">
     <link rel="stylesheet" href="../../../assets/css/add-student-form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
-    <link rel="stylesheet" href="../../../assets/themify-icons/themify-icons.css">
     <title>Sinh viên</title>
 </head>
 <body>
@@ -188,6 +187,7 @@
     <!-- Them sinh vien dialog -->
     <%@include file="../student/student_form.jsp" %>
 
+    <script src="../../../assets/js/menu.js"></script>
     <script src="../../../assets/js/student.js"></script>
     <script src="../../../assets/js/pagination_student.js"></script>
     <script src="../../../assets/js/add_student.js"></script>
