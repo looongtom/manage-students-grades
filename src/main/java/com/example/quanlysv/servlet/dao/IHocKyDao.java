@@ -12,5 +12,9 @@ public interface IHocKyDao {
 
     List<HocKyEntity> findSemester(BaseRequest baseRequest);
 
+    HocKyEntity findById(String id);
+
+    boolean existByIdAndName(String id, String name);
+
     void deleteHocKy (String id);
 }
