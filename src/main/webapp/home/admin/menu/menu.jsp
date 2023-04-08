@@ -27,8 +27,8 @@
       <img src="../../../assets/images/teacher.png" alt="Giảng vien" class="icon-Muc">
       <div class="menuMuc-tieuDe">Giảng viên</div>
     </a>
-    <a class="menuMuc thongTinMuc" href="/../../home/admin/semester/semester.jsp">
-      <img src="../../../assets/images/general_info.png" alt="Thông tin chung" class="icon-Muc">
+    <a class="menuMuc hocKyMuc" href="/../../home/admin/semester/semester.jsp">
+      <img src="../../../assets/images/general_info.png" alt="Học kỳ" class="icon-Muc">
       <div class="menuMuc-tieuDe">Học kỳ</div>
     </a>
     <a class="menuMuc monHocMuc" href="/../../home/admin/subject/subject.jsp">
