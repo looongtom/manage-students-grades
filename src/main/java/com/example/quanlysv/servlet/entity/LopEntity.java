@@ -1,15 +1,38 @@
 package com.example.quanlysv.servlet.entity;
 
+import java.time.Instant;
+
 public class LopEntity {
     private String idLop,tenLop,idKhoa;
+    private Long ngayTao,ngaySua;
+    public Long GetCurrentTime(Instant instant){
+        Long timestamp = instant.toEpochMilli();
+        return timestamp;
+    }
     public LopEntity(){
 
     }
+    public Long getNgayTao() {
+        return ngayTao;
+    }
 
-    public LopEntity(String idLop, String tenLop, String idKhoa) {
+    public void setNgayTao(Instant instant) {
+        this.ngayTao = GetCurrentTime(instant);
+    }
+
+    public Long getNgaySua() {
+        return ngaySua;
+    }
+
+    public void setNgaySua(Instant instant) {
+        this.ngaySua = GetCurrentTime(instant);
+    }
+    public LopEntity(String idLop, String tenLop, String idKhoa, Long ngayTao, Long ngaySua) {
         this.idLop = idLop;
         this.tenLop = tenLop;
         this.idKhoa = idKhoa;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
     }
 
     public String getIdLop() {
