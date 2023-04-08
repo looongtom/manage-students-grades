@@ -26,4 +26,10 @@ public class Constant {
     public static final String messageStudentExist ="idSv, email or phone existed!";
     public static final String messageStudentNotFound="student not found!";
 
+
+    // response api hoc ki
+    public static final String messageSemesterExist ="idHk, tenHocKy existed!";
+    public static final String messageSemesterNotFound="student not found!";
+
+
 }

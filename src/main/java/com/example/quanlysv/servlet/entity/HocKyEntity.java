@@ -4,6 +4,26 @@ public class HocKyEntity {
     private String idHk;
     private String tenHocKy;
 
+    private Long ngayTao;
+
+    private Long ngaySua;
+
+    public Long getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Long ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public Long getNgaySua() {
+        return ngaySua;
+    }
+
+    public void setNgaySua(Long ngaySua) {
+        this.ngaySua = ngaySua;
+    }
+
     public String getIdHk() {
         return idHk;
     }

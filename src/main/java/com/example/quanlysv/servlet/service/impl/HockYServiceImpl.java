@@ -1,26 +1,35 @@
 package com.example.quanlysv.servlet.service.impl;
 
+import com.example.quanlysv.servlet.common.Constant;
 import com.example.quanlysv.servlet.dao.IHocKyDao;
 import com.example.quanlysv.servlet.dao.impl.HocKyDaoImpl;
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
+import com.example.quanlysv.servlet.dto.request.kyhoc.CreateOrEditSemesterDTO;
 import com.example.quanlysv.servlet.dto.request.kyhoc.SemesterDTO;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.entity.HocKyEntity;
+import com.example.quanlysv.servlet.entity.StudentEntity;
 import com.example.quanlysv.servlet.service.IHocKyService;
 import com.example.quanlysv.servlet.util.Convert;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class HockYServiceImpl implements IHocKyService {
+public class HocKyServiceImpl implements IHocKyService {
+    private static final org.apache.log4j.Logger log =
+            Logger.getLogger(HocKyServiceImpl.class.getName());
 
     private IHocKyDao hocKyDao;
 
-    public HockYServiceImpl(){
+    public HocKyServiceImpl(){
         this.hocKyDao = new HocKyDaoImpl();
     }
+
+    private final Date date = new Date();
 
     @Override
     public BaseResponse<?> findSemester(BaseRequest request) {
@@ -31,7 +40,6 @@ public class HockYServiceImpl implements IHocKyService {
             if(request.getSortField() == null || request.getSortField().isEmpty()){
                 request.setSortField("id_hk");
             }
-
 
             List<SemesterDTO> dtoList = new ArrayList<>();
             List<HocKyEntity> list = hocKyDao.findSemester(request);
@@ -49,13 +57,39 @@ public class HockYServiceImpl implements IHocKyService {
             }).filter(Objects::nonNull).collect(Collectors.toList());
 
             return new BaseResponse.Builder<List<SemesterDTO>>()
-                    .setData(dtoList).setMessage("success").setStatus(200).build();
+                    .setData(dtoList).setMessage(Constant.messageSuccess)
+                    .setStatus(Constant.httpStatusOk).build();
 
         }catch (Exception e){
+            log.error(e.getCause());
             return new BaseResponse.Builder<List<SemesterDTO>>()
-                    .setMessage("failed"+ e.getMessage()).setStatus(500).build();
+                    .setMessage("failed"+ e.getMessage())
+                    .setStatus(Constant.httpStatusErrorServer).build();
         }
 
+    }
+
+    @Override
+    public BaseResponse<?> findSemesterById(String id) {
+        try {
+            HocKyEntity hocKyEntity = hocKyDao.findById(id);
+            if(hocKyEntity == null){
+                return new BaseResponse.Builder<>()
+                        .setMessage(Constant.messageStudentNotFound)
+                        .setStatus(Constant.httpStatusErrorServer).build();
+            }
+            SemesterDTO semesterDTO = Convert.convertEntityToDTO(hocKyEntity, SemesterDTO.class);
+            return new BaseResponse.Builder<>()
+                    .setMessage(Constant.messageSuccess)
+                    .setData(semesterDTO)
+                    .setStatus(Constant.httpStatusOk).build();
+
+        }catch (Exception e){
+            log.error(e.getCause());
+            return new BaseResponse.Builder<>()
+                    .setMessage("failed"+ e.getMessage())
+                    .setStatus(Constant.httpStatusErrorServer).build();
+        }
     }
 
     @Override
@@ -73,18 +107,41 @@ public class HockYServiceImpl implements IHocKyService {
 
 
     @Override
-    public BaseResponse<?> createOrEdit(SemesterDTO semesterDTO) {
+    public BaseResponse<?> createOrEdit(CreateOrEditSemesterDTO semesterDTO) {
         try {
+            if(semesterDTO.getStatus() != 0 && semesterDTO.getStatus() != 1){
+                return new BaseResponse.Builder<>().setMessage(Constant.messageBadRequest)
+                        .setStatus(Constant.httpStatusErrorServer)
+                        .build();
+            }
+
+            if(semesterDTO.getStatus() ==0 && hocKyDao.existByIdAndName(semesterDTO.getIdHk(), semesterDTO.getTenHocKy())){
+                return new BaseResponse.Builder<>().setMessage(Constant.messageSemesterExist)
+                        .setStatus(Constant.httpStatusErrorServer)
+                        .build();
+            }
             HocKyEntity hocKyEntity = Convert.convertDTOToEntity(semesterDTO, HocKyEntity.class);
+            hocKyEntity.setNgayTao(date.getTime());
+            hocKyEntity.setNgaySua(date.getTime());
+
             hocKyDao.createOrEditHocKy(hocKyEntity);
             BaseResponse<HocKyEntity> baseResponse =
                     new BaseResponse.Builder<HocKyEntity>()
-                            .setMessage("success").setStatus(200).build();
+                            .setMessage(Constant.messageSuccess)
+                            .setStatus(Constant.httpStatusOk).build();
             return baseResponse;
         } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            log.error(e.getMessage());
+            return new BaseResponse.Builder<>().setMessage(Constant.messageBadRequest)
+                    .setStatus(Constant.httpStatusErrorServer)
+                    .build();
+//            throw new RuntimeException(e);
         } catch (InstantiationException e) {
-            throw new RuntimeException(e);
+            log.error(e.getMessage());
+            return new BaseResponse.Builder<>().setMessage(Constant.messageBadRequest)
+                    .setStatus(Constant.httpStatusErrorServer)
+                    .build();
+//            throw new RuntimeException(e);
         }
     }
 
