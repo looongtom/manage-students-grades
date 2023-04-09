@@ -15,9 +15,7 @@ import java.io.IOException;
 
 @WebServlet("/auth/login")
 public class AuthController extends HttpServlet {
-
     private IAuthService authService;
-
     public AuthController(){
         authService = new AuthServiceImpl();
     }
@@ -32,7 +30,11 @@ public class AuthController extends HttpServlet {
         if(accountEntity != null){
             // lưu đăng nhập vào session
             SessionUtils.getInstance().putValue(req, "ACCOUNT", accountEntity);
-            resp.sendRedirect(req.getContextPath() + "/home/home.jsp");
+// <<<<<<< HEAD
+//             resp.sendRedirect(req.getContextPath() + "/home/home.jsp");
+// =======
+            resp.sendRedirect("/home/home.jsp");
+// >>>>>>> develop
         }
         else{
             String errorMessage = "Invalid username or password";

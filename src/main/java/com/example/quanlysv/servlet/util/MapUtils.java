@@ -18,6 +18,7 @@ public class MapUtils {
                 // set du lieu cho field
                 field.set(object,valueFromDb);
             } catch (SQLException | IllegalAccessException e) {
+                e.getMessage();
                 e.printStackTrace();
             }
         }

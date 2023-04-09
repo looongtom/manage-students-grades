@@ -1,10 +1,13 @@
-const $=document.querySelector.bind(document)
-const $$=document.querySelectorAll.bind(document)
-const muc=$$('.menuMuc')
-console.log(muc)
-muc.forEach(tab => {
-    tab.onclick=function() {
-        $('.menuMuc.bamVao').classList.remove('bamVao')
-        this.classList.add('bamVao')
+function closeMenu() {
+    var menu=document.querySelector('.menu')
+    var isClosed=menu.classList.contains('dongMenu')
+    console.log(isClosed)
+    var manHinhChinh=document.querySelector('.manHinhChinh')
+    if(!isClosed) {
+        manHinhChinh.classList.add('dongMenu')
+        menu.classList.add('dongMenu')
+    } else {
+        manHinhChinh.classList.remove('dongMenu')
+        menu.classList.remove('dongMenu')
     }
-});
+}

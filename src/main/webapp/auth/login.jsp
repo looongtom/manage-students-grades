@@ -4,6 +4,7 @@
 <head>
     <title>Trang đăng nhập</title>
     <link rel="stylesheet" href=".././assets/css/login.css">
+    <link rel="icon" type="image/x-icon" href=".././assets/images/ptit.png">
 </head>
 <body>
 <form action="/auth/login" method="post">
