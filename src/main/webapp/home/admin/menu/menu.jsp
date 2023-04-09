@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="menu">
-  <div class="menuChinh">
+  <div class="menu-phanTren">
     <div class="tieuDe">
       <img class="logo" src="../../../assets/images/ptit.png" alt="Logo PTIT">
       <div class="tenTieuDe">Quản lý điểm sinh viên</div>
@@ -27,8 +27,8 @@
       <img src="../../../assets/images/teacher.png" alt="Giảng vien" class="icon-Muc">
       <div class="menuMuc-tieuDe">Giảng viên</div>
     </a>
-    <a class="menuMuc thongTinMuc" href="/../../home/admin/semester/semester.jsp">
-      <img src="../../../assets/images/general_info.png" alt="Thông tin chung" class="icon-Muc">
+    <a class="menuMuc hocKyMuc" href="/../../home/admin/semester/semester.jsp">
+      <img src="../../../assets/images/general_info.png" alt="Học kỳ" class="icon-Muc">
       <div class="menuMuc-tieuDe">Học kỳ</div>
     </a>
     <a class="menuMuc monHocMuc" href="/../../home/admin/subject/subject.jsp">
@@ -44,8 +44,14 @@
       <div class="menuMuc-tieuDe">Người dùng</div>
     </a>
   </div>
-  <a href="#" class="dangXuat">
-    <img src="../../../assets/images/log-out.png" alt="Đăng xuất" class="icon-DangXuat">
-    <div class="dangXuat-tieuDe">Đăng xuất</div>
-  </a>
+  <div class="menu-phanDuoi">
+    <div class="dongMenuMuc" onclick="closeMenu()">
+      <img src="../../../assets/images/menu.png" alt="Đóng menu" class="icon-Muc">
+      <div class="dongMenu-tieuDe">Đóng menu</div>
+    </div>
+    <a href="#" class="dangXuat">
+      <img src="../../../assets/images/log-out.png" alt="Đăng xuất" class="icon-DangXuat">
+      <div class="dangXuat-tieuDe">Đăng xuất</div>
+    </a>
+  </div>
 </div>

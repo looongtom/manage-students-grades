@@ -9,30 +9,52 @@ button {
     background-color: var(--red-color);
 }
 
-h1 {
-    font-size: 30px;
-}
-
-.tieuDeTrang {
-    margin-left: 20px;
-}
-
-.themVaTimKiem {
+/* đầu trang */
+.dauTrang {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 10px 20px;
+    align-items: center;
 }
 
-.boc-bang {
-    width: 74vw;
-    overflow-x: auto;
-    padding: 10px 10px 15px 10px;
-    margin-left: 10px;
+.tieuDeTrang {
+    font-size: 30px;
+}
+
+.nutThemSV {
+    height: 40px;
+}
+
+/* khu vực tìm kiếm */
+.khuVucTimKiem {
+    margin: 20px 20px;
+    border: 1px rgba(0, 0, 0, 0.3) solid;
+    border-radius: 10px;
+}
+
+.khuVucTimKiem-dau {
+    padding-left: 20px;
+    background-color: var(--red-color);
+    border-radius: 10px 10px 0 0;
+}
+
+.tieuDeTimKiem {
+    margin-right: 10px;
+    line-height: 40px;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+}
+
+.khuVucTimKiem-phanThan {
+    margin: 20px 20px;
+    text-align: center;
 }
 
 .nutThemSV,
-.nutTimKiem {
+.nutTimKiem,
+.nutReset {
     background-color: var(--red-color);
     color: var(--white-color);
     font-size: 14px;
@@ -44,9 +66,13 @@ h1 {
     margin-right: 10px;
 }
 
+.nutReset {
+    background-color: rgb(24, 170, 255);
+}
+
 .nutThemSV:hover,
-.nutTimKiem:hover {
-    background-color: var(--red-color);
+.nutTimKiem:hover,
+.nutReset:hover {
     opacity: 0.7;
 }
 
@@ -60,16 +86,16 @@ h1 {
     flex-direction: row;
 }
 
-.tieuDeTimKiem {
-    margin-right: 10px;
-    line-height: 40px;
-    align-items: center;
+.phanTimKiem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .nhapTimKiem {
     padding: 10px;
-    width: 20vw;
-    margin-right: 10px;
+    width: 49%;
     border-radius: 5px;
     border-width: 1px;
 }
@@ -78,7 +104,44 @@ h1 {
     margin-right: 5px;
 }
 
+/* table */
+.boc-bang {
+    width: 74vw;
+    overflow-x: auto;
+    padding: 10px 10px 15px 10px;
+    margin-left: 10px;
+}
+
+.cot-gioiTinhSV,
+.cot-sdtSV {
+    width: 100px;
+}
+
+.cot-maSV,
+.cot-ngaySinhSV,
+.cot-sdtSV,
+.cot-lopSV {
+    width: 150px;
+}
+
+.cot-ngayTao {
+    width: 180px;
+}
+
+.cot-tenSV {
+    width: 200px
+}
+
+.cot-emailSV {
+    width: 300px;
+}
+
+.hanh-dong {
+    width: 170px;
+}
+
 .danhSach {
+    table-layout: fixed;
     width: 100%;
     font-size: 14px;
     color: var(--text-color);
@@ -175,4 +238,26 @@ tr:nth-child(even) {
 
 .xoa_tieuDe {
     margin-right: 5px;
+}
+
+
+/* đóng menu */
+.manHinhChinh.dongMenu .boc-bang {
+    width: 90vw;
+}
+
+@media screen and (max-width: 740px) {
+    .dauTrang {
+        flex-direction: column;
+    }
+
+    .boc-bang {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .boc-bang {
+        width: 100%;
+    }
 }

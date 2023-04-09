@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../../../assets/css/subject.css">
     <link rel="stylesheet" href="../../../assets/css/add-subject-form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
-    <link rel="stylesheet" href="../../../assets/themify-icons/themify-icons.css">
     <title>Môn học</title>
 </head>
 <body>
@@ -42,6 +41,8 @@
             <th data-sort onclick="sortName(this)" class="cot-tenMH">Tên môn học</th>
             <th data-sort onclick="sortTable(2, this)" class="cot-TC">Số tín chỉ</th>
             <th data-sort onclick="sortTable(3, this)" class="cot-khoa">Khoa</th>
+            <th class="cot-ngayTao">Ngày tạo</th>
+            <th class="cot-ngayTao">Ngày cập nhật</th>
             <th class="hanh-dong">Action</th>
             </thead>
             <tbody>
@@ -50,6 +51,8 @@
                 <td>Lập trình Web</td>
                 <td class="cot-TC">3</td>
                 <td>Công nghệ thông tin</td>
+                <td>06/04/2023 10:20:00</td>
+                <td>06/04/2023 10:20:00</td>
                 <td class="chucNang">
                     <div class="hop-hanh-dong">
                         <button class="sua hop-hanh-dong-nut" type="button">
@@ -68,6 +71,28 @@
                 <td>An toàn và bảo mật hệ thống thông tin</td>
                 <td class="cot-TC">3</td>
                 <td>An toàn thông tin</td>
+                <td>06/04/2023 10:20:00</td>
+                <td>06/04/2023 10:20:00</td>
+                <td class="chucNang">
+                    <div class="hop-hanh-dong">
+                        <button class="sua hop-hanh-dong-nut" type="button">
+                            <span class="sua_tieuDe">Sửa</span>
+                            <i class="fa-solid fa-pencil sua_icon"></i>
+                        </button>
+                        <button class="xoa hop-hanh-dong-nut" type="button">
+                            <span class="xoa_tieuDe">Xóa</span>
+                            <i class="fa-solid fa-trash xoa_icon"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="cot-maMH">SKD1101</td>
+                <td>Kĩ năng thuyết trình</td>
+                <td class="cot-TC">1</td>
+                <td>Truyền thông đa phương tiện</td>
+                <td>06/04/2023 10:20:00</td>
+                <td>06/04/2023 10:20:00</td>
                 <td class="chucNang">
                     <div class="hop-hanh-dong">
                         <button class="sua hop-hanh-dong-nut" type="button">
@@ -87,11 +112,8 @@
     <div class="phanTrang">
         <ul></ul>
     </div>
-
-
     <%@include file="../subject/subject_form.jsp" %>
-
-
+    <script src="../../../assets/js/menu.js"></script>
     <script src="../../../assets/js/subject.js"></script>
     <script src="../../../assets/js/pagination_subject.js"></script>
     <script src="../../../assets/js/add_subject.js"></script>

@@ -3,7 +3,7 @@ body {
     flex-direction: row;
 }
 
-.menu{
+.menu {
     width: 20%;
     height: 100%;
     background-color: var(--menu-color);
@@ -14,6 +14,7 @@ body {
     justify-content: space-between;
     position: fixed;
     margin: 0;
+    overflow-y: auto;
 }
 
 .manHinhChinh {
@@ -23,11 +24,11 @@ body {
     margin-right: 30px;
 }
 
-.menuChinh {
+.menu-phanTren {
     background-color: var(--menu-color);
 }
 
-.nganCach{
+.nganCach {
     height: 0.5px;
     margin-left: -20px;
     background-color: var(--hover-color);
@@ -76,7 +77,8 @@ body {
     color: var(--white-color);
 }
 
-.menuMuc:hover {
+.menuMuc:hover,
+.dongMenuMuc:hover {
     background-color: var(--hover-color);
     padding-left: 20px;
     margin-left: -20px;
@@ -93,7 +95,13 @@ body {
     line-height: 24px;
 }
 
-.dangXuat {
+.menu-phanDuoi {
+    display: flex;
+    flex-direction: column;
+}
+
+.dangXuat,
+.dongMenuMuc {
     display: flex;
     flex-direction: row;
     padding: 10px 5px;
@@ -103,13 +111,19 @@ body {
     margin-left: -20px;
 }
 
+.dongMenuMuc {
+    background-color: var(--menu-color);
+    padding: 10px 20px;
+}
+
 .icon-DangXuat {
     margin-left: 20px;
     width: 30px;
     height: 30px;
 }
 
-.dangXuat-tieuDe {
+.dangXuat-tieuDe,
+.dongMenu-tieuDe {
     padding-left: 12px;
     line-height: 30px;
     font-size: 1.6rem;
@@ -120,7 +134,7 @@ body {
 .khoa-cacMucCon,
 .nguoiDung-cacMucCon {
     display: none;
-    background-color: rgba(0,0,0,.85);
+    background-color: rgba(0, 0, 0, .85);
     margin-left: -20px;
     padding-left: 55px;
 }
@@ -142,4 +156,88 @@ body {
     font-size: 1.4rem;
     line-height: 24px;
     padding: 10px 5px;
+}
+
+/* menu khi đóng */
+.menu.dongMenu {
+    width: 70px;
+}
+
+.menu.dongMenu .menuMuc-tieuDe {
+    display: none;
+}
+
+.menu.dongMenu .tieuDe {
+    display: none;
+}
+
+.menu.dongMenu .tenTaiKhoan {
+    display: none;
+}
+
+.menu.dongMenu .dangXuat-tieuDe {
+    display: none;
+}
+
+.menu.dongMenu .dongMenu-tieuDe {
+    display: none;
+}
+
+.menu.dongMenu .icon-Muc {
+    width: 30px;
+    height: 30px;
+}
+
+.menu.dongMenu .dongMenuMuc {
+    padding-left: 20px;
+}
+
+.manHinhChinh.dongMenu {
+    width: 100%;
+    margin-left: 70px;
+}
+
+@media screen and (max-width: 740px) {
+    .menu {
+        width: 70px;
+    }
+
+    .menuMuc-tieuDe,
+    .tieuDe,
+    .tenTaiKhoan,
+    .dangXuat-tieuDe,
+    .dongMenu-tieuDe {
+        display: none;
+    }
+
+    .icon-Muc {
+        width: 30px;
+        height: 30px;
+    }
+
+    .menuMuc {
+        padding: 10px 0;
+    }
+
+    .dongMenuMuc:hover {
+        padding: 10px 0;
+    }
+
+    .manHinhChinh {
+        width: 86%;
+        margin-left: 70px;
+        padding-left: 15px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .menu {
+        display: none;
+    }
+
+    .manHinhChinh {
+        width: 96%;
+        margin-left: 5px;
+        padding-left: 5px;
+    }
 }

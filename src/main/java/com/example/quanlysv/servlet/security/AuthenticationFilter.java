@@ -2,6 +2,9 @@ package com.example.quanlysv.servlet.security;
 
 import com.example.quanlysv.servlet.common.Constant;
 import com.example.quanlysv.servlet.entity.AccountEntity;
+import com.example.quanlysv.servlet.entity.RoleEntity;
+import com.example.quanlysv.servlet.service.IRoleService;
+import com.example.quanlysv.servlet.service.impl.RoleServiceImpl;
 import com.example.quanlysv.servlet.util.SessionUtils;
 
 import javax.servlet.*;
@@ -10,6 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AuthenticationFilter implements Filter {
+
+    private IRoleService service;
+
+    public AuthenticationFilter(){
+        this.service = new RoleServiceImpl();
+    }
 
     private ServletContext context;
 
@@ -25,25 +34,30 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String url = request.getRequestURI();
-        if(url.startsWith("/admin")){
+        if (url.startsWith("/home")) {
             AccountEntity model = (AccountEntity) SessionUtils.getInstance().getValue(request, "ACCOUNT");
-
-            if(model != null){
-                 if(model.getRoleId().equals(Constant.ADMIN)){
-                     filterChain.doFilter(servletRequest, servletResponse);
-                 }
-                 else if(model.getRoleId().equals(Constant.USER)){
-                     response.sendRedirect(request.getContextPath());
-                 }
+            if (model == null) {
+                response.sendRedirect("/");
+                // chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
+                return;
             }
-            else{
-                response.sendRedirect(request.getContextPath());
+            RoleEntity role = service.findRoleWithId(model.getRoleId());
+            if (role == null) {
+                response.sendRedirect("/");
+                // chuyển hướng đến trang đăng nhập nếu không tìm thấy role của user
+                return;
             }
+            if (role.getRoleName().equals(Constant.ADMIN)) {
+                filterChain.doFilter(servletRequest, servletResponse);
+            } else if (role.getRoleName().equals(Constant.USER)) {
+                filterChain.doFilter(servletRequest, servletResponse);
+            } else {
+                response.sendRedirect("/");
+                // chuyển hướng đến trang đăng nhập nếu role không phải admin hoặc user
+            }
+            return;
         }
-        else{
-            // đi tiếp không cần filter
-            filterChain.doFilter(servletRequest, servletResponse);
-        }
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

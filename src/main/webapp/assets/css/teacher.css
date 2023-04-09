@@ -35,13 +35,6 @@ h1 {
     margin: 10px 20px;
 }
 
-.boc-bang {
-    width: 74vw;
-    overflow-x: auto;
-    padding: 10px 10px 15px 10px;
-    margin-left: 10px;
-}
-
 .nutThemGV,
 .nutTimKiem {
     background-color: var(--red-color);
@@ -89,13 +82,51 @@ h1 {
     margin-right: 5px;
 }
 
+/* table */
+.boc-bang {
+    width: 74vw;
+    overflow-x: auto;
+    padding: 10px 10px 15px 10px;
+    margin-left: 10px;
+}
+
 .danhSach {
+    table-layout: fixed;
     width: 100%;
     font-size: 14px;
     color: var(--text-color);
     border-radius: 10px;
     border-spacing: 0;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.4);
+}
+
+.cot-maGV,
+.cot-gioiTinhGV {
+    width: 90px;
+}
+
+.cot-sdtGV {
+    width: 120px;
+}
+
+.cot-khoaGV {
+    width: 210px;
+}
+
+.cot-ngayTao {
+    width: 162px;
+}
+
+.cot-tenGV {
+    width: 200px
+}
+
+.cot-emailGV {
+    width: 200px;
+}
+
+.hanh-dong {
+    width: 170px;
 }
 
 th, td {
@@ -185,4 +216,39 @@ tr:nth-child(even) {
 
 .xoa_tieuDe {
     margin-right: 5px;
+}
+
+/* đóng menu */
+.manHinhChinh.dongMenu .boc-bang {
+    width: 90vw;
+}
+
+@media screen and (max-width: 740px) {
+    .dauTrang {
+        flex-direction: column;
+    }
+
+    .boc-bang {
+        width: 100%;
+    }
+
+    .manHinhChinh {
+        width: 86%;
+        margin-left: 70px;
+        padding-left: 15px;
+    }
+
+    .themVaTimKiem {
+        flex-direction: column;
+    }
+
+    .nutThemGV {
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .boc-bang {
+        width: 100%;
+    }
 }

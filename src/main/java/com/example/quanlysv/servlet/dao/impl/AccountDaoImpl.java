@@ -11,7 +11,9 @@ public class AccountDaoImpl extends AbstractDao<AccountEntity> implements IAccou
 
     @Override
     public AccountEntity findAccountByUsernameAndPassword(String username, String password) {
-        String sql = "select * from taikhoan where username=? and password=?";
+        String sql = "select tk.id as id, tk.username as username, " +
+                "tk.password as password, tk.email as email, " +
+                "tk.role_id as roleId from taikhoan as tk where username=? and password=?";
         List<AccountEntity> accountEntities = findByProperties(sql, new AccountMapper(), username, password);
         return accountEntities.isEmpty() ? null : accountEntities.get(0);
     }

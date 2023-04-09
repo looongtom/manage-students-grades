@@ -24,13 +24,6 @@ h1 {
     margin: 10px 20px;
 }
 
-.boc-bang {
-    width: 74vw;
-    overflow-x: auto;
-    padding: 10px 10px 15px 10px;
-    margin-left: 10px;
-}
-
 .nutThemMH,
 .nutTimKiem {
     background-color: var(--red-color);
@@ -83,18 +76,40 @@ h1 {
     width: 170px;
 }
 
-.cot-maMH,
 .cot-TC {
-    width: 170px;
+    width: 100px;
+}
+
+.cot-maMH {
+    width: 120px;
     text-align: center;
 }
 
+.cot-khoa {
+    width: 120px;
+}
+
+.cot-ngayTao {
+    width: 140px;
+}
+
 .cot-tenMH {
-    width: 350px;
+    width: 240px;
 }
 
 .cot-khoa {
     width: 250px;
+}
+
+.cot-ngayTao {
+    width: 200px;
+}
+
+.boc-bang {
+    width: 74vw;
+    overflow-x: auto;
+    padding: 10px 10px 15px 10px;
+    margin-left: 10px;
 }
 
 .danhSach {
@@ -194,4 +209,25 @@ tr:nth-child(even) {
 
 .xoa_tieuDe {
     margin-right: 5px;
+}
+
+/* đóng menu */
+.manHinhChinh.dongMenu .boc-bang {
+    width: 90vw;
+}
+
+@media screen and (max-width: 740px) {
+    .dauTrang {
+        flex-direction: column;
+    }
+
+    .boc-bang {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .boc-bang {
+        width: 100%;
+    }
 }
