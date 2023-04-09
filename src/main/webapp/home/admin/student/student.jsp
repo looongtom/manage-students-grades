@@ -165,6 +165,8 @@
     <script src="../../../assets/js/student.js"></script>
     <script src="../../../assets/js/pagination_student.js"></script>
     <script src="../../../assets/js/add_student.js"></script>
+    <script src="../../../assets/js/text_error.js"></script>
+
 </div>
 </body>
 </html>

@@ -9,97 +9,100 @@ closeButton.addEventListener("click", function() {
 })
 
 function validateForm() {
-    var maInput = document.getElementById("ma")
-    var maError = document.getElementById("ma-error")
-    var tenInput = document.getElementById("ten")
-    var tenError = document.getElementById("ten-error")
-    var emailInput = document.getElementById("email")
-    var emailError = document.getElementById("email-error")
-    var gioiTinhInput = document.getElementById("gioi-tinh")
-    var gioiTinhError = document.getElementById("gioi-tinh-error")
-    var sdtInput = document.getElementById("sdt")
-    var sdtError = document.getElementById("sdt-error")
-    var khoaInput = document.getElementById("ma-khoa")
-    var khoaError = document.getElementById("ma-khoa-error")
-// list SV co them
-    var dobInput = document.getElementById("dob")
-    var dobError = document.getElementById("dob-error")
+    var maSvInput = document.getElementById("ma-sv")
+    var maSvError = document.getElementById("ma-sv-error")
+    var tenSvInput = document.getElementById("ten-sv")
+    var tenSvError = document.getElementById("ten-sv-error")
+    var emailSvInput = document.getElementById("email-sv")
+    var emailSvError = document.getElementById("email-sv-error")
+    var dobSvInput = document.getElementById("dob-sv")
+    var dobSvError = document.getElementById("dob-sv-error")
+    var gioiTinhSvInput = document.getElementById("gioi-tinh-sv")
+    var gioiTinhSvError = document.getElementById("gioi-tinh-sv-error")
+    var sdtSvInput = document.getElementById("sdt-sv")
+    var sdtSvError = document.getElementById("sdt-sv-error")
+    var khoaSvInput = document.getElementById("ma-khoa-sv")
+    var khoaSvError = document.getElementById("ma-khoa-sv-error")
 
-    if (maInput.value == "") {
-        maError.style.display = "block";
+
+
+
+    if (maSvInput.value == "") {
+        maSvError.style.display = "block";
     } else {
-        maError.style.display = "none";
+        maSvError.style.display = "none";
     }
 
-    if (tenInput.value == "") {
-        tenError.style.display = "block";
+    if (tenSvInput.value == "") {
+        tenSvError.style.display = "block";
     } else {
-        tenError.style.display = "none";
+        tenSvError.style.display = "none";
     }
 
-    if (emailInput.value == "") {
-        emailError.style.display = "block";
+    if (emailSvInput.value == "") {
+        emailSvError.style.display = "block";
     } else {
-        emailError.style.display = "none";
+        emailSvError.style.display = "none";
     }
 
-    if (gioiTinhInput.value == "") {
-        gioiTinhError.style.display = "block";
+    if (gioiTinhSvInput.value == "") {
+        gioiTinhSvError.style.display = "block";
     } else {
-        gioiTinhError.style.display = "none";
+        gioiTinhSvError.style.display = "none";
     }
 
-    if (sdtInput.value == "") {
-        sdtError.style.display = "block";
+    if (sdtSvInput.value == "") {
+        sdtSvError.style.display = "block";
     } else {
-        sdtError.style.display = "none";
+        sdtSvError.style.display = "none";
     }
-    if (khoaInput.value == "") {
-        khoaError.style.display = "block";
+    if (khoaSvInput.value == "") {
+        khoaSvError.style.display = "block";
 
     } else {
-        khoaError.style.display = "none";
-    }
-
-// listSV co them'
-    if (dobInput.value == "") {
-        dobError.style.display = "block";
-    } else {
-        dobError.style.display = "none";
+        khoaSvError.style.display = "none";
     }
 
 
+    if (dobSvInput.value == "") {
+        dobSvError.style.display = "block";
+    } else {
+        dobSvError.style.display = "none";
+    }
 
 
-    maInput.addEventListener("input", function() {
-        maError.style.display = "none"
+
+    maSvInput.addEventListener("input", function() {
+        maSvError.style.display = "none"
     })
 
-    tenInput.addEventListener("input", function() {
-        tenError.style.display = "none"
-    })
-
-
-    emailInput.addEventListener("input", function() {
-        emailError.style.display = "none"
-    })
-
-    sdtInput.addEventListener("input", function() {
-        sdtError.style.display = "none"
-    })
-
-    gioiTinhInput.addEventListener("input", function() {
-        gioiTinhError.style.display = "none"
-    })
-
-    khoaInput.addEventListener("input", function() {
-        khoaError.style.display = "none"
+    tenSvInput.addEventListener("input", function() {
+        tenSvError.style.display = "none"
     })
 
 
-    dobInput.addEventListener("input", function() {
-        dobError.style.display = "none"
+    emailSvInput.addEventListener("input", function() {
+        emailSvError.style.display = "none"
     })
+
+    dobSvInput.addEventListener("input", function() {
+        dobSvError.style.display = "none"
+    })
+
+    sdtSvInput.addEventListener("input", function() {
+        sdtSvError.style.display = "none"
+    })
+
+    gioiTinhSvInput.addEventListener("input", function() {
+        gioiTinhSvError.style.display = "none"
+    })
+
+    khoaSvInput.addEventListener("input", function() {
+        khoaSvError.style.display = "none"
+    })
+
+
+
 
 }
 
