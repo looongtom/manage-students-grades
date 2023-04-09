@@ -5,7 +5,7 @@ public class AccountEntity {
     private String username;
     private String password;
     private String email;
-    private Integer roleId;
+    private Long roleId;
 
     public Long getId() {
         return id;
@@ -39,11 +39,11 @@ public class AccountEntity {
         this.email = email;
     }
 
-    public Integer getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Integer roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 }

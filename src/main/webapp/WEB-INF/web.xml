@@ -13,8 +13,7 @@
     <welcome-file-list>
         <welcome-file>auth/login.jsp</welcome-file>
     </welcome-file-list>
-
-<!--       tạm thời chưa filter request-->
+    
     <filter>
         <filter-name>servletFilter</filter-name>
         <filter-class>com.example.quanlysv.servlet.security.AuthenticationFilter</filter-class>
