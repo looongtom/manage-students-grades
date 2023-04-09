@@ -150,7 +150,7 @@
     <script src="../../../assets/js/menu.js"></script>
     <script src="../../../assets/js/teacher.js"></script>
     <script src="../../../assets/js/pagination_teacher.js"></script>
-    <script src="../../../assets/js/text_error.js"></script>
+    <script src="../../../assets/js/text_error_teacher.js"></script>
     <script src="../../../assets/js/add_teacher.js"></script>
 
 </body>

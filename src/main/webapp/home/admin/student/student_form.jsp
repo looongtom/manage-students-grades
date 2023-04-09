@@ -12,47 +12,47 @@
     <!-- modal body -->
     <div class="modal-body">
       <label for="" class="modal-label">Mã sinh viên</label>
-      <input id="ma" type="text" class="modal-input" placeholder="Nhập mã ...">
-      <div id="ma-error" class="error-message">Làm ơn nhập vào </div>
+      <input id="ma-sv" type="text" class="modal-input" placeholder="Nhập mã ...">
+      <div id="ma-sv-error" class="error-message">Mã sinh viên không được để trống </div>
 
       <label for="" class="modal-label">Tên sinh viên</label>
-      <input id="ten" type="text" class="modal-input" placeholder="Nhập tên ...">
-      <div id="ten-error" class="error-message">Làm ơn nhập vào </div>
+      <input id="ten-sv" type="text" class="modal-input" placeholder="Nhập tên ...">
+      <div id="ten-sv-error" class="error-message">Tên sinh viên không được để trống </div>
 
 
       <label for="" class="modal-label">Email</label>
-      <input id="email" type="email" class="modal-input" placeholder="Điền email .. ">
-      <div id="email-error" class="error-message">Làm ơn nhập vào </div>
+      <input id="email-sv" type="email" class="modal-input" placeholder="Điền email .. ">
+      <div id="email-sv-error" class="error-message">Email không được để trống </div>
 
 
       <label for="" class="modal-label">Ngày sinh</label>
-      <input id="dob" type="date" class="modal-input">
-      <div id="dob-error" class="error-message">Làm ơn nhập vào </div>
+      <input id="dob-sv" type="date" class="modal-input">
+      <div id="dob-sv-error" class="error-message"> Chọn ngày tháng năm sinh </div>
 
 
       <label for="" class="modal-label">Giới tính</label>
-      <select id="gioi-tinh" class="modal-input" required>
+      <select id="gioi-tinh-sv" class="modal-input" required>
         <option value="">Please select</option>
         <option value="Class A">Nam</option>
         <option value="Class B">Nữ</option>
       </select>
-      <div id="gioi-tinh-error" class="error-message">Làm ơn chọn giới tính </div>
+      <div id="gioi-tinh-sv-error" class="error-message">Chọn giới tính </div>
 
 
       <label for="" class="modal-label">Số điện thoại</label>
-      <input id="sdt" type="text" class="modal-input" placeholder="Nhập số điện thoại ...">
-      <div id="sdt-error" class="error-message">Làm ơn nhập vào</div>
+      <input id="sdt-sv" type="text" class="modal-input" placeholder="Nhập số điện thoại ...">
+      <div id="sdt-sv-error" class="error-message">Số điện thoại không được để trống</div>
 
 
 
       <label for="" class="modal-label">Lớp hành chính</label>
-      <select id="ma-khoa" class="modal-input" required>
+      <select id="ma-khoa-sv" class="modal-input" required>
         <option value="">Please select</option>
         <option value="Class A">Class A</option>
         <option value="Class B">Class B</option>
         <option value="Class C">Class C</option>
       </select>
-      <div id="ma-khoa-error" class="error-message">Làm ơn chọn mã lớp</div>
+      <div id="ma-khoa-sv-error" class="error-message">Chọn lớp hành chính</div>
 
     </div>
     <!-- modal footer -->

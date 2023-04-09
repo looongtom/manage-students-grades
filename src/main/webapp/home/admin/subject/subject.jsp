@@ -10,6 +10,7 @@
 <head>
     <%@include file="../menu/menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/subject.css">
+    <link rel="stylesheet" href="../../../assets/css/add-subject-form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
     <title>Môn học</title>
 </head>
@@ -111,10 +112,13 @@
     <div class="phanTrang">
         <ul></ul>
     </div>
-
+    <%@include file="../subject/subject_form.jsp" %>
     <script src="../../../assets/js/menu.js"></script>
     <script src="../../../assets/js/subject.js"></script>
     <script src="../../../assets/js/pagination_subject.js"></script>
+    <script src="../../../assets/js/add_subject.js"></script>
+    <script src="../../../assets/js/text_error_subject.js"></script>
+
 </div>
 </body>
 </html>
