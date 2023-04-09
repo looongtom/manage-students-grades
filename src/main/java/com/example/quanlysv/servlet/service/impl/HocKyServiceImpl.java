@@ -8,7 +8,6 @@ import com.example.quanlysv.servlet.dto.request.kyhoc.CreateOrEditSemesterDTO;
 import com.example.quanlysv.servlet.dto.request.kyhoc.SemesterDTO;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.entity.HocKyEntity;
-import com.example.quanlysv.servlet.entity.StudentEntity;
 import com.example.quanlysv.servlet.service.IHocKyService;
 import com.example.quanlysv.servlet.util.Convert;
 import org.apache.log4j.Logger;
