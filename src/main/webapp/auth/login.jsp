@@ -7,22 +7,29 @@
     <link rel="icon" type="image/x-icon" href=".././assets/images/ptit.png">
 </head>
 <body>
-<form action="/auth/login" method="post">
-    <h2>Đăng nhập</h2>
-    <div class="container">
-        <% String errorMessage = (String) request.getAttribute("errorMessage");
-            if (errorMessage != null) { %>
-        <div class="error-message" style="color: red"><%= errorMessage %></div>
-        <% } %>
-
-        <label><b>Tên đăng nhập</b></label>
-        <input type="text" placeholder="Nhập tên đăng nhập" name="username" required>
-
-        <label><b>Mật khẩu</b></label>
-        <input type="password" placeholder="Nhập mật khẩu" name="password" required>
-
-        <button type="submit">Đăng nhập</button>
-    </div>
-</form>
+    <img class="anh-ben-trai" src="https://code.ptit.edu.vn/2020/images/bg_left.png" alt="Ảnh bên trái">
+    <img class="anh-ben-phai" src="https://code.ptit.edu.vn/2020/images/bg_right.png" alt="Ảnh bên phải">
+    <form action="/auth/login" method="post">
+        <div class="phan-tieuDe">
+            <img src=".././assets/images/ptit.png" alt="" class="logo-ptit">
+            <div class="dangNhap-tieuDe">Đăng nhập</div>
+        </div>
+        <div class="phan-nhap">
+            <% String errorMessage = (String) request.getAttribute("errorMessage");
+                if (errorMessage != null) { %>
+            <div class="thongBaoLoi"><%= errorMessage %></div>
+            <% } %>
+            <label>
+                <b class="tenDangNhap-tieuDe">Tên đăng nhập</b>
+            </label>
+            <input type="text" placeholder="Nhập tên đăng nhập" name="username" required>
+            <label>
+                <b  class="matKhau-tieuDe">Mật khẩu</b>
+            </label>
+            <input type="password" placeholder="Nhập mật khẩu" name="password" required>
+            <button type="submit" class="nut-dangNhap">Đăng nhập</button>
+            <a class="quen-mat-khau" href="">Quên mật khẩu?</a>
+        </div>
+    </form>
 </body>
 </html>
