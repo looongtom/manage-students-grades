@@ -1,6 +1,8 @@
 package com.example.quanlysv.servlet.common;
 
 public class Constant {
+
+    public static final String ERROR_LOGIN ="Tài khoản hoặc mật khẩu không đúng!";
     public static final String ADMIN ="ADMIN";
     public static final String USER ="USER";
 

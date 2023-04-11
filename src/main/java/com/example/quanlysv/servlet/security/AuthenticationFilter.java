@@ -32,32 +32,43 @@ public class AuthenticationFilter implements Filter {
                          FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-
         String url = request.getRequestURI();
-        if (url.startsWith("/home")) {
-            AccountEntity model = (AccountEntity) SessionUtils.getInstance().getValue(request, "ACCOUNT");
+        AccountEntity model = (AccountEntity) SessionUtils.getInstance().getValue(request, "ACCOUNT");
+
+        if(model != null){
+            if(url.equals("/") || url.contains("/auth/login.jsp")){
+                response.sendRedirect("/home/home.jsp");
+                return;
+            }
+        }
+
+        if(url.equals("/") || url.contains("assets") ||url.startsWith("/auth")){
+            filterChain.doFilter(servletRequest, servletResponse);
+        }
+
+        else if (url.startsWith("/home") && url.startsWith(".jsp", url.length()-4)) {
             if (model == null) {
                 response.sendRedirect("/");
-                // chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
                 return;
             }
             RoleEntity role = service.findRoleWithId(model.getRoleId());
             if (role == null) {
                 response.sendRedirect("/");
-                // chuyển hướng đến trang đăng nhập nếu không tìm thấy role của user
                 return;
             }
+
             if (role.getRoleName().equals(Constant.ADMIN)) {
                 filterChain.doFilter(servletRequest, servletResponse);
             } else if (role.getRoleName().equals(Constant.USER)) {
                 filterChain.doFilter(servletRequest, servletResponse);
+
             } else {
                 response.sendRedirect("/");
-                // chuyển hướng đến trang đăng nhập nếu role không phải admin hoặc user
             }
-            return;
         }
-        filterChain.doFilter(servletRequest, servletResponse);
+        else{
+            response.sendRedirect("/auth/page_404.jsp");
+        }
     }
 
     @Override

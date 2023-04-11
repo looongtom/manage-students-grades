@@ -1,6 +1,7 @@
 package com.example.quanlysv.servlet.controller;
 
 
+import com.example.quanlysv.servlet.common.Constant;
 import com.example.quanlysv.servlet.entity.AccountEntity;
 import com.example.quanlysv.servlet.service.IAuthService;
 import com.example.quanlysv.servlet.service.impl.AuthServiceImpl;
@@ -11,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/auth/login")
@@ -34,7 +34,7 @@ public class AuthController extends HttpServlet {
             resp.sendRedirect("/home/home.jsp");
         }
         else{
-            String errorMessage = "Invalid username or password";
+            String errorMessage = Constant.ERROR_LOGIN;
             req.setAttribute("errorMessage", errorMessage);
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
