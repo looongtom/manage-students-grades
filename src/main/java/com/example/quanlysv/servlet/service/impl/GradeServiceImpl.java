@@ -7,6 +7,7 @@ import com.example.quanlysv.servlet.dto.request.diem.GradeDTO;
 import com.example.quanlysv.servlet.dto.request.teacher.TeacherDTO;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.entity.GradeEntity;
+import com.example.quanlysv.servlet.entity.SubjectEntity;
 import com.example.quanlysv.servlet.entity.TeacherEntity;
 import com.example.quanlysv.servlet.service.IGradeService;
 import com.example.quanlysv.servlet.util.Convert;
@@ -19,6 +20,20 @@ import java.util.stream.Collectors;
 public class GradeServiceImpl implements IGradeService {
     private IGradeDao gradeDao;
     public GradeServiceImpl(){gradeDao=new GradeDaoImpl();}
+
+    @Override
+    public void createOrUpdateGrade(GradeDTO gradeDTO) {
+        try{
+            GradeEntity gradeEntity = Convert.convertDTOToEntity(gradeDTO, GradeEntity.class);
+            if(gradeEntity != null){
+                gradeDao.createOrUpdateGrade(gradeEntity);
+            }
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
     @Override
     public BaseResponse<?> nhapDiem(GradeEntity gradeEntity) {

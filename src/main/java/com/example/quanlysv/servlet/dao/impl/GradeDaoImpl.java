@@ -3,7 +3,9 @@ package com.example.quanlysv.servlet.dao.impl;
 import com.example.quanlysv.servlet.dao.IGradeDao;
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.entity.GradeEntity;
+import com.example.quanlysv.servlet.entity.SubjectEntity;
 import com.example.quanlysv.servlet.mapper.GradeMapper;
+import com.example.quanlysv.servlet.mapper.SubjectMapper;
 
 import java.time.Instant;
 import java.util.List;
@@ -17,6 +19,33 @@ import java.util.List;
 */
 
 public class GradeDaoImpl extends AbstractDao<GradeEntity> implements IGradeDao {
+
+    @Override
+    public void createOrUpdateGrade(GradeEntity gradeEntity) {
+//        String sqlQuery="SELECT diem.id_diem as idDiem, " +
+//                "diem.diem_cc as diemCc, diem.diem_bt as diemBt, diem.diem_thi as diemThi, diem.diem_kt as diemKt, " +
+//                "diem.id_gv as idGv, diem.id_mh as idMh, diem.id_sv as idSv, diem.id_hk as idHk, " +
+//                "diem.ngay_tao as ngayTao, diem.ngay_sua as ngaySua FROM diem WHERE diem.id_diem =? ";
+//        List<GradeEntity> list = findByProperties(sqlQuery, new GradeMapper(), gradeEntity.getIdDiem());
+
+        try{
+            String sql = "INSERT INTO public.diem(id_diem," +
+                    "diem_cc, diem_bt, diem_thi, diem_kt," +
+                    "id_gv, id_mh, id_sv, id_hk," +
+                    "ngay_tao, ngay_sua)" +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                insertOrUpdateOrDelete(sql,gradeEntity.getIdDiem(),
+                        gradeEntity.getDiemCc(),gradeEntity.getDiemBt(),
+                        gradeEntity.getDiemThi(),gradeEntity.getDiemKt(),
+                        gradeEntity.getIdGv(),gradeEntity.getIdMh(),gradeEntity.getIdSv(),gradeEntity.getIdHk(),
+                        gradeEntity.getNgayTao(),gradeEntity.getNgaySua()
+                );
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            throw new RuntimeException("failed: "+ e.getMessage());
+        }
+    }
+
     @Override
     public void nhapDiem(GradeEntity gradeEntity) {
         String sqlQuery="INSERT INTO public.diem(id_diem," +

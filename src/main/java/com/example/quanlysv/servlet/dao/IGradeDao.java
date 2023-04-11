@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface IGradeDao extends IGenericDao<GradeEntity> {
     void nhapDiem(GradeEntity gradeEntity);
-
+    void createOrUpdateGrade(GradeEntity gradeEntity);
     List<GradeEntity> findDiem(BaseRequest request);
 }
