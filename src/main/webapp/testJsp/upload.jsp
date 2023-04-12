@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP-Servlet Upload file</title>
+    <title>Nhập điểm</title>
 </head>
 <body>
 <h2>Nhập điểm</h2>
