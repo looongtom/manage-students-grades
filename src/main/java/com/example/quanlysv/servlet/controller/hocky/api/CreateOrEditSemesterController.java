@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/api/home/semester/create-or-edit")
+@WebServlet("/api/admin/home/semester/create-or-edit")
 public class CreateOrEditSemesterController extends HttpServlet {
 
     private IHocKyService service;
