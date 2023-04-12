@@ -1,5 +1,5 @@
 --drop database quanlysinhvien
---create database quanlysinhvien
+-- create database quanlysinhvien
 
 -- use quanlysinhvien
 
@@ -10,7 +10,7 @@ create table THANHPHAN
     chuyen_can int,
     bai_tap int,
     thi int,
-    thanh_phan int,
+    kiem_tra int,
     ngay_tao bigint,
     ngay_sua bigint
 );
@@ -41,19 +41,19 @@ alter table HOCKY add primary key(id_hk);
 create table DIEM
 (
     id_diem varchar(25) not null,
-    diem_cc int,
-    diem_bt int,
-    diem_thi int,
-    diem_kt int,
-    diem_th int,
+    diem_cc float,
+    diem_bt float,
+    diem_thi float,
+    diem_kt float,
     id_gv varchar(25),
     id_mh varchar(25),
-    id_sv varchar(25),
+    id_sv varchar(25) not null,
     id_hk varchar(25),
     ngay_tao bigint,
-    ngay_sua bigint
+    ngay_sua bigint,
+    PRIMARY KEY(id_diem,id_sv)
 );
-alter table DIEM add primary key(id_diem);
+-- alter table DIEM add primary key(id_sv);
 
 create table SINHVIEN
 (
@@ -145,4 +145,4 @@ alter table DIEM add foreign key(id_hk) references HOCKY(id_hk);
 alter table HOC add foreign key(id_sv) references SINHVIEN(id_sv);
 alter table HOC add foreign key(id_lop) references LOP(id_lop);
 alter table LOP add foreign key(id_khoa) references KHOA(id_khoa);
-alter table THANHPHAN add foreign key(id_diem) references DIEM(id_diem)
+-- alter table THANHPHAN add foreign key(id_diem) references DIEM(id_diem)
