@@ -8,9 +8,12 @@ import com.example.quanlysv.servlet.service.impl.RoleServiceImpl;
 import com.example.quanlysv.servlet.util.SessionUtils;
 
 import javax.servlet.*;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class AuthenticationFilter implements Filter {
 
@@ -33,6 +36,32 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getRequestURI();
+
+        if(url.startsWith("/api")){
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("auth");
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (resourceBundle.getString("key_cookie_test").equals(cookie.getName())) {
+                        String sessionId = cookie.getValue();
+                        HttpSession session = request.getSession(false); // không tạo ra session mới nếu chưa có
+                        if (session != null && sessionId.equals(session.getId())) {
+                            filterChain.doFilter(servletRequest, servletResponse);
+                            return;
+                        } else {
+                            // session không hợp lệ, người dùng chưa đăng nhập hoặc đã hết hạn
+                            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+                            return;
+                        }
+                    }
+                }
+            }
+            else{
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "missed sessionId in request".toUpperCase());
+                return;
+            }
+        }
+
         AccountEntity model = (AccountEntity) SessionUtils.getInstance().getValue(request, "ACCOUNT");
 
         if(model != null){
@@ -41,6 +70,8 @@ public class AuthenticationFilter implements Filter {
                 return;
             }
         }
+
+
 
         if(url.equals("/") || url.contains("assets") ||url.startsWith("/auth")){
             filterChain.doFilter(servletRequest, servletResponse);
