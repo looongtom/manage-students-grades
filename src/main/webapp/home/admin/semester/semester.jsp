@@ -11,6 +11,7 @@
     <%@include file="../menu/menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/semester.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
+    <link rel="stylesheet"  href="../../../assets/css/add_semester_form.css">
     <title>Học kỳ</title>
 </head>
 <body>
@@ -54,8 +55,14 @@
         <ul></ul>
     </div>
 </div>
+<%@include file="../semester/semester_form.jsp" %>
+
 </body>
 <script src="../../../assets/js/menu.js"></script>
 <script src="../../../assets/js/semester.js"></script>
 <script src="../../../assets/js/pagination_semester.js"></script>
+<script src="../../../assets/js/add_semester.js"></script>
+<script src ="../../../assets/js/text_error_semester.js"></script>
+
+
 </html>

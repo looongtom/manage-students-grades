@@ -1,6 +1,6 @@
 
-const errorMessage = document.querySelectorAll(".error-message")
-const closeButton = document.getElementById("close-btn")
+const errorMessage = document.querySelectorAll(".tb-loi-nhap")
+const closeButton = document.getElementById("dong-form-btn")
 
 closeButton.addEventListener("click", function() {
     for(var i=0; i<errorMessage.length; i++) {

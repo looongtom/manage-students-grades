@@ -84,7 +84,7 @@
 
 
 
-.modal-container {
+.chua-modal {
     scroll-behavior: smooth;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 15px;
@@ -115,7 +115,7 @@
 
 
 
-.modal-container {
+.chua-modal {
     position: relative;
     background-color: #fff;
     width: 600px;
@@ -125,7 +125,7 @@
 
 
 
-.modal-header {
+.dau-modal {
     background: var(--red-color);
     height: 120px;
     display: flex;
@@ -135,11 +135,11 @@
     color: #fff;
 }
 
-.modal-heading-icon {
+.dau-modal-icon {
     padding: 15px;
 }
 
-.modal-close {
+.dong-modal {
     position: absolute;
     right: 0;
     padding: 12px;
@@ -149,22 +149,18 @@
 }
 
 
-.modal-close:hover {
+.dong-modal:hover {
     opacity: 1;
 }
 
 
-.modal-close1:hover {
-    opacity: 1;
-}
-
-.modal-body {
+.than-modal {
     padding: 15px;
     height: 65vh;
     overflow: auto;
 }
 
-.modal-label {
+.nhan-hieu-modal {
     font-size: 15px;
     display: block;
     margin-bottom: 8px;
@@ -172,7 +168,7 @@
 }
 
 
-.modal-input {
+.nhap-modal {
     border: 1px solid #ccc;
     padding: 10px;
     width: 100%;
@@ -182,7 +178,7 @@
 
 
 
-.buy-btn {
+.them-btn {
     width: 100%;
     background-color: var(--red-color);
     color: #fff;
@@ -192,17 +188,17 @@
     cursor: pointer;
 }
 
-.buy-btn:hover {
+.them-btn:hover {
     opacity: 0.7;
 }
 
 
-.modal-footer {
+.cuoi-modal {
     padding: 15px;
     text-align: right;
 }
 
-.modal-footer .a {
+.cuoi-modal .a {
     color: #2196F3;
 }
 
@@ -210,7 +206,7 @@
     display: flex !important;
 }
 
-.error-message {
+.tb-loi-nhap {
     display: none;
     color: red;
     margin: auto;

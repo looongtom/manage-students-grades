@@ -84,13 +84,13 @@
 
 
 
-.modal-container {
+.chua-modal-xoa {
     scroll-behavior: smooth;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 15px;
 }
 
-.boc-modal {
+.boc-modal-xoa {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -102,32 +102,20 @@
     display: none;
 }
 
-.modal {
-    position: relative;
-    top: 10%;
-    bottom: 10%;
-    right: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-
-
-.modal-container {
+.chua-modal-xoa {
     position: relative;
     background-color: #fff;
-    width: 600px;
+    width: 400px;
     max-width: calc(100% - 32px);
     animation: modalFadeIn ease 0.5s;
 }
 
 
 
-.modal-header {
+.dau-modal-xoa {
     background: var(--red-color);
-    height: 120px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -135,11 +123,11 @@
     color: #fff;
 }
 
-.modal-heading-icon {
+.dau-modal-icon {
     padding: 15px;
 }
 
-.modal-close {
+.dong-modal-xoa {
     position: absolute;
     right: 0;
     padding: 12px;
@@ -149,71 +137,61 @@
 }
 
 
-.modal-close:hover {
+.dong-modal-xoa:hover {
     opacity: 1;
 }
 
 
-.modal-close1:hover {
-    opacity: 1;
-}
-
-.modal-body {
+.than-modal-xoa {
     padding: 15px;
-    height: 50vh;
+    height: 7vh;
     overflow: auto;
-}
-
-.modal-label {
-    font-size: 15px;
-    display: block;
-    margin-bottom: 8px;
-    margin-top: 18px;
-}
-
-
-.modal-input {
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 5px;
-
+    text-align: center;
 }
 
 
 
-.buy-btn {
-    width: 100%;
-    background-color: var(--red-color);
+
+.huy-btn {
+    width: 40%;
+    background-color: gray;
     color: #fff;
-    padding: 18px;
+    padding: 12px;
     font-weight: bold;
     border: none;
     cursor: pointer;
+    justify-items: right;
 }
 
-.buy-btn:hover {
+
+.xoa-btn {
+    width: 40%;
+    background-color: var(--red-color);
+    color: #fff;
+    padding: 12px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    justify-items: right;
+}
+
+
+.them-btn:hover {
     opacity: 0.7;
 }
 
 
-.modal-footer {
+.cuoi-modal-xoa {
     padding: 15px;
-    text-align: right;
+    text-align: center;
 }
 
-.modal-footer .a {
+.cuoi-modal-xoa .a {
     color: #2196F3;
 }
 
-.hien-thi-modal {
+.hien-thi-xac-nhan-xoa {
     display: flex !important;
-}
-
-.error-message {
-    display: none;
-    color: red;
-    margin: auto;
 }
 
 
