@@ -35,7 +35,7 @@
       <img src="../../../assets/images/subject.jpg" alt="Thông tin mon hoc" class="icon-Muc">
       <div class="menuMuc-tieuDe">Thông tin môn học</div>
     </a>
-    <a class="menuMuc khoaMuc" href="#">
+    <a class="menuMuc khoaMuc" href="/../../home/admin/specialization/specialization.jsp">
       <img src="../../../assets/images/school.png" alt="Khoa" class="icon-Muc">
       <div class="menuMuc-tieuDe">Khoa chuyên môn</div>
     </a>
