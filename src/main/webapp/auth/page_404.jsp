@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.quanlysv.servlet.entity.AccountEntity" %><%--
   Created by IntelliJ IDEA.
   User: NMQ
   Date: 4/10/2023
@@ -18,7 +18,14 @@
 <div class="boc-trang-404">
     <div class="bao-boc-404">
         <div class="chua-404">
-            <a href="/auth/login.jsp" class="tro-ve-trang chu">Quay về trang chủ</a>
+            <%
+            AccountEntity account = (AccountEntity) session.getAttribute("ACCOUNT");
+            if (account != null) {
+                %><a href="/home/home.jsp" class="tro-ve-trang chu">Quay về trang chủ</a><%
+             } else {
+                %><a href="/auth/login.jsp" class="tro-ve-trang chu">Quay về trang chủ</a><%
+            }
+            %>
             <div class="blank b403">
                 <img src="https://code.ptit.edu.vn/2020/images/download (2)@3x.png" alt="">
                 <p>Đã có lỗi gì đó ! Rất tiếc vì sự cố này</p>

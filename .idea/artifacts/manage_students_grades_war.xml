@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="manage-students-grades:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>manage-students-grades</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="quanlysv-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="manage-students-grades:war exploded" />
+    </root>
+  </artifact>
+</component>

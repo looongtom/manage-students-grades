@@ -15,5 +15,25 @@
 </head>
 <body>
     <%@include file="../menu/menu.jsp" %>
+    <div class="manHinhChinh">
+        <h2>Nhập điểm</h2>
+        <form method="post" action="/home/grade/create-or-edit" enctype="multipart/form-data">
+            Vui lòng chọn file:
+            <input type="file" name="file" size="60" /><br /><br />
+            <label>idDiem</label>
+            <input type="text" name="idDiem">
+            <label>idGv</label>
+            <input type="text" name="idGv">
+            <label>idMh</label>
+            <input type="text" name="idMh">
+            <label>idHk</label>
+            <input type="text" name="idHk">
+
+            <input type="submit" value="Upload" />
+        </form>
+        <script src="../../../assets/js/menu.js"></script>
+    </div>
+
+
 </body>
 </html>
