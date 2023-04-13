@@ -10,8 +10,10 @@
 <head>
     <%@include file="../menu/menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/subject.css">
-    <link rel="stylesheet" href="../../../assets/css/add-subject-form.css">
+    <link rel="stylesheet" href="../../../assets/css/add_subject_form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
+    <link rel="stylesheet" href="../../../assets/css/confirm_delete_form.css">
+
     <title>Môn học</title>
 </head>
 <body>
@@ -59,7 +61,7 @@
                             <span class="sua_tieuDe">Sửa</span>
                             <i class="fa-solid fa-pencil sua_icon"></i>
                         </button>
-                        <button class="xoa hop-hanh-dong-nut" type="button">
+                        <button onclick="showModal('modal_xac_nhan_xoa')" class="xoa hop-hanh-dong-nut" type="button">
                             <span class="xoa_tieuDe">Xóa</span>
                             <i class="fa-solid fa-trash xoa_icon"></i>
                         </button>
@@ -79,7 +81,7 @@
                             <span class="sua_tieuDe">Sửa</span>
                             <i class="fa-solid fa-pencil sua_icon"></i>
                         </button>
-                        <button class="xoa hop-hanh-dong-nut" type="button">
+                        <button onclick="showModal('modal_xac_nhan_xoa')" class="xoa hop-hanh-dong-nut" type="button">
                             <span class="xoa_tieuDe">Xóa</span>
                             <i class="fa-solid fa-trash xoa_icon"></i>
                         </button>
@@ -99,7 +101,7 @@
                             <span class="sua_tieuDe">Sửa</span>
                             <i class="fa-solid fa-pencil sua_icon"></i>
                         </button>
-                        <button class="xoa hop-hanh-dong-nut" type="button">
+                        <button onclick="showModal('modal_xac_nhan_xoa')" class="xoa hop-hanh-dong-nut" type="button">
                             <span class="xoa_tieuDe">Xóa</span>
                             <i class="fa-solid fa-trash xoa_icon"></i>
                         </button>
@@ -113,11 +115,15 @@
         <ul></ul>
     </div>
     <%@include file="../subject/subject_form.jsp" %>
+    <%@include file="../subject/confirm_delete_subject.jsp" %>
+
     <script src="../../../assets/js/menu.js"></script>
     <script src="../../../assets/js/subject.js"></script>
     <script src="../../../assets/js/pagination_subject.js"></script>
     <script src="../../../assets/js/add_subject.js"></script>
     <script src="../../../assets/js/text_error_subject.js"></script>
+    <script src="../../../assets/js/confirm_delete_form.js"></script>
+
 
 </div>
 </body>

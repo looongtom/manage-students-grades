@@ -11,7 +11,8 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/assets/css/page_404.css">
-
+    <title>Lỗi</title>
+    <link rel="icon" href="/assets/images/ptit.png" type="image/x-icon" />
 </head>
 <body>
 <div class="boc-trang-404">

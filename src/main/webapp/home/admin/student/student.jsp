@@ -10,8 +10,9 @@
 <head>
     <%@include file="../menu/menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/student.css">
-    <link rel="stylesheet" href="../../../assets/css/add-student-form.css">
+    <link rel="stylesheet" href="../../../assets/css/add_student_form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
+    <link rel="stylesheet" href="../../../assets/css/confirm_delete_form.css">
     <title>Sinh viên</title>
 </head>
 <body>
@@ -74,12 +75,12 @@
                 <td>06/04/2023 10:20:00</td>
                 <td>06/04/2023 10:20:00</td>
                 <td class="chucNang">
-                    <div class="hop-hanh-dong">
+                    <div  class="hop-hanh-dong">
                         <button class="sua hop-hanh-dong-nut" type="button">
                             <span class="sua_tieuDe">Sửa</span>
                             <i class="fa-solid fa-pencil sua_icon"></i>
                         </button>
-                        <button class="xoa hop-hanh-dong-nut" type="button">
+                        <button onclick="showModal('modal_xac_nhan_xoa')" class="xoa hop-hanh-dong-nut" type="button">
                             <span class="xoa_tieuDe">Xóa</span>
                             <i class="fa-solid fa-trash xoa_icon"></i>
                         </button>
@@ -102,8 +103,8 @@
                             <span class="sua_tieuDe">Sửa</span>
                             <i class="fa-solid fa-pencil sua_icon"></i>
                         </button>
-                        <button class="xoa hop-hanh-dong-nut" type="button">
-                            <span class="xoa_tieuDe">Xóa</span>
+                        <button  onclick="showModal('modal_xac_nhan_xoa')" class="xoa hop-hanh-dong-nut" type="button">
+                            <span  class="xoa_tieuDe">Xóa</span>
                             <i class="fa-solid fa-trash xoa_icon"></i>
                         </button>
                     </div>
@@ -125,8 +126,8 @@
                             <span class="sua_tieuDe">Sửa</span>
                             <i class="fa-solid fa-pencil sua_icon"></i>
                         </button>
-                        <button class="xoa hop-hanh-dong-nut" type="button">
-                            <span class="xoa_tieuDe">Xóa</span>
+                        <button onclick="showModal('modal_xac_nhan_xoa')"  class="xoa hop-hanh-dong-nut" type="button">
+                            <span  class="xoa_tieuDe">Xóa</span>
                             <i class="fa-solid fa-trash xoa_icon"></i>
                         </button>
                     </div>
@@ -148,7 +149,7 @@
                             <span class="sua_tieuDe">Sửa</span>
                             <i class="fa-solid fa-pencil sua_icon"></i>
                         </button>
-                        <button class="xoa hop-hanh-dong-nut" type="button">
+                        <button onclick="showModal('modal_xac_nhan_xoa')"  class="xoa hop-hanh-dong-nut" type="button">
                             <span class="xoa_tieuDe">Xóa</span>
                             <i class="fa-solid fa-trash xoa_icon"></i>
                         </button>
@@ -167,11 +168,11 @@
                 <td>06/04/2023 10:20:00</td>
                 <td class="chucNang">
                     <div class="hop-hanh-dong">
-                        <button class="sua hop-hanh-dong-nut" type="button">
+                        <button  class="sua hop-hanh-dong-nut" type="button">
                             <span class="sua_tieuDe">Sửa</span>
                             <i class="fa-solid fa-pencil sua_icon"></i>
                         </button>
-                        <button class="xoa hop-hanh-dong-nut" type="button">
+                        <button onclick="showModal('modal_xac_nhan_xoa')"  class="xoa hop-hanh-dong-nut" type="button">
                             <span class="xoa_tieuDe">Xóa</span>
                             <i class="fa-solid fa-trash xoa_icon"></i>
                         </button>
@@ -186,12 +187,13 @@
     </div>
     <!-- Them sinh vien dialog -->
     <%@include file="../student/student_form.jsp" %>
+    <%@include file="../student/confirm_delete_student.jsp"%>
 
     <script src="../../../assets/js/menu.js"></script>
     <script src="../../../assets/js/student.js"></script>
     <script src="../../../assets/js/pagination_student.js"></script>
     <script src="../../../assets/js/add_student.js"></script>
-    <script src="../../../assets/js/text_error.js"></script>
+    <script src="../../../assets/js/text_error_student.js"></script>
 
 </div>
 </body>

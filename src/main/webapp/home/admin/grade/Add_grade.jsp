@@ -10,7 +10,7 @@
 <head>
     <%@include file="../menu/menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/student.css">
-    <link rel="stylesheet" href="../../../assets/css/add-student-form.css">
+    <link rel="stylesheet" href="../../../assets/css/add_student_form.css">
     <link rel="stylesheet" href="../../../assets/themify-icons/themify-icons.css">
 </head>
 <body>
