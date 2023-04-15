@@ -29,10 +29,11 @@ public class GradeDaoImpl extends AbstractDao<GradeEntity> implements IGradeDao 
 //        List<GradeEntity> list = findByProperties(sqlQuery, new GradeMapper(), gradeEntity.getIdDiem());
 
         try{
-            String sql = "INSERT INTO public.diem(id_diem," +
-                    "diem_cc, diem_bt, diem_thi, diem_kt," +
-                    "id_gv, id_mh, id_sv, id_hk," +
-                    "ngay_tao, ngay_sua)" +
+            String sql = "INSERT INTO public.diem(" +
+                    "id_diem," +
+                    " diem_cc, diem_bt, diem_thi, diem_kt," +
+                    " id_gv, id_mh, id_sv, id_hk," +
+                    " ngay_tao, ngay_sua)" +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             insertOrUpdateOrDelete(sql,gradeEntity.getIdDiem(),
                     gradeEntity.getDiemCc(),gradeEntity.getDiemBt(),

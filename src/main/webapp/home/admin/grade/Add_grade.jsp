@@ -17,6 +17,8 @@
     <%@include file="../menu/menu.jsp" %>
     <div class="manHinhChinh">
         <h2>Nhập điểm</h2>
+        <h3>${sessionScope.cookie_name}</h3>
+        <h4>${sessionScope.cookie_value}</h4>
         <form method="post" action="/home/grade/create-or-edit" enctype="multipart/form-data">
             Vui lòng chọn file:
             <input type="file" name="file" size="60" /><br /><br />

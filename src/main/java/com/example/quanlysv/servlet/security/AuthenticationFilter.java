@@ -36,7 +36,6 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getRequestURI();
-
         if(url.startsWith("/api")){
             ResourceBundle resourceBundle = ResourceBundle.getBundle("auth");
             Cookie[] cookies = request.getCookies();
@@ -60,7 +59,9 @@ public class AuthenticationFilter implements Filter {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "missed sessionId in request".toUpperCase());
                 return;
             }
-        }
+        }else if(url.contains("home/grade/create-or-edit")){
+            filterChain.doFilter(servletRequest, servletResponse);
+        }else System.out.println(url);
 
         AccountEntity model = (AccountEntity) SessionUtils.getInstance().getValue(request, "ACCOUNT");
 
