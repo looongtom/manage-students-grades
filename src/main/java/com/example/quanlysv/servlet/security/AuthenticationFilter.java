@@ -60,8 +60,17 @@ public class AuthenticationFilter implements Filter {
                 return;
             }
         }else if(url.contains("home/grade/create-or-edit")){
-            filterChain.doFilter(servletRequest, servletResponse);
-        }else System.out.println(url);
+            HttpSession session = request.getSession(false);
+            String cookieValue = (String) session.getAttribute("cookie_value");
+            if (session != null && cookieValue.equals(session.getId())) {
+                filterChain.doFilter(servletRequest, servletResponse);
+                return;
+            } else {
+                // session không hợp lệ, người dùng chưa đăng nhập hoặc đã hết hạn
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+                return;
+            }
+        }
 
         AccountEntity model = (AccountEntity) SessionUtils.getInstance().getValue(request, "ACCOUNT");
 
