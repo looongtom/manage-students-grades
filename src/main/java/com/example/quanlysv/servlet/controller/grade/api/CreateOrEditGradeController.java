@@ -8,10 +8,7 @@ import com.example.quanlysv.servlet.service.impl.GradeServiceImpl;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
 import java.time.Instant;
@@ -51,15 +48,23 @@ public class CreateOrEditGradeController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
+
+        HttpSession session = req.getSession();
+        String cookieName = (String) session.getAttribute("cookie_name");
+        String cookieValue = (String) session.getAttribute("cookie_value");
+        System.out.println("cookieName: "+cookieName);
+        System.out.println("cookieValue: "+cookieValue);
+        resp.setHeader( cookieName,cookieValue );
+
         Part part = req.getPart("file");
         String idDiem = req.getParameter("idDiem");
         String idGv = req.getParameter("idGv");
         String idMh = req.getParameter("idMh");
         String idHk = req.getParameter("idHk");
-        System.out.println(idDiem);
-        System.out.println(idGv);
-        System.out.println(idMh);
-        System.out.println(idHk);
+//        System.out.println("idDiem: "+idDiem);
+//        System.out.println("idGv: "+idGv);
+//        System.out.println("idMh: "+idMh);
+//        System.out.println("idHk: "+idHk);
 //        for (Part part : req.getParts()) {
         String fileName = extractFileName(part);
         // refines the fileName in case it is an absolute path

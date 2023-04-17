@@ -5,6 +5,7 @@ import com.example.quanlysv.servlet.common.Constant;
 import com.example.quanlysv.servlet.entity.AccountEntity;
 import com.example.quanlysv.servlet.service.IAuthService;
 import com.example.quanlysv.servlet.service.impl.AuthServiceImpl;
+import com.example.quanlysv.servlet.util.CookieUtils;
 import com.example.quanlysv.servlet.util.SessionUtils;
 
 import javax.servlet.ServletException;
@@ -31,6 +32,7 @@ public class AuthController extends HttpServlet {
         if(accountEntity != null){
             // lưu đăng nhập vào session
             SessionUtils.getInstance().putValue(req, "ACCOUNT", accountEntity);
+            CookieUtils.getInstance().addCookie(resp, req);
             resp.sendRedirect("/home/home.jsp");
         }
         else{
