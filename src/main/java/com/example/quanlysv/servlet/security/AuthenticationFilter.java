@@ -36,7 +36,6 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getRequestURI();
-
         if(url.startsWith("/api")){
             ResourceBundle resourceBundle = ResourceBundle.getBundle("auth");
             Cookie[] cookies = request.getCookies();
@@ -58,6 +57,17 @@ public class AuthenticationFilter implements Filter {
             }
             else{
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "missed sessionId in request".toUpperCase());
+                return;
+            }
+        }else if(url.contains("home/grade/create-or-edit")){
+            HttpSession session = request.getSession(false);
+            String cookieValue = (String) session.getAttribute("cookie_value");
+            if (session != null && cookieValue.equals(session.getId())) {
+                filterChain.doFilter(servletRequest, servletResponse);
+                return;
+            } else {
+                // session không hợp lệ, người dùng chưa đăng nhập hoặc đã hết hạn
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
                 return;
             }
         }
