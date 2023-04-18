@@ -126,6 +126,8 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
                 preparedStatement.setTimestamp(index,(Timestamp) value);
             }else if (value instanceof Long){
                 preparedStatement.setLong(index,(Long)value);
+            }else if (value instanceof Double){
+                preparedStatement.setDouble(index,(Double)value);
             }
         }
     }
