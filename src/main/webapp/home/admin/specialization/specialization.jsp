@@ -1,16 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Personal
-  Date: 4/13/2023
-  Time: 4:57 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 
 <head>
     <%@include file="../menu/menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/specialization.css">
+    <title>Khoa chuyên môn</title>
 </head>
 
 <body>

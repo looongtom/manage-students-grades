@@ -15,7 +15,7 @@
       <img src="../../../assets/images/home.png" alt="Trang chủ" class="icon-Muc">
       <div class="menuMuc-tieuDe">Trang chủ</div>
     </a>
-    <a class="menuMuc nhapDiemMuc" href="/../../home/admin/grade/Add_grade.jsp">
+    <a class="menuMuc nhapDiemMuc" href="/../../home/admin/grade/add_grade.jsp">
       <img src="../../../assets/images/score.png" alt="Điểm" class="icon-Muc">
       <div class="menuMuc-tieuDe">Nhập điểm</div>
     </a>

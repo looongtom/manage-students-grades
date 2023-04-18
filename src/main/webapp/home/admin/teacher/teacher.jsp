@@ -10,7 +10,7 @@
 <head>
     <%@include file="../menu/menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/teacher.css">
-    <link rel="stylesheet" href="../../../assets/css/add-student-form.css">
+    <link rel="stylesheet" href="../../../assets/css/add_teacher_form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
     <title>Giảng viên</title>
 </head>
@@ -144,7 +144,6 @@
         </div>
     </div>
 
-<%--    Them modal o day nhe quan, co gi tao file rieng roi dung include cho clean code--%>
     <%@include file="../teacher/teacher_form.jsp" %>
 
     <script src="../../../assets/js/menu.js"></script>
