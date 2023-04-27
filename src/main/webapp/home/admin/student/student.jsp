@@ -14,67 +14,6 @@
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
     <link rel="stylesheet" href="../../../assets/css/confirm_delete_form.css">
     <title>Sinh viên</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        var formData = {
-            "idSv": "",
-            "tenSv": "",
-            "baseRequest": {
-                "sortField": "",
-                "sortOrder": "",
-                "pageIndex": 1,
-                "pageSize": 5
-            }
-        };
-
-        $(document).ready(function() {
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8080/api/admin/home/student",
-                data: JSON.stringify(formData),
-                contentType: "application/json",
-                success: function(res) {
-                    // display data
-                    console.log(res.data);
-                    var tableBody = $("#myTable tbody");
-                    // clear table
-                    tableBody.empty();
-                    // add data table
-                    $.each(res.data, function(index, item) {
-                        var row = `
-                            <tr>
-                              <td>`+item.idSv+`</td>
-                              <td>`+item.tenSv+`</td>
-                              <td>`+item.emailSv+`</td>
-                              <td>`+item.dobSv+`</td>
-                              <td>`+item.genderSv+`</td>
-                              <td>`+item.phoneSv+`</td>
-                              <td>`+item.lopHanhChinhSv+`</td>
-                              <td>`+item.ngayTao+`</td>
-                              <td>`+item.ngaySua+`</td>
-                              <td class="chucNang">
-                                <div class="hop-hanh-dong">
-                                  <button class="sua hop-hanh-dong-nut" type="button">
-                                    <span class="sua_tieuDe">Sửa</span>
-                                    <i class="fa-solid fa-pencil sua_icon"></i>
-                                  </button>
-                                  <button onclick="showModal('modal_xac_nhan_xoa')" class="xoa hop-hanh-dong-nut" type="button">
-                                    <span class="xoa_tieuDe">Xóa</span>
-                                    <i class="fa-solid fa-trash xoa_icon"></i>
-                                  </button>
-                                </div>
-                              </td>
-                            </tr>`;
-                        tableBody.append(row);
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.log("Lấy thông tin sinh viên bị lỗi!");
-                }
-            });
-        });
-
-    </script>
 </head>
 <body>
 <%@include file="../menu/menu.jsp" %>
@@ -116,7 +55,7 @@
             <th data-sort onclick="sortTable(0, this)" class="cot-maSV">Mã SV</th>
             <th data-sort onclick="sortName(this)" class="cot-tenSV">Họ và tên</th>
             <th data-sort onclick="sortTable(2, this)" class="cot-emailSV">Email</th>
-            <th data-sort onclick="sortTable(3, this)" class="cot-ngaySinhSV">Ngày sinh</th>
+            <th class="cot-ngaySinhSV">Ngày sinh</th>
             <th data-sort onclick="sortTable(4, this)" class="cot-gioiTinhSV">Giới tính</th>
             <th class="cot-sdtSV">Số điện thoại</th>
             <th data-sort onclick="sortTable(6, this)" class="cot-lopSV">Lớp hành chính</th>
@@ -125,121 +64,7 @@
             <th class="hanh-dong">Action</th>
             </thead>
             <tbody>
-            <tr>
-                <td>B20DCCN443</td>
-                <td>Trần Quang Minh</td>
-                <td>minhtq.b20cn443@stu.ptit.edu.vn</td>
-                <td>04/07/2002</td>
-                <td>Nam</td>
-                <td>0986153247</td>
-                <td>D20CQCN11-B</td>
-                <td>06/04/2023 10:20:00</td>
-                <td>06/04/2023 10:20:00</td>
-                <td class="chucNang">
-                    <div  class="hop-hanh-dong">
-                        <button class="sua hop-hanh-dong-nut" type="button">
-                            <span class="sua_tieuDe">Sửa</span>
-                            <i class="fa-solid fa-pencil sua_icon"></i>
-                        </button>
-                        <button onclick="showModal('modal_xac_nhan_xoa')" class="xoa hop-hanh-dong-nut" type="button">
-                            <span class="xoa_tieuDe">Xóa</span>
-                            <i class="fa-solid fa-trash xoa_icon"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>B20DCCN037</td>
-                <td>Trịnh Minh Tuấn</td>
-                <td>tuantm.b20cn037@stu.ptit.edu.vn</td>
-                <td>27/01/2002</td>
-                <td>Nam</td>
-                <td>0986153247</td>
-                <td>D20CQCN11-B</td>
-                <td>06/04/2023 10:20:00</td>
-                <td>06/04/2023 10:20:00</td>
-                <td class="chucNang">
-                    <div class="hop-hanh-dong">
-                        <button class="sua hop-hanh-dong-nut" type="button">
-                            <span class="sua_tieuDe">Sửa</span>
-                            <i class="fa-solid fa-pencil sua_icon"></i>
-                        </button>
-                        <button  onclick="showModal('modal_xac_nhan_xoa')" class="xoa hop-hanh-dong-nut" type="button">
-                            <span  class="xoa_tieuDe">Xóa</span>
-                            <i class="fa-solid fa-trash xoa_icon"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>B20DCCN551</td>
-                <td>Nguyễn Minh Quân</td>
-                <td>quannm.b20cn551@stu.ptit.edu.vn</td>
-                <td>21/01/2002</td>
-                <td>Nam</td>
-                <td>0986153247</td>
-                <td>D20CQCN11-B</td>
-                <td>06/04/2023 10:20:00</td>
-                <td>06/04/2023 10:20:00</td>
-                <td class="chucNang">
-                    <div class="hop-hanh-dong">
-                        <button class="sua hop-hanh-dong-nut" type="button">
-                            <span class="sua_tieuDe">Sửa</span>
-                            <i class="fa-solid fa-pencil sua_icon"></i>
-                        </button>
-                        <button onclick="showModal('modal_xac_nhan_xoa')"  class="xoa hop-hanh-dong-nut" type="button">
-                            <span  class="xoa_tieuDe">Xóa</span>
-                            <i class="fa-solid fa-trash xoa_icon"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>B20DCCN575</td>
-                <td>Lại Ngọc Sơn</td>
-                <td>sonln.b20cn575@stu.ptit.edu.vn</td>
-                <td>06/04/2001</td>
-                <td>Nam</td>
-                <td>0986153247</td>
-                <td>D20CQCN11-B</td>
-                <td>06/04/2023 10:20:00</td>
-                <td>06/04/2023 10:20:00</td>
-                <td class="chucNang">
-                    <div class="hop-hanh-dong">
-                        <button class="sua hop-hanh-dong-nut" type="button">
-                            <span class="sua_tieuDe">Sửa</span>
-                            <i class="fa-solid fa-pencil sua_icon"></i>
-                        </button>
-                        <button onclick="showModal('modal_xac_nhan_xoa')"  class="xoa hop-hanh-dong-nut" type="button">
-                            <span class="xoa_tieuDe">Xóa</span>
-                            <i class="fa-solid fa-trash xoa_icon"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>B20DCCN192</td>
-                <td>Đào Xuân Đồng</td>
-                <td>dongdx.b20cn443@stu.ptit.edu.vn</td>
-                <td>24/10/2002</td>
-                <td>Nam</td>
-                <td>0986153247</td>
-                <td>D20CQCN12-B</td>
-                <td>06/04/2023 10:20:00</td>
-                <td>06/04/2023 10:20:00</td>
-                <td class="chucNang">
-                    <div class="hop-hanh-dong">
-                        <button  class="sua hop-hanh-dong-nut" type="button">
-                            <span class="sua_tieuDe">Sửa</span>
-                            <i class="fa-solid fa-pencil sua_icon"></i>
-                        </button>
-                        <button onclick="showModal('modal_xac_nhan_xoa')"  class="xoa hop-hanh-dong-nut" type="button">
-                            <span class="xoa_tieuDe">Xóa</span>
-                            <i class="fa-solid fa-trash xoa_icon"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+
             </tbody>
         </table>
     </div>
@@ -251,11 +76,11 @@
     <%@include file="../student/confirm_delete_student.jsp"%>
 
     <script src="../../../assets/js/menu.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../../assets/js/student.js"></script>
     <script src="../../../assets/js/pagination_student.js"></script>
     <script src="../../../assets/js/add_student.js"></script>
     <script src="../../../assets/js/text_error_student.js"></script>
-
 </div>
 </body>
 </html>
