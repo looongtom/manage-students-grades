@@ -14,6 +14,67 @@
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
     <link rel="stylesheet" href="../../../assets/css/confirm_delete_form.css">
     <title>Sinh viên</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var formData = {
+            "idSv": "",
+            "tenSv": "",
+            "baseRequest": {
+                "sortField": "",
+                "sortOrder": "",
+                "pageIndex": 1,
+                "pageSize": 5
+            }
+        };
+
+        $(document).ready(function() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/admin/home/student",
+                data: JSON.stringify(formData),
+                contentType: "application/json",
+                success: function(res) {
+                    // display data
+                    console.log(res.data);
+                    var tableBody = $("#myTable tbody");
+                    // clear table
+                    tableBody.empty();
+                    // add data table
+                    $.each(res.data, function(index, item) {
+                        var row = `
+                            <tr>
+                              <td>`+item.idSv+`</td>
+                              <td>`+item.tenSv+`</td>
+                              <td>`+item.emailSv+`</td>
+                              <td>`+item.dobSv+`</td>
+                              <td>`+item.genderSv+`</td>
+                              <td>`+item.phoneSv+`</td>
+                              <td>`+item.lopHanhChinhSv+`</td>
+                              <td>`+item.ngayTao+`</td>
+                              <td>`+item.ngaySua+`</td>
+                              <td class="chucNang">
+                                <div class="hop-hanh-dong">
+                                  <button class="sua hop-hanh-dong-nut" type="button">
+                                    <span class="sua_tieuDe">Sửa</span>
+                                    <i class="fa-solid fa-pencil sua_icon"></i>
+                                  </button>
+                                  <button onclick="showModal('modal_xac_nhan_xoa')" class="xoa hop-hanh-dong-nut" type="button">
+                                    <span class="xoa_tieuDe">Xóa</span>
+                                    <i class="fa-solid fa-trash xoa_icon"></i>
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>`;
+                        tableBody.append(row);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.log("Lấy thông tin sinh viên bị lỗi!");
+                }
+            });
+        });
+
+    </script>
 </head>
 <body>
 <%@include file="../menu/menu.jsp" %>
@@ -50,7 +111,7 @@
     </div>
 
     <div class="boc-bang">
-        <table class="danhSach">
+        <table id="myTable" class="danhSach">
             <thead class="hang1">
             <th data-sort onclick="sortTable(0, this)" class="cot-maSV">Mã SV</th>
             <th data-sort onclick="sortName(this)" class="cot-tenSV">Họ và tên</th>
