@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="manage-students-grades:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/manage_students_grades_war_exploded</output-path>
+  <artifact type="exploded-war" name="quanlysv:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/quanlysv_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="manage-students-grades" />
+          <element id="module-output" name="quanlysv" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
@@ -36,7 +36,7 @@
           <element id="library" level="project" name="Maven: org.webjars:jquery:3.6.1" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="manage-students-grades/web/Web" />
+      <element id="javaee-facet-resources" facet="quanlysv/web/Web" />
     </root>
   </artifact>
 </component>
