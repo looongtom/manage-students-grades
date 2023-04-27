@@ -29,7 +29,7 @@
         <i class="fa-solid fa-plus"></i>
       </button>
     </div>
-    <div class="phanlop-close js-phanlop-close" class="back" onclick="location.href='specialization.html'">
+    <div class="phanlop-close js-phanlop-close" class="back" onclick="location.href='../specialization/specialization.jsp '">
       Khoa Chuyên Môn
     </div>
   </header>
