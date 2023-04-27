@@ -1,3 +1,4 @@
+<%@ page import="java.util.Random" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,6 +10,25 @@
 <body>
     <%@include file="../menu/menu.jsp" %>
     <div class="manHinhChinh">
+
+        <%
+            String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            int length = 8; // Change this to set the length of the generated ID
+            StringBuilder idBuilder = new StringBuilder();
+            Random random = new Random();
+
+            for (int i = 0; i < length; i++) {
+                int index = random.nextInt(alphabet.length());
+                char randomChar = alphabet.charAt(index);
+                idBuilder.append(randomChar);
+            }
+
+            String randomID = "Diem_"+idBuilder.toString();
+        %>
+
+        <!-- Use the generated ID wherever you need it -->
+        <input type="hidden" name="idDiem" value="<%= randomID %>" />
+
         <h1 class="tieuDeTrang">Nhập điểm</h1>
         <div class="khuVucNhapDiem">
             <div class="khuVucNhapDiem-dau">
@@ -63,4 +83,5 @@
     </div>
 </body>
 <script src="../../../assets/js/menu.js"></script>
+<script src="../../../assets/js/auto_generate_id.js"></script>
 </html>

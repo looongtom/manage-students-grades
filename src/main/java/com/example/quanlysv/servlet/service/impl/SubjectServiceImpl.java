@@ -8,6 +8,7 @@ import com.example.quanlysv.servlet.entity.SubjectEntity;
 import com.example.quanlysv.servlet.service.ISubjectService;
 import com.example.quanlysv.servlet.util.Convert;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -34,6 +35,10 @@ public class SubjectServiceImpl implements ISubjectService {
                     return null;
                 } catch (InstantiationException e) {
                    return null;
+                } catch (InvocationTargetException e) {
+                    throw new RuntimeException(e);
+                } catch (NoSuchMethodException e) {
+                    throw new RuntimeException(e);
                 }
             }).filter(Objects::nonNull).collect(Collectors.toList());
             return list;

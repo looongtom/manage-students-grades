@@ -3,12 +3,13 @@ package com.example.quanlysv.servlet.util;
 import com.example.quanlysv.servlet.common.Constant;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Convert {
-    public static <E, D> D convertEntityToDTO(E entity, Class<D> dtoClass) throws IllegalAccessException, InstantiationException {
-        D dto = dtoClass.newInstance();
+    public static <E, D> D convertEntityToDTO(E entity, Class<D> dtoClass) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+        D dto = dtoClass.getDeclaredConstructor().newInstance();
         Field[] entityFields = entity.getClass().getDeclaredFields();
         Field[] dtoFields = dtoClass.getDeclaredFields();
         for (Field entityField : entityFields) {
