@@ -27,7 +27,7 @@
         %>
 
         <!-- Use the generated ID wherever you need it -->
-        <input type="hidden" name="idDiem" value="<%= randomID %>" />
+        <input type="text" name="idDiem" value="<%= randomID %>" />
 
         <h1 class="tieuDeTrang">Nhập điểm</h1>
         <div class="khuVucNhapDiem">
