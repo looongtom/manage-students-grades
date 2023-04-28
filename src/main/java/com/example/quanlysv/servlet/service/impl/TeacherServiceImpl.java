@@ -3,6 +3,7 @@ package com.example.quanlysv.servlet.service.impl;
 import com.example.quanlysv.servlet.dao.ITeacherDao;
 import com.example.quanlysv.servlet.dao.impl.TeacherDaoImpl;
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
+import com.example.quanlysv.servlet.dto.request.teacher.CreateOrEditTeacherDTO;
 import com.example.quanlysv.servlet.dto.request.teacher.TeacherDTO;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.entity.TeacherEntity;
@@ -22,7 +23,7 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
-    public BaseResponse<?> createOrEditTeacher(TeacherDTO teacherDTO) {
+    public BaseResponse<?> createOrEditTeacher(CreateOrEditTeacherDTO teacherDTO) {
         try {
             TeacherEntity teacherEntity = Convert.convertDTOToEntity(teacherDTO,TeacherEntity.class);
             teacherDao.createOrEditTeacher(teacherEntity);
