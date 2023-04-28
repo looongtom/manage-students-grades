@@ -12,6 +12,7 @@ import com.example.quanlysv.servlet.entity.TeacherEntity;
 import com.example.quanlysv.servlet.service.IGradeService;
 import com.example.quanlysv.servlet.util.Convert;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -71,6 +72,10 @@ public class GradeServiceImpl implements IGradeService {
                 } catch (InstantiationException e) {
                     System.out.println(e.getCause());
                     return null;
+                } catch (InvocationTargetException e) {
+                    throw new RuntimeException(e);
+                } catch (NoSuchMethodException e) {
+                    throw new RuntimeException(e);
                 }
             }).filter(Objects::nonNull).collect(Collectors.toList());
 

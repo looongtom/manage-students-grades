@@ -98,4 +98,19 @@ public class StudentEntity {
     public void setLopHanhChinhSv(String lopHanhChinhSv) {
         this.lopHanhChinhSv = lopHanhChinhSv;
     }
+
+    @Override
+    public String toString() {
+        return "StudentEntity{" +
+                "idSv='" + idSv + '\'' +
+                ", tenSv='" + tenSv + '\'' +
+                ", emailSv='" + emailSv + '\'' +
+                ", dobSv='" + dobSv + '\'' +
+                ", genderSv='" + genderSv + '\'' +
+                ", phoneSv='" + phoneSv + '\'' +
+                ", lopHanhChinhSv='" + lopHanhChinhSv + '\'' +
+                ", ngayTao=" + ngayTao +
+                ", ngaySua=" + ngaySua +
+                '}';
+    }
 }

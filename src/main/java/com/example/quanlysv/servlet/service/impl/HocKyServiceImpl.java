@@ -12,6 +12,7 @@ import com.example.quanlysv.servlet.service.IHocKyService;
 import com.example.quanlysv.servlet.util.Convert;
 import org.apache.log4j.Logger;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,6 +53,10 @@ public class HocKyServiceImpl implements IHocKyService {
                 } catch (InstantiationException e) {
                     System.out.println(e.getCause());
                     return null;
+                } catch (InvocationTargetException e) {
+                    throw new RuntimeException(e);
+                } catch (NoSuchMethodException e) {
+                    throw new RuntimeException(e);
                 }
             }).filter(Objects::nonNull).collect(Collectors.toList());
 
