@@ -18,7 +18,7 @@
     </header>
     <!-- modal body -->
     <div class="than-modal-xoa">
-      Bạn có chắc chắn muốn xóa giảng viên không?
+      Bạn có chắc chắn muốn xóa giảng viên <span id="textMa"></span> không?
       <br>
       Sau khi xóa bạn không thể khôi phục dữ liệu này.
     </div>
@@ -27,7 +27,7 @@
       <button onclick="anXacNhanXoa('modal_xac_nhan_xoa')" class="huy-btn" type="submit">
         Hủy
       </button>
-      <button class="xoa-btn" type="submit" onclick="deleteGV()">
+      <button class="xoa-btn" type="submit" onclick="deleteGV(this)">
         Xóa
       </button>
     </div>

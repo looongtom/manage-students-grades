@@ -4,6 +4,7 @@
     <%@include file="../menu/menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/teacher.css">
     <link rel="stylesheet" href="../../../assets/css/add_teacher_form.css">
+    <link rel="stylesheet" href="../../../assets/css/update_teacher_form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
     <link rel="stylesheet" href="../../../assets/css/confirm_delete_form.css">
     <title>Giảng viên</title>
@@ -21,8 +22,8 @@
         </button>
         <div class="timKiem">
             <div class="tieuDeTimKiem">Tìm kiếm giảng viên: </div>
-            <input type="search" class="nhapTimKiem" placeholder="Nhập tên/mã giảng viên">
-            <button class="nutTimKiem">
+            <input type="search" class="nhapTimKiem" placeholder="Nhập tên giảng viên">
+            <button class="nutTimKiem" onclick="timKiemGV()">
                 <span class="nutTimKiem_tieuDe">Tìm</span>
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -52,7 +53,8 @@
     </div>
 </div>
 
-<%@include file="../teacher/teacher_form.jsp" %>
+<%@include file="../teacher/add_teacher_form.jsp" %>
+<%@include file="../teacher/update_teacher_form.jsp" %>
 <%@include file="../teacher/confirm_delete_teacher.jsp"%>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -61,6 +63,7 @@
 <script src="../../../assets/js/pagination_teacher.js"></script>
 <script src="../../../assets/js/text_error_teacher.js"></script>
 <script src="../../../assets/js/add_teacher.js"></script>
+<script src="../../../assets/js/update_teacher.js"></script>
 <script src="../../../assets/js/confirm_delete_form.js"></script>
 
 </body>
