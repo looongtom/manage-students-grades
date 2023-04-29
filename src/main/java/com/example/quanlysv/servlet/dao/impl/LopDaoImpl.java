@@ -10,6 +10,14 @@ import java.util.List;
 
 public class LopDaoImpl extends AbstractDao<LopEntity> implements ILopDao {
     @Override
+    public List<LopEntity> getListLopByIdKhoa(String idKhoa) {
+        String sql="SELECT lop.id_lop as idLop, lop.ten_lop as tenLop, lop.id_khoa as idKhoa " +
+                "FROM lop where id_khoa=?";
+        List<LopEntity>lopEntities=findByProperties(sql,new LopMapper(),idKhoa);
+        return lopEntities.isEmpty() ? null : lopEntities;
+    }
+
+    @Override
     public void createOrUpdateLop(LopEntity lopEntity) {
         String sqlQuery="SELECT lop.id_lop as idLop, lop.ten_lop as tenLop, lop.id_khoa as idKhoa"+
                 " FROM lop where lop.id_lop=?";

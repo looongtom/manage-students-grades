@@ -17,6 +17,7 @@ public interface IStudentDao  extends IGenericDao<StudentEntity> {
 
    StudentEntity getById(String id);
 
-
    void deleteStudentById(String id);
+
+   List<StudentEntity>findListStudentByIdLop(String idLop);
 }

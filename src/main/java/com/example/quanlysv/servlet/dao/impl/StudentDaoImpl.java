@@ -9,6 +9,18 @@ import com.example.quanlysv.servlet.mapper.StudentMapper;
 import java.util.List;
 
 public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStudentDao {
+
+    @Override
+    public List<StudentEntity> findListStudentByIdLop(String idLop) {
+        String sql="SELECT sv.id_sv as idSv, sv.ten_sv as tenSv, sv.email_sv as emailSv," +
+                "sv.dob_sv as dobSv, sv.gender_sv as genderSv, sv.ngay_tao as ngayTao, " +
+                "sv.ngay_sua as ngaySua,sv.phone_sv as phoneSv, sv.lop_hanh_chinh_sv as " +
+                "lopHanhChinhSv from sinhvien as sv,hoc,lop where sv.id_sv = hoc.id_sv " +
+                "and hoc.id_lop=lop.id_lop and hoc.id_lop=?";
+        List<StudentEntity>studentEntities=findByProperties(sql,new StudentMapper(),idLop);
+        return studentEntities.isEmpty()?null:studentEntities;
+    }
+
     @Override
     public List<StudentEntity> findStudent(StudentFilter request) {
         String sql = "SELECT sv.id_sv as idSv, sv.ten_sv as tenSv, sv.email_sv as emailSv," +

@@ -9,5 +9,7 @@ public interface ITeacherDao extends IGenericDao<TeacherEntity> {
     void createOrEditTeacher(TeacherEntity teacherEntity);
     List<TeacherEntity> findTeacher(BaseRequest baseRequest);
     void deleteTeacher(String id);
+    TeacherEntity getById(String id);
+
 
 }

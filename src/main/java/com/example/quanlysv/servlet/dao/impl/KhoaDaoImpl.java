@@ -18,4 +18,17 @@ public class KhoaDaoImpl extends AbstractDao<KhoaEntity> implements IKhoaDao {
                 request.getPageIndex() * request.getPageSize(), request.getPageSize());
         return khoaEntities.isEmpty() ? null : khoaEntities;
     }
+
+    @Override
+    public KhoaEntity getById(String id) {
+        try{
+            String sql="SELECT khoa.id_khoa as idKhoa, khoa.ten_khoa as tenKhoa " +
+                    "FROM khoa where id_khoa=?";
+            KhoaEntity  khoa = findOne(sql,new KhoaMapper(),id);
+            if(khoa != null) return khoa;
+            return null;
+        }catch (Exception e){
+            throw new RuntimeException("error: "+ e.getMessage());
+        }
+    }
 }

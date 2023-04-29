@@ -27,4 +27,12 @@ public class KhoaEntity {
     public void setTenKhoa(String tenKhoa) {
         this.tenKhoa = tenKhoa;
     }
+
+    @Override
+    public String toString() {
+        return "KhoaEntity{" +
+                "idKhoa='" + idKhoa + '\'' +
+                ", tenKhoa='" + tenKhoa + '\'' +
+                '}';
+    }
 }

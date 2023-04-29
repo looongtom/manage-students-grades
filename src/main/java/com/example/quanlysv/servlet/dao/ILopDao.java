@@ -12,4 +12,6 @@ public interface ILopDao extends IGenericDao<LopEntity> {
 
     void deleteLopById(String id);
 
+    List<LopEntity> getListLopByIdKhoa(String idKhoa);
+
 }
