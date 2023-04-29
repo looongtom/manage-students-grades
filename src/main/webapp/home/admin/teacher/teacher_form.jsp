@@ -30,8 +30,8 @@
             <label for="" class="nhan-hieu-modal">Giới tính</label>
             <select id = "gioi-tinh-gv" class="nhap-modal" required>
                 <option value="">Please select</option>
-                <option value="Class A">Nam</option>
-                <option value="Class B">Nữ</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
             </select>
             <div id="gioi-tinh-gv-error" class="tb-loi-nhap">Chọn giới tính </div>
 
@@ -46,9 +46,15 @@
             <label for="" class="nhan-hieu-modal">Mã khoa </label>
             <select id="ma-khoa-gv" class="nhap-modal" required>
                 <option value="">Please select</option>
-                <option value="Class A">Class A</option>
-                <option value="Class B">Class B</option>
-                <option value="Class C">Class C</option>
+                <option value="CNTT">Công nghệ thông tin</option>
+                <option value="ATTT">An toàn thông tin</option>
+                <option value="DPT">Đa phương tiện</option>
+                <option value="MKT">Marketing</option>
+                <option value="DTVT">Điện tử viễn thông</option>
+                <option value="KTDT">Kĩ thuật điện tử</option>
+                <option value="QTKD">Quản trị kinh doanh</option>
+                <option value="TCKT">Tài chính kế toán</option>
+                <option value="CB">Cơ bản</option>
             </select>
             <div id="ma-khoa-gv-error" class="tb-loi-nhap">Chọn mã khoa</div>
 

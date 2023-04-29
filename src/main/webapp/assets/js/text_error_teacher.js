@@ -9,6 +9,7 @@ closeButton.addEventListener("click", function() {
 })
 
 function validateForm() {
+    var error=false;
     var maGvInput = document.getElementById("ma-gv")
     var maGvError = document.getElementById("ma-gv-error")
     var tenGvInput = document.getElementById("ten-gv")
@@ -22,47 +23,46 @@ function validateForm() {
     var khoaGvInput = document.getElementById("ma-khoa-gv")
     var khoaGvError = document.getElementById("ma-khoa-gv-error")
 
-
-
     if (maGvInput.value === "") {
         maGvError.style.display = "block";
+        error=true;
     } else {
         maGvError.style.display = "none";
     }
 
     if (tenGvInput.value === "") {
         tenGvError.style.display = "block";
+        error=true;
     } else {
         tenGvError.style.display = "none";
     }
 
     if (emailGvInput.value === "") {
         emailGvError.style.display = "block";
+        error=true;
     } else {
         emailGvError.style.display = "none";
     }
 
     if (gioiTinhGvInput.value === "") {
         gioiTinhGvError.style.display = "block";
+        error=true;
     } else {
         gioiTinhGvError.style.display = "none";
     }
 
     if (sdtGvInput.value === "") {
         sdtGvError.style.display = "block";
+        error=true;
     } else {
         sdtGvError.style.display = "none";
     }
     if (khoaGvInput.value === "") {
         khoaGvError.style.display = "block";
-
+        error=true;
     } else {
         khoaGvError.style.display = "none";
     }
-
-
-
-
 
 
     maGvInput.addEventListener("input", function() {
@@ -90,7 +90,7 @@ function validateForm() {
         khoaGvError.style.display = "none"
     })
 
-
+    if(error==false) addGV();
 }
 
 

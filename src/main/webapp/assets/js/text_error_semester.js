@@ -1,4 +1,3 @@
-
 const errorMessage = document.querySelectorAll(".tb-loi-nhap")
 const closeButton = document.getElementById("dong-form-btn")
 
@@ -13,10 +12,6 @@ function validateForm() {
     var maHkError = document.getElementById("ma-hk-error")
     var tenHkInput = document.getElementById("ten-hk")
     var tenHkError = document.getElementById("ten-hk-error")
-
-
-
-
     if (maHkInput.value == "") {
         maHkError.style.display = "block";
     } else {
@@ -28,10 +23,6 @@ function validateForm() {
     } else {
         tenHkError.style.display = "none";
     }
-
-
-
-
     maHkInput.addEventListener("input", function() {
         maHkError.style.display = "none"
     })
@@ -39,9 +30,6 @@ function validateForm() {
     tenHkInput.addEventListener("input", function() {
         tenHkError.style.display = "none"
     })
-
-
-
 }
 
 

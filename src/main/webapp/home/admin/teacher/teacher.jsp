@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="../../../assets/css/teacher.css">
     <link rel="stylesheet" href="../../../assets/css/add_teacher_form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
+    <link rel="stylesheet" href="../../../assets/css/confirm_delete_form.css">
     <title>Giảng viên</title>
 </head>
 <body>
@@ -52,6 +53,7 @@
 </div>
 
 <%@include file="../teacher/teacher_form.jsp" %>
+<%@include file="../teacher/confirm_delete_teacher.jsp"%>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../../../assets/js/menu.js"></script>
@@ -59,6 +61,7 @@
 <script src="../../../assets/js/pagination_teacher.js"></script>
 <script src="../../../assets/js/text_error_teacher.js"></script>
 <script src="../../../assets/js/add_teacher.js"></script>
+<script src="../../../assets/js/confirm_delete_form.js"></script>
 
 </body>
 </html>
