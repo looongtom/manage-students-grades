@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IKhoaDao extends IGenericDao<KhoaEntity> {
     List<KhoaEntity>findKhoa(BaseRequest request);
+
+    KhoaEntity getById(String id);
 }

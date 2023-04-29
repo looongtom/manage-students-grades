@@ -1,24 +1,18 @@
-package com.example.quanlysv.servlet.entity;
+package com.example.quanlysv.servlet.dto.response;
 
-import java.time.Instant;
-
-public class TeacherEntity {
+public class TeacherResponse {
     private String idGv,tenGv,sdtGv,emailGv,genderGv,idKhoa,tenKhoa;
     private Long ngayTao,ngaySua;
-    public Long GetCurrentTime(Instant instant){
-        Long timestamp = instant.toEpochMilli();
-        return timestamp;
-    }
-    public TeacherEntity(){
 
-    }
-
-    public String getTenKhoa() {
-        return tenKhoa;
-    }
-
-    public void setTenKhoa(String tenKhoa) {
+    public TeacherResponse(String idGv, String tenGv, String sdtGv, String emailGv, String genderGv, String tenKhoa, Long ngayTao, Long ngaySua) {
+        this.idGv = idGv;
+        this.tenGv = tenGv;
+        this.sdtGv = sdtGv;
+        this.emailGv = emailGv;
+        this.genderGv = genderGv;
         this.tenKhoa = tenKhoa;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
     }
 
     public String getIdGv() {
@@ -69,34 +63,27 @@ public class TeacherEntity {
         this.idKhoa = idKhoa;
     }
 
+    public String getTenKhoa() {
+        return tenKhoa;
+    }
+
+    public void setTenKhoa(String tenKhoa) {
+        this.tenKhoa = tenKhoa;
+    }
+
     public Long getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(Instant instant) {
-        this.ngayTao = GetCurrentTime(instant);
+    public void setNgayTao(Long ngayTao) {
+        this.ngayTao = ngayTao;
     }
 
     public Long getNgaySua() {
         return ngaySua;
     }
 
-    public void setNgaySua(Instant instant) {
-        this.ngaySua = GetCurrentTime(instant);
-    }
-
-    @Override
-    public String toString() {
-        return "TeacherEntity{" +
-                "idGv='" + idGv + '\'' +
-                ", tenGv='" + tenGv + '\'' +
-                ", sdtGv='" + sdtGv + '\'' +
-                ", emailGv='" + emailGv + '\'' +
-                ", genderGv='" + genderGv + '\'' +
-                ", idKhoa='" + idKhoa + '\'' +
-                ", tenKhoa='" + tenKhoa + '\'' +
-                ", ngayTao=" + ngayTao +
-                ", ngaySua=" + ngaySua +
-                '}';
+    public void setNgaySua(Long ngaySua) {
+        this.ngaySua = ngaySua;
     }
 }

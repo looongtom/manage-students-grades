@@ -1,8 +1,16 @@
 package com.example.quanlysv.servlet.dto.request.teacher;
 
 public class TeacherDTO {
-    private String idGv,tenGv,sdtGv,emailGv,genderGv,idKhoa;
+    private String idGv,tenGv,sdtGv,emailGv,genderGv,idKhoa,tenKhoa;
     private String ngayTao,ngaySua;
+
+    public String getTenKhoa() {
+        return tenKhoa;
+    }
+
+    public void setTenKhoa(String tenKhoa) {
+        this.tenKhoa = tenKhoa;
+    }
 
     public String getIdGv() {
         return idGv;

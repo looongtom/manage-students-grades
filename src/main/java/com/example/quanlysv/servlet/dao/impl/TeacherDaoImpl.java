@@ -9,6 +9,21 @@ import java.time.Instant;
 import java.util.List;
 
 public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeacherDao {
+
+    @Override
+    public TeacherEntity getById(String id) {
+        try{
+            String sql="select gv.id_gv as idGv,gv.ten_gv as tenGv,gv.sdt_gv as sdtGv," +
+                    "gv.email_gv as emailGv, gv.gender_gv as genderGv, gv.id_khoa as idKhoa," +
+                    "gv.ngay_tao as ngayTao, gv.ngay_sua as ngaySua from giangvien as gv where gv.id_gv=?";
+            TeacherEntity teacher = findOne(sql,new TeacherMapper(),id);
+            if(teacher != null) return teacher;
+            return null;
+        }catch (Exception e){
+            throw new RuntimeException("error: "+ e.getMessage());
+        }
+    }
+
     @Override
     public List<TeacherEntity> findTeacher(BaseRequest request) {
         String sql="select gv.id_gv as idGv,gv.ten_gv as tenGv,gv.sdt_gv as sdtGv," +

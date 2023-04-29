@@ -25,7 +25,7 @@ $(document).ready(function() {
                               <td>`+item.sdtGv+`</td>
                               <td>`+item.emailGv+`</td>
                               <td>`+item.genderGv+`</td>
-                              <td>`+item.idKhoa+`</td>
+                              <td>`+item.tenKhoa+`</td>
                               <td>`+item.ngayTao+`</td>
                               <td>`+item.ngaySua+`</td>
                               <td class="chucNang">
