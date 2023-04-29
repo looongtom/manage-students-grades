@@ -1,6 +1,5 @@
 function hienXacNhanXoa(elementId){
     const el = document.getElementById(elementId);
-    console.log(el);
     el.classList.add('hien-thi-xac-nhan-xoa')
 }
 
