@@ -1,9 +1,12 @@
 package com.example.quanlysv.servlet.service.impl;
 
+import com.example.quanlysv.servlet.dao.IKhoaDao;
 import com.example.quanlysv.servlet.dao.ISubjectDao;
+import com.example.quanlysv.servlet.dao.impl.KhoaDaoImpl;
 import com.example.quanlysv.servlet.dao.impl.SubjectDaoImpl;
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.student.StudentDTO;
+import com.example.quanlysv.servlet.dto.request.subject.CreateOrEditSubjectDTO;
 import com.example.quanlysv.servlet.dto.request.subject.SubjectDTO;
 import com.example.quanlysv.servlet.dto.request.subject.SubjectFilter;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
@@ -19,10 +22,13 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class SubjectServiceImpl implements ISubjectService {
-    private ISubjectDao subjectDao;
+    private final ISubjectDao subjectDao;
+
+    private final IKhoaDao khoaDao;
 
     public SubjectServiceImpl(){
         this.subjectDao = new SubjectDaoImpl();
+        this.khoaDao = new KhoaDaoImpl();
     }
 
 
@@ -68,16 +74,39 @@ public class SubjectServiceImpl implements ISubjectService {
     }
 
     @Override
-    public void createOrUpdateSubject(SubjectDTO subjectDTO) {
+    public BaseResponse<?> createOrUpdateSubject(CreateOrEditSubjectDTO subjectDTO) {
          try{
+
+             if(subjectDTO.getFlag()==1 && subjectDao.exitsByIdOrName(subjectDTO.getIdMh(), subjectDTO.getTenMonHoc())){
+                 return new BaseResponse.Builder<>()
+                         .setStatus(500)
+                         .setMessage("idMh or subjectName existed!")
+                         .build();
+             }
+
+             if(khoaDao.existById(subjectDTO.getIdKhoa())){
+                 return new BaseResponse.Builder<>()
+                         .setStatus(500)
+                         .setMessage("khoa not found!")
+                         .build();
+             }
+
              SubjectEntity subjectEntity = Convert.convertDTOToEntity(subjectDTO, SubjectEntity.class);
              if(subjectEntity != null){
                  subjectDao.createOrUpdateSubject(subjectEntity);
              }
+             return new BaseResponse.Builder<>()
+                     .setStatus(200)
+                     .setMessage("success")
+                     .build();
 
          }catch (Exception e){
              System.out.println(e.getMessage());
-             throw new RuntimeException(e.getMessage());
+             return new BaseResponse.Builder<>()
+                     .setStatus(500)
+                     .setMessage("failed")
+                     .build();
+
          }
     }
 

@@ -32,13 +32,22 @@ public class SubjectDaoImpl extends AbstractDao<SubjectEntity> implements ISubje
         return total;
     }
 
+    @Override
+    public boolean exitsByIdOrName(String id, String name) {
+        String sql = "SELECT mh.id_mh as idMh, mh.ten_mon_hoc as tenMonHoc, mh.tin_chi as tinChi,\n" +
+                "                mh.id_khoa as idKhoa, k.ten_khoa as tenKhoa FROM monhoc mh join khoa k on mh.id_khoa = k.id_khoa where lower(mh.id_mh) like concat('%', lower(?) , '%') or " +
+                "lower(mh.ten_mon_hoc) like concat('%', lower(?), '%')";
+
+        SubjectEntity subjectEntity = findOne(sql, new SubjectMapper(), id, name);
+        return subjectEntity != null;
+    }
+
 
     @Override
     public void createOrUpdateSubject(SubjectEntity subjectEntity) {
         String sqlQuery = "SELECT mh.id_mh as idMh, mh.ten_mon_hoc as tenMonHoc, mh.tin_chi as tinChi," +
                 "mh.id_khoa as idKhoa FROM monhoc mh where mh.id_mh =?";
         List<SubjectEntity> list = findByProperties(sqlQuery, new SubjectMapper(), subjectEntity.getIdMh());
-
         try{
             StringBuilder sql = new StringBuilder("");
             if(list == null || list.isEmpty()){

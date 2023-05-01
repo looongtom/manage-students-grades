@@ -11,6 +11,8 @@ public interface ISubjectDao {
 
     Integer countTotalRecords(SubjectFilter baseRequest);
 
+    boolean exitsByIdOrName(String id, String name);
+
     void createOrUpdateSubject(SubjectEntity subjectEntity);
 
     void deleteSubject(String id);

@@ -8,6 +8,16 @@ public class CreateOrEditSubjectDTO {
 
     private String idKhoa;
 
+    private Integer flag;
+
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
+    }
+
     public String getIdMh() {
         return idMh;
     }

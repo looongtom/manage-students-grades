@@ -20,6 +20,14 @@ public class KhoaDaoImpl extends AbstractDao<KhoaEntity> implements IKhoaDao {
     }
 
     @Override
+    public boolean existById(String id) {
+        String sql = "SELECT khoa.id_khoa as idKhoa, khoa.ten_khoa as tenKhoa" +
+                " FROM khoa where khoa.id_khoa = ?";
+        KhoaEntity khoa =  findOne(sql, new KhoaMapper(), id);
+        return khoa== null;
+    }
+
+    @Override
     public KhoaEntity getById(String id) {
         try{
             String sql="SELECT khoa.id_khoa as idKhoa, khoa.ten_khoa as tenKhoa " +
