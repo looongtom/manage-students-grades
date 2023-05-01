@@ -53,7 +53,7 @@ public class HocKyDaoImpl extends AbstractDao<HocKyEntity> implements IHocKyDao 
         try {
             String sql = "select hk.id_hk as idHk, hk.ten_hoc_ky " +
                     "as tenHocKy, hk.ngay_tao as ngayTao, hk.ngay_sua as ngaySua " +
-                    "from hocky as hk where hk.id_hk = ? or hk.id_hk = ?";
+                    "from hocky as hk where hk.id_hk = ? or hk.ten_hoc_ky = ?";
             HocKyEntity hocKyEntity = findOne(sql, new HocKyMapper(), id, name);
             return hocKyEntity==null? false:true;
         }catch (Exception e){
