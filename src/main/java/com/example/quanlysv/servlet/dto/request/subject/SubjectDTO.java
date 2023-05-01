@@ -7,6 +7,16 @@ public class SubjectDTO {
 
     private String idKhoa;
 
+    private String tenKhoa;
+
+    public String getTenKhoa() {
+        return tenKhoa;
+    }
+
+    public void setTenKhoa(String tenKhoa) {
+        this.tenKhoa = tenKhoa;
+    }
+
     public String getIdKhoa() {
         return idKhoa;
     }

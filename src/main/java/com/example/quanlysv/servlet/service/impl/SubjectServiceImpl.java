@@ -3,7 +3,11 @@ package com.example.quanlysv.servlet.service.impl;
 import com.example.quanlysv.servlet.dao.ISubjectDao;
 import com.example.quanlysv.servlet.dao.impl.SubjectDaoImpl;
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
+import com.example.quanlysv.servlet.dto.request.student.StudentDTO;
 import com.example.quanlysv.servlet.dto.request.subject.SubjectDTO;
+import com.example.quanlysv.servlet.dto.request.subject.SubjectFilter;
+import com.example.quanlysv.servlet.dto.response.BaseResponse;
+import com.example.quanlysv.servlet.entity.StudentEntity;
 import com.example.quanlysv.servlet.entity.SubjectEntity;
 import com.example.quanlysv.servlet.service.ISubjectService;
 import com.example.quanlysv.servlet.util.Convert;
@@ -23,29 +27,43 @@ public class SubjectServiceImpl implements ISubjectService {
 
 
     @Override
-    public List<SubjectDTO> findSubject(BaseRequest baseRequest) {
+    public BaseResponse<?> findSubject(SubjectFilter request) {
         List<SubjectDTO> list = new ArrayList<>();
         try{
-            List<SubjectEntity> list1 = subjectDao.findSubject(baseRequest);
+            if(request.getTenMonHoc() == null ||request.getTenMonHoc().isEmpty()){
+                request.setTenMonHoc("");
+            }
+
+            if (request.getBaseRequest().getSortOrder().isEmpty()) {
+                request.getBaseRequest().setSortOrder("asc");
+            }
+            if(request.getBaseRequest().getSortField().isEmpty()){
+                request.getBaseRequest().setSortField("id_mh");
+            }
+
+            Integer totalRecords = subjectDao.countTotalRecords(request);
+            int totalPages = totalRecords!= null?(int) Math.ceil((double)
+                    totalRecords / request.getBaseRequest().getPageSize()): 0;
+
+
+            List<SubjectEntity> list1 = subjectDao.findSubject(request);
 
             list = list1.stream().map(x ->{
                 try {
                     return Convert.convertEntityToDTO(x, SubjectDTO.class);
-                } catch (IllegalAccessException e) {
+                } catch (IllegalAccessException | InstantiationException e) {
                     return null;
-                } catch (InstantiationException e) {
-                   return null;
-                } catch (InvocationTargetException e) {
-                    throw new RuntimeException(e);
-                } catch (NoSuchMethodException e) {
+                } catch (InvocationTargetException | NoSuchMethodException e) {
                     throw new RuntimeException(e);
                 }
             }).filter(Objects::nonNull).collect(Collectors.toList());
-            return list;
+            return new BaseResponse.Builder<>().setTotalPages(totalPages)
+                    .setData(list).setMessage("success").setStatus(200).build();
 
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return list;
+            return new BaseResponse.Builder<List<StudentDTO>>().setMessage("failed => "+e.getMessage())
+                    .setStatus(500).build();
         }
     }
 

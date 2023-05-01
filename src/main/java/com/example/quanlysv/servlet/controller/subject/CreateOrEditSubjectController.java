@@ -6,10 +6,10 @@ import com.example.quanlysv.servlet.service.impl.SubjectServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/home/subject/create-or-edit")
+@WebServlet("/api/admin/home/subject/create-or-edit")
 public class CreateOrEditSubjectController {
 
-    private ISubjectService service;
+    private final ISubjectService service;
 
     public CreateOrEditSubjectController(){
         this.service = new SubjectServiceImpl();
