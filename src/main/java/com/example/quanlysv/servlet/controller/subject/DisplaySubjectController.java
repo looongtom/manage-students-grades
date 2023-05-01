@@ -38,4 +38,13 @@ public class DisplaySubjectController extends HttpServlet {
         BaseResponse<?> baseResponse = service.findSubject(baseRequest);
         ResponseUtils.responseApi(req, resp, baseResponse);
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        String idMh = req.getParameter("idMh");
+        BaseResponse<?> baseResponse = service.deleteSubject(idMh);
+        ResponseUtils.responseApi(req, resp, baseResponse);
+    }
 }

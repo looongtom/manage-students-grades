@@ -35,11 +35,16 @@ public class SubjectDaoImpl extends AbstractDao<SubjectEntity> implements ISubje
     @Override
     public boolean exitsByIdOrName(String id, String name) {
         String sql = "SELECT mh.id_mh as idMh, mh.ten_mon_hoc as tenMonHoc, mh.tin_chi as tinChi,\n" +
-                "                mh.id_khoa as idKhoa, k.ten_khoa as tenKhoa FROM monhoc mh join khoa k on mh.id_khoa = k.id_khoa where lower(mh.id_mh) like concat('%', lower(?) , '%') or " +
-                "lower(mh.ten_mon_hoc) like concat('%', lower(?), '%')";
+                "                mh.id_khoa as idKhoa, k.ten_khoa as tenKhoa FROM monhoc mh join khoa k on mh.id_khoa like k.id_khoa where mh.id_mh = ? or " +
+                "mh.ten_mon_hoc = ?";
 
         SubjectEntity subjectEntity = findOne(sql, new SubjectMapper(), id, name);
         return subjectEntity != null;
+    }
+
+    @Override
+    public boolean existById(String id) {
+        return false;
     }
 
 
@@ -51,15 +56,15 @@ public class SubjectDaoImpl extends AbstractDao<SubjectEntity> implements ISubje
         try{
             StringBuilder sql = new StringBuilder("");
             if(list == null || list.isEmpty()){
-                sql.append("insert into monhoc(id_mh, ten_mon_hoc, tin_chi, id_khoa) " +
-                        "values(?, ?, ?, ?)");
+                sql.append("insert into monhoc(id_mh, ten_mon_hoc, tin_chi, id_khoa, ngay_tao, ngay_sua) " +
+                        "values(?, ?, ?, ?, ?, ?)");
                 insertOrUpdateOrDelete(sql.toString(), subjectEntity.getIdMh(), subjectEntity.getTenMonHoc(),
-                        subjectEntity.getTinChi(), subjectEntity.getIdKhoa());
+                        subjectEntity.getTinChi(), subjectEntity.getIdKhoa(), subjectEntity.getNgayTao(), subjectEntity.getNgaySua());
             }
             else{
-                sql.append("update monhoc set ten_mon_hoc =?, tin_chi=?, id_khoa=? where id_mh=?");
+                sql.append("update monhoc set ten_mon_hoc =?, tin_chi=?, id_khoa=?, ngay_sua = ? where id_mh=?");
                 insertOrUpdateOrDelete(sql.toString(), subjectEntity.getTenMonHoc(), subjectEntity.getTinChi(),
-                        subjectEntity.getIdKhoa(), subjectEntity.getIdMh());
+                        subjectEntity.getNgaySua(), subjectEntity.getIdMh() );
             }
 
         }catch (Exception e){

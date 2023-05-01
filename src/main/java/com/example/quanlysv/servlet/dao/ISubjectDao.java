@@ -13,6 +13,8 @@ public interface ISubjectDao {
 
     boolean exitsByIdOrName(String id, String name);
 
+
+    boolean existById(String id);
     void createOrUpdateSubject(SubjectEntity subjectEntity);
 
     void deleteSubject(String id);

@@ -13,5 +13,5 @@ public interface ISubjectService {
 
     BaseResponse<?> createOrUpdateSubject(CreateOrEditSubjectDTO dto);
 
-    void deleteSubject(String id);
+    BaseResponse<?> deleteSubject(String id);
 }

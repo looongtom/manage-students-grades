@@ -17,6 +17,7 @@ import com.example.quanlysv.servlet.util.Convert;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -93,6 +94,9 @@ public class SubjectServiceImpl implements ISubjectService {
 
              SubjectEntity subjectEntity = Convert.convertDTOToEntity(subjectDTO, SubjectEntity.class);
              if(subjectEntity != null){
+                 subjectEntity.setNgayTao(new Date().getTime());
+                 subjectEntity.setNgaySua(new Date().getTime());
+
                  subjectDao.createOrUpdateSubject(subjectEntity);
              }
              return new BaseResponse.Builder<>()
@@ -111,14 +115,27 @@ public class SubjectServiceImpl implements ISubjectService {
     }
 
     @Override
-    public void deleteSubject(String id) {
+    public BaseResponse<?> deleteSubject(String id) {
         try {
-            if(!id.trim().isEmpty()){
+
+            if(!subjectDao.exitsByIdOrName(id, "")){
                 subjectDao.deleteSubject(id.trim());
+                return new BaseResponse.Builder<>()
+                        .setStatus(200)
+                        .setMessage("success")
+                        .build();
             }
+            return new BaseResponse.Builder<>()
+                    .setStatus(200)
+                    .setMessage("subject not found!")
+                    .build();
+
         }catch (Exception e){
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e.getMessage());
+            return new BaseResponse.Builder<>()
+                    .setStatus(500)
+                    .setMessage("failed")
+                    .build();
+
         }
     }
 }
