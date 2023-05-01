@@ -5,6 +5,16 @@ public class BaseResponse<T> {
     private String message;
     private T data;
 
+    private int totalPages;
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
+    }
+
     public void setStatus(int status) {
         this.status = status;
     }
@@ -17,10 +27,11 @@ public class BaseResponse<T> {
         this.data = data;
     }
 
-    private BaseResponse(int status, String message, T data) {
+    private BaseResponse(int status, String message, T data, int totalPages) {
         this.status = status;
         this.message = message;
         this.data = data;
+        this.totalPages = totalPages;
     }
 
     public int getStatus() {
@@ -40,8 +51,15 @@ public class BaseResponse<T> {
         private String message;
         private T data;
 
+        private int totalPages;
+
         public Builder<T> setStatus(int status) {
             this.status = status;
+            return this;
+        }
+
+        public Builder<T> setTotalPages(int totalPages){
+            this.totalPages = totalPages;
             return this;
         }
 
@@ -56,7 +74,7 @@ public class BaseResponse<T> {
         }
 
         public BaseResponse<T> build() {
-            return new BaseResponse<>(status, message, data);
+            return new BaseResponse<>(status, message, data, totalPages);
         }
     }
 }

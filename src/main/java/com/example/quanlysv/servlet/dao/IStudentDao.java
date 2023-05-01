@@ -11,6 +11,8 @@ public interface IStudentDao  extends IGenericDao<StudentEntity> {
 
    List<StudentEntity> findStudent(StudentFilter request);
 
+   Integer countTotalRecords(StudentFilter request);
+
    void createOrUpdateStudent (StudentEntity studentEntity);
 
    boolean existedByEmailAndIdSvAndPhone(String id, String email, String phone);
