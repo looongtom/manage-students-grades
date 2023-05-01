@@ -1,28 +1,21 @@
 package com.example.quanlysv.servlet.dto.request.subject;
 
-public class SubjectDTO {
+public class CreateOrEditSubjectDTO {
     private String idMh;
     private String tenMonHoc;
+
     private Integer tinChi;
 
     private String idKhoa;
 
-    private String tenKhoa;
+    private Integer flag;
 
-    public String getTenKhoa() {
-        return tenKhoa;
+    public Integer getFlag() {
+        return flag;
     }
 
-    public void setTenKhoa(String tenKhoa) {
-        this.tenKhoa = tenKhoa;
-    }
-
-    public String getIdKhoa() {
-        return idKhoa;
-    }
-
-    public void setIdKhoa(String idKhoa) {
-        this.idKhoa = idKhoa;
+    public void setFlag(Integer flag) {
+        this.flag = flag;
     }
 
     public String getIdMh() {
@@ -49,13 +42,11 @@ public class SubjectDTO {
         this.tinChi = tinChi;
     }
 
-    @Override
-    public String toString() {
-        return "SubjectDTO{" +
-                "idMh='" + idMh + '\'' +
-                ", tenMonHoc='" + tenMonHoc + '\'' +
-                ", tinChi=" + tinChi +
-                ", idKhoa='" + idKhoa + '\'' +
-                '}';
+    public String getIdKhoa() {
+        return idKhoa;
+    }
+
+    public void setIdKhoa(String idKhoa) {
+        this.idKhoa = idKhoa;
     }
 }
