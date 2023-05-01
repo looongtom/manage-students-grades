@@ -33,15 +33,15 @@
     <div class="boc-bang">
         <table id="myTable" class="danhSach">
             <thead class="hang1">
-            <th data-sort onclick="sortTable(0, this)" class="cot-maGV">Mã GV</th>
-            <th data-sort onclick="sortName(this)" class="cot-tenGV">Họ và tên</th>
-            <th class="cot-sdtGV">Số điện thoại</th>
-            <th class="cot-emailGV">Email</th>
-            <th data-sort onclick="sortTable(4, this)" class="cot-gioiTinhGV">Giới tính</th>
-            <th data-sort onclick="sortName(this)" class="cot-khoaGV">Khoa</th>
-            <th class="cot-ngayTao">Ngày tạo</th>
-            <th class="cot-ngayTao">Ngày cập nhật</th>
-            <th class="hanh-dong">Action</th>
+                <th data-sort onclick="sortTable('idGv', this)" class="cot-maGV">Mã GV</th>
+                <th data-sort onclick="sortTable('tenGv', this)" class="cot-tenGV">Họ và tên</th>
+                <th class="cot-sdtGV">Số điện thoại</th>
+                <th class="cot-emailGV">Email</th>
+                <th data-sort onclick="sortTable('genderGv', this)" class="cot-gioiTinhGV">Giới tính</th>
+                <th data-sort onclick="sortTable('idKhoa', this)" class="cot-khoaGV">Khoa</th>
+                <th data-sort onclick="sortTable('ngayTao', this)" class="cot-ngayTao">Ngày tạo</th>
+                <th data-sort onclick="sortTable('ngaySua', this)" class="cot-ngayTao">Ngày cập nhật</th>
+                <th class="hanh-dong">Action</th>
             </thead>
             <tbody>
 
@@ -57,7 +57,6 @@
 <%@include file="../teacher/update_teacher_form.jsp" %>
 <%@include file="../teacher/confirm_delete_teacher.jsp"%>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../../../assets/js/menu.js"></script>
 <script src="../../../assets/js/teacher.js"></script>
 <script src="../../../assets/js/pagination_teacher.js"></script>
