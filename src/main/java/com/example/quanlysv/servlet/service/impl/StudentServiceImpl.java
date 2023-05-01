@@ -40,11 +40,15 @@ public class StudentServiceImpl implements IStudentService {
             }
 
             List<StudentEntity> list = studentDao.findStudent(request);
+            Integer totalRecords = studentDao.countTotalRecords(request);
+            int totalPages = totalRecords!= null?(int) Math.ceil((double)
+                    totalRecords / request.getBaseRequest().getPageSize()): null;
+
             for(int i=0; i< list.size(); i++){
                 result.add(Convert.convertEntityToDTO(list.get(i), StudentDTO.class));
             }
             return new BaseResponse.Builder<List<StudentDTO>>().setMessage("success")
-                    .setStatus(200).setData(result).build();
+                    .setStatus(200).setData(result).setTotalPages(totalPages).build();
         }catch (Exception e){
             log.error("failed by => ", e.getCause());
             return new BaseResponse.Builder<List<StudentDTO>>().setMessage("failed => "+e.getMessage())

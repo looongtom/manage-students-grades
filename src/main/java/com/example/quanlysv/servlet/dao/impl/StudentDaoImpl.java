@@ -38,6 +38,13 @@ public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStude
     }
 
     @Override
+    public Integer countTotalRecords(StudentFilter request) {
+        String countSql = "SELECT COUNT(*) FROM sinhvien as sv where lower(sv.ten_sv) like concat('%',lower(?), '%') or lower(sv.id_sv) like concat('%', lower(?), '%')";
+        Integer totalRecords = countTotalRecords(countSql, request.getTenSv(), request.getIdSv());
+        return totalRecords;
+    }
+
+    @Override
     public void createOrUpdateStudent(StudentEntity studentEntity) {
         String sqlQuery = "select sv.id_sv as idSv, sv.ten_sv as tenSv, sv.email_sv as emailSv, " +
                 "sv.dob_sv as dobSv, sv.gender_sv as genderSv, " +

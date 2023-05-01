@@ -51,6 +51,31 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
         return data;
     }
 
+    public Integer countTotalRecords(String sql, Object... params ){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Integer totalRecord = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++) {
+                preparedStatement.setObject(i + 1, params[i]);
+            }
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                totalRecord = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+           disconectSafe(connection, preparedStatement);
+        }
+        return totalRecord;
+
+    }
+
+
     public T findOne(String sql, IRowMapper<T> mapper, Object...params){
         Connection connection = getConnection();
         PreparedStatement preparedStatement = null;
