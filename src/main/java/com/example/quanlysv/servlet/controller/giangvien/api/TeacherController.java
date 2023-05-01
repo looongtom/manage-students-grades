@@ -2,6 +2,7 @@ package com.example.quanlysv.servlet.controller.giangvien.api;
 
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.teacher.TeacherDTO;
+import com.example.quanlysv.servlet.dto.request.teacher.TeacherFilter;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.service.ITeacherService;
 import com.example.quanlysv.servlet.service.impl.TeacherServiceImpl;
@@ -35,7 +36,7 @@ public class TeacherController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        BaseRequest baseRequest = HttpUtil.of(req.getReader()).toModel(BaseRequest.class);
+        TeacherFilter baseRequest = HttpUtil.of(req.getReader()).toModel(TeacherFilter.class);
         BaseResponse<?> baseResponse = service.findTeacher(baseRequest);
         ResponseUtils.responseApi(req, resp, baseResponse);
     }

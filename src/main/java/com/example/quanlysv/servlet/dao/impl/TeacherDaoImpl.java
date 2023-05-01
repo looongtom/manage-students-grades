@@ -1,7 +1,7 @@
 package com.example.quanlysv.servlet.dao.impl;
 
 import com.example.quanlysv.servlet.dao.ITeacherDao;
-import com.example.quanlysv.servlet.dto.request.BaseRequest;
+import com.example.quanlysv.servlet.dto.request.teacher.TeacherFilter;
 import com.example.quanlysv.servlet.entity.TeacherEntity;
 import com.example.quanlysv.servlet.mapper.TeacherMapper;
 
@@ -25,16 +25,19 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
     }
 
     @Override
-    public List<TeacherEntity> findTeacher(BaseRequest request) {
+    public List<TeacherEntity> findTeacher(TeacherFilter request) {
         String sql="select gv.id_gv as idGv,gv.ten_gv as tenGv,gv.sdt_gv as sdtGv," +
                 "gv.email_gv as emailGv, gv.gender_gv as genderGv, gv.id_khoa as idKhoa," +
-                "gv.ngay_tao as ngayTao, gv.ngay_sua as ngaySua from giangvien as gv ORDER BY " +
-                request.getSortField() + " "+  request.getSortOrder() + " OFFSET ? LIMIT ?";
+                "gv.ngay_tao as ngayTao, gv.ngay_sua as ngaySua from giangvien as gv where " +
+                "lower(gv.ten_gv) like concat('%',lower(?), '%') ORDER BY " +
+                request.getBaseRequest().getSortField() + " "+  request.getBaseRequest().getSortOrder() + " OFFSET ? LIMIT ?";
 
         List<TeacherEntity> list = findByProperties(sql, new TeacherMapper(),
-                request.getPageIndex() * request.getPageSize(), request.getPageSize());
+                request.getTenGv(),
+                request.getBaseRequest().getPageIndex() * request.getBaseRequest().getPageSize(),
+                request.getBaseRequest().getPageSize());
 
-        return list.isEmpty()?null:list;
+        return list.isEmpty() ? null : list;
 
     }
     @Override

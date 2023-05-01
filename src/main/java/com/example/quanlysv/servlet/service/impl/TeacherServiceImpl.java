@@ -5,9 +5,9 @@ import com.example.quanlysv.servlet.dao.IKhoaDao;
 import com.example.quanlysv.servlet.dao.ITeacherDao;
 import com.example.quanlysv.servlet.dao.impl.KhoaDaoImpl;
 import com.example.quanlysv.servlet.dao.impl.TeacherDaoImpl;
-import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.teacher.CreateOrEditTeacherDTO;
 import com.example.quanlysv.servlet.dto.request.teacher.TeacherDTO;
+import com.example.quanlysv.servlet.dto.request.teacher.TeacherFilter;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.entity.KhoaEntity;
 import com.example.quanlysv.servlet.entity.TeacherEntity;
@@ -40,13 +40,6 @@ public class TeacherServiceImpl implements ITeacherService {
                         .setStatus(Constant.httpStatusErrorServer)
                         .setMessage(Constant.messageStudentNotFound).build();
             }
-//            KhoaEntity khoaEntity = iKhoaDao.getById( teacherEntity.getIdKhoa() );
-//            if(khoaEntity==null){
-//                return new BaseResponse.Builder<>()
-//                        .setStatus(Constant.httpStatusErrorServer)
-//                        .setMessage(Constant.messageStudentNotFound).build();
-//            }
-//            teacherEntity.setTenKhoa(khoaEntity.getTenKhoa());
 
             TeacherDTO teacherDTO = Convert.convertEntityToDTO(teacherEntity, TeacherDTO.class);
             return new BaseResponse.Builder<>()
@@ -80,16 +73,15 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
-    public BaseResponse<?> findTeacher(BaseRequest request) {
+    public BaseResponse<?> findTeacher(TeacherFilter request) {
+        List<TeacherDTO> dtoList;
         try{
-            if ((request.getSortOrder() == null || request.getSortOrder().isEmpty())) {
-                request.setSortOrder("asc");
+            if ((request.getBaseRequest().getSortOrder() == null || request.getBaseRequest().getSortOrder().isEmpty())) {
+                request.getBaseRequest().setSortOrder("asc");
             }
-            if(request.getSortField() == null || request.getSortField().isEmpty()){
-                request.setSortField("id_gv");
+            if(request.getBaseRequest().getSortField() == null || request.getBaseRequest().getSortField().isEmpty()){
+                request.getBaseRequest().setSortField("id_gv");
             }
-
-            List<TeacherDTO> dtoList=new ArrayList<>();
             List<TeacherEntity> list=teacherDao.findTeacher(request);
             for(TeacherEntity tmp:list){
                 KhoaEntity khoaEntity = iKhoaDao.getById( tmp.getIdKhoa() );
