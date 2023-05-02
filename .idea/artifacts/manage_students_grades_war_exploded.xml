@@ -1,10 +1,17 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="quanlysv:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/quanlysv_war_exploded</output-path>
+  <artifact type="exploded-war" name="manage-students-grades:war exploded">
+    <output-path>$PROJECT_DIR$/target/quanlysv-1.0-SNAPSHOT</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>manage-students-grades</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="quanlysv" />
+          <element id="module-output" name="manage-students-grades" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
@@ -17,6 +24,7 @@
           <element id="library" level="project" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" />
           <element id="library" level="project" name="Maven: stax:stax-api:1.0.1" />
           <element id="library" level="project" name="Maven: com.github.virtuald:curvesapi:1.04" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.9" />
           <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.5.4" />
           <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.5.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.14.1" />
@@ -36,7 +44,10 @@
           <element id="library" level="project" name="Maven: org.webjars:jquery:3.6.1" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="quanlysv/web/Web" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/quanlysv-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="manage-students-grades/web/Web" />
     </root>
   </artifact>
 </component>

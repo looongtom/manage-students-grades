@@ -1,4 +1,8 @@
 <%@ page import="java.util.Random" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -42,18 +46,56 @@
                                 <label for="" class="nhanModal">Học kỳ</label>
                                 <select id="hoc-ky" class="nhapModal" required>
                                     <option value="">Please select</option>
-                                    <option value="Class A">Học kì 1 năm 2020-2021</option>
-                                    <option value="Class B">Học kì 2 năm 2020-2021</option>
+<%--                                    <option value="Class A">Học kì 1 năm 2020-2021</option>--%>
+<%--                                    <option value="Class B">Học kì 2 năm 2020-2021</option>--%>
+                                    <%
+                                        try{
+                                            Class.forName("org.postgresql.Driver");
+                                            Connection con= DriverManager.getConnection("jdbc:postgresql://localhost:5432/quanlysinhvien",
+                                                    "postgres","tr1nhtu@n");
+                                            Statement st=con.createStatement();
+                                            String str="select * from hocky ";
+                                            ResultSet rs=st.executeQuery(str);
+                                            while(rs.next()){
+                                    %>
+                                    <option><%=rs.getString("ten_hoc_ky")%></option>
+                                    <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
+                                    <%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
+                                    <% }
+
+                                    }catch (Exception e){
+
+                                    }
+                                    %>
                                 </select>
                             </div>
 
                             <div class="hang">
                                 <label for="" class="nhanModal">Giảng viên</label>
+
                                 <select id="giang-vien" class="nhapModal" required>
                                     <option value="">Please select</option>
-                                    <option value="Class A">Trần Quang Minh</option>
-                                    <option value="Class B">Trịnh Minh Tuấn</option>
+                                    <%
+                                        try{
+                                            Class.forName("org.postgresql.Driver");
+                                            Connection con= DriverManager.getConnection("jdbc:postgresql://localhost:5432/quanlysinhvien",
+                                                    "postgres","tr1nhtu@n");
+                                            Statement st=con.createStatement();
+                                            String str="select * from giangvien ";
+                                            ResultSet rs=st.executeQuery(str);
+                                            while(rs.next()){
+                                    %>
+                                    <option><%=rs.getString("ten_gv")%></option>
+<%--                                    <option value="Class A">Trần Quang Minh</option>--%>
+<%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
+                                    <% }
+
+                                    }catch (Exception e){
+
+                                    }
+                                    %>
                                 </select>
+
                             </div>
                         </div>
 
@@ -62,8 +104,27 @@
                                 <label for="" class="nhanModal">Môn học</label>
                                 <select id="mon-hoc" class="nhapModal" required>
                                     <option value="">Please select</option>
-                                    <option value="Class A">Lập trình Web</option>
-                                    <option value="Class B">Cơ sở dữ liệu phân tán</option>
+<%--                                    <option value="Class A">Lập trình Web</option>--%>
+<%--                                    <option value="Class B">Cơ sở dữ liệu phân tán</option>--%>
+                                    <%
+                                        try{
+                                            Class.forName("org.postgresql.Driver");
+                                            Connection con= DriverManager.getConnection("jdbc:postgresql://localhost:5432/quanlysinhvien",
+                                                    "postgres","tr1nhtu@n");
+                                            Statement st=con.createStatement();
+                                            String str="select * from monhoc ";
+                                            ResultSet rs=st.executeQuery(str);
+                                            while(rs.next()){
+                                    %>
+                                    <option><%=rs.getString("ten_mon_hoc")%></option>
+                                    <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
+                                    <%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
+                                    <% }
+
+                                    }catch (Exception e){
+
+                                    }
+                                    %>
                                 </select>
                             </div>
                             <div class="hang" style="display: none;">
