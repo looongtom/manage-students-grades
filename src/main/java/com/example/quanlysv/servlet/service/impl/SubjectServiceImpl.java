@@ -77,7 +77,6 @@ public class SubjectServiceImpl implements ISubjectService {
     @Override
     public BaseResponse<?> createOrUpdateSubject(CreateOrEditSubjectDTO subjectDTO) {
          try{
-
              if(subjectDTO.getFlag()==1 && subjectDao.exitsByIdOrName(subjectDTO.getIdMh(), subjectDTO.getTenMonHoc())){
                  return new BaseResponse.Builder<>()
                          .setStatus(500)
@@ -117,8 +116,7 @@ public class SubjectServiceImpl implements ISubjectService {
     @Override
     public BaseResponse<?> deleteSubject(String id) {
         try {
-
-            if(!subjectDao.exitsByIdOrName(id, "")){
+            if(subjectDao.existById(id)){
                 subjectDao.deleteSubject(id.trim());
                 return new BaseResponse.Builder<>()
                         .setStatus(200)
