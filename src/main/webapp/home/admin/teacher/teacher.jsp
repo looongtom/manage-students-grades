@@ -49,7 +49,14 @@
         </table>
     </div>
     <div class="phanTrang">
-        <ul></ul>
+        <ul>
+            <li class="nutPaginate prev" style="color: white">
+                <span><i class="fas fa-angle-left"></i></span>
+            </li>
+            <li class="nutPaginate next" style="color: white">
+                <span><i class="fas fa-angle-right"></i></span>
+            </li>
+        </ul>
     </div>
 </div>
 
@@ -59,7 +66,6 @@
 
 <script src="../../../assets/js/menu.js"></script>
 <script src="../../../assets/js/teacher.js"></script>
-<script src="../../../assets/js/pagination_teacher.js"></script>
 <script src="../../../assets/js/text_error_teacher.js"></script>
 <script src="../../../assets/js/add_teacher.js"></script>
 <script src="../../../assets/js/update_teacher.js"></script>

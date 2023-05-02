@@ -40,6 +40,14 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
         return list.isEmpty() ? null : list;
 
     }
+
+    @Override
+    public Integer countTotalRecords(TeacherFilter request) {
+        String countSql = "SELECT COUNT(*) FROM giangvien as gv where lower(gv.ten_gv) like concat('%',lower(?), '%')";
+        Integer totalRecords = countTotalRecords(countSql, request.getTenGv());
+        return totalRecords;
+    }
+
     @Override
     public void createOrEditTeacher(TeacherEntity teacherEntity) {
         String sqlQuery="select gv.id_gv as idGv,gv.ten_gv as tenGv,gv.sdt_gv as sdtGv," +

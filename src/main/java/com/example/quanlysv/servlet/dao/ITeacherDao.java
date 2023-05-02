@@ -9,6 +9,7 @@ import java.util.List;
 public interface ITeacherDao extends IGenericDao<TeacherEntity> {
     void createOrEditTeacher(TeacherEntity teacherEntity);
     List<TeacherEntity> findTeacher(TeacherFilter baseRequest);
+    Integer countTotalRecords(TeacherFilter request);
     void deleteTeacher(String id);
     TeacherEntity getById(String id);
 
