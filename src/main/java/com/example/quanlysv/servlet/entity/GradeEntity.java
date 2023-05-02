@@ -3,7 +3,7 @@ package com.example.quanlysv.servlet.entity;
 import java.time.Instant;
 
 public class GradeEntity {
-    private String idDiem,idGv,idMh,idSv,idHk;
+    private String idDiem,idGv,idMh,idSv,idHk,idLop;
     private Double diemCc,diemBt,diemThi,diemKt;
     private Long ngayTao,ngaySua;
     public Long GetCurrentTime(Instant instant){
@@ -20,6 +20,14 @@ public class GradeEntity {
         this.diemKt = diemKt;
         this.ngayTao = ngayTao;
         this.ngaySua = ngaySua;
+    }
+
+    public String getIdLop() {
+        return idLop;
+    }
+
+    public void setIdLop(String idLop) {
+        this.idLop = idLop;
     }
 
     public String getIdDiem() {

@@ -3,7 +3,7 @@ package com.example.quanlysv.servlet.dto.request.diem;
 import java.time.Instant;
 
 public class GradeDTO {
-    private String idDiem,idGv,idMh,idSv,idHk;
+    private String idDiem,idGv,idMh,idSv,idHk,idLop;
     private Double diemCc,diemBt,diemThi,diemKt;
     private Long ngayTao,ngaySua;
     public Long GetCurrentTime(Instant instant){
@@ -24,6 +24,14 @@ public class GradeDTO {
 
     public String getIdDiem() {
         return idDiem;
+    }
+
+    public String getIdLop() {
+        return idLop;
+    }
+
+    public void setIdLop(String idLop) {
+        this.idLop = idLop;
     }
 
     public void setIdDiem(String idDiem) {
@@ -112,12 +120,13 @@ public class GradeDTO {
 
     @Override
     public String toString() {
-        return "GradeEntity{" +
+        return "GradeDTO{" +
                 "idDiem='" + idDiem + '\'' +
                 ", idGv='" + idGv + '\'' +
                 ", idMh='" + idMh + '\'' +
                 ", idSv='" + idSv + '\'' +
                 ", idHk='" + idHk + '\'' +
+                ", idLop='" + idLop + '\'' +
                 ", diemCc=" + diemCc +
                 ", diemBt=" + diemBt +
                 ", diemThi=" + diemThi +
