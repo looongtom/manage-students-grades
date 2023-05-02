@@ -32,13 +32,13 @@ public class GradeDaoImpl extends AbstractDao<GradeEntity> implements IGradeDao 
             String sql = "INSERT INTO public.diem(" +
                     "id_diem," +
                     " diem_cc, diem_bt, diem_thi, diem_kt," +
-                    " id_gv, id_mh, id_sv, id_hk," +
+                    " id_gv, id_mh, id_sv, id_hk,id_lop," +
                     " ngay_tao, ngay_sua)" +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
             insertOrUpdateOrDelete(sql,gradeEntity.getIdDiem(),
                     gradeEntity.getDiemCc(),gradeEntity.getDiemBt(),
                     gradeEntity.getDiemThi(),gradeEntity.getDiemKt(),
-                    gradeEntity.getIdGv(),gradeEntity.getIdMh(),gradeEntity.getIdSv(),gradeEntity.getIdHk(),
+                    gradeEntity.getIdGv(),gradeEntity.getIdMh(),gradeEntity.getIdSv(),gradeEntity.getIdHk(),gradeEntity.getIdLop(),
                     gradeEntity.getNgayTao(),gradeEntity.getNgaySua()
             );
         }catch (Exception e){

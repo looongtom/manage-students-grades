@@ -61,10 +61,16 @@ public class CreateOrEditGradeController extends HttpServlet {
         String idGv = req.getParameter("idGv");
         String idMh = req.getParameter("idMh");
         String idHk = req.getParameter("idHk");
-//        System.out.println("idDiem: "+idDiem);
-//        System.out.println("idGv: "+idGv);
-//        System.out.println("idMh: "+idMh);
-//        System.out.println("idHk: "+idHk);
+        String idLop = req.getParameter("idLop");
+
+
+
+        System.out.println("idDiem: "+idDiem);
+        System.out.println("idGv: "+idGv);
+        System.out.println("idMh: "+idMh);
+        System.out.println("idHk: "+idHk);
+        System.out.println("idLop: "+idLop);
+
 //        for (Part part : req.getParts()) {
         String fileName = extractFileName(part);
         // refines the fileName in case it is an absolute path
@@ -84,6 +90,7 @@ public class CreateOrEditGradeController extends HttpServlet {
             gradeDTO.setIdGv(idGv);
             gradeDTO.setIdMh(idMh);
             gradeDTO.setIdHk(idHk);
+            gradeDTO.setIdLop(idLop);
             gradeDTO.setIdSv(grade.getIdSv());
 
             gradeDTO.setDiemCc(grade.getDiemCc());
