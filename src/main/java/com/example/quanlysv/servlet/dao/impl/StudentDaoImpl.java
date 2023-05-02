@@ -27,7 +27,7 @@ public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStude
                 "sv.dob_sv as dobSv, sv.gender_sv as genderSv, sv.ngay_tao as ngayTao, sv.ngay_sua as ngaySua," +
                 "sv.phone_sv as phoneSv, sv.lop_hanh_chinh_sv as lopHanhChinhSv" +
                 " FROM sinhvien as sv where" +
-                " lower(sv.ten_sv) like concat('%',lower(?), '%') or lower(sv.id_sv) like concat('%', lower(?), '%') ORDER BY " +
+                " lower(sv.ten_sv) like concat('%',lower(?), '%') and lower(sv.id_sv) like concat('%', lower(?), '%') ORDER BY " +
                 request.getBaseRequest().getSortField() + " "+  request.getBaseRequest().getSortOrder() + " OFFSET ? LIMIT ?";
 
         List<StudentEntity> studentEntities = findByProperties(sql, new StudentMapper(),
@@ -39,7 +39,7 @@ public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStude
 
     @Override
     public Integer countTotalRecords(StudentFilter request) {
-        String countSql = "SELECT COUNT(*) FROM sinhvien as sv where lower(sv.ten_sv) like concat('%',lower(?), '%') or lower(sv.id_sv) like concat('%', lower(?), '%')";
+        String countSql = "SELECT COUNT(*) FROM sinhvien as sv where lower(sv.ten_sv) like concat('%',lower(?), '%') and lower(sv.id_sv) like concat('%', lower(?), '%')";
         Integer totalRecords = countTotalRecords(countSql, request.getTenSv(), request.getIdSv());
         return totalRecords;
     }
