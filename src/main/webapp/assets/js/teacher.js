@@ -1,14 +1,23 @@
+// set mặc định các biến
+var pageSize=10;
+var pageIndex=0;
+var totalPages;
+
+// request body của phương thức get và find
 var formData={
     "tenGv":"",
     "baseRequest": {
         "sortField":"",
         "sortOrder":"",
-        "pageIndex": 0,
-        "pageSize": 10
+        "pageIndex": pageIndex,
+        "pageSize": pageSize
     }
 }
+
+// cái này sẽ được thực thi ngay khi mới vào trang -> Lấy tất cả giảng viên
 document.addEventListener("DOMContentLoaded", getAllGV());
 
+// đọc (R)
 function getAllGV() {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8080/api/home/teacher', true);
@@ -18,6 +27,7 @@ function getAllGV() {
             const res = JSON.parse(xhr.responseText);
             const myTable = document.getElementById('myTable');
             const tbody = myTable.querySelector('tbody');
+            totalPages=res.totalPages;
             while (tbody.firstChild) {
                 tbody.removeChild(tbody.firstChild);
             }
@@ -53,6 +63,8 @@ function getAllGV() {
     };
     xhr.send(JSON.stringify(formData));
 }
+
+// thêm (C)
 function addGV() {
     const maGvInput = document.getElementById("ma-gv").value;
     const tenGvInput = document.getElementById("ten-gv").value;
@@ -86,6 +98,7 @@ function addGV() {
     }));
 }
 
+// sửa (U)
 function updateGV() {
     const maGvInput = document.getElementById("ma-gv-sua").value;
     const tenGvInput = document.getElementById("ten-gv-sua").value;
@@ -117,6 +130,7 @@ function updateGV() {
     }));
 }
 
+// xóa (D)
 function deleteGV(el) {
     anXacNhanXoa('modal_xac_nhan_xoa');
     const id = el.getAttribute('data-id');
@@ -135,12 +149,12 @@ function deleteGV(el) {
     xhr.send();
 }
 
+// tìm kiếm
 function timKiemGV() {
     const name = document.querySelector('.nhapTimKiem').value;
     console.log(name);
-    var pageSize=9999;
-    if(name==="") {
-        pageSize=10;
+    if(name!=="") {
+        pageSize=9999;
     }
     formData={
         "tenGv": name,
@@ -154,6 +168,7 @@ function timKiemGV() {
     getAllGV();
 }
 
+// sort
 function sortTable(field, event) {
     var thead=document.querySelector('thead');
     var hData=[...thead.querySelectorAll('th')]
@@ -173,8 +188,117 @@ function sortTable(field, event) {
             "sortField": field,
             "sortOrder": desc ? 'desc' : 'asc',
             "pageIndex": 0,
-            "pageSize": 10
+            "pageSize": pageSize
         }
     }
     getAllGV();
 }
+
+// lấy element để phân trang
+// const paginationElement = document.querySelector(".phanTrang ul");
+// paginationElement.innerHTML = createPaginationUI(totalPages, pageIndex+1);
+
+// phân trang
+// function createPaginationUI(totalPages, currentPage){
+//     let liTag = '';
+//     let active;
+//     let beforePage = currentPage - 1;
+//     let afterPage = currentPage + 1;
+//     if(currentPage > 1){
+//         liTag += `<li class="nutPaginate prev" style="color: white" onclick="createPagination(totalPages, ${currentPage - 1})"><span><i class="fas fa-angle-left"></i></span></li>`;
+//     }
+//     if(currentPage > 2 && totalPages>4){
+//         liTag += `<li class="first numb" onclick="createPagination(totalPages, 1)"><span>1</span></li>`;
+//         if(currentPage > 3){
+//             liTag += `<li class="dots"><span>...</span></li>`;
+//         }
+//     }
+//     if (currentPage === totalPages) {
+//         beforePage = beforePage - 2;
+//     } else if (currentPage === totalPages - 1) {
+//         beforePage = beforePage - 1;
+//     }
+//     if (currentPage === 1) {
+//         beforePage=1;
+//         afterPage = afterPage + 2;
+//     } else if (currentPage === 2) {
+//         beforePage=1;
+//         afterPage  = afterPage + 1;
+//     }
+//     for (var plength = beforePage; plength <= afterPage; plength++) {
+//         if (plength > totalPages) {
+//             continue;
+//         }
+//         if (plength === 0) {
+//             plength = plength + 1;
+//         }
+//         if(currentPage === plength){
+//             active = "active";
+//         }else{
+//             active = "";
+//         }
+//         liTag += `<li class="numb ${active}" onclick="createPagination(totalPages, ${plength})"><span>${plength}</span></li>`;
+//     }
+//     if(currentPage < totalPages - 1 && totalPages>4){
+//         if(currentPage < totalPages - 2){
+//             liTag += `<li class="dots"><span>...</span></li>`;
+//         }
+//         liTag += `<li class="last numb" onclick="createPagination(totalPages, ${totalPages})"><span>${totalPages}</span></li>`;
+//     }
+//     if (currentPage < totalPages) {
+//         liTag += `<li class="nutPaginate next" style="color: white" onclick="createPagination(totalPages, ${currentPage + 1})"><span><i class="fas fa-angle-right"></i></span></li>`;
+//     }
+//     paginationElement.innerHTML = liTag;
+//     return liTag;
+// }
+
+const prevBtn=document.querySelector(".nutPaginate.prev");
+const nextBtn=document.querySelector(".nutPaginate.next");
+const pageNumbers = document.querySelectorAll(".numb");
+prevBtn.addEventListener("click", () => {
+    if (pageIndex > 0) {
+        pageIndex--;
+        formData={
+            "tenGv":"",
+            "baseRequest": {
+                "sortField":"",
+                "sortOrder":"",
+                "pageIndex": pageIndex,
+                "pageSize": pageSize
+            }
+        }
+        getAllGV();
+    }
+});
+
+nextBtn.addEventListener("click", () => {
+    if(pageIndex<totalPages-1) {
+        pageIndex++;
+        formData={
+            "tenGv":"",
+            "baseRequest": {
+                "sortField":"",
+                "sortOrder":"",
+                "pageIndex": pageIndex,
+                "pageSize": pageSize
+            }
+        }
+        getAllGV();
+    }
+});
+
+pageNumbers.forEach((pageNumber, index) => {
+    pageNumber.addEventListener("click", () => {
+        pageIndex = index;
+        formData={
+            "tenGv":"",
+            "baseRequest": {
+                "sortField":"",
+                "sortOrder":"",
+                "pageIndex": pageIndex,
+                "pageSize": pageSize
+            }
+        }
+        getAllGV();
+    });
+});

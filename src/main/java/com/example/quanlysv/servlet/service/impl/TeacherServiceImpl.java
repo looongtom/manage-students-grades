@@ -83,6 +83,9 @@ public class TeacherServiceImpl implements ITeacherService {
                 request.getBaseRequest().setSortField("id_gv");
             }
             List<TeacherEntity> list=teacherDao.findTeacher(request);
+            Integer totalRecords = teacherDao.countTotalRecords(request);
+            int totalPages = totalRecords!= null?(int) Math.ceil((double)
+                    totalRecords / request.getBaseRequest().getPageSize()): null;
             for(TeacherEntity tmp:list){
                 KhoaEntity khoaEntity = iKhoaDao.getById( tmp.getIdKhoa() );
                 tmp.setTenKhoa(khoaEntity.getTenKhoa());
@@ -104,7 +107,7 @@ public class TeacherServiceImpl implements ITeacherService {
             }).filter(Objects::nonNull).collect(Collectors.toList());
 
             return new BaseResponse.Builder<List<TeacherDTO>>()
-                    .setData(dtoList).setMessage("success").setStatus(200).build();
+                    .setData(dtoList).setMessage("success").setStatus(200).setTotalPages(totalPages).build();
         } catch (Exception e) {
             return new BaseResponse.Builder<List<TeacherDTO>>()
                     .setMessage("failed"+ e.getMessage()).setStatus(500).build();

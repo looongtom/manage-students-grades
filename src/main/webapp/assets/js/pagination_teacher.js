@@ -32,15 +32,15 @@ function createPagination(totalPages, currentPage){
             liTag += `<li class="dots"><span>...</span></li>`;
         }
     }
-    if (currentPage == totalPages) {
+    if (currentPage === totalPages) {
         beforePage = beforePage - 2;
-    } else if (currentPage == totalPages - 1) {
+    } else if (currentPage === totalPages - 1) {
         beforePage = beforePage - 1;
     }
-    if (currentPage == 1) {
+    if (currentPage === 1) {
         beforePage=1;
         afterPage = afterPage + 2;
-    } else if (currentPage == 2) {
+    } else if (currentPage === 2) {
         beforePage=1;
         afterPage  = afterPage + 1;
     }
@@ -48,10 +48,10 @@ function createPagination(totalPages, currentPage){
         if (plength > totalPages) {
             continue;
         }
-        if (plength == 0) {
+        if (plength === 0) {
             plength = plength + 1;
         }
-        if(currentPage == plength){
+        if(currentPage === plength){
             active = "active";
         }else{
             active = "";
@@ -68,6 +68,6 @@ function createPagination(totalPages, currentPage){
         liTag += `<li class="nutPaginate next" style="color: white" onclick="createPagination(totalPages, ${currentPage + 1})"><span><i class="fas fa-angle-right"></i></span></li>`;
     }
     element.innerHTML = liTag;
-    showPage(currentPage)
+    pageIndex=currentPage;
     return liTag;
 }
