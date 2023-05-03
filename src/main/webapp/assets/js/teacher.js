@@ -1,23 +1,84 @@
 // set mặc định các biến
 var pageSize=10;
 var pageIndex=0;
+var sortField='';
+var sortOrder='';
+var tenGv='';
 var totalPages;
 
 // request body của phương thức get và find
 var formData={
-    "tenGv":"",
+    "tenGv": tenGv,
     "baseRequest": {
-        "sortField":"",
-        "sortOrder":"",
+        "sortField": sortField,
+        "sortOrder": sortOrder,
         "pageIndex": pageIndex,
         "pageSize": pageSize
     }
 }
 
+// lấy element để phân trang
+const paginationElement = document.querySelector(".soTrang");
+var pageNumbers;
+
 // cái này sẽ được thực thi ngay khi mới vào trang -> Lấy tất cả giảng viên
-document.addEventListener("DOMContentLoaded", getAllGV());
+document.addEventListener("DOMContentLoaded", readDataInit());
 
 // đọc (R)
+
+
+// đọc data lúc mới vào trang
+function readDataInit() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:8080/api/home/teacher', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            const res = JSON.parse(xhr.responseText);
+            const myTable = document.getElementById('myTable');
+            const tbody = myTable.querySelector('tbody');
+            totalPages=res.totalPages;
+            while (tbody.firstChild) {
+                tbody.removeChild(tbody.firstChild);
+            }
+
+            // cái này để render lại cái UI phân trang
+            paginationElement.innerHTML = createPaginationUI(totalPages, pageIndex+1);
+
+            // hàm này để add data đc trả về vào bảng
+            res.data.forEach(function(item) {
+                var row = `
+                            <tr>
+                              <td>`+item.idGv+`</td>
+                              <td>`+item.tenGv+`</td>
+                              <td>`+item.sdtGv+`</td>
+                              <td>`+item.emailGv+`</td>
+                              <td>`+item.genderGv+`</td>
+                              <td>`+item.tenKhoa+`</td>
+                              <td>`+item.ngayTao+`</td>
+                              <td>`+item.ngaySua+`</td>
+                              <td class="chucNang">
+                                <div class="hop-hanh-dong">
+                                  <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_giang_vien_sua', '`+ item.idGv +`', '`+ item.tenGv +`', '`+ item.sdtGv +`', '`+ item.emailGv +`', '`+ item.genderGv +`', '`+ item.idKhoa +`')">
+                                    <span class="sua_tieuDe">Sửa</span>
+                                    <i class="fa-solid fa-pencil sua_icon"></i>
+                                  </button>
+                                  <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '`+ item.idGv +`')" class="xoa hop-hanh-dong-nut" type="button">
+                                    <span class="xoa_tieuDe">Xóa</span>
+                                    <i class="fa-solid fa-trash xoa_icon"></i>
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>`;
+                tbody.innerHTML+=row;
+            });
+        } else {
+            console.error('Request failed. Status code: ' + xhr.status);
+        }
+    };
+    xhr.send(JSON.stringify(formData));
+}
+
 function getAllGV() {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8080/api/home/teacher', true);
@@ -31,6 +92,8 @@ function getAllGV() {
             while (tbody.firstChild) {
                 tbody.removeChild(tbody.firstChild);
             }
+
+            // hàm này để add data đc trả về vào bảng
             res.data.forEach(function(item) {
                 var row = `
                             <tr>
@@ -151,21 +214,18 @@ function deleteGV(el) {
 
 // tìm kiếm
 function timKiemGV() {
-    const name = document.querySelector('.nhapTimKiem').value;
-    console.log(name);
-    if(name!=="") {
-        pageSize=9999;
-    }
+    tenGv = document.querySelector('.nhapTimKiem').value;
+    pageIndex=0;
     formData={
-        "tenGv": name,
+        "tenGv": tenGv,
         "baseRequest": {
-            "sortField":"",
-            "sortOrder":"",
-            "pageIndex": 0,
+            "sortField": sortField,
+            "sortOrder": sortOrder,
+            "pageIndex": pageIndex,
             "pageSize": pageSize
         }
     }
-    getAllGV();
+    readDataInit();
 }
 
 // sort
@@ -182,91 +242,99 @@ function sortTable(field, event) {
     var desc=event.classList.contains('asc');
     event.classList[desc ? 'remove' : 'add']('asc')
     event.classList[desc ? 'add' : 'remove']('desc')
+    sortField = field;
+    sortOrder = desc ? 'desc' : 'asc';
     formData={
-        "tenGv": "",
+        "tenGv": tenGv,
         "baseRequest": {
-            "sortField": field,
-            "sortOrder": desc ? 'desc' : 'asc',
-            "pageIndex": 0,
+            "sortField": sortField,
+            "sortOrder": sortOrder,
+            "pageIndex": pageIndex,
             "pageSize": pageSize
         }
     }
     getAllGV();
 }
 
-// lấy element để phân trang
-// const paginationElement = document.querySelector(".phanTrang ul");
-// paginationElement.innerHTML = createPaginationUI(totalPages, pageIndex+1);
-
 // phân trang
-// function createPaginationUI(totalPages, currentPage){
-//     let liTag = '';
-//     let active;
-//     let beforePage = currentPage - 1;
-//     let afterPage = currentPage + 1;
-//     if(currentPage > 1){
-//         liTag += `<li class="nutPaginate prev" style="color: white" onclick="createPagination(totalPages, ${currentPage - 1})"><span><i class="fas fa-angle-left"></i></span></li>`;
-//     }
-//     if(currentPage > 2 && totalPages>4){
-//         liTag += `<li class="first numb" onclick="createPagination(totalPages, 1)"><span>1</span></li>`;
-//         if(currentPage > 3){
-//             liTag += `<li class="dots"><span>...</span></li>`;
-//         }
-//     }
-//     if (currentPage === totalPages) {
-//         beforePage = beforePage - 2;
-//     } else if (currentPage === totalPages - 1) {
-//         beforePage = beforePage - 1;
-//     }
-//     if (currentPage === 1) {
-//         beforePage=1;
-//         afterPage = afterPage + 2;
-//     } else if (currentPage === 2) {
-//         beforePage=1;
-//         afterPage  = afterPage + 1;
-//     }
-//     for (var plength = beforePage; plength <= afterPage; plength++) {
-//         if (plength > totalPages) {
-//             continue;
-//         }
-//         if (plength === 0) {
-//             plength = plength + 1;
-//         }
-//         if(currentPage === plength){
-//             active = "active";
-//         }else{
-//             active = "";
-//         }
-//         liTag += `<li class="numb ${active}" onclick="createPagination(totalPages, ${plength})"><span>${plength}</span></li>`;
-//     }
-//     if(currentPage < totalPages - 1 && totalPages>4){
-//         if(currentPage < totalPages - 2){
-//             liTag += `<li class="dots"><span>...</span></li>`;
-//         }
-//         liTag += `<li class="last numb" onclick="createPagination(totalPages, ${totalPages})"><span>${totalPages}</span></li>`;
-//     }
-//     if (currentPage < totalPages) {
-//         liTag += `<li class="nutPaginate next" style="color: white" onclick="createPagination(totalPages, ${currentPage + 1})"><span><i class="fas fa-angle-right"></i></span></li>`;
-//     }
-//     paginationElement.innerHTML = liTag;
-//     return liTag;
-// }
+function createPaginationUI(totalPages, currentPage) {
+    let liTag = '';
+    let active;
+    let beforePage = currentPage - 1;
+    let afterPage = currentPage + 1;
+    if(currentPage > 2 && totalPages > 4){
+        liTag += `<li class="first numb" onclick="getDataAtPageNum(totalPages, 1)"><span>1</span></li>`;
+        if(currentPage > 3 && totalPages!=5){
+            liTag += `<li class="dots"><span>...</span></li>`;
+        }
+    }
+    if (currentPage === totalPages) {
+        beforePage = beforePage - 2;
+    } else if (currentPage === totalPages - 1) {
+        beforePage = beforePage - 1;
+    }
+    if (currentPage === 1) {
+        beforePage=1;
+        afterPage = afterPage + 2;
+    } else if (currentPage === 2) {
+        beforePage = 1;
+        afterPage = afterPage + 1;
+    }
+    for (var plength = beforePage; plength <= afterPage; plength++) {
+        if (plength > totalPages) {
+            continue;
+        }
+        if (plength === 0) {
+            plength = plength + 1;
+        }
+        if(currentPage === plength){
+            active = "active";
+        }else{
+            active = "";
+        }
+        liTag += `<li class="numb ${active}" onclick="getDataAtPageNum(totalPages, ${plength})"><span>${plength}</span></li>`;
+    }
+    if(currentPage < totalPages - 1 && totalPages>4){
+        if(currentPage < totalPages - 2){
+            liTag += `<li class="dots"><span>...</span></li>`;
+        }
+        liTag += `<li class="last numb" onclick="getDataAtPageNum(totalPages, ${totalPages})"><span>${totalPages}</span></li>`;
+    }
+    paginationElement.innerHTML = liTag;
+    return liTag;
+}
 
+// lấy data ở trang mà mình bấm vào
+function getDataAtPageNum(totalPages, currentPage) {
+    createPaginationUI(totalPages, currentPage);
+    formData={
+        "tenGv": tenGv,
+        "baseRequest": {
+            "sortField": sortField,
+            "sortOrder": sortOrder,
+            "pageIndex": currentPage-1,
+            "pageSize": pageSize
+        }
+    }
+    getAllGV();
+}
+
+// thêm sự kiện click vào nút trang trước (>) trang sau (<) ở phần phân trang
 const prevBtn=document.querySelector(".nutPaginate.prev");
 const nextBtn=document.querySelector(".nutPaginate.next");
-const pageNumbers = document.querySelectorAll(".numb");
 prevBtn.addEventListener("click", () => {
     if (pageIndex > 0) {
         pageIndex--;
         formData={
-            "tenGv":"",
+            "tenGv": tenGv,
             "baseRequest": {
-                "sortField":"",
-                "sortOrder":"",
+                "sortField": sortField,
+                "sortOrder": sortOrder,
                 "pageIndex": pageIndex,
                 "pageSize": pageSize
             }
         }
+        createPaginationUI(totalPages, pageIndex+1)
         getAllGV();
     }
 });
@@ -275,30 +343,15 @@ nextBtn.addEventListener("click", () => {
     if(pageIndex<totalPages-1) {
         pageIndex++;
         formData={
-            "tenGv":"",
+            "tenGv": tenGv,
             "baseRequest": {
-                "sortField":"",
-                "sortOrder":"",
+                "sortField": sortField,
+                "sortOrder": sortOrder,
                 "pageIndex": pageIndex,
                 "pageSize": pageSize
             }
         }
+        createPaginationUI(totalPages, pageIndex+1)
         getAllGV();
     }
-});
-
-pageNumbers.forEach((pageNumber, index) => {
-    pageNumber.addEventListener("click", () => {
-        pageIndex = index;
-        formData={
-            "tenGv":"",
-            "baseRequest": {
-                "sortField":"",
-                "sortOrder":"",
-                "pageIndex": pageIndex,
-                "pageSize": pageSize
-            }
-        }
-        getAllGV();
-    });
 });
