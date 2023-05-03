@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: NMQ
-  Date: 4/12/2023
-  Time: 5:05 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="boc-modal" id="modal_hoc_ky">
     <div class="chua-modal">
@@ -35,5 +28,3 @@
         </div>
     </div>
 </div>
-<script src="../../../assets/js/add_subject.js"></script>
-<script src ="../../../assets/js/text_error_semester.js"></script>

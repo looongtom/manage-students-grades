@@ -43,6 +43,9 @@ public class HocKyServiceImpl implements IHocKyService {
 
             List<SemesterDTO> dtoList = new ArrayList<>();
             List<HocKyEntity> list = hocKyDao.findSemester(request);
+            Integer totalRecords = hocKyDao.countTotalRecords(request);
+            int totalPages = totalRecords!= null?(int) Math.ceil((double)
+                    totalRecords / request.getPageSize()): null;
 
             dtoList = list.stream().map(x ->{
                 try {
@@ -62,7 +65,7 @@ public class HocKyServiceImpl implements IHocKyService {
 
             return new BaseResponse.Builder<List<SemesterDTO>>()
                     .setData(dtoList).setMessage(Constant.messageSuccess)
-                    .setStatus(Constant.httpStatusOk).build();
+                    .setStatus(Constant.httpStatusOk).setTotalPages(totalPages).build();
 
         }catch (Exception e){
             log.error(e.getCause());
