@@ -35,6 +35,13 @@ public class HocKyDaoImpl extends AbstractDao<HocKyEntity> implements IHocKyDao 
     }
 
     @Override
+    public Integer countTotalRecords(BaseRequest request) {
+        String countSql = "SELECT COUNT(*) FROM hocky";
+        Integer totalRecords = countTotalRecords(countSql);
+        return totalRecords;
+    }
+
+    @Override
     public HocKyEntity findById(String id) {
         try {
             String sql = "select hk.id_hk as idHk, hk.ten_hoc_ky " +

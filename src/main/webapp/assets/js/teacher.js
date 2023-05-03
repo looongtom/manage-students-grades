@@ -175,7 +175,7 @@ function updateGV() {
     xhr.onload = function() {
         if (xhr.status === 200) {
             alert("Sửa giảng viên " + maGvInput + " : " + tenGvInput + " thành công");
-            hideModal('modal_giang_vien');
+            hideModalSua('modal_giang_vien_sua');
             getAllGV();
         } else {
             console.log("Lấy thông tin giảng viên bị lỗi");
