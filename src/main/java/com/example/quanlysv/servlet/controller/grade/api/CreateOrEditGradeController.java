@@ -5,6 +5,7 @@ import com.example.quanlysv.servlet.entity.GradeEntity;
 import com.example.quanlysv.servlet.service.IGradeService;
 import com.example.quanlysv.servlet.service.impl.GradeServiceImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -101,6 +102,9 @@ public class CreateOrEditGradeController extends HttpServlet {
             gradeDTO.setNgaySua(currentTime);
             service.createOrUpdateGrade(gradeDTO);
         }
-        System.out.println("create success");
+
+        req.setAttribute("showDialog", true);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/home/admin/grade/add_grade.jsp");
+        dispatcher.forward(req, resp);
     }
 }

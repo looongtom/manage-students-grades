@@ -3,6 +3,7 @@
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.ResourceBundle" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -16,6 +17,12 @@
     <div class="manHinhChinh">
 
         <%
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
+            String url = resourceBundle.getString("url");
+            String username = resourceBundle.getString("username");
+            String password = resourceBundle.getString("password");
+            String driver=resourceBundle.getString("driverName");
+
             String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             int length = 8; // Change this to set the length of the generated ID
             StringBuilder idBuilder = new StringBuilder();
@@ -32,6 +39,42 @@
 
         <!-- Use the generated ID wherever you need it -->
         <input type="text" name="idDiem" value="<%= randomID %>" />
+
+        <% boolean showDialog = false; %>
+
+        <%
+            // Get the "showDialog" attribute from the request
+            Boolean showDialogAttribute = (Boolean) request.getAttribute("showDialog");
+            if (showDialogAttribute != null && showDialogAttribute.booleanValue()) {
+                // Set the "showDialog" variable to true if the attribute is set to true
+                showDialog = true;
+            }
+        %>
+
+        <dialog id="my-dialog"  style="left: 50%">
+            <p>Nhập điểm thành công</p>
+            <button onclick="closeDialog()">Close</button>
+        </dialog>
+
+        <script>
+            function closeDialog() {
+                var dialog = document.getElementById("my-dialog");
+                if (dialog) {
+                    dialog.close();
+                }
+                document.body.style.filter = "none";
+            }
+
+            var dialog = document.getElementById("my-dialog");
+
+            if (<%= showDialog %>) {
+                if (dialog) {
+                    <% System.out.println(showDialog); %>
+                    dialog.showModal();
+                    document.body.style.filter = "blur(1px)";
+                }
+            }
+        </script>
 
         <h1 class="tieuDeTrang">Nhập điểm</h1>
         <div class="khuVucNhapDiem">
@@ -51,9 +94,9 @@
 <%--                                    <option value="Class B">Học kì 2 năm 2020-2021</option>--%>
                                     <%
                                         try{
-                                            Class.forName("org.postgresql.Driver");
-                                            Connection con= DriverManager.getConnection("jdbc:postgresql://localhost:5432/quanlysinhvien",
-                                                    "postgres","tr1nhtu@n");
+                                            Class.forName(driver);
+                                            Connection con= DriverManager.getConnection(url,
+                                                    username,password);
                                             Statement st=con.createStatement();
                                             String str="select * from hocky ";
                                             ResultSet rs=st.executeQuery(str);
@@ -78,9 +121,9 @@
                                     <option value="">Please select</option>
                                     <%
                                         try{
-                                            Class.forName("org.postgresql.Driver");
-                                            Connection con= DriverManager.getConnection("jdbc:postgresql://localhost:5432/quanlysinhvien",
-                                                    "postgres","tr1nhtu@n");
+                                            Class.forName(driver);
+                                            Connection con= DriverManager.getConnection(url,
+                                                    username,password);
                                             Statement st=con.createStatement();
                                             String str="select * from giangvien ";
                                             ResultSet rs=st.executeQuery(str);
@@ -111,9 +154,9 @@
 <%--                                    <option value="Class B">Cơ sở dữ liệu phân tán</option>--%>
                                     <%
                                         try{
-                                            Class.forName("org.postgresql.Driver");
-                                            Connection con= DriverManager.getConnection("jdbc:postgresql://localhost:5432/quanlysinhvien",
-                                                    "postgres","tr1nhtu@n");
+                                            Class.forName(driver);
+                                            Connection con= DriverManager.getConnection(url,
+                                                    username,password);
                                             Statement st=con.createStatement();
                                             String str="select * from monhoc ";
                                             ResultSet rs=st.executeQuery(str);
@@ -141,9 +184,9 @@
                                     <%--                                    <option value="Class B">Cơ sở dữ liệu phân tán</option>--%>
                                     <%
                                         try{
-                                            Class.forName("org.postgresql.Driver");
-                                            Connection con= DriverManager.getConnection("jdbc:postgresql://localhost:5432/quanlysinhvien",
-                                                    "postgres","tr1nhtu@n");
+                                            Class.forName(driver);
+                                            Connection con= DriverManager.getConnection(url,
+                                                    username,password);
                                             Statement st=con.createStatement();
                                             String str="select * from lop ";
                                             ResultSet rs=st.executeQuery(str);
@@ -171,7 +214,7 @@
                     </div>
 
                     <div class="cacNut">
-                        <input class="nutChonFile" type="file" name="file" size="60" />
+                        <input class="nutChonFile" type="file" name="file" size="60" required accept=".xlsx, .xls"/>
                         <input class="nutNhapDiem" type="submit" value="Nhập điểm" />
                     </div>
                 </form>
@@ -179,6 +222,8 @@
         </div>
     </div>
 </body>
+
 <script src="../../../assets/js/menu.js"></script>
+<script src="../../../assets/js/add_grade.js"></script>
 <script src="../../../assets/js/auto_generate_id.js"></script>
 </html>
