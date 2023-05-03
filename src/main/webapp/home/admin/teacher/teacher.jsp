@@ -53,6 +53,9 @@
             <li class="nutPaginate prev" style="color: white">
                 <span><i class="fas fa-angle-left"></i></span>
             </li>
+            <span class="soTrang">
+
+            </span>
             <li class="nutPaginate next" style="color: white">
                 <span><i class="fas fa-angle-right"></i></span>
             </li>
