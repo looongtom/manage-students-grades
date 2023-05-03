@@ -16,8 +16,9 @@ public class SubjectDaoImpl extends AbstractDao<SubjectEntity> implements ISubje
 
     @Override
     public List<SubjectEntity> findSubject(SubjectFilter request) {
-        String sql = "SELECT mh.id_mh as idMh, mh.ten_mon_hoc as tenMonHoc, mh.tin_chi as tinChi,\n" +
-                "                mh.id_khoa as idKhoa, k.ten_khoa as tenKhoa FROM monhoc mh join khoa k on mh.id_khoa = k.id_khoa where lower(mh.ten_mon_hoc) like concat('%', lower(?), '%') ORDER BY " +
+        String sql = "SELECT mh.id_mh as idMh, mh.ten_mon_hoc as tenMonHoc, mh.tin_chi as tinChi, mh.ngay_tao as ngayTao, mh.ngay_sua as ngaySua, " +
+                "mh.id_khoa as idKhoa, k.ten_khoa as tenKhoa FROM monhoc mh join khoa k on mh.id_khoa = k.id_khoa " +
+                "where lower(mh.ten_mon_hoc) like concat('%', lower(?), '%') ORDER BY " +
                 request.getBaseRequest().getSortField() + " "+  request.getBaseRequest().getSortOrder() + " OFFSET ? LIMIT ?";
         List<SubjectEntity> list = findByProperties(sql, new SubjectMapper(), request.getTenMonHoc(),
                 (request.getBaseRequest().getPageIndex()-1) * request.getBaseRequest().getPageSize(), request.getBaseRequest().getPageSize());

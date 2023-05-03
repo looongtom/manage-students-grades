@@ -92,12 +92,10 @@ public class SubjectServiceImpl implements ISubjectService {
              }
 
              SubjectEntity subjectEntity = Convert.convertDTOToEntity(subjectDTO, SubjectEntity.class);
-             if(subjectEntity != null){
-                 subjectEntity.setNgayTao(new Date().getTime());
-                 subjectEntity.setNgaySua(new Date().getTime());
+             subjectEntity.setNgayTao(new Date().getTime());
+             subjectEntity.setNgaySua(new Date().getTime());
 
-                 subjectDao.createOrUpdateSubject(subjectEntity);
-             }
+             subjectDao.createOrUpdateSubject(subjectEntity);
              return new BaseResponse.Builder<>()
                      .setStatus(200)
                      .setMessage("success")
