@@ -23,12 +23,29 @@ public class TeacherController extends HttpServlet {
         this.service = new TeacherServiceImpl();
     }
 
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        req.setCharacterEncoding("UTF-8");
+//        resp.setContentType("application/json");
+//        String idGv = req.getParameter("idGv");
+//        BaseResponse<?> baseResponse = service.getTeacherById(idGv);
+//        ResponseUtils.responseApi(req, resp, baseResponse);
+//    }
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        String idGv = req.getParameter("idGv");
-        BaseResponse<?> baseResponse = service.getTeacherById(idGv);
+        String tenGv = req.getParameter("tenGv");
+        String sortField = req.getParameter("sortField");
+        String sortOrder = req.getParameter("sortOrder");
+        Integer pageSize = Integer.valueOf(req.getParameter("pageSize"));
+        Integer pageIndex = Integer.valueOf(req.getParameter("pageIndex"));
+        System.out.println(
+                tenGv+" "+sortOrder+" "+sortField+" "+pageIndex+" "+pageSize
+        );
+        BaseResponse<?> baseResponse = service.findTeacherV2(tenGv,sortField,sortOrder,pageSize,pageIndex);
         ResponseUtils.responseApi(req, resp, baseResponse);
     }
 

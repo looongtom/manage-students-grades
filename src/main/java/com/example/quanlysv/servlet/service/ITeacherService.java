@@ -8,6 +8,8 @@ public interface ITeacherService {
     BaseResponse<?> createOrEditTeacher(CreateOrEditTeacherDTO teacherDTO);
 
     BaseResponse<?> findTeacher(TeacherFilter request);
+    BaseResponse<?> findTeacherV2(String tenGv,String sortField,String sortOrder,Integer pageSize,Integer pageIndex);
+
 
     BaseResponse<?> deleteTeacher(String id);
 

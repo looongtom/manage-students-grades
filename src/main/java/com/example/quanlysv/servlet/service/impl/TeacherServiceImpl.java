@@ -32,6 +32,47 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
+    public BaseResponse<?> findTeacherV2(String tenGv, String sortField, String sortOrder, Integer pageSize, Integer pageIndex) {
+        List<TeacherDTO> dtoList;
+        try{
+            if (sortOrder.equals("")) {
+                sortOrder="asc";
+            }
+            if (sortField.equals("")) {
+                sortField="id_gv";
+            }
+            List<TeacherEntity> list=teacherDao.findTeacherV2(tenGv,sortField,sortOrder,pageSize,pageIndex);
+            Integer totalRecords = teacherDao.countTotalRecordsV2(tenGv);
+            int totalPages = totalRecords!= null?(int) Math.ceil((double)
+                    totalRecords / pageSize): null;
+            for(TeacherEntity tmp:list){
+                KhoaEntity khoaEntity = iKhoaDao.getById( tmp.getIdKhoa() );
+                tmp.setTenKhoa(khoaEntity.getTenKhoa());
+            }
+            dtoList=list.stream().map(x->{
+                try{
+                    return Convert.convertEntityToDTO(x,TeacherDTO.class);
+                } catch (IllegalAccessException e) {
+                    System.out.println(e.getCause());
+                    return null;
+                } catch (InstantiationException e) {
+                    System.out.println(e.getCause());
+                    return null;
+                } catch (InvocationTargetException e) {
+                    throw new RuntimeException(e);
+                } catch (NoSuchMethodException e) {
+                    throw new RuntimeException(e);
+                }
+            }).filter(Objects::nonNull).collect(Collectors.toList());
+
+            return new BaseResponse.Builder<List<TeacherDTO>>()
+                    .setData(dtoList).setMessage("success").setStatus(200).setTotalPages(totalPages).build();
+        } catch (Exception e) {
+            return new BaseResponse.Builder<List<TeacherDTO>>()
+                    .setMessage("failed"+ e.getMessage()).setStatus(500).build();
+        }    }
+
+    @Override
     public BaseResponse<?> getTeacherById(String id) {
         try{
             TeacherEntity teacherEntity = teacherDao.getById(id);

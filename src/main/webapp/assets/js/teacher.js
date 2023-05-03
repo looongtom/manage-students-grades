@@ -1,5 +1,5 @@
 // set mặc định các biến
-var pageSize=10;
+var pageSize=2;
 var pageIndex=0;
 var totalPages;
 

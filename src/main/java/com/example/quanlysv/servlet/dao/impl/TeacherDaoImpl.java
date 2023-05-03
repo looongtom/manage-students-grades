@@ -42,9 +42,32 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
     }
 
     @Override
+    public List<TeacherEntity> findTeacherV2(String tenGv, String sortField, String sortOrder, Integer pageSize, Integer pageIndex) {
+        String sql="select gv.id_gv as idGv,gv.ten_gv as tenGv,gv.sdt_gv as sdtGv," +
+                "gv.email_gv as emailGv, gv.gender_gv as genderGv, gv.id_khoa as idKhoa," +
+                "gv.ngay_tao as ngayTao, gv.ngay_sua as ngaySua from giangvien as gv where " +
+                "lower(gv.ten_gv) like concat('%',lower(?), '%') ORDER BY " +
+                sortField + " "+  sortOrder + " OFFSET ? LIMIT ?";
+
+        List<TeacherEntity> list = findByProperties(sql, new TeacherMapper(),
+                tenGv,
+                pageIndex * pageSize,
+                pageSize);
+
+        return list.isEmpty() ? null : list;
+    }
+
+    @Override
     public Integer countTotalRecords(TeacherFilter request) {
         String countSql = "SELECT COUNT(*) FROM giangvien as gv where lower(gv.ten_gv) like concat('%',lower(?), '%')";
         Integer totalRecords = countTotalRecords(countSql, request.getTenGv());
+        return totalRecords;
+    }
+
+    @Override
+    public Integer countTotalRecordsV2(String tenGv) {
+        String countSql = "SELECT COUNT(*) FROM giangvien as gv where lower(gv.ten_gv) like concat('%',lower(?), '%')";
+        Integer totalRecords = countTotalRecords(countSql, tenGv);
         return totalRecords;
     }
 
