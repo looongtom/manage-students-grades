@@ -10,11 +10,12 @@
 
 <head>
     <%@include file="/home/admin/menu/admin_menu_header.jsp" %>
-    <link rel="stylesheet" href="../assets/css/home.css">
+    <link rel="stylesheet" href="../../../assets/css/home.css">
+
     <title>Trang chủ</title>
 </head>
 <body>
-    <%@include file="admin/menu/admin_menu.jsp" %>
+    <%@include file="../menu/admin_menu.jsp" %>
     <div class="manHinhChinh">
 
 
@@ -79,6 +80,6 @@
         </div>
     </div>
     <script src="../../../assets/js/menu.js"></script>
-    <script src="../assets/js/home.js"></script>
+    <script src="../../../assets/js/home.js"></script>
 </body>
 </html>

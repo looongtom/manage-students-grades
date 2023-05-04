@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <%@include file="../menu/menu_header.jsp" %>
+    <%@include file="../menu/admin_menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/specialization.css">
     <title>Khoa chuyên môn</title>
 </head>
 
 <body>
-<%@include file="../menu/menu.jsp" %>
+<%@include file="../menu/admin_menu.jsp" %>
 <div class="manHinhChinh">
     <h2 class="dau-noidung text-red">Cơ sở đào tạo tại Hà Nội</h2>
     <p class="dau-noidung1 text-red">Các khoa của học viện

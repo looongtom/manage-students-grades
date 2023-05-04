@@ -9,7 +9,7 @@
 <html lang="en">
 
 <head>
-  <%@include file="../menu/menu_header.jsp" %>
+  <%@include file="../menu/admin_menu_header.jsp" %>
   <title>Danh sách lớp</title>
   <link rel="stylesheet" href="../../../assets/fonts/fontawesome-free-6.3.0-web/css/all.min.css">
   <link rel="stylesheet" href="../../../assets/themify-icons/themify-icons.css">

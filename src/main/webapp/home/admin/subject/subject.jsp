@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%@include file="../menu/menu_header.jsp" %>
+    <%@include file="../menu/admin_menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/subject.css">
     <link rel="stylesheet" href="../../../assets/css/add_subject_form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
@@ -17,7 +17,7 @@
     <title>Môn học</title>
 </head>
 <body>
-<%@include file="../menu/menu.jsp" %>
+<%@include file="../menu/admin_menu.jsp" %>
 <div class="manHinhChinh">
     <h1 class="tieuDeTrang">Danh sách môn học</h1>
     <div class="themVaTimKiem">
