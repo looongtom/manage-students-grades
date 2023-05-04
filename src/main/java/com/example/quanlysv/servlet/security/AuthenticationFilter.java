@@ -59,15 +59,28 @@ public class AuthenticationFilter implements Filter {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "missed sessionId in request".toUpperCase());
                 return;
             }
-        }else if(url.contains("home/grade/create-or-edit")){
-            HttpSession session = request.getSession(false);
-            String cookieValue = (String) session.getAttribute("cookie_value");
-            if (session != null && cookieValue.equals(session.getId())) {
-                filterChain.doFilter(servletRequest, servletResponse);
-                return;
-            } else {
-                // session không hợp lệ, người dùng chưa đăng nhập hoặc đã hết hạn
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+        }
+        else if(url.contains("home/grade/create-or-edit")){
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("auth");
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (resourceBundle.getString("key_cookie_test").equals(cookie.getName())) {
+                        String sessionId = cookie.getValue();
+                        HttpSession session = request.getSession(false); // không tạo ra session mới nếu chưa có
+                        if (session != null && sessionId.equals(session.getId())) {
+                            filterChain.doFilter(servletRequest, servletResponse);
+                            return;
+                        } else {
+                            // session không hợp lệ, người dùng chưa đăng nhập hoặc đã hết hạn
+                            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+                            return;
+                        }
+                    }
+                }
+            }
+            else{
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "missed sessionId in request".toUpperCase());
                 return;
             }
         }
