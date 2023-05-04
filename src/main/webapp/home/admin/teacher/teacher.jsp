@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%@include file="../menu/menu_header.jsp" %>
+    <%@include file="../menu/admin_menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/teacher.css">
     <link rel="stylesheet" href="../../../assets/css/add_teacher_form.css">
     <link rel="stylesheet" href="../../../assets/css/update_teacher_form.css">
@@ -10,7 +10,7 @@
     <title>Giảng viên</title>
 </head>
 <body>
-<%@include file="../menu/menu.jsp" %>
+<%@include file="../menu/admin_menu.jsp" %>
 <div class="manHinhChinh">
     <h1 class="tieuDeTrang">Danh sách giảng viên</h1>
     <div class="themVaTimKiem">

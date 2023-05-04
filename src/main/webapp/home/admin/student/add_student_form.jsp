@@ -19,22 +19,19 @@
       <input id="ten-sv" type="text" class="nhap-modal" placeholder="Nhập tên ...">
       <div id="ten-sv-error" class="tb-loi-nhap">Tên sinh viên không được để trống </div>
 
-
       <label for="" class="nhan-hieu-modal">Email</label>
       <input id="email-sv" type="email" class="nhap-modal" placeholder="Điền email .. ">
       <div id="email-sv-error" class="tb-loi-nhap">Email không được để trống </div>
-
 
       <label for="" class="nhan-hieu-modal">Ngày sinh</label>
       <input id="dob-sv" type="date" class="nhap-modal">
       <div id="dob-sv-error" class="tb-loi-nhap"> Chọn ngày tháng năm sinh </div>
 
-
       <label for="" class="nhan-hieu-modal">Giới tính</label>
       <select id="gioi-tinh-sv" class="nhap-modal" required>
         <option value="">Please select</option>
-        <option value="Class A">Nam</option>
-        <option value="Class B">Nữ</option>
+        <option value="Nam">Nam</option>
+        <option value="Nữ">Nữ</option>
       </select>
       <div id="gioi-tinh-sv-error" class="tb-loi-nhap">Chọn giới tính </div>
 
@@ -46,13 +43,10 @@
 
 
       <label for="" class="nhan-hieu-modal">Lớp hành chính</label>
-      <select id="ma-khoa-sv" class="nhap-modal" required>
+      <select id="ma-lop-sv" class="nhap-modal" required>
         <option value="">Please select</option>
-        <option value="Class A">Class A</option>
-        <option value="Class B">Class B</option>
-        <option value="Class C">Class C</option>
       </select>
-      <div id="ma-khoa-sv-error" class="tb-loi-nhap">Chọn lớp hành chính</div>
+      <div id="ma-lop-sv-error" class="tb-loi-nhap">Chọn lớp hành chính</div>
 
     </div>
     <!-- modal footer -->
@@ -63,6 +57,3 @@
     </div>
   </div>
 </div>
-
-<script src="../../../assets/js/add_student.js"></script>
-<script src ="../../../assets/js/text_error_student.js"></script>
