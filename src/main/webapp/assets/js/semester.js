@@ -197,7 +197,7 @@ function getDataAtPageNum(totalPages, currentPage) {
     formData = {
         "sortField": sortField,
         "sortOrder": sortOrder,
-        "pageIndex": pageIndex,
+        "pageIndex": currentPage-1,
         "pageSize": pageSize,
     }
     getAllHK();

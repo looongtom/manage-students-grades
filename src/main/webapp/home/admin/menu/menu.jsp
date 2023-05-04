@@ -39,9 +39,9 @@
       <img src="../../../assets/images/school.png" alt="Khoa" class="icon-Muc">
       <div class="menuMuc-tieuDe">Khoa chuyên môn</div>
     </a>
-    <a class="menuMuc nguoiDungMuc" href="#">
+    <a class="menuMuc doiMatKhauMuc" href="#">
       <img src="../../../assets/images/user.png" alt="Người dùng" class="icon-Muc">
-      <div class="menuMuc-tieuDe">Người dùng</div>
+      <div class="menuMuc-tieuDe">Đổi mật khẩu</div>
     </a>
   </div>
   <div class="menu-phanDuoi">

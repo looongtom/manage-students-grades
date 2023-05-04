@@ -51,32 +51,11 @@
             }
         %>
 
-        <dialog id="my-dialog"  style="left: 50%">
-            <p>Nhập điểm thành công</p>
-            <button onclick="closeDialog()">Close</button>
-        </dialog>
-
-        <script>
-            function closeDialog() {
-                var dialog = document.getElementById("my-dialog");
-                if (dialog) {
-                    dialog.close();
-                }
-                document.body.style.filter = "none";
-            }
-
-            var dialog = document.getElementById("my-dialog");
-
-            if (<%= showDialog %>) {
-                if (dialog) {
-                    <% System.out.println(showDialog); %>
-                    dialog.showModal();
-                    document.body.style.filter = "blur(1px)";
-                }
-            }
-        </script>
-
         <h1 class="tieuDeTrang">Nhập điểm</h1>
+        <div id="my-dialog">
+            <p>Nhập điểm thành công</p>
+            <button class="nutDong" onclick="closeDialog()">Đóng</button>
+        </div>
         <div class="khuVucNhapDiem">
             <div class="khuVucNhapDiem-dau">
                 <div class="khuVucNhapDiem-dau-tieuDe">Thông tin nhập điểm</div>
@@ -223,7 +202,16 @@
     </div>
 </body>
 
+<script>
+    console.log(<%= showDialog %>);
+    const dialog = document.getElementById("my-dialog");
+    function closeDialog() {
+        dialog.classList.remove('hien-thi-modal');
+    }
+
+    if (<%= showDialog %>) {
+        dialog.classList.add('hien-thi-modal');
+    }
+</script>
 <script src="../../../assets/js/menu.js"></script>
-<script src="../../../assets/js/add_grade.js"></script>
-<script src="../../../assets/js/auto_generate_id.js"></script>
 </html>

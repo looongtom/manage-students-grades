@@ -4,6 +4,7 @@
     <%@include file="../menu/menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/student.css">
     <link rel="stylesheet" href="../../../assets/css/add_student_form.css">
+    <link rel="stylesheet" href="../../../assets/css/update_student_form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
     <link rel="stylesheet" href="../../../assets/css/confirm_delete_form.css">
     <title>Sinh viên</title>
@@ -45,15 +46,15 @@
     <div class="boc-bang">
         <table id="myTable" class="danhSach">
             <thead class="hang1">
-            <th data-sort onclick="sortTable(0, this)" class="cot-maSV">Mã SV</th>
-            <th data-sort onclick="sortName(this)" class="cot-tenSV">Họ và tên</th>
-            <th data-sort onclick="sortTable(2, this)" class="cot-emailSV">Email</th>
+            <th data-sort onclick="sortTable('idSv', this)" class="cot-maSV">Mã SV</th>
+            <th data-sort onclick="sortTable('tenSv', this)" class="cot-tenSV">Họ và tên</th>
+            <th class="cot-emailSV">Email</th>
             <th class="cot-ngaySinhSV">Ngày sinh</th>
-            <th data-sort onclick="sortTable(4, this)" class="cot-gioiTinhSV">Giới tính</th>
+            <th data-sort onclick="sortTable('genderSv', this)" class="cot-gioiTinhSV">Giới tính</th>
             <th class="cot-sdtSV">Số điện thoại</th>
-            <th data-sort onclick="sortTable(6, this)" class="cot-lopSV">Lớp hành chính</th>
-            <th class="cot-ngayTao">Ngày tạo</th>
-            <th class="cot-ngayTao">Ngày cập nhật</th>
+            <th data-sort onclick="sortTable('lopHanhChinhSv', this)" class="cot-lopSV">Lớp hành chính</th>
+            <th data-sort onclick="sortTable('ngayTao', this)" class="cot-ngayTao">Ngày tạo</th>
+            <th data-sort onclick="sortTable('ngaySua', this)" class="cot-ngayTao">Ngày cập nhật</th>
             <th class="hanh-dong">Action</th>
             </thead>
             <tbody>
@@ -62,18 +63,27 @@
         </table>
     </div>
     <div class="phanTrang">
-        <ul></ul>
+        <ul>
+            <li class="nutPaginate prev" style="color: white">
+                <span><i class="fas fa-angle-left"></i></span>
+            </li>
+            <span class="soTrang">
+
+            </span>
+            <li class="nutPaginate next" style="color: white">
+                <span><i class="fas fa-angle-right"></i></span>
+            </li>
+        </ul>
     </div>
     <!-- Them sinh vien dialog -->
-    <%@include file="../student/student_form.jsp" %>
-    <%@include file="../student/confirm_delete_student.jsp"%>
-
-    <script src="../../../assets/js/menu.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../../assets/js/student.js"></script>
-    <script src="../../../assets/js/pagination_student.js"></script>
-    <script src="../../../assets/js/add_student.js"></script>
-    <script src="../../../assets/js/text_error_student.js"></script>
+    <%@include file="add_student_form.jsp" %>
+    <%@include file="update_student_form.jsp" %>
+    <%@include file="confirm_delete_student.jsp"%>
 </div>
 </body>
+<script src="../../../assets/js/menu.js"></script>
+<script src="../../../assets/js/student.js"></script>
+<script src="../../../assets/js/add_student.js"></script>
+<script src="../../../assets/js/update_student.js"></script>
+<script src="../../../assets/js/text_error_student.js"></script>
 </html>
