@@ -29,7 +29,7 @@
             <img src="../../../assets/images/menu.png" alt="Đóng menu" class="icon-Muc">
             <div class="dongMenu-tieuDe">Đóng menu</div>
         </div>
-        <a href="#" class="dangXuat">
+        <a href="/auth/logout" class="dangXuat">
             <img src="../../../assets/images/log-out.png" alt="Đăng xuất" class="icon-DangXuat">
             <div class="dangXuat-tieuDe">Đăng xuất</div>
         </a>

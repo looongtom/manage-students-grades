@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/auth/login")
-public class AuthController extends HttpServlet {
+public class LoginController extends HttpServlet {
     private IAuthService authService;
-    public AuthController(){
+    public LoginController(){
         authService = new AuthServiceImpl();
     }
     @Override
@@ -33,7 +33,17 @@ public class AuthController extends HttpServlet {
             // lưu đăng nhập vào session
             SessionUtils.getInstance().putValue(req, "ACCOUNT", accountEntity);
             CookieUtils.getInstance().addCookie(resp, req);
-            resp.sendRedirect("/home/home.jsp");
+
+            if(accountEntity.getRoleId() == 1)
+                 resp.sendRedirect("/home/admin/home_admin/home_admin.jsp");
+            else if (accountEntity.getRoleId() == 2) {
+                resp.sendRedirect("/home/user/home_user/home_user.jsp");
+            }
+            else {
+                String errorMessage = "Người dùng chưa được phân quyền!";
+                req.setAttribute("errorMessage", errorMessage);
+                req.getRequestDispatcher("login.jsp").forward(req, resp);
+            }
         }
         else{
             String errorMessage = Constant.ERROR_LOGIN;
