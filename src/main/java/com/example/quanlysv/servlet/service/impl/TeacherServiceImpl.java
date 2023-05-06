@@ -129,7 +129,7 @@ public class TeacherServiceImpl implements ITeacherService {
                     totalRecords / request.getBaseRequest().getPageSize()): null;
             for(TeacherEntity tmp:list){
                 KhoaEntity khoaEntity = iKhoaDao.getById( tmp.getIdKhoa() );
-                tmp.setTenKhoa(khoaEntity.getTenKhoa());
+//                tmp.setTenKhoa(khoaEntity.getTenKhoa());
             }
             dtoList=list.stream().map(x->{
                 try{

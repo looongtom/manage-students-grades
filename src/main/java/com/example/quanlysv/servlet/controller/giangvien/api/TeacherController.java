@@ -42,9 +42,6 @@ public class TeacherController extends HttpServlet {
         String sortOrder = req.getParameter("sortOrder");
         Integer pageSize = Integer.valueOf(req.getParameter("pageSize"));
         Integer pageIndex = Integer.valueOf(req.getParameter("pageIndex"));
-        System.out.println(
-                tenGv+" "+sortOrder+" "+sortField+" "+pageIndex+" "+pageSize
-        );
         BaseResponse<?> baseResponse = service.findTeacherV2(tenGv,sortField,sortOrder,pageSize,pageIndex);
         ResponseUtils.responseApi(req, resp, baseResponse);
     }

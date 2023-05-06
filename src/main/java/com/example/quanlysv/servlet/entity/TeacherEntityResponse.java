@@ -1,24 +1,21 @@
 package com.example.quanlysv.servlet.entity;
 
-import java.time.Instant;
+public class TeacherEntityResponse {
+    private String idGv,tenGv,sdtGv,emailGv,genderGv,idKhoa,tenKhoa,ngayTao,ngaySua;
 
-public class TeacherEntity {
-    private String idGv,tenGv,sdtGv,emailGv,genderGv,idKhoa,tenKhoa;
-    private Long ngayTao,ngaySua;
-    public Long GetCurrentTime(Instant instant){
-        Long timestamp = instant.toEpochMilli();
-        return timestamp;
-    }
-    public TeacherEntity(){
-
+    public TeacherEntityResponse() {
     }
 
-    public String getTenKhoa() {
-        return tenKhoa;
-    }
-
-    public void setTenKhoa(String tenKhoa) {
+    public TeacherEntityResponse(String idGv, String tenGv, String sdtGv, String emailGv, String genderGv, String idKhoa, String tenKhoa, String ngayTao, String ngaySua) {
+        this.idGv = idGv;
+        this.tenGv = tenGv;
+        this.sdtGv = sdtGv;
+        this.emailGv = emailGv;
+        this.genderGv = genderGv;
+        this.idKhoa = idKhoa;
         this.tenKhoa = tenKhoa;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
     }
 
     public String getIdGv() {
@@ -69,33 +66,43 @@ public class TeacherEntity {
         this.idKhoa = idKhoa;
     }
 
-    public Long getNgayTao() {
+    public String getTenKhoa() {
+        return tenKhoa;
+    }
+
+    public void setTenKhoa(String tenKhoa) {
+        this.tenKhoa = tenKhoa;
+    }
+
+    public String getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(Instant instant) {
-        this.ngayTao = GetCurrentTime(instant);
+    public void setNgayTao(String ngayTao) {
+        this.ngayTao = ngayTao;
     }
 
-    public Long getNgaySua() {
+    public String getNgaySua() {
         return ngaySua;
     }
 
-    public void setNgaySua(Instant instant) {
-        this.ngaySua = GetCurrentTime(instant);
+    public void setNgaySua(String ngaySua) {
+        this.ngaySua = ngaySua;
     }
+
 
     @Override
     public String toString() {
-        return "TeacherEntity{" +
+        return "TeacherEntityResponse{" +
                 "idGv='" + idGv + '\'' +
                 ", tenGv='" + tenGv + '\'' +
                 ", sdtGv='" + sdtGv + '\'' +
                 ", emailGv='" + emailGv + '\'' +
                 ", genderGv='" + genderGv + '\'' +
                 ", idKhoa='" + idKhoa + '\'' +
-                ", ngayTao=" + ngayTao +
-                ", ngaySua=" + ngaySua +
+                ", tenKhoa='" + tenKhoa + '\'' +
+                ", ngayTao='" + ngayTao + '\'' +
+                ", ngaySua='" + ngaySua + '\'' +
                 '}';
     }
 }
