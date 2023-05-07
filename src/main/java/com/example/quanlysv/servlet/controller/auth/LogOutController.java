@@ -1,4 +1,4 @@
-package com.example.quanlysv.servlet.controller;
+package com.example.quanlysv.servlet.controller.auth;
 
 import com.example.quanlysv.servlet.util.SessionUtils;
 
