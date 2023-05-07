@@ -31,35 +31,33 @@ public class ChangePasswordController extends HttpServlet {
          String passAgain = req.getParameter("passAgain");
          if(!Validate.validatePass(passNew, passAgain, passOld).equals("ok")){
              String errorMessage = Validate.validatePass(passNew, passAgain, passOld);
-             req.setAttribute("errorMessage", errorMessage);
-             req.setAttribute("passOld", passOld);
-             req.setAttribute("passNew", passNew);
-             req.setAttribute("passAgain", passAgain);
-
+             setValueForForm(req, passOld, passNew, passAgain, errorMessage);
              req.getRequestDispatcher("/home/common/change_password.jsp").forward(req, resp);
          }
         HttpSession session = req.getSession(false);
         if (session != null) {
             AccountEntity accountEntity = (AccountEntity) SessionUtils.getInstance().getValue(req, "ACCOUNT");
             if(!authService.checkPassword(accountEntity.getUsername(), passOld)){
-                req.setAttribute("passOld", passOld);
-                req.setAttribute("passNew", passNew);
-                req.setAttribute("passAgain", passAgain);
-                req.setAttribute("errorMessage", "Mật khẩu không đúng!");
-
+                setValueForForm(req, passOld, passNew, passAgain, "Mật khẩu không đúng!");
                 req.getRequestDispatcher("/home/common/change_password.jsp").forward(req, resp);
             }
             else{
                 boolean ac = authService.changePassword(accountEntity.getUsername(), passNew);
                 if(!ac){
-                    req.setAttribute("passOld", passOld);
-                    req.setAttribute("passNew", passNew);
-                    req.setAttribute("passAgain", passAgain);
-                    req.setAttribute("errorMessage", "Thay đổi mật khẩu không thành công!");
+                    setValueForForm(req, passOld, passNew, passAgain, "Thay đổi mật khẩu không thành công!");
                 }
                 req.setAttribute("successMessage", "Bạn đã đổi mật khẩu thành công");
                 req.getRequestDispatcher("/home/common/change_password.jsp").forward(req, resp);
             }
         }
+    }
+
+    private static void setValueForForm(HttpServletRequest req,
+                                        String passOld, String passNew,
+                                        String passAgain, String message) {
+        req.setAttribute("passOld", passOld);
+        req.setAttribute("passNew", passNew);
+        req.setAttribute("passAgain", passAgain);
+        req.setAttribute("errorMessage", message);
     }
 }
