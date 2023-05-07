@@ -5,4 +5,6 @@ import com.example.quanlysv.servlet.entity.AccountEntity;
 public interface IAccountDao extends IGenericDao<AccountEntity> {
 
     AccountEntity findAccountByUsernameAndPassword(String username,String password);
+
+    boolean changePass(String pass, String username);
 }

@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="../../assets/css/change_password.css">
     <link rel="stylesheet" href="../../assets/themify-icons/themify-icons.css">
     <title>Đổi mật khẩu</title>
-
 </head>
 <body>
 <c:choose>
@@ -29,13 +28,31 @@
 <div class="manHinhChinh">
     <h1 class="tieuDeTrang">Đổi mật khẩu</h1>
     <div class="container">
-        <form action="/action_page.php">
+        <form action="/auth/change-password" method="post">
+
+            <div class="row">
+                <div class="col-25">
+                    <label hidden="true" >Mật khẩu cũ</label>
+                </div>
+                <div class="col-75">
+                    <% String errorMessage = (String) request.getAttribute("errorMessage");
+                        if (errorMessage != null) { %>
+                    <div class="thongBaoLoi"><%= errorMessage %></div>
+                    <% } %>
+
+                    <% String successMessage = (String) request.getAttribute("successMessage");
+                        if (successMessage != null) { %>
+                    <div class="thongBaoThanhCong"><%= successMessage %></div>
+                    <% } %>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-25">
                     <label >Mật khẩu cũ</label>
                 </div>
                 <div class="col-75">
-                    <input type="text"  placeholder="">
+                    <input value="${passOld}" type="password" style="font-size: 16px" name="passOld"  placeholder="">
                 </div>
             </div>
             <div class="row">
@@ -43,7 +60,7 @@
                     <label >Mật khẩu mới</label>
                 </div>
                 <div class="col-75">
-                    <input type="text"  placeholder="">
+                    <input value="${passNew}" type="password" style="font-size: 16px" name="passNew"   placeholder="">
                 </div>
             </div>
             <div class="row">
@@ -51,21 +68,20 @@
                     <label >Nhập lại mật khẩu</label>
                 </div>
                 <div class="col-75">
-                    <input type="text"  placeholder="">
+                    <input value="${passAgain}" type="password" style="font-size: 16px" name="passAgain"  placeholder="">
                 </div>
             </div>
             <br>
             <div class="row">
                 <div class="col-25">
-                    <button class="btn" type="submit" value="Submit">Đổi mật khẩu</button>
+                    <button class="btn" type="submit" >Đổi mật khẩu</button>
                 </div>
-                <!-- <input class="btn" type="submit" value="Submit"> -->
             </div>
-
         </form>
     </div>
 
 </div>
 </body>
 <script src="../../assets/js/menu.js"></script>
+<script src="../../assets/js/change_password.js"></script>
 </html>

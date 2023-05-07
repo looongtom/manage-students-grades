@@ -7,6 +7,7 @@ import com.example.quanlysv.servlet.service.IAuthService;
 import com.example.quanlysv.servlet.service.impl.AuthServiceImpl;
 import com.example.quanlysv.servlet.util.CookieUtils;
 import com.example.quanlysv.servlet.util.SessionUtils;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,11 +26,11 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-
         AccountEntity accountEntity = new AccountEntity();
         accountEntity = authService.findAccountByUsernameAndPassword(username, password);
 
-        if(accountEntity != null){
+        if(accountEntity != null &&
+                BCrypt.checkpw(password, accountEntity.getPassword())){
             // lưu đăng nhập vào session
             SessionUtils.getInstance().putValue(req, "ACCOUNT", accountEntity);
             CookieUtils.getInstance().addCookie(resp, req);

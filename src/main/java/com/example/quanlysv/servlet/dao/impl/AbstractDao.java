@@ -136,6 +136,30 @@ public abstract class AbstractDao<T> implements IGenericDao<T> {
         }
     }
 
+    public boolean update(String sql,Object... param){
+        PreparedStatement preparedStatement = null;
+        Connection connection = getConnection();
+
+        try {
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(sql);
+            setParam(preparedStatement,param);
+            preparedStatement.executeUpdate();
+            connection.commit();
+            return true;
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            return false;
+        }finally {
+            disconectSafe(connection, preparedStatement);
+        }
+    }
+
 
     private void setParam(PreparedStatement preparedStatement,Object... param) throws SQLException {
         for (int i = 0; i < param.length; i++) {
