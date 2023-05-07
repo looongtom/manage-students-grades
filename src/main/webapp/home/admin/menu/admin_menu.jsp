@@ -39,7 +39,7 @@
       <img src="../../../assets/images/school.png" alt="Khoa" class="icon-Muc">
       <div class="menuMuc-tieuDe">Khoa chuyên môn</div>
     </a>
-    <a class="menuMuc doiMatKhauMuc" href="/../../home/admin/change_password/admin_change_password.jsp">
+    <a class="menuMuc doiMatKhauMuc" href="/../home/common/change_password.jsp">
       <img src="../../../assets/images/user.png" alt="Người dùng" class="icon-Muc">
       <div class="menuMuc-tieuDe">Đổi mật khẩu</div>
     </a>

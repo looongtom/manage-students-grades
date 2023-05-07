@@ -19,7 +19,7 @@
             <img src="../../../assets/images/score.png" alt="Điểm" class="icon-Muc">
             <div class="menuMuc-tieuDe">Xem điểm</div>
         </a>
-        <a class="menuMuc nhapDiemMuc" href="/../../home/user/change_password/user_change_password.jsp">
+        <a class="menuMuc nhapDiemMuc" href="/../../home/common/change_password.jsp">
             <img src="../../../assets/images/score.png" alt="Điểm" class="icon-Muc">
             <div class="menuMuc-tieuDe">Đổi mật khẩu</div>
         </a>
