@@ -17,13 +17,13 @@ public class AuthServiceImpl implements IAuthService {
 
 
     @Override
-    public AccountEntity findAccountByUsernameAndPassword(String username, String password) {
-        return accountDao.findAccountByUsernameAndPassword(username, password);
+    public AccountEntity findAccountByUsernameAndPassword(String username) {
+        return accountDao.findAccountByUsernameAndPassword(username);
     }
 
     @Override
     public boolean checkPassword(String username, String password) {
-        AccountEntity accountEntity = findAccountByUsernameAndPassword(username, password);
+        AccountEntity accountEntity = findAccountByUsernameAndPassword(username);
         if(accountEntity == null) return false;
         String passwordOld =accountEntity.getPassword();
         return BCrypt.checkpw(password, passwordOld);
@@ -38,5 +38,33 @@ public class AuthServiceImpl implements IAuthService {
               System.out.println(e.getMessage());
               return false;
           }
+    }
+
+    @Override
+    public String changePassDefault(String username, String passNew, String passAgain) {
+        try {
+            if(!validate(passNew, passAgain).equals("ok")) return validate(passNew, passAgain);
+            AccountEntity accountEntity = findAccountByUsernameAndPassword(username);
+            if(accountEntity == null) return "Người dùng không tồn tại!";
+
+            String passwordNew = BCrypt.hashpw(passNew, BCrypt.gensalt());
+            boolean res =  accountDao.changePassDefault(passwordNew, username);
+            if(res) return "ok";
+            return "Thay đôi mật khẩu thất bại";
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return "Không thể thay đổi mật khẩu";
+        }
+    }
+
+    @Override
+    public boolean checkPassDefault(String username, String pass) {
+        return accountDao.checkPassDefault(username, pass);
+    }
+
+    private String validate(String passNew, String passAgain){
+       if(passNew.length() < 8 || passAgain.length() < 8 ) return "Mật khẩu không được nhỏ hơn 8 kí tự!";
+       else if(!passNew.equals(passAgain)) return "Mật khẩu nhập lại không trùng khớp!";
+       return "ok";
     }
 }

@@ -10,10 +10,11 @@ public class AccountDaoImpl extends AbstractDao<AccountEntity> implements IAccou
 
 
     @Override
-    public AccountEntity findAccountByUsernameAndPassword(String username, String password) {
+    public AccountEntity findAccountByUsernameAndPassword(String username) {
         String sql = "select tk.id as id, tk.username as username, " +
                 "tk.password as password, tk.email as email, " +
-                "tk.role_id as roleId from taikhoan as tk where username=?";
+                "tk.role_id as roleId, tk.status_password_default as statusPasswordDefault" +
+                " from taikhoan as tk where username=?";
         List<AccountEntity> accountEntities = findByProperties(sql, new AccountMapper(), username);
         return accountEntities.isEmpty() ? null : accountEntities.get(0);
     }
@@ -27,5 +28,27 @@ public class AccountDaoImpl extends AbstractDao<AccountEntity> implements IAccou
             System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public boolean changePassDefault(String pass, String username) {
+        try {
+            String sql = "update taikhoan set password =?, status_password_default = ? where username = ?";
+            return update(sql, pass, 1, username );
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean checkPassDefault(String username, String pass) {
+        String sql = "select tk.id as id, tk.username as username, " +
+                "tk.password as password, tk.email as email, " +
+                "tk.role_id as roleId, tk.status_password_default as statusPasswordDefault" +
+                " from taikhoan as tk where username=? and password =?";
+        List<AccountEntity> accountEntities = findByProperties(sql, new AccountMapper(), username, pass);
+        if(accountEntities.size() > 0) return true;
+        return false;
     }
 }

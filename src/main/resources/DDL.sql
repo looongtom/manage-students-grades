@@ -123,6 +123,7 @@ create table taikhoan
     username varchar(50),
     password varchar(200),
     email varchar(100),
+    status_password_default int not null ,
     role_id bigint
 );
 
