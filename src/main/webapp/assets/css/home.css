@@ -5,38 +5,16 @@
     background-color: var(--red-color);
 }
 
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
 html{
     scroll-behavior: smooth;
     font-family: Helvetica, Arial, sans-serif;
 }
 
-.manHinhChinh{
-    position: fixed;
-}
-
 /* header */
-#thanh-header{
-    position: absolute;
-    font-size: 1.8rem;
-    height:50px;
-    background-color: #000;
-    /* position:fixed; */
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-}
 #nav > li > a, #nav2 > li > a{
     color: #fff;
     text-transform: uppercase;
 }
-
 
 #nav li a{
     text-decoration: none;
@@ -80,11 +58,9 @@ html{
 }
 /* nội dung */
 #noidung{
-    margin-top: 50px;
     margin-left: -30px;
-    /* height: 46px; */
-    /* width: 0%; */
 }
+
 .noidung-header{
     padding: 20px;
     font-size: 20px;
@@ -106,30 +82,35 @@ html{
     justify-content: space-between;
     border-radius: 5px;
 }
+
 .box2{
     background-color: #1E90FF;
     display: flex;
     justify-content: space-between;
     border-radius: 5px;
 }
+
 .box3{
     background-color: #FF0000;
     display: flex;
     justify-content: space-between;
     border-radius: 5px;
 }
+
 .box4{
     background-color: #EE82EE;
     display: flex;
     justify-content: space-between;
     border-radius: 5px;
 }
+
 .small-box1{
     height: 80%;
     display: flex;
     justify-content: space-between;
 
 }
+
 .small-box2{
     height: 80%;
     display: flex;
@@ -208,8 +189,23 @@ html{
     transition: transform 0.5s ease-in-out;
 }
 
+/* đóng menu */
+.manHinhChinh.dongMenu .boc-bang {
+    width: 90vw;
+}
 
+@media screen and (max-width: 740px) {
+    .dauTrang {
+        flex-direction: column;
+    }
 
+    .boc-bang {
+        width: 100%;
+    }
+}
 
-
-
+@media screen and (max-width: 400px) {
+    .boc-bang {
+        width: 100%;
+    }
+}

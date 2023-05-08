@@ -40,7 +40,7 @@
       <div class="menuMuc-tieuDe">Khoa chuyên môn</div>
     </a>
     <a class="menuMuc doiMatKhauMuc" href="/../home/common/change_password.jsp">
-      <img src="../../../assets/images/user.png" alt="Người dùng" class="icon-Muc">
+      <img src="../../../assets/images/change_password.png" alt="Người dùng" class="icon-Muc">
       <div class="menuMuc-tieuDe">Đổi mật khẩu</div>
     </a>
   </div>

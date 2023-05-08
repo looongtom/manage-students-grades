@@ -54,7 +54,7 @@
 </body>
 <script src="../../../assets/js/menu.js"></script>
 <script src="../../../assets/js/semester.js"></script>
-<script src="../../../assets/js/add_semester.js"></script>
+<script src="../../../assets/js/add_form.js"></script>
 <script src="../../../assets/js/update_semester.js"></script>
 <script src ="../../../assets/js/text_error_semester.js"></script>
 

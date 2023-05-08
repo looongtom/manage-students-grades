@@ -131,7 +131,7 @@
 <%@include file="../class/add_class_form.jsp" %>
 
 <script src="../../../assets/js/pagination_class.js"></script>
-<script src="../../../assets/js/add_class.js"></script>
+<script src="../../../assets/js/add_form.js"></script>
 <script src="../../../assets/js/class.js"></script>
 <script src="../../../assets/js/text_error_class.js"></script>
 </body>
