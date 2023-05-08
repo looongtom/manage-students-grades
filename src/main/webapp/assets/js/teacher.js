@@ -15,54 +15,54 @@ var formData={
 }
 
 // cái này sẽ được thực thi ngay khi mới vào trang -> Lấy tất cả giảng viên
-document.addEventListener("DOMContentLoaded", getAllGV());
+// document.addEventListener("DOMContentLoaded", getAllGV());
 
 // đọc (R)
-function getAllGV() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:8080/api/home/teacher', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            const res = JSON.parse(xhr.responseText);
-            const myTable = document.getElementById('myTable');
-            const tbody = myTable.querySelector('tbody');
-            totalPages=res.totalPages;
-            while (tbody.firstChild) {
-                tbody.removeChild(tbody.firstChild);
-            }
-            res.data.forEach(function(item) {
-                var row = `
-                            <tr>
-                              <td>`+item.idGv+`</td>
-                              <td>`+item.tenGv+`</td>
-                              <td>`+item.sdtGv+`</td>
-                              <td>`+item.emailGv+`</td>
-                              <td>`+item.genderGv+`</td>
-                              <td>`+item.tenKhoa+`</td>
-                              <td>`+item.ngayTao+`</td>
-                              <td>`+item.ngaySua+`</td>
-                              <td class="chucNang">
-                                <div class="hop-hanh-dong">
-                                  <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_giang_vien_sua', '`+ item.idGv +`', '`+ item.tenGv +`', '`+ item.sdtGv +`', '`+ item.emailGv +`', '`+ item.genderGv +`', '`+ item.idKhoa +`')">
-                                    <span class="sua_tieuDe">Sửa</span>
-                                    <i class="fa-solid fa-pencil sua_icon"></i>
-                                  </button>
-                                  <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '`+ item.idGv +`')" class="xoa hop-hanh-dong-nut" type="button">
-                                    <span class="xoa_tieuDe">Xóa</span>
-                                    <i class="fa-solid fa-trash xoa_icon"></i>
-                                  </button>
-                                </div>
-                              </td>
-                            </tr>`;
-                tbody.innerHTML+=row;
-            });
-        } else {
-            console.error('Request failed. Status code: ' + xhr.status);
-        }
-    };
-    xhr.send(JSON.stringify(formData));
-}
+// function getAllGV() {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('POST', 'http://localhost:8080/api/home/teacher', true);
+//     xhr.setRequestHeader('Content-Type', 'application/json');
+//     xhr.onload = function() {
+//         if (xhr.status === 200) {
+//             const res = JSON.parse(xhr.responseText);
+//             const myTable = document.getElementById('myTable');
+//             const tbody = myTable.querySelector('tbody');
+//             totalPages=res.totalPages;
+//             while (tbody.firstChild) {
+//                 tbody.removeChild(tbody.firstChild);
+//             }
+//             res.data.forEach(function(item) {
+//                 var row = `
+//                             <tr>
+//                               <td>`+item.idGv+`</td>
+//                               <td>`+item.tenGv+`</td>
+//                               <td>`+item.sdtGv+`</td>
+//                               <td>`+item.emailGv+`</td>
+//                               <td>`+item.genderGv+`</td>
+//                               <td>`+item.tenKhoa+`</td>
+//                               <td>`+item.ngayTao+`</td>
+//                               <td>`+item.ngaySua+`</td>
+//                               <td class="chucNang">
+//                                 <div class="hop-hanh-dong">
+//                                   <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_giang_vien_sua', '`+ item.idGv +`', '`+ item.tenGv +`', '`+ item.sdtGv +`', '`+ item.emailGv +`', '`+ item.genderGv +`', '`+ item.idKhoa +`')">
+//                                     <span class="sua_tieuDe">Sửa</span>
+//                                     <i class="fa-solid fa-pencil sua_icon"></i>
+//                                   </button>
+//                                   <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '`+ item.idGv +`')" class="xoa hop-hanh-dong-nut" type="button">
+//                                     <span class="xoa_tieuDe">Xóa</span>
+//                                     <i class="fa-solid fa-trash xoa_icon"></i>
+//                                   </button>
+//                                 </div>
+//                               </td>
+//                             </tr>`;
+//                 tbody.innerHTML+=row;
+//             });
+//         } else {
+//             console.error('Request failed. Status code: ' + xhr.status);
+//         }
+//     };
+//     xhr.send(JSON.stringify(formData));
+// }
 
 // thêm (C)
 function addGV() {

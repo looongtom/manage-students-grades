@@ -4,11 +4,9 @@
 <%@ page import="org.apache.http.client.utils.URIBuilder" %>
 <%@ page import="org.apache.http.impl.client.HttpClients" %>
 <%@ page import="org.apache.http.HttpResponse" %>
+<%@ page import="org.json.*" %>
 <%@ page import="org.apache.http.util.EntityUtils" %>
-<%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
-<%@ page import="com.example.quanlysv.servlet.entity.TeacherEntityResponse" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.fasterxml.jackson.core.type.TypeReference" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -23,6 +21,8 @@
 <body>
 <%@include file="../menu/menu.jsp" %>
 <%
+    //todo: mẫu url api
+//    http://localhost:8080/api/home/teacher?tenGv=&sortField=id_gv&sortOrder=asc&pageSize=2&pageIndex=1
     HttpClient httpclient = HttpClients.createDefault();
     URI uri = new URIBuilder("http://localhost:8080/api/home/teacher")
             .setParameter("tenGv", "")
@@ -39,26 +39,24 @@
     String value="JSESSIONID=";
     // set request headers
     HttpSession getSession = request.getSession();
-    String cookieName = (String) getSession.getAttribute("cookie_name");
     String cookieValue = (String) getSession.getAttribute("cookie_value");
-    System.out.println("Cookie"+cookieName);
-    System.out.println("cookieValue: "+cookieValue);
-
-//    httpGet.setHeader("User-Agent", "Mozilla/5.0");
     httpGet.setHeader("Cookie",value+cookieValue);
 
     // send the request and retrieve the response
     HttpResponse resp = httpclient.execute(httpGet);
-
     String responseBody = EntityUtils.toString(resp.getEntity());
-    String dataString = responseBody.replaceAll("^.*?\\[", "").replaceAll("\\].*$", "");
 
+    System.out.println(responseBody);
 
-    ObjectMapper objectMapper = new ObjectMapper();
-    List<TeacherEntityResponse> listTeacher=objectMapper.readValue("["+dataString+"]", new TypeReference<List<TeacherEntityResponse>>(){});
-    System.out.println(listTeacher.size());
-    for (TeacherEntityResponse tmp:listTeacher){
-        System.out.println(tmp.toString());
+    JSONObject jsonResponse = new JSONObject(responseBody);
+    JSONArray listResp = jsonResponse.getJSONArray("data");
+
+//    ObjectMapper objectMapper = new ObjectMapper();
+//    List<TeacherEntityResponse> listTeacher=objectMapper.readValue("["+dataString+"]", new TypeReference<List<TeacherEntityResponse>>(){});
+    System.out.println(listResp.length());
+    for(int i=0;i<listResp.length();i++){
+        JSONObject teacher = listResp.getJSONObject(i);
+        System.out.println(teacher.toString());
     }
 %>
 <div class="manHinhChinh">
@@ -95,16 +93,30 @@
             </thead>
             <tbody>
 
-            <% for (TeacherEntityResponse teacher : listTeacher) { %>
+            <%     for(int i=0;i<listResp.length();i++){%>
+            <% JSONObject teacher = listResp.getJSONObject(i); %>
             <tr>
-                <td><%= teacher.getIdGv() %></td>
-                <td><%= teacher.getTenGv() %></td>
-                <td><%= teacher.getEmailGv() %></td>
-                <td><%= teacher.getSdtGv() %></td>
-                <td><%= teacher.getGenderGv() %></td>
-                <td><%= teacher.getTenKhoa() %></td>
-                <td><%= teacher.getNgayTao() %></td>
-                <td><%= teacher.getNgaySua() %></td>
+                <td><%= teacher.getString("idGv") %></td>
+                <td><%= teacher.getString("tenGv") %></td>
+                <td><%= teacher.getString("sdtGv") %></td>
+                <td><%= teacher.getString("emailGv") %></td>
+                <td><%= teacher.getString("genderGv") %></td>
+                <td><%= teacher.getString("tenKhoa") %></td>
+                <td><%= teacher.getString("ngayTao") %></td>
+                <td><%= teacher.getString("ngaySua") %></td>
+                </td>
+                <td class="chucNang">
+                    <div class="hop-hanh-dong">
+                        <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_giang_vien_sua', <%= teacher.getString("idGv") %> , <%= teacher.getString("tenGv") %>, <%= teacher.getString("sdtGv") %>,<%=  teacher.getString("emailGv") %>,<%= teacher.getString("genderGv") %>,<%= teacher.getString("idKhoa") %>)">
+                            <span class="sua_tieuDe">Sửa</span>
+                            <i class="fa-solid fa-pencil sua_icon"></i>
+                        </button>
+                        <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', <%= teacher.getString("idGv") %>)" class="xoa hop-hanh-dong-nut" type="button">
+                            <span class="xoa_tieuDe">Xóa</span>
+                            <i class="fa-solid fa-trash xoa_icon"></i>
+                        </button>
+                    </div>
+                </td>
             </tr>
             <% } %>
             </tbody>
