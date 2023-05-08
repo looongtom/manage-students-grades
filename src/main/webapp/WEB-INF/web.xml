@@ -11,12 +11,12 @@
 
 
     <welcome-file-list>
-        <welcome-file>auth/login.jsp</welcome-file>
+        <welcome-file>auth/login</welcome-file>
     </welcome-file-list>
 
     <filter>
         <filter-name>servletFilter</filter-name>
-        <filter-class>com.example.quanlysv.servlet.security.AuthenticationFilter</filter-class>
+        <filter-class>com.example.quanlysv.servlet.security.AuthenticationFilterCustom</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>servletFilter</filter-name>

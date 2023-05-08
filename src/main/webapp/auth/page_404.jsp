@@ -19,12 +19,22 @@
     <div class="bao-boc-404">
         <div class="chua-404">
             <%
-            AccountEntity account = (AccountEntity) session.getAttribute("ACCOUNT");
-            if (account != null) {
-                %><a href="/home/home.jsp" class="tro-ve-trang chu">Quay về trang chủ</a><%
-             } else {
-                %><a href="/auth/login.jsp" class="tro-ve-trang chu">Quay về trang chủ</a><%
-            }
+                AccountEntity account = (AccountEntity) request.getAttribute("account");
+                if (account == null) {
+            %>
+            <a href="/auth/login.jsp" class="tro-ve-trang chu">Quay về trang chủ chưa đăng nhập</a>
+            <%
+            } else {
+                if(account.getRoleId() == 1) {
+            %>
+            <a href="/home/admin/home_admin/home_admin.jsp" class="tro-ve-trang chu">Quay về trang chủ admin</a>
+            <%
+            } else {
+            %>
+            <a href="/home/user/home_user/home_user.jsp" class="tro-ve-trang chu">Quay về trang chủ user</a>
+            <%
+                    }
+                }
             %>
             <div class="blank b403">
                 <img src="https://code.ptit.edu.vn/2020/images/download (2)@3x.png" alt="">

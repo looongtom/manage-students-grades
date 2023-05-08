@@ -22,11 +22,11 @@
             <label>
                 <b class="tenDangNhap-tieuDe">Tên đăng nhập</b>
             </label>
-            <input type="text" placeholder="Nhập tên đăng nhập" name="username" required>
+            <input type="text" value="${username}" placeholder="Nhập tên đăng nhập" name="username" required>
             <label>
                 <b  class="matKhau-tieuDe">Mật khẩu</b>
             </label>
-            <input type="password" placeholder="Nhập mật khẩu" name="password" required>
+            <input type="password"  value="${password}"  placeholder="Nhập mật khẩu" name="password" required>
             <button type="submit" class="nut-dangNhap">Đăng nhập</button>
             <a class="quen-mat-khau" href="">Quên mật khẩu?</a>
         </div>

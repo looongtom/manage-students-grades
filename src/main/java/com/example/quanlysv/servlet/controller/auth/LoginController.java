@@ -11,6 +11,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,21 @@ public class LoginController extends HttpServlet {
     public LoginController(){
         authService = new AuthServiceImpl();
     }
+
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Cookie arr[] = req.getCookies();
+        if(arr != null){
+            for(Cookie o : arr){
+                if(o.getName().equals("username")){
+                    req.setAttribute("username", o.getValue());
+                }
+            }
+        }
+        req.getRequestDispatcher("login.jsp").forward(req, resp);
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
@@ -31,21 +47,26 @@ public class LoginController extends HttpServlet {
         try {
             if(accountEntity != null
                     && accountEntity.getStatusPasswordDefault() == 0
-                    && authService.checkPassDefault(username, password)){
+                    && authService.checkPassDefault(username, password)) {
                 SessionUtils.getInstance().putValue(req, "ACCOUNT", accountEntity);
+
                 resp.sendRedirect("/home/common/change_password_default.jsp");
                 return;
             }
-            else if(accountEntity != null && BCrypt.checkpw(password, accountEntity.getPassword())){
-                // lưu đăng nhập vào session
-                SessionUtils.getInstance().putValue(req, "ACCOUNT", accountEntity);
-                CookieUtils.getInstance().addCookie(resp, req);
+        if(accountEntity != null &&
+                BCrypt.checkpw(password, accountEntity.getPassword())){
+            // lưu đăng nhập vào session
+            SessionUtils.getInstance().putValue(req, "ACCOUNT", accountEntity);
 
-                if(accountEntity.getRoleId() == 1)
-                    resp.sendRedirect("/home/admin/home_admin/home_admin.jsp");
-                else if (accountEntity.getRoleId() == 2) {
-                    resp.sendRedirect("/home/user/home_user/home_user.jsp");
-                }
+            Cookie u = new Cookie("username", accountEntity.getUsername());
+            u.setMaxAge(3600);
+            resp.addCookie(u);
+
+            if(accountEntity.getRoleId() == 1)
+                req.getRequestDispatcher("/home/admin/home_admin/home_admin.jsp").forward(req, resp);
+            else if (accountEntity.getRoleId() == 2) {
+                req.getRequestDispatcher("/home/user/home_user/home_user.jsp").forward(req, resp);
+            }
                 else {
                     String errorMessage = "Người dùng chưa được phân quyền!";
                     req.setAttribute("errorMessage", errorMessage);
