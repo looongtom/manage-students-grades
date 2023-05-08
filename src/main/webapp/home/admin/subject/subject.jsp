@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admins
-  Date: 2/19/2023
-  Time: 4:28 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -116,15 +109,12 @@
     </div>
     <%@include file="../subject/subject_form.jsp" %>
     <%@include file="../subject/confirm_delete_subject.jsp" %>
-
+</div>
+</body>
     <script src="../../../assets/js/menu.js"></script>
     <script src="../../../assets/js/subject.js"></script>
     <script src="../../../assets/js/pagination_subject.js"></script>
-    <script src="../../../assets/js/add_subject.js"></script>
+    <script src="../../../assets/js/add_form.js"></script>
     <script src="../../../assets/js/text_error_subject.js"></script>
     <script src="../../../assets/js/confirm_delete_form.js"></script>
-
-
-</div>
-</body>
 </html>

@@ -2,20 +2,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <%@include file="../admin/menu/admin_menu_header.jsp" %>
+    <c:choose>
+        <c:when test="${sessionScope.ACCOUNT.roleId == 1}">
+            <%@include file="../admin/menu/admin_menu_header.jsp" %>
+        </c:when>
+        <c:when test="${sessionScope.ACCOUNT.roleId == 2}">
+            <%@include file="../user/menu/user_menu_header.jsp" %>
+        </c:when>
+    </c:choose>
     <link rel="stylesheet" href="../../assets/css/change_password.css">
     <link rel="stylesheet" href="../../assets/themify-icons/themify-icons.css">
     <title>Đổi mật khẩu</title>
 </head>
 <body>
-<c:choose>
-    <c:when test="${sessionScope.ACCOUNT.roleId == 1}">
-        <%@include file="../admin/menu/admin_menu_header.jsp" %>
-    </c:when>
-    <c:when test="${sessionScope.ACCOUNT.roleId == 2}">
-        <%@include file="../user/menu/user_menu_header.jsp" %>
-    </c:when>
-</c:choose>
 <c:choose>
     <c:when test="${sessionScope.ACCOUNT.roleId == 1}">
         <%@include file="../admin/menu/admin_menu.jsp" %>

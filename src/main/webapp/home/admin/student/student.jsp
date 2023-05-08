@@ -83,7 +83,7 @@
 </body>
 <script src="../../../assets/js/menu.js"></script>
 <script src="../../../assets/js/student.js"></script>
-<script src="../../../assets/js/add_student.js"></script>
+<script src="../../../assets/js/add_form.js"></script>
 <script src="../../../assets/js/update_student.js"></script>
 <script src="../../../assets/js/text_error_student.js"></script>
 </html>

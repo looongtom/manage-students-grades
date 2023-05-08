@@ -116,8 +116,6 @@
 </div>
 <script src="../../../assets/js/menu.js"></script>
 <script src="../../../assets/js/specialization.js"></script>
-<script src="../../../assets/js/text_error_class.js"></script>
-
 </body>
 
 </html>
