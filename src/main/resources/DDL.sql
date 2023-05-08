@@ -49,6 +49,7 @@ create table DIEM
     id_mh varchar(25),
     id_sv varchar(25) not null,
     id_hk varchar(25),
+    id_lop varchar(25),
     ngay_tao bigint,
     ngay_sua bigint,
     PRIMARY KEY(id_diem,id_sv)
@@ -65,7 +66,8 @@ create table SINHVIEN
     phone_sv varchar(14),
     lop_hanh_chinh_sv varchar(50),
     ngay_tao bigint,
-    ngay_sua bigint
+    ngay_sua bigint,
+    dathoihoc int not null default 0
 );
 alter table SINHVIEN add primary key(id_sv);
 
@@ -143,6 +145,7 @@ alter table DIEM add foreign key(id_gv) references GIANGVIEN(id_gv);
 alter table DIEM add foreign key(id_mh) references MONHOC(id_mh);
 alter table DIEM add foreign key(id_sv) references SINHVIEN(id_sv);
 alter table DIEM add foreign key(id_hk) references HOCKY(id_hk);
+alter table DIEM add foreign key(id_lop) references LOP(id_lop);
 alter table HOC add foreign key(id_sv) references SINHVIEN(id_sv);
 alter table HOC add foreign key(id_lop) references LOP(id_lop);
 alter table LOP add foreign key(id_khoa) references KHOA(id_khoa);
