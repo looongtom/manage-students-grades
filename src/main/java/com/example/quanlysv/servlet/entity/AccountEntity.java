@@ -7,6 +7,16 @@ public class AccountEntity {
     private String email;
     private Long roleId;
 
+    private Integer statusPasswordDefault;
+
+    public Integer getStatusPasswordDefault() {
+        return statusPasswordDefault;
+    }
+
+    public void setStatusPasswordDefault(Integer statusPasswordDefault) {
+        this.statusPasswordDefault = statusPasswordDefault;
+    }
+
     public Long getId() {
         return id;
     }
