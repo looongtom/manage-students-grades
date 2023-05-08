@@ -18,7 +18,7 @@ public class LogOutController extends HttpServlet {
         HttpSession session = req.getSession(false);
         if (session != null) {
             SessionUtils.getInstance().removeValue(req, "ACCOUNT");
-            resp.sendRedirect("login.jsp");
+            resp.sendRedirect("/auth/login");
         }
     }
 }
