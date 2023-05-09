@@ -11,15 +11,15 @@
             <div class="tenTaiKhoan">User</div>
         </div>
         <div class="nganCach"></div>
-        <a class="menuMuc nhapDiemMuc" href="/../../home/user/home_user/home_user.jsp">
+        <a class="menuMuc trangChuMuc" href="/../../home/user/home_user/home_user.jsp">
             <img src="../../../assets/images/home.png" alt="Trang chủ" class="icon-Muc">
             <div class="menuMuc-tieuDe">Trang chủ</div>
         </a>
-        <a class="menuMuc nhapDiemMuc" href="/../../home/user/grade/watch_grade.jsp">
+        <a class="menuMuc xemDiemMuc" href="/../../home/user/grade/watch_grade.jsp">
             <img src="../../../assets/images/score.png" alt="Điểm" class="icon-Muc">
             <div class="menuMuc-tieuDe">Xem điểm</div>
         </a>
-        <a class="menuMuc nhapDiemMuc" href="/../../home/common/change_password.jsp">
+        <a class="menuMuc doiMatKhauMuc" href="/../../home/common/change_password.jsp">
             <img src="../../../assets/images/change_password.png" alt="Đổi mật khẩu" class="icon-Muc">
             <div class="menuMuc-tieuDe">Đổi mật khẩu</div>
         </a>

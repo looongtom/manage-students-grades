@@ -10,7 +10,7 @@
 
 <head>
     <%@include file="/home/admin/menu/admin_menu_header.jsp" %>
-    <link rel="stylesheet" href="../../../assets/css/home.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/home_admin.css">
 
     <title>Trang chủ</title>
 </head>

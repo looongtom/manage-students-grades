@@ -8,7 +8,7 @@
 <html>
 <head>
     <%@include file="../menu/admin_menu_header.jsp" %>
-    <link rel="stylesheet" href="../../../assets/css/add_grade.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/add_grade.css">
     <link rel="stylesheet" href="../../../assets/themify-icons/themify-icons.css">
     <title>Nhập điểm</title>
 </head>

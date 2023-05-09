@@ -11,7 +11,7 @@
       <div class="tenTaiKhoan">Admin</div>
     </div>
     <div class="nganCach"></div>
-    <a class="menuMuc trangChuMuc" href="/../home/home.jsp">
+    <a class="menuMuc trangChuMuc" href="/../../home/admin/home_admin/home_admin.jsp">
       <img src="../../../assets/images/home.png" alt="Trang chủ" class="icon-Muc">
       <div class="menuMuc-tieuDe">Trang chủ</div>
     </a>

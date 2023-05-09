@@ -2,6 +2,7 @@
 <html>
 <head>
     <%@include file="../menu/user_menu_header.jsp" %>
+    <link rel="stylesheet" href="../../../assets/css/user/watch_grade.css">
     <title>Xem điểm</title>
 </head>
 <body>

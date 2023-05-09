@@ -5,11 +5,11 @@
 <html>
 <head>
     <%@include file="../menu/admin_menu_header.jsp" %>
-    <link rel="stylesheet" href="../../../assets/css/teacher.css">
-    <link rel="stylesheet" href="../../../assets/css/add_teacher_form.css">
-    <link rel="stylesheet" href="../../../assets/css/update_teacher_form.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/teacher.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/add_teacher_form.css">
+    <link rel="stylesheet" href="./../../assets/css/admin/update_form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
-    <link rel="stylesheet" href="../../../assets/css/confirm_delete_form.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/confirm_delete_form.css">
     <title>Giảng viên</title>
 </head>
 <body>
@@ -164,11 +164,10 @@
 <%@include file="../teacher/update_teacher_form.jsp" %>
 <%@include file="../teacher/confirm_delete_teacher.jsp"%>
 
-<script src="../../../assets/js/menu.js"></script>
-<script src="../../../assets/js/text_error_teacher.js"></script>
-<script src="../../../assets/js/add_form.js"></script>
-<script src="../../../assets/js/update_teacher.js"></script>
-<script src="../../../assets/js/confirm_delete_form.js"></script>
-
 </body>
+    <script src="../../../assets/js/menu.js"></script>
+    <script src="../../../assets/js/admin/text_error_teacher.js"></script>
+    <script src="../../../assets/js/admin/add_form.js"></script>
+    <script src="../../../assets/js/admin/update_teacher.js"></script>
+    <script src="../../../assets/js/admin/confirm_delete_form.js"></script>
 </html>

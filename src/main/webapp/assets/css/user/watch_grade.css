@@ -1,0 +1,6 @@
+.xemDiemMuc,
+.xemDiemMuc:hover {
+    padding-left: 20px;
+    margin-left: -20px;
+    background-color: var(--red-color);
+}
