@@ -2,10 +2,11 @@
 <html>
 <head>
     <%@include file="../menu/admin_menu_header.jsp" %>
-    <link rel="stylesheet" href="../../../assets/css/subject.css">
-    <link rel="stylesheet" href="../../../assets/css/add_subject_form.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/subject.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/add_subject_form.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/update_subject_form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
-    <link rel="stylesheet" href="../../../assets/css/confirm_delete_form.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/confirm_delete_form.css">
 
     <title>Môn học</title>
 </head>
@@ -50,11 +51,11 @@
                 <td>06/04/2023 10:20:00</td>
                 <td class="chucNang">
                     <div class="hop-hanh-dong">
-                        <button class="sua hop-hanh-dong-nut" type="button">
+                        <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_giang_vien_sua', 'INT1434', 'Lập trình Web', '3', 'CNTT')">
                             <span class="sua_tieuDe">Sửa</span>
                             <i class="fa-solid fa-pencil sua_icon"></i>
                         </button>
-                        <button onclick="showModal('modal_xac_nhan_xoa')" class="xoa hop-hanh-dong-nut" type="button">
+                        <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', 'INT1434')" class="xoa hop-hanh-dong-nut" type="button">
                             <span class="xoa_tieuDe">Xóa</span>
                             <i class="fa-solid fa-trash xoa_icon"></i>
                         </button>
@@ -70,11 +71,11 @@
                 <td>06/04/2023 10:20:00</td>
                 <td class="chucNang">
                     <div class="hop-hanh-dong">
-                        <button class="sua hop-hanh-dong-nut" type="button">
+                        <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_mon_hoc_sua', 'INT1434', 'Lập trình Web', '3', 'CNTT')">
                             <span class="sua_tieuDe">Sửa</span>
                             <i class="fa-solid fa-pencil sua_icon"></i>
                         </button>
-                        <button onclick="showModal('modal_xac_nhan_xoa')" class="xoa hop-hanh-dong-nut" type="button">
+                        <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', 'INT1303')" class="xoa hop-hanh-dong-nut" type="button">
                             <span class="xoa_tieuDe">Xóa</span>
                             <i class="fa-solid fa-trash xoa_icon"></i>
                         </button>
@@ -90,11 +91,11 @@
                 <td>06/04/2023 10:20:00</td>
                 <td class="chucNang">
                     <div class="hop-hanh-dong">
-                        <button class="sua hop-hanh-dong-nut" type="button">
+                        <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_mon_hoc_sua', 'INT1434', 'Lập trình Web', '3', 'CNTT')">
                             <span class="sua_tieuDe">Sửa</span>
                             <i class="fa-solid fa-pencil sua_icon"></i>
                         </button>
-                        <button onclick="showModal('modal_xac_nhan_xoa')" class="xoa hop-hanh-dong-nut" type="button">
+                        <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', 'SKD1101')" class="xoa hop-hanh-dong-nut" type="button">
                             <span class="xoa_tieuDe">Xóa</span>
                             <i class="fa-solid fa-trash xoa_icon"></i>
                         </button>
@@ -107,14 +108,16 @@
     <div class="phanTrang">
         <ul></ul>
     </div>
-    <%@include file="../subject/subject_form.jsp" %>
-    <%@include file="../subject/confirm_delete_subject.jsp" %>
+    <%@include file="add_subject_form.jsp" %>
+    <%@include file="update_subject_form.jsp" %>
+    <%@include file="confirm_delete_subject.jsp" %>
 </div>
 </body>
     <script src="../../../assets/js/menu.js"></script>
-    <script src="../../../assets/js/subject.js"></script>
-    <script src="../../../assets/js/pagination_subject.js"></script>
-    <script src="../../../assets/js/add_form.js"></script>
-    <script src="../../../assets/js/text_error_subject.js"></script>
-    <script src="../../../assets/js/confirm_delete_form.js"></script>
+    <script src="../../../assets/js/admin/subject.js"></script>
+    <script src="../../../assets/js/admin/update_subject.js"></script>
+    <script src="../../../assets/js/admin/pagination_subject.js"></script>
+    <script src="../../../assets/js/admin/add_form.js"></script>
+    <script src="../../../assets/js/admin/text_error_subject.js"></script>
+    <script src="../../../assets/js/admin/confirm_delete_form.js"></script>
 </html>

@@ -13,8 +13,8 @@
   <title>Danh sách lớp</title>
   <link rel="stylesheet" href="../../../assets/fonts/fontawesome-free-6.3.0-web/css/all.min.css">
   <link rel="stylesheet" href="../../../assets/themify-icons/themify-icons.css">
-  <link rel="stylesheet" href="../../../assets/css/class.css">
-  <link rel="stylesheet" href="../../../assets/css/add_class_form.css">
+  <link rel="stylesheet" href="../../../assets/css/admin/class.css">
+  <link rel="stylesheet" href="../../../assets/css/admin/add_class_form.css">
   <link rel="stylesheet" href="../../../assets/css/pagination.css">
   <link rel="stylesheet" href="../../../assets/css/page_404.css">
 </head>
@@ -130,10 +130,10 @@
 </div>
 <%@include file="../class/add_class_form.jsp" %>
 
-<script src="../../../assets/js/pagination_class.js"></script>
-<script src="../../../assets/js/add_form.js"></script>
+<script src="../../../assets/js/admin/pagination_class.js"></script>
+<script src="../../../assets/js/admin/add_form.js"></script>
 <script src="../../../assets/js/class.js"></script>
-<script src="../../../assets/js/text_error_class.js"></script>
+<script src="../../../assets/js/admin/text_error_class.js"></script>
 </body>
 
 </html>

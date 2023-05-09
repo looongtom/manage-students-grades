@@ -2,6 +2,7 @@
 <html>
 <head>
     <%@include file="../menu/user_menu_header.jsp" %>
+    <link rel="stylesheet" href="../../../assets/css/user/home_user.css">
     <title>Trang chủ</title>
 </head>
 <body>

@@ -34,6 +34,6 @@
   </div>
 </div>
 
-<script src="../../../assets/js/confirm_delete_form.js"></script>
+<script src="../../../assets/js/admin/confirm_delete_form.js"></script>
 
 

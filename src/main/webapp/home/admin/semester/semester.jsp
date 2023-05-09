@@ -2,10 +2,10 @@
 <html>
 <head>
     <%@include file="../menu/admin_menu_header.jsp" %>
-    <link rel="stylesheet" href="../../../assets/css/semester.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/semester.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
-    <link rel="stylesheet"  href="../../../assets/css/add_semester_form.css">
-    <link rel="stylesheet"  href="../../../assets/css/update_semester_form.css">
+    <link rel="stylesheet"  href="../../../assets/css/admin/add_semester_form.css">
+    <link rel="stylesheet"  href="../../../assets/css/admin/update_semester_form.css">
     <title>Học kỳ</title>
 </head>
 <body>
@@ -53,9 +53,9 @@
 
 </body>
 <script src="../../../assets/js/menu.js"></script>
-<script src="../../../assets/js/semester.js"></script>
-<script src="../../../assets/js/add_form.js"></script>
-<script src="../../../assets/js/update_semester.js"></script>
-<script src ="../../../assets/js/text_error_semester.js"></script>
+<script src="../../../assets/js/admin/semester.js"></script>
+<script src="../../../assets/js/admin/add_form.js"></script>
+<script src="../../../assets/js/admin/update_semester.js"></script>
+<script src ="../../../assets/js/admin/text_error_semester.js"></script>
 
 </html>

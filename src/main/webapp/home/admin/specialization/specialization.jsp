@@ -3,7 +3,7 @@
 
 <head>
     <%@include file="../menu/admin_menu_header.jsp" %>
-    <link rel="stylesheet" href="../../../assets/css/specialization.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/specialization.css">
     <title>Khoa chuyên môn</title>
 </head>
 
@@ -115,7 +115,7 @@
     </div>
 </div>
 <script src="../../../assets/js/menu.js"></script>
-<script src="../../../assets/js/specialization.js"></script>
+<script src="../../../assets/js/admin/specialization.js"></script>
 </body>
 
 </html>
