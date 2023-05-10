@@ -89,8 +89,7 @@ function validateForm() {
     khoaGvInput.addEventListener("input", function() {
         khoaGvError.style.display = "none"
     })
-
-    if(!error) addGV();
+    return !error;
 }
 
 
@@ -177,5 +176,5 @@ function validateFormSua() {
         khoaGvError.style.display = "none"
     })
 
-    if(!error) updateGV();
+    return !error;
 }

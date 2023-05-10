@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: NMQ
-  Date: 4/13/2023
-  Time: 12:19 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="boc-modal-xoa" id="modal_xac_nhan_xoa">
   <div class="chua-modal-xoa">

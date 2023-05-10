@@ -11,11 +11,9 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 @WebServlet("/auth/login")
 public class LoginController extends HttpServlet {
@@ -61,6 +59,13 @@ public class LoginController extends HttpServlet {
             Cookie u = new Cookie("username", accountEntity.getUsername());
             u.setMaxAge(3600);
             resp.addCookie(u);
+
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("auth");
+            CookieUtils.getInstance().addCookie(resp,req);
+            Cookie cookie = new Cookie(resourceBundle.getString("key_cookie"), req.getSession().getId());
+            HttpSession session = req.getSession();
+            session.setAttribute("cookie_name",cookie.getName());
+            session.setAttribute("cookie_value",cookie.getValue());
 
             if(accountEntity.getRoleId() == 1)
                 req.getRequestDispatcher("/home/admin/home_admin/home_admin.jsp").forward(req, resp);

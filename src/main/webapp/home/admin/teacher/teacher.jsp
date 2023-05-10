@@ -1,26 +1,170 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.io.*,java.net.*,java.sql.*" %>
-<%@ page import="java.util.ResourceBundle" %>
 <%@ page import="org.json.*" %>
+<%@ page import="org.apache.http.client.methods.HttpPost" %>
+<%@ page import="org.apache.http.client.HttpClient" %>
+<%@ page import="org.apache.http.HttpResponse" %>
+<%@ page import="org.json.*" %>
+<%@ page import="org.apache.http.util.EntityUtils" %>
+<%@ page import="org.apache.http.entity.StringEntity" %>
+<%@ page import="org.apache.http.impl.client.HttpClientBuilder" %>
+<%@ page import="org.apache.http.client.methods.HttpDelete" %>
+<%@ page import="org.apache.http.client.utils.URIBuilder" %>
+<%@ page import="java.net.URI" %>
+
 <html>
 <head>
     <%@include file="../menu/admin_menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/admin/teacher.css">
     <link rel="stylesheet" href="../../../assets/css/admin/add_teacher_form.css">
-    <link rel="stylesheet" href="./../../assets/css/admin/update_form.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/update_teacher_form.css">
     <link rel="stylesheet" href="../../../assets/css/pagination.css">
     <link rel="stylesheet" href="../../../assets/css/admin/confirm_delete_form.css">
     <title>Giảng viên</title>
 </head>
+<%
+    HttpClient httpClient = HttpClientBuilder.create().build();
+
+    // get session id
+    String value="JSESSIONID=";
+    HttpSession getSession = request.getSession();
+    String cookieValue = (String) getSession.getAttribute("cookie_value");
+
+    // variables in request body
+    String tenGv="";
+    String sortField="";
+    String sortOrder="";
+    int pageIndex=1;
+    int pageSize=10;
+    int totalPages;
+
+    // request body for getAll, finding and sorting
+    String requestBody ="{"+
+            "\"tenGv\":\"" + tenGv + "\","+
+            "\"baseRequest\":{"+
+            "\"sortField\":\"" + sortField + "\","+
+            "\"sortOrder\":\"" + sortOrder + "\","+
+            "\"pageIndex\":" + pageIndex + ","+
+            "\"pageSize\":" + pageSize +
+            "}"+
+            "}";
+%>
 <body>
 <%@include file="../menu/admin_menu.jsp" %>
 <div class="manHinhChinh">
     <%
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
-        String dBUrl = resourceBundle.getString("url");
-        String username = resourceBundle.getString("username");
-        String password = resourceBundle.getString("password");
-        String driver=resourceBundle.getString("driverName");
+        //get all
+        String uriGetAll = "http://localhost:8080/api/admin/home/teacher";
+
+        //
+        HttpPost httpPost = new HttpPost(uriGetAll);
+        StringEntity entity = new StringEntity(requestBody);
+        httpPost.setEntity(entity);
+
+        httpPost.setHeader("Cookie",value+cookieValue);
+
+        // send the request and retrieve the response
+        HttpResponse resp = httpClient.execute(httpPost);
+        String responseBody = EntityUtils.toString(resp.getEntity());
+        System.out.println(responseBody);
+
+        JSONObject jsonResponse = new JSONObject(responseBody);
+        JSONArray listResp = jsonResponse.getJSONArray("data");
+        System.out.println(listResp.length());
+        for(int i=0; i<listResp.length(); i++){
+            JSONObject teacher = listResp.getJSONObject(i);
+            System.out.println(teacher.toString());
+        }
+    %>
+    <%
+        // add GV
+        String uriAddGV = "http://localhost:8080/api/admin/home/teacher/create-or-edit";
+        String idGv = request.getParameter("ma-gv");
+        String nameGv = request.getParameter("ten-gv");
+        String emailGv = request.getParameter("email-gv");
+        String genderGv = request.getParameter("gioi-tinh-gv");
+        String sdtGv = request.getParameter("sdt-gv");
+        String idKhoa = request.getParameter("ma-khoa-gv");
+        String requestBodyAddGV ="{"+
+                "\"idGv\":\"" + idGv + "\","+
+                "\"tenGv\":\"" + nameGv + "\","+
+                "\"sdtGv\":\"" + sdtGv + "\","+
+                "\"emailGv\":\"" + emailGv + "\","+
+                "\"genderGv\":\"" + genderGv + "\","+
+                "\"idKhoa\":\"" + idKhoa + "\"" +
+                "}";
+
+        // send the request and retrieve the response
+        if(idGv!=null && nameGv!=null && emailGv!=null && genderGv!=null && sdtGv!=null && idKhoa!=null) {
+            System.out.println(requestBodyAddGV);
+
+            HttpPost httpPostAddGV = new HttpPost(uriAddGV);
+            StringEntity entityAddGV = new StringEntity(requestBodyAddGV);
+            httpPostAddGV.setEntity(entityAddGV);
+
+            httpPostAddGV.setHeader("Cookie",value+cookieValue);
+
+            HttpResponse respAddGV = httpClient.execute(httpPostAddGV);
+            String responseBodyAddGV = EntityUtils.toString(respAddGV.getEntity());
+            System.out.println(responseBodyAddGV);
+
+            JSONObject jsonResponseAddGV = new JSONObject(responseBodyAddGV);
+            System.out.println(jsonResponseAddGV);
+
+            // get all giang vien
+            resp=httpClient.execute(httpPost);
+            responseBody = EntityUtils.toString(resp.getEntity());
+            jsonResponse = new JSONObject(responseBody);
+            listResp = jsonResponse.getJSONArray("data");
+            for(int i=0; i<listResp.length(); i++) {
+                JSONObject teacher = listResp.getJSONObject(i);
+                System.out.println(teacher.toString());
+            }
+        }
+    %>
+    <%
+        // update GV
+        String uriUpdateGV = "http://localhost:8080/api/admin/home/teacher/create-or-edit";
+        String idGvU = request.getParameter("ma-gv-sua");
+        String tenGvU = request.getParameter("ten-gv-sua");
+        String emailGvU = request.getParameter("email-gv-sua");
+        String genderGvU = request.getParameter("gioi-tinh-gv-sua");
+        String sdtGvU = request.getParameter("sdt-gv-sua");
+        String idKhoaU = request.getParameter("ma-khoa-gv-sua");
+        String requestBodyUpdateGV ="{"+
+                "\"idGv\":\"" + idGvU + "\","+
+                "\"tenGv\":\"" + tenGvU + "\","+
+                "\"sdtGv\":\"" + sdtGvU + "\","+
+                "\"emailGv\":\"" + emailGvU + "\","+
+                "\"genderGv\":\"" + genderGvU + "\","+
+                "\"idKhoa\":\"" + idKhoaU + "\"" +
+                "}";
+        // send the request and retrieve the response
+        if(idGvU!=null && tenGvU!=null && emailGvU!=null && genderGvU!=null && sdtGvU!=null && idKhoaU!=null) {
+            System.out.println(requestBodyUpdateGV);
+
+            HttpPost httpPostUpdateGV = new HttpPost(uriUpdateGV);
+            StringEntity entityUpdateGV = new StringEntity(requestBodyUpdateGV);
+            httpPostUpdateGV.setEntity(entityUpdateGV);
+
+            httpPostUpdateGV.setHeader("Cookie",value+cookieValue);
+
+            HttpResponse respUpdateGV = httpClient.execute(httpPostUpdateGV);
+            String responseBodyUpdateGV = EntityUtils.toString(respUpdateGV.getEntity());
+            System.out.println(responseBodyUpdateGV);
+
+            JSONObject jsonResponseUpdateGV = new JSONObject(responseBodyUpdateGV);
+            System.out.println(jsonResponseUpdateGV);
+
+            // get all giang vien
+            resp=httpClient.execute(httpPost);
+            responseBody = EntityUtils.toString(resp.getEntity());
+            jsonResponse = new JSONObject(responseBody);
+            listResp = jsonResponse.getJSONArray("data");
+            for(int i=0; i<listResp.length(); i++) {
+                JSONObject teacher = listResp.getJSONObject(i);
+                System.out.println(teacher.toString());
+            }
+        }
     %>
     <h1 class="tieuDeTrang">Danh sách giảng viên</h1>
     <div class="themVaTimKiem">
@@ -54,94 +198,33 @@
             <th class="hanh-dong">Action</th>
             </thead>
             <tbody>
-            <%
-                // Register JDBC driver
-                try {
-                    Class.forName(driver);
-
-                    // Open a connection to the database
-                    Connection conn = DriverManager.getConnection(dBUrl, username, password);
-
-                    // Create the HTTP request URL
-                    String url = "http://localhost:8080/api/home/teacher";
-
-                    // Create the HTTP connection
-                    URL obj = new URL(url);
-                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-                    // Set request method
-                    con.setRequestMethod("POST");
-
-                    // Set request headers
-                    con.setRequestProperty("Content-Type", "application/json");
-                    con.setRequestProperty("Accept", "application/json");
-                    con.setRequestProperty("Cookie", "JSESSIONID=" + request.getSession().getId());
-
-                    // Set request parameters
-                    String jsonInputString = "{\"tenGv\":\"\",\"baseRequest\":{\"sortField\":\"\",\"sortOrder\":\"\",\"pageIndex\":0,\"pageSize\":10}}";
-                    con.setDoOutput(true);
-                    OutputStream os = con.getOutputStream();
-                    byte[] input = jsonInputString.getBytes("utf-8");
-                    os.write(input, 0, input.length);
-
-                    // Send request
-                    int responseCode = con.getResponseCode();
-
-                    // Read response
-                    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                    String inputLine;
-                    StringBuffer resp = new StringBuffer();
-                    while ((inputLine = in.readLine()) != null) {
-                        resp.append(inputLine);
-                    }
-                    in.close();
-
-                    // Process the response
-                    String responseJson = resp.toString();
-                    JSONObject jsonResponse = new JSONObject(responseJson);
-
-                    // Process the response
-                    JSONArray items = jsonResponse.getJSONArray("data");
-                    for (int i = 0; i < items.length(); i++) {
-                        JSONObject item = items.getJSONObject(i);
-                        String idGv = item.getString("idGv");
-                        String tenGv = item.getString("tenGv");
-                        String sdtGv = item.getString("sdtGv");
-                        String emailGv = item.getString("emailGv");
-                        String genderGv = item.getString("genderGv");
-                        String tenKhoa = item.getString("tenKhoa");
-                        String idKhoa = item.getString("idKhoa");
-                        String ngayTao = item.getString("ngayTao");
-                        String ngaySua = item.getString("ngaySua");
-                        out.println("<tr>");
-                        out.println("<td>" + idGv + "</td>");
-                        out.println("<td>" + tenGv + "</td>");
-                        out.println("<td>" + sdtGv + "</td>");
-                        out.println("<td>" + emailGv + "</td>");
-                        out.println("<td>" + genderGv + "</td>");
-                        out.println("<td>" + tenKhoa + "</td>");
-                        out.println("<td>" + ngayTao + "</td>");
-                        out.println("<td>" + ngaySua + "</td>");
-                        out.println("<td class=\"chucNang\">");
-                        out.println("<div class=\"hop-hanh-dong\">");
-                        out.println("<button class=\"sua hop-hanh-dong-nut\" type=\"button\" onclick=\"showModalSua('modal_giang_vien_sua'," + "'" + idGv + "','" + tenGv + "','" + sdtGv + "','" + emailGv + "','" + genderGv + "','" + idKhoa + "')\">");
-                        out.println("<span class=\"sua_tieuDe\">Sửa</span>");
-                        out.println("<i class=\"fa-solid fa-pencil sua_icon\"></i>");
-                        out.println("</button>");
-                        out.println("<button onclick=\"hienXacNhanXoa('modal_xac_nhan_xoa'," + "'" + idGv + "'" + ")\" class=\"xoa hop-hanh-dong-nut\" type=\"button\">");
-                        out.println("<span class=\"xoa_tieuDe\">Xóa</span>");
-                        out.println("<i class=\"fa-solid fa-trash xoa_icon\"></i>");
-                        out.println("</button>");
-                        out.println("</div>");
-                        out.println("</td>");
-                        out.println("</tr>");
-                    }
-                    // Close the database connection
-                    conn.close();
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            %>
+<%--            hiển thị ra màn hình--%>
+            <%     for(int i=0;i<listResp.length();i++){%>
+            <% JSONObject teacher = listResp.getJSONObject(i); %>
+            <tr>
+                <td><%= teacher.getString("idGv") %></td>
+                <td><%= teacher.getString("tenGv") %></td>
+                <td><%= teacher.getString("sdtGv") %></td>
+                <td><%= teacher.getString("emailGv") %></td>
+                <td><%= teacher.getString("genderGv") %></td>
+                <td><%= teacher.getString("tenKhoa") %></td>
+                <td><%= teacher.getString("ngayTao") %></td>
+                <td><%= teacher.getString("ngaySua") %></td>
+                </td>
+                <td class="chucNang">
+                    <div class="hop-hanh-dong">
+                        <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_giang_vien_sua', '<%= teacher.getString("idGv") %>' , '<%= teacher.getString("tenGv") %>', '<%= teacher.getString("sdtGv") %>','<%=  teacher.getString("emailGv") %>','<%= teacher.getString("genderGv") %>','<%= teacher.getString("idKhoa") %>')">
+                            <span class="sua_tieuDe">Sửa</span>
+                            <i class="fa-solid fa-pencil sua_icon"></i>
+                        </button>
+                        <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '<%= teacher.getString("idGv") %>')" class="xoa hop-hanh-dong-nut" type="button">
+                            <span class="xoa_tieuDe">Xóa</span>
+                            <i class="fa-solid fa-trash xoa_icon"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <% } %>
             </tbody>
         </table>
     </div>
@@ -166,8 +249,8 @@
 
 </body>
     <script src="../../../assets/js/menu.js"></script>
-    <script src="../../../assets/js/admin/text_error_teacher.js"></script>
     <script src="../../../assets/js/admin/add_form.js"></script>
     <script src="../../../assets/js/admin/update_teacher.js"></script>
+    <script src="../../../assets/js/admin/text_error_teacher.js"></script>
     <script src="../../../assets/js/admin/confirm_delete_form.js"></script>
 </html>
