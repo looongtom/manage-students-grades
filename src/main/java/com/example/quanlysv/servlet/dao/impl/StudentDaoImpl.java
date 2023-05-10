@@ -114,11 +114,11 @@ public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStude
         try{
 
             if(!id.trim().isEmpty()){
-                String sql = "DELETE FROM sinhvien where id_sv = ?";
+                String sql = "UPDATE sinhvien SET  dathoihoc=1 where id_sv = ?";
                 insertOrUpdateOrDelete(sql, id.trim());
             }
         }catch (Exception e){
-            throw new RuntimeException("create student failed: "+ e.getMessage());
+            throw new RuntimeException("delete student failed: "+ e.getMessage());
         }
     }
 }

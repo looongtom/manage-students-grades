@@ -26,108 +26,110 @@ var pageNumbers;
 // cái này sẽ được thực thi ngay khi mới vào trang -> Lấy tất cả sinh viên
 document.addEventListener("DOMContentLoaded", readDataInit());
 
+
+
 // đọc (R)
 // đọc data lúc mới vào trang
-function readDataInit() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:8080/api/admin/home/student', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            const res = JSON.parse(xhr.responseText);
-            const myTable = document.getElementById('myTable');
-            const tbody = myTable.querySelector('tbody');
-            totalPages=res.totalPages;
-            while (tbody.firstChild) {
-                tbody.removeChild(tbody.firstChild);
-            }
+// function readDataInit() {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('POST', 'http://localhost:8080/api/admin/home/student', true);
+//     xhr.setRequestHeader('Content-Type', 'application/json');
+//     xhr.onload = function() {
+//         if (xhr.status === 200) {
+//             const res = JSON.parse(xhr.responseText);
+//             const myTable = document.getElementById('myTable');
+//             const tbody = myTable.querySelector('tbody');
+//             totalPages=res.totalPages;
+//             while (tbody.firstChild) {
+//                 tbody.removeChild(tbody.firstChild);
+//             }
+//
+//             // cái này để render lại cái UI phân trang
+//             paginationElement.innerHTML = createPaginationUI(totalPages, pageIndex);
+//
+//             // hàm này để add data đc trả về vào bảng
+//             res.data.forEach(function(item) {
+//                 var row = `
+//                             <tr>
+//                               <td>`+item.idSv+`</td>
+//                               <td>`+item.tenSv+`</td>
+//                               <td>`+item.emailSv+`</td>
+//                               <td>`+item.dobSv+`</td>
+//                               <td>`+item.genderSv+`</td>
+//                               <td>`+item.phoneSv+`</td>
+//                               <td>`+item.lopHanhChinhSv+`</td>
+//                               <td>`+item.ngayTao+`</td>
+//                               <td>`+item.ngaySua+`</td>
+//                               <td class="chucNang">
+//                                 <div class="hop-hanh-dong">
+//                                   <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_sinh_vien_sua', '`+ item.idSv +`', '`+ item.tenSv +`', '`+ item.emailSv +`', '`+ item.dobSv +`', '`+ item.genderSv +`', '`+ item.phoneSv +`', '`+ item.lopHanhChinhSv +`')">
+//                                     <span class="sua_tieuDe">Sửa</span>
+//                                     <i class="fa-solid fa-pencil sua_icon"></i>
+//                                   </button>
+//                                   <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '`+ item.idSv +`')" class="xoa hop-hanh-dong-nut" type="button">
+//                                     <span class="xoa_tieuDe">Xóa</span>
+//                                     <i class="fa-solid fa-trash xoa_icon"></i>
+//                                   </button>
+//                                 </div>
+//                               </td>
+//                             </tr>`;
+//                 tbody.innerHTML+=row;
+//             });
+//         } else {
+//             console.error('Request failed. Status code: ' + xhr.status);
+//         }
+//     };
+//     xhr.send(JSON.stringify(formData));
+// }
 
-            // cái này để render lại cái UI phân trang
-            paginationElement.innerHTML = createPaginationUI(totalPages, pageIndex);
-
-            // hàm này để add data đc trả về vào bảng
-            res.data.forEach(function(item) {
-                var row = `
-                            <tr>
-                              <td>`+item.idSv+`</td>
-                              <td>`+item.tenSv+`</td>
-                              <td>`+item.emailSv+`</td>
-                              <td>`+item.dobSv+`</td>
-                              <td>`+item.genderSv+`</td>
-                              <td>`+item.phoneSv+`</td>
-                              <td>`+item.lopHanhChinhSv+`</td>
-                              <td>`+item.ngayTao+`</td>
-                              <td>`+item.ngaySua+`</td>
-                              <td class="chucNang">
-                                <div class="hop-hanh-dong">
-                                  <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_sinh_vien_sua', '`+ item.idSv +`', '`+ item.tenSv +`', '`+ item.emailSv +`', '`+ item.dobSv +`', '`+ item.genderSv +`', '`+ item.phoneSv +`', '`+ item.lopHanhChinhSv +`')">
-                                    <span class="sua_tieuDe">Sửa</span>
-                                    <i class="fa-solid fa-pencil sua_icon"></i>
-                                  </button>
-                                  <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '`+ item.idSv +`')" class="xoa hop-hanh-dong-nut" type="button">
-                                    <span class="xoa_tieuDe">Xóa</span>
-                                    <i class="fa-solid fa-trash xoa_icon"></i>
-                                  </button>
-                                </div>
-                              </td>
-                            </tr>`;
-                tbody.innerHTML+=row;
-            });
-        } else {
-            console.error('Request failed. Status code: ' + xhr.status);
-        }
-    };
-    xhr.send(JSON.stringify(formData));
-}
-
-function getAllSV() {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:8080/api/admin/home/student', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            const res = JSON.parse(xhr.responseText);
-            const myTable = document.getElementById('myTable');
-            const tbody = myTable.querySelector('tbody');
-            totalPages=res.totalPages;
-            while (tbody.firstChild) {
-                tbody.removeChild(tbody.firstChild);
-            }
-
-            // hàm này để add data đc trả về vào bảng
-            res.data.forEach(function(item) {
-                var row = `
-                            <tr>
-                              <td>`+item.idSv+`</td>
-                              <td>`+item.tenSv+`</td>
-                              <td>`+item.emailSv+`</td>
-                              <td>`+item.dobSv+`</td>
-                              <td>`+item.genderSv+`</td>
-                              <td>`+item.phoneSv+`</td>
-                              <td>`+item.lopHanhChinhSv+`</td>
-                              <td>`+item.ngayTao+`</td>
-                              <td>`+item.ngaySua+`</td>
-                              <td class="chucNang">
-                                <div class="hop-hanh-dong">
-                                  <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_sinh_vien_sua', '`+ item.idSv +`', '`+ item.tenSv +`', '`+ item.emailSv +`', '`+ item.dobSv +`', '`+ item.genderSv +`', '`+ item.phoneSv +`', '`+ item.lopHanhChinhSv +`')">
-                                    <span class="sua_tieuDe">Sửa</span>
-                                    <i class="fa-solid fa-pencil sua_icon"></i>
-                                  </button>
-                                  <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '`+ item.idSv +`')" class="xoa hop-hanh-dong-nut" type="button">
-                                    <span class="xoa_tieuDe">Xóa</span>
-                                    <i class="fa-solid fa-trash xoa_icon"></i>
-                                  </button>
-                                </div>
-                              </td>
-                            </tr>`;
-                tbody.innerHTML+=row;
-            });
-        } else {
-            console.error('Request failed. Status code: ' + xhr.status);
-        }
-    };
-    xhr.send(JSON.stringify(formData));
-}
+// function getAllSV() {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('POST', 'http://localhost:8080/api/admin/home/student', true);
+//     xhr.setRequestHeader('Content-Type', 'application/json');
+//     xhr.onload = function() {
+//         if (xhr.status === 200) {
+//             const res = JSON.parse(xhr.responseText);
+//             const myTable = document.getElementById('myTable');
+//             const tbody = myTable.querySelector('tbody');
+//             totalPages=res.totalPages;
+//             while (tbody.firstChild) {
+//                 tbody.removeChild(tbody.firstChild);
+//             }
+//
+//             // hàm này để add data đc trả về vào bảng
+//             res.data.forEach(function(item) {
+//                 var row = `
+//                             <tr>
+//                               <td>`+item.idSv+`</td>
+//                               <td>`+item.tenSv+`</td>
+//                               <td>`+item.emailSv+`</td>
+//                               <td>`+item.dobSv+`</td>
+//                               <td>`+item.genderSv+`</td>
+//                               <td>`+item.phoneSv+`</td>
+//                               <td>`+item.lopHanhChinhSv+`</td>
+//                               <td>`+item.ngayTao+`</td>
+//                               <td>`+item.ngaySua+`</td>
+//                               <td class="chucNang">
+//                                 <div class="hop-hanh-dong">
+//                                   <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_sinh_vien_sua', '`+ item.idSv +`', '`+ item.tenSv +`', '`+ item.emailSv +`', '`+ item.dobSv +`', '`+ item.genderSv +`', '`+ item.phoneSv +`', '`+ item.lopHanhChinhSv +`')">
+//                                     <span class="sua_tieuDe">Sửa</span>
+//                                     <i class="fa-solid fa-pencil sua_icon"></i>
+//                                   </button>
+//                                   <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '`+ item.idSv +`')" class="xoa hop-hanh-dong-nut" type="button">
+//                                     <span class="xoa_tieuDe">Xóa</span>
+//                                     <i class="fa-solid fa-trash xoa_icon"></i>
+//                                   </button>
+//                                 </div>
+//                               </td>
+//                             </tr>`;
+//                 tbody.innerHTML+=row;
+//             });
+//         } else {
+//             console.error('Request failed. Status code: ' + xhr.status);
+//         }
+//     };
+//     xhr.send(JSON.stringify(formData));
+// }
 
 // thêm (C)
 function addSV() {

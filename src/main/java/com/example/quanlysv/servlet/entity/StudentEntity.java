@@ -31,9 +31,7 @@ public class StudentEntity {
     public StudentEntity() {
     }
 
-    public StudentEntity(String idSv, String tenSv,
-                         String emailSv, String dobSv, String genderSv,
-                         String phoneSv, String lopHanhChinhSv) {
+    public StudentEntity(String idSv, String tenSv, String emailSv, String dobSv, String genderSv, String phoneSv, String lopHanhChinhSv, Integer daThoiHoc, Long ngayTao, Long ngaySua) {
         this.idSv = idSv;
         this.tenSv = tenSv;
         this.emailSv = emailSv;

@@ -59,7 +59,7 @@ public class StudentServiceImpl implements IStudentService {
     @Override
     public BaseResponse<?> createOrUpdateStudent(CreateOrEditStudentDTO studentDTO) {
         try {
-            if(studentDTO.getStatus() != 0 || studentDTO.getStatus() != 1){
+            if(studentDTO.getStatus() != 0 && studentDTO.getStatus() != 1){
                 return new BaseResponse.Builder<>()
                         .setStatus(Constant.httpStatusErrorServer)
                         .setMessage(Constant.messageBadRequest)

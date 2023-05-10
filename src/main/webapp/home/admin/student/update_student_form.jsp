@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="boc-modal" id="modal_sinh_vien_sua">
+<form class="boc-modal" id="modal_sinh_vien_sua" method="POST"  onsubmit="return validateFormSua()">
   <div class="chua-modal">
     <div class="dong-modal" onclick="hideModal('modal_sinh_vien_sua')">
       <i id ="dong-form-btn-sua" class="ti-close"></i>
@@ -11,27 +11,28 @@
     </header>
     <!-- modal body -->
     <div class="than-modal">
-      <label for="" class="nhan-hieu-modal">Mã sinh viên</label>
-      <input id="ma-sv-sua" type="text" class="nhap-modal" placeholder="Nhập mã ...">
-      <div id="ma-sv-error-sua" class="tb-loi-nhap">Mã sinh viên không được để trống </div>
+      <input id="ma-sv-sua" name="ma-sv-sua" type="text" class="nhap-modal" value="" >
 
       <label for="" class="nhan-hieu-modal">Tên sinh viên</label>
-      <input id="ten-sv-sua" type="text" class="nhap-modal" placeholder="Nhập tên ...">
+      <input id="ten-sv-sua" name="ten-sv-sua" type="text" class="nhap-modal" placeholder="Nhập tên ...">
       <div id="ten-sv-error-sua" class="tb-loi-nhap">Tên sinh viên không được để trống </div>
-
+        <%
+            String tenSvSua = request.getParameter("ten-sv-sua");
+            System.out.println("tenSvSua: "+tenSvSua);
+        %>
 
       <label for="" class="nhan-hieu-modal">Email</label>
-      <input id="email-sv-sua" type="email" class="nhap-modal" placeholder="Điền email .. ">
+      <input id="email-sv-sua" name="email-sv-sua" type="email" class="nhap-modal" placeholder="Điền email .. ">
       <div id="email-sv-error-sua" class="tb-loi-nhap">Email không được để trống </div>
 
 
       <label for="" class="nhan-hieu-modal">Ngày sinh</label>
-      <input id="dob-sv-sua" type="date" class="nhap-modal">
+      <input id="dob-sv-sua" name="dob-sv-sua" type="date" class="nhap-modal">
       <div id="dob-sv-error-sua" class="tb-loi-nhap"> Chọn ngày tháng năm sinh </div>
 
 
       <label for="" class="nhan-hieu-modal">Giới tính</label>
-      <select id="gioi-tinh-sv-sua" class="nhap-modal" required>
+      <select id="gioi-tinh-sv-sua" name="gioi-tinh-sv-sua" class="nhap-modal" required>
         <option value="">Please select</option>
         <option value="Nam">Nam</option>
         <option value="Nữ">Nữ</option>
@@ -40,21 +41,21 @@
 
       <label for="" class="nhan-hieu-modal">Số điện thoại</label>
 
-      <input id="sdt-sv-sua" type="text" class="nhap-modal" placeholder="Nhập số điện thoại ...">
+      <input id="sdt-sv-sua"  name="sdt-sv-sua" type="text" class="nhap-modal" placeholder="Nhập số điện thoại ...">
       <div id="sdt-sv-error-sua" class="tb-loi-nhap">Số điện thoại không được để trống</div>
 
       <label for="" class="nhan-hieu-modal">Lớp hành chính</label>
-      <select id="ma-lop-sv-sua" class="nhap-modal" required>
-        <option value="">Please select</option>
-      </select>
+      <input id="ma-lop-sv-sua" name="ma-lop-sv-sua" type="text" class="nhap-modal" placeholder="Nhập lớp hành chính ...">
+
       <div id="ma-lop-sv-error-sua" class="tb-loi-nhap-sua">Chọn lớp hành chính</div>
 
     </div>
     <!-- modal footer -->
     <div class="cuoi-modal">
-      <button class="sua-btn" type="submit" onclick="validateFormSua()">
-        Sửa
-      </button>
+            <button class="sua-btn" type="submit" onclick="validateFormSua()">
+                Sửa
+            </button>
     </div>
   </div>
-</div>
+</form>
+

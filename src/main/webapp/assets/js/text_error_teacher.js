@@ -177,5 +177,5 @@ function validateFormSua() {
         khoaGvError.style.display = "none"
     })
 
-    if(!error) updateGV();
+    return (!error) ;
 }
