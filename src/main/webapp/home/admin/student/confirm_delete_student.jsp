@@ -6,7 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="boc-modal-xoa" id="modal_xac_nhan_xoa">
+<form class="boc-modal-xoa" id="modal_xac_nhan_xoa" method="POST">
+  <input type="hidden" value="deleta">
+  <input type="hidden" value=""> //todo: truyền id sv
   <div class="chua-modal-xoa">
     <div class="dong-modal-xoa" onclick="anXacNhanXoa('modal_xac_nhan_xoa')">
       <i id ="dong-form-btn" class="ti-close"></i>
@@ -32,7 +34,7 @@
       </button>
     </div>
   </div>
-</div>
+</form>
 
 <script src="../../../assets/js/confirm_delete_form.js"></script>
 

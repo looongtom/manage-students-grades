@@ -6,6 +6,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Update_SV.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/home.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/home/admin/student/student.jsp" value="file://$PROJECT_DIR$/src/main/webapp/home/admin/student" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/home/admin/student/update_student_form.jsp" value="file://$PROJECT_DIR$/src/main/webapp/home/admin/student" />
       </map>
     </option>
   </component>

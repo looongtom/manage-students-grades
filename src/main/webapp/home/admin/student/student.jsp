@@ -79,7 +79,7 @@
             "\"phoneSv\":\""+phoneSvUpdate+"\","+
             "\"lopHanhChinhSv\":\""+lopHanhChinhSvUpdate+"\""+
             "}";
-    System.out.println("requestBodyUpdate: "+requestBodyUpdate);
+
     if (idSvUpdate!=null && tenSvUpdate!=null && emailSvUpdate!=null && dobUpdate!=null && genderSvUpdate!=null && phoneSvUpdate!=null && lopHanhChinhSvUpdate!=null){
         HttpPost httpPostUpdate = new HttpPost(uriUpdate);
         StringEntity entityUpdate = new StringEntity(requestBodyUpdate);
