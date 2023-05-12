@@ -180,6 +180,7 @@
 
 
 .them-btn {
+    border-radius: 5px;
     width: 100%;
     background-color: var(--red-color);
     color: #fff;

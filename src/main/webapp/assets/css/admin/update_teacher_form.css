@@ -170,6 +170,7 @@
 }
 
 .sua-btn {
+    border-radius: 5px;
     width: 100%;
     background-color: rgb(24, 170, 255);
     color: #fff;
