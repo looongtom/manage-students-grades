@@ -18,6 +18,7 @@
 
     <%--    hidden input to retrieve id--%>
     <input id ="ma-gv-xoa" name="ma-gv-xoa" type="hidden">
+
     <!-- modal footer -->
     <div class="cuoi-modal-xoa">
       <button onclick="anXacNhanXoa('modal_xac_nhan_xoa')" class="huy-btn" type="button">

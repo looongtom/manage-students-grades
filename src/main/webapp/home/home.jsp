@@ -1,13 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admins
-  Date: 2/19/2023
-  Time: 3:26 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
 <head>
     <%@include file="/home/admin/menu/admin_menu_header.jsp" %>
     <link rel="stylesheet" href="../assets/css/admin/home_admin.css">
@@ -16,8 +8,6 @@
 <body>
     <%@include file="admin/menu/admin_menu.jsp" %>
     <div class="manHinhChinh">
-
-
         <div id="noidung">
             <div class="noidung-header">
                 <h2>Dashboard</h2>
@@ -78,7 +68,7 @@
             </section>
         </div>
     </div>
-    <script src="../../../assets/js/menu.js"></script>
-    <script src="../assets/js/home.js"></script>
+    <script src="../assets/js/menu.js"></script>
+    <script src="../assets/js/admin/home_admin.js"></script>
 </body>
 </html>

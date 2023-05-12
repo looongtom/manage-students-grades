@@ -12,7 +12,7 @@
     <!-- modal body -->
     <div class="than-modal">
       <label for="" class="nhan-hieu-modal">Mã giảng viên</label>
-      <input id ="ma-gv-sua" name="ma-gv-sua" type="text" class="nhap-modal" placeholder="Nhập mã ...">
+      <input id ="ma-gv-sua" name="ma-gv-sua" type="text" class="nhap-modal" placeholder="Nhập mã ..." readonly>
       <div id="ma-gv-error-sua" class="tb-loi-nhap-sua">Mã giảng viên không được để trống</div>
 
       <label for="" class="nhan-hieu-modal">Tên giảng viên</label>

@@ -14,7 +14,6 @@
     color: #fff !important;
 }
 
-
 .text-center {
     text-align: center !important;
 }
@@ -160,6 +159,9 @@
     margin-top: 18px;
 }
 
+#ma-gv-sua {
+    background-color: aliceblue;
+}
 
 .nhap-modal {
     border: 1px solid #ccc;

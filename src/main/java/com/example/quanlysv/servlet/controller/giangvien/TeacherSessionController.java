@@ -8,37 +8,32 @@ import java.io.IOException;
 @WebServlet("/admin/teacher")
 public class TeacherSessionController extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
         String tenGv = request.getParameter("tenGv");
         if(tenGv==null) tenGv="";
 
-        String sortField = request.getParameter("sortField");
+        String sortField = request.getParameter("sortFieldGV");
         if(sortField==null) sortField="";
 
-        String sortOrder = request.getParameter("sortOrder");
+        String sortOrder = request.getParameter("sortOrderGV");
         if(sortOrder==null) sortOrder="";
 
-        String pageIndex = request.getParameter("pageIndex");
+        String pageIndex = request.getParameter("pageIndexGV");
         if(pageIndex==null) pageIndex="1";
 
-        String pageSize = request.getParameter("pageSize");
+        String pageSize = request.getParameter("pageSizeGV");
         if(pageSize==null) pageSize="10";
 
         System.out.println("pageIndex in Session: " + pageIndex);
         System.out.println("pageSize in Session: " + pageSize);
 
         session.setAttribute("tenGv", tenGv);
-        session.setAttribute("sortField", sortField);
-        session.setAttribute("sortOrder", sortOrder);
-        session.setAttribute("pageIndex", Integer.parseInt(pageIndex));
-        session.setAttribute("pageSize", Integer.parseInt(pageSize));
+        session.setAttribute("sortFieldGV", sortField);
+        session.setAttribute("sortOrderGV", sortOrder);
+        session.setAttribute("pageIndexGV", Integer.parseInt(pageIndex));
+        session.setAttribute("pageSizeGV", Integer.parseInt(pageSize));
         request.getRequestDispatcher("/home/admin/teacher/teacher.jsp").forward(request, response);
     }
 }

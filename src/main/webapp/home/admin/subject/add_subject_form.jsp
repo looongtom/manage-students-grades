@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<div class="boc-modal" id="modal_mon_hoc" >
+<form class="boc-modal" id="modal_mon_hoc" method="post" onsubmit="return validateForm()">
   <div class="chua-modal ">
     <div class="dong-modal" onclick="hideModal('modal_mon_hoc')">
       <i id ="dong-form-btn" class="ti-close"></i>
@@ -13,17 +12,15 @@
     <!-- modal body -->
     <div class="than-modal">
       <label for="" class="nhan-hieu-modal">Mã môn học</label>
-      <input id ="ma-mh" type="text" class="nhap-modal" placeholder="Nhập mã ...">
+      <input id ="ma-mh" name="ma-mh" type="text" class="nhap-modal" placeholder="Nhập mã ...">
       <div id="ma-mh-error" class="tb-loi-nhap">Mã môn học không được để trống </div>
 
-
-
       <label for="" class="nhan-hieu-modal">Tên môn học</label>
-      <input id = "ten-mh" type="text" class="nhap-modal" placeholder="Nhập tên ...">
+      <input id ="ten-mh" name="ten-mh" type="text" class="nhap-modal" placeholder="Nhập tên ...">
       <div id="ten-mh-error" class="tb-loi-nhap">Tên môn học không được để trống  </div>
 
-      <label for="" class="nhan-hieu-modal">Số tín chỉ </label>
-      <select id="stc-mh" class="nhap-modal" required>
+      <label for="" class="nhan-hieu-modal">Số tín chỉ</label>
+      <select id="stc-mh" name="stc-mh" class="nhap-modal" required>
         <option value="">Please select</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -33,9 +30,7 @@
       <div id="stc-mh-error" class="tb-loi-nhap">Chọn số tín chỉ</div>
 
       <label for="" class="nhan-hieu-modal">Mã khoa</label>
-      <select id="ma-khoa-mh" class="nhap-modal" required>
-        <option value="">Please select</option>
-        <option value="">Please select</option>
+      <select id="ma-khoa-mh" name="ma-khoa-mh" class="nhap-modal" required>
         <option value="">Please select</option>
         <option value="CNTT">Công nghệ thông tin</option>
         <option value="ATTT">An toàn thông tin</option>
@@ -48,11 +43,10 @@
         <option value="CB">Cơ bản</option>
       </select>
       <div id="ma-khoa-mh-error" class="tb-loi-nhap">Chọn mã khoa</div>
-
     </div>
     <!-- modal footer -->
     <div class="cuoi-modal">
-      <button class="them-btn" type="submit" onclick="validateFormSua()">Thêm</button>
+      <input class="them-btn" type="submit" value="Thêm">
     </div>
   </div>
-</div>
+</form>

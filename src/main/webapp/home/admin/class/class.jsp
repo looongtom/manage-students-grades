@@ -132,7 +132,7 @@
 
 <script src="../../../assets/js/admin/pagination_class.js"></script>
 <script src="../../../assets/js/admin/add_form.js"></script>
-<script src="../../../assets/js/class.js"></script>
+<script src="../../../assets/js/admin/class.js"></script>
 <script src="../../../assets/js/admin/text_error_class.js"></script>
 </body>
 
