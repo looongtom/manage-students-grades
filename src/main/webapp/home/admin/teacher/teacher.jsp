@@ -10,6 +10,7 @@
 <%@ page import="org.apache.http.client.methods.HttpDelete" %>
 <%@ page import="org.apache.http.client.utils.URIBuilder" %>
 <%@ page import="java.net.URI" %>
+<%@ page import="java.io.IOException" %>
 
 <html>
 <head>
@@ -30,12 +31,19 @@
     String cookieValue = (String) getSession.getAttribute("cookie_value");
 
     // variables in request body
-    String tenGv="";
-    String sortField="";
-    String sortOrder="";
-    int pageIndex=1;
-    int pageSize=10;
-    int totalPages;
+    String tenGv = "";
+    String sortField = "";
+    String sortOrder = "";
+    int pageSize = 10;
+
+    int pageIndex = 1;
+    if(session.getAttribute("pageIndex")!=null) {
+        pageIndex = (int) session.getAttribute("pageIndex");
+    }
+
+    System.out.println(session.getAttribute("pageIndex"));
+    System.out.println("pageIndex in teacher.jsp: " + pageIndex);
+    System.out.println("pageSize in teacher.jsp: " + pageSize);
 
     // request body for getAll, finding and sorting
     String requestBody ="{"+
@@ -51,29 +59,34 @@
 <body>
 <%@include file="../menu/admin_menu.jsp" %>
 <div class="manHinhChinh">
+    <%!
+        int totalPages;
+
+        // Hàm Refresh lại trang lấy giảng viên
+        public JSONArray getAllGv(HttpClient httpClient, HttpPost httpPost) throws IOException {
+            HttpResponse resp  = httpClient.execute(httpPost);
+            String responseBody = EntityUtils.toString(resp.getEntity());
+            JSONObject jsonResponse = new JSONObject(responseBody);
+            if(jsonResponse.getInt("status")==200) {
+                totalPages = jsonResponse.getInt("totalPages");
+                return jsonResponse.getJSONArray("data");
+            } else {
+                return null;
+            }
+        }
+    %>
     <%
         //get all
         String uriGetAll = "http://localhost:8080/api/admin/home/teacher";
 
-        //
         HttpPost httpPost = new HttpPost(uriGetAll);
         StringEntity entity = new StringEntity(requestBody);
         httpPost.setEntity(entity);
 
-        httpPost.setHeader("Cookie",value+cookieValue);
+        httpPost.setHeader("Cookie", value + cookieValue);
 
-        // send the request and retrieve the response
-        HttpResponse resp = httpClient.execute(httpPost);
-        String responseBody = EntityUtils.toString(resp.getEntity());
-        System.out.println(responseBody);
-
-        JSONObject jsonResponse = new JSONObject(responseBody);
-        JSONArray listResp = jsonResponse.getJSONArray("data");
-        System.out.println(listResp.length());
-        for(int i=0; i<listResp.length(); i++){
-            JSONObject teacher = listResp.getJSONObject(i);
-            System.out.println(teacher.toString());
-        }
+        // call function, return data
+        JSONArray listResp = getAllGv(httpClient, httpPost);
     %>
     <%
         // add GV
@@ -84,7 +97,7 @@
         String genderGv = request.getParameter("gioi-tinh-gv");
         String sdtGv = request.getParameter("sdt-gv");
         String idKhoa = request.getParameter("ma-khoa-gv");
-        String requestBodyAddGV ="{"+
+        String requestBodyAddGV = "{"+
                 "\"idGv\":\"" + idGv + "\","+
                 "\"tenGv\":\"" + nameGv + "\","+
                 "\"sdtGv\":\"" + sdtGv + "\","+
@@ -111,14 +124,7 @@
             System.out.println(jsonResponseAddGV);
 
             // get all giang vien
-            resp=httpClient.execute(httpPost);
-            responseBody = EntityUtils.toString(resp.getEntity());
-            jsonResponse = new JSONObject(responseBody);
-            listResp = jsonResponse.getJSONArray("data");
-            for(int i=0; i<listResp.length(); i++) {
-                JSONObject teacher = listResp.getJSONObject(i);
-                System.out.println(teacher.toString());
-            }
+            listResp = getAllGv(httpClient, httpPost);
         }
     %>
     <%
@@ -156,14 +162,65 @@
             System.out.println(jsonResponseUpdateGV);
 
             // get all giang vien
-            resp=httpClient.execute(httpPost);
-            responseBody = EntityUtils.toString(resp.getEntity());
-            jsonResponse = new JSONObject(responseBody);
-            listResp = jsonResponse.getJSONArray("data");
-            for(int i=0; i<listResp.length(); i++) {
-                JSONObject teacher = listResp.getJSONObject(i);
-                System.out.println(teacher.toString());
-            }
+            listResp = getAllGv(httpClient, httpPost);
+        }
+    %>
+    <%
+        // delete
+        String idGvD = request.getParameter("ma-gv-xoa");
+        URI uriDeleteGV = new URIBuilder("http://localhost:8080/api/admin/home/teacher").setParameter("id", idGvD).build();
+        if(idGvD!=null) {
+            HttpDelete httpDelete = new HttpDelete(uriDeleteGV);
+            httpDelete.setHeader("Cookie",value+cookieValue);
+
+            httpClient.execute(httpDelete);
+
+            // get all giang vien
+            listResp = getAllGv(httpClient, httpPost);
+        }
+    %>
+    <%
+        // tìm kiếm
+        tenGv = request.getParameter("nhapTimKiem");
+        if(tenGv==null) tenGv = "";
+        System.out.println("Ten GV: " + tenGv);
+        requestBody = "{"+
+                "\"tenGv\":\"" + tenGv + "\","+
+                "\"baseRequest\":{"+
+                "\"sortField\":\"" + sortField + "\","+
+                "\"sortOrder\":\"" + sortOrder + "\","+
+                "\"pageIndex\":" + pageIndex + ","+
+                "\"pageSize\":" + pageSize +
+                "}"+
+                "}";
+        entity = new StringEntity(requestBody);
+        httpPost.setEntity(entity);
+        listResp = getAllGv(httpClient, httpPost);
+    %>
+    <%
+        // sort
+        sortField = request.getParameter("sortField");
+        sortOrder = request.getParameter("sortOrder");
+        if(sortField!=null) {
+            tenGv = request.getParameter("tenGv");
+            if(tenGv==null) tenGv = "";
+
+            requestBody = "{"+
+                    "\"tenGv\":\"" + tenGv + "\","+
+                    "\"baseRequest\":{"+
+                    "\"sortField\":\"" + sortField + "\","+
+                    "\"sortOrder\":\"" + sortOrder + "\","+
+                    "\"pageIndex\":" + pageIndex + ","+
+                    "\"pageSize\":" + pageSize +
+                    "}"+
+                    "}";
+            entity = new StringEntity(requestBody);
+            httpPost.setEntity(entity);
+
+            System.out.println("Sort Field: " + sortField);
+            System.out.println("Sort Order: " + sortOrder);
+            System.out.println("Ten GV sort: " + tenGv);
+            listResp = getAllGv(httpClient, httpPost);
         }
     %>
     <h1 class="tieuDeTrang">Danh sách giảng viên</h1>
@@ -174,69 +231,79 @@
             <span class="nutThemGV_tieuDe">Thêm giảng viên</span>
             <i class="fa-solid fa-plus"></i>
         </button>
-        <div class="timKiem">
+        <form class="timKiem" method="post">
             <div class="tieuDeTimKiem">Tìm kiếm giảng viên: </div>
-            <input type="search" class="nhapTimKiem" placeholder="Nhập tên giảng viên">
-            <button class="nutTimKiem" onclick="timKiemGV()">
+            <input type="search" id="nhapTimKiem" name="nhapTimKiem" placeholder="Nhập tên giảng viên" value="<%= tenGv %>">
+            <button class="nutTimKiem" type="submit">
                 <span class="nutTimKiem_tieuDe">Tìm</span>
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-        </div>
+        </form>
     </div>
 
     <div class="boc-bang">
-        <table id="myTable" class="danhSach">
-            <thead class="hang1">
-            <th data-sort onclick="sortTable('idGv', this)" class="cot-maGV">Mã GV</th>
-            <th data-sort onclick="sortTable('tenGv', this)" class="cot-tenGV">Họ và tên</th>
-            <th class="cot-sdtGV">Số điện thoại</th>
-            <th class="cot-emailGV">Email</th>
-            <th data-sort onclick="sortTable('genderGv', this)" class="cot-gioiTinhGV">Giới tính</th>
-            <th data-sort onclick="sortTable('idKhoa', this)" class="cot-khoaGV">Khoa</th>
-            <th data-sort onclick="sortTable('ngayTao', this)" class="cot-ngayTao">Ngày tạo</th>
-            <th data-sort onclick="sortTable('ngaySua', this)" class="cot-ngayTao">Ngày cập nhật</th>
-            <th class="hanh-dong">Action</th>
-            </thead>
-            <tbody>
-<%--            hiển thị ra màn hình--%>
-            <%     for(int i=0;i<listResp.length();i++){%>
-            <% JSONObject teacher = listResp.getJSONObject(i); %>
-            <tr>
-                <td><%= teacher.getString("idGv") %></td>
-                <td><%= teacher.getString("tenGv") %></td>
-                <td><%= teacher.getString("sdtGv") %></td>
-                <td><%= teacher.getString("emailGv") %></td>
-                <td><%= teacher.getString("genderGv") %></td>
-                <td><%= teacher.getString("tenKhoa") %></td>
-                <td><%= teacher.getString("ngayTao") %></td>
-                <td><%= teacher.getString("ngaySua") %></td>
-                </td>
-                <td class="chucNang">
-                    <div class="hop-hanh-dong">
-                        <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_giang_vien_sua', '<%= teacher.getString("idGv") %>' , '<%= teacher.getString("tenGv") %>', '<%= teacher.getString("sdtGv") %>','<%=  teacher.getString("emailGv") %>','<%= teacher.getString("genderGv") %>','<%= teacher.getString("idKhoa") %>')">
-                            <span class="sua_tieuDe">Sửa</span>
-                            <i class="fa-solid fa-pencil sua_icon"></i>
-                        </button>
-                        <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '<%= teacher.getString("idGv") %>')" class="xoa hop-hanh-dong-nut" type="button">
-                            <span class="xoa_tieuDe">Xóa</span>
-                            <i class="fa-solid fa-trash xoa_icon"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            <% } %>
-            </tbody>
-        </table>
+        <form id="sortForm" method="post" action="/admin/teacher">
+            <input type="hidden" name="tenGv" value="<%= tenGv %>">
+            <input type="hidden" name="sortField" value="<%= sortField %>">
+            <input type="hidden" name="sortOrder" value="<%= sortOrder %>">
+            <input type="hidden" name="pageIndex" value="<%= pageIndex %>">
+            <input type="hidden" name="pageSize" value="<%= pageSize %>">
+
+            <table id="myTable" class="danhSach">
+                <thead class="hang1">
+                    <th data-sort onclick="sortTable('idGv', this)" class="cot-maGV idGv">Mã GV</th>
+                    <th data-sort onclick="sortTable('tenGv', this)" class="cot-tenGV tenGv">Họ và tên</th>
+                    <th class="cot-sdtGV">Số điện thoại</th>
+                    <th class="cot-emailGV">Email</th>
+                    <th data-sort onclick="sortTable('genderGv', this)" class="cot-gioiTinhGV genderGv">Giới tính</th>
+                    <th data-sort onclick="sortTable('idKhoa', this)" class="cot-khoaGV idKhoa">Khoa</th>
+                    <th data-sort onclick="sortTable('ngayTao', this)" class="cot-ngayTao ngayTao">Ngày tạo</th>
+                    <th data-sort onclick="sortTable('ngaySua', this)" class="cot-ngayTao ngaySua">Ngày cập nhật</th>
+                    <th class="hanh-dong">Action</th>
+                </thead>
+                <tbody>
+    <%--            hiển thị ra màn hình--%>
+                <%  if(listResp!=null) {
+                    for(int i=0;i<listResp.length();i++) {%>
+                <% JSONObject teacher = listResp.getJSONObject(i); %>
+                <tr>
+                    <td><%= teacher.getString("idGv") %></td>
+                    <td><%= teacher.getString("tenGv") %></td>
+                    <td><%= teacher.getString("sdtGv") %></td>
+                    <td><%= teacher.getString("emailGv") %></td>
+                    <td><%= teacher.getString("genderGv") %></td>
+                    <td><%= teacher.getString("tenKhoa") %></td>
+                    <td><%= teacher.getString("ngayTao") %></td>
+                    <td><%= teacher.getString("ngaySua") %></td>
+                    </td>
+                    <td class="chucNang">
+                        <div class="hop-hanh-dong">
+                            <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_giang_vien_sua', '<%= teacher.getString("idGv") %>' , '<%= teacher.getString("tenGv") %>', '<%= teacher.getString("sdtGv") %>','<%=  teacher.getString("emailGv") %>','<%= teacher.getString("genderGv") %>','<%= teacher.getString("idKhoa") %>')">
+                                <span class="sua_tieuDe">Sửa</span>
+                                <i class="fa-solid fa-pencil sua_icon"></i>
+                            </button>
+                            <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '<%= teacher.getString("idGv") %>', 'ma-gv-xoa')" class="xoa hop-hanh-dong-nut" type="button">
+                                <span class="xoa_tieuDe">Xóa</span>
+                                <i class="fa-solid fa-trash xoa_icon"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <% }
+                }%>
+                </tbody>
+            </table>
+        </form>
     </div>
     <div class="phanTrang">
         <ul>
-            <li class="nutPaginate prev" style="color: white">
+            <li class="nutPaginate prev" style="color: white" onclick="nutPrev()">
                 <span><i class="fas fa-angle-left"></i></span>
             </li>
             <span class="soTrang">
 
             </span>
-            <li class="nutPaginate next" style="color: white">
+            <li class="nutPaginate next" style="color: white" onclick="nutNext()">
                 <span><i class="fas fa-angle-right"></i></span>
             </li>
         </ul>
@@ -248,6 +315,161 @@
 <%@include file="../teacher/confirm_delete_teacher.jsp"%>
 
 </body>
+    <script>
+        // do lúc gửi đoạn sort nó hay load lại trang dẫn đến không kịp lưu lại class, hàm này dùng để lấy session đã lưu
+        // trong TeacherSessionController, gán nó vào class để hiển thị giao diện mũi tên là đang sort theo cột nào, asc hay desc
+        if('${sessionScope.sortField}'!=='null' && '${sessionScope.sortField}'!=='') {
+            var getTd = document.querySelector('.${sessionScope.sortField}');
+            const asc = '${sessionScope.sortOrder}'==='desc';
+            getTd.classList[asc ? 'remove' : 'add']('asc');
+            getTd.classList[asc ? 'add' : 'remove']('desc');
+        }
+
+        // hàm sort cột
+        function sortTable(field, event) {
+            const tenGvInput = document.querySelector('input[name="tenGv"]');
+            const sortFieldInput = document.querySelector('input[name="sortField"]');
+            const sortOrderInput = document.querySelector('input[name="sortOrder"]');
+            const pageIndexInput = document.querySelector('input[name="pageIndex"]');
+
+            const thead=document.querySelector('thead');
+            const hData=[...thead.querySelectorAll('th')]
+
+            hData.map((head) => {
+                if(head!==event) {
+                    head.classList.remove('asc', 'desc')
+                }
+            });
+
+            if (sortFieldInput.value === field) {
+                const asc = sortOrderInput.value === "asc"
+                event.classList[asc ? 'remove' : 'add']('asc');
+                event.classList[asc ? 'add' : 'remove']('desc');
+                sortOrderInput.value = sortOrderInput.value === "asc" ? "desc" : "asc";
+            } else {
+                event.classList.add('asc');
+                sortFieldInput.value = field;
+                sortOrderInput.value = "asc";
+            }
+
+            // sau khi sort, quay trở lại trang đầu tiên
+            pageIndexInput.value = 1;
+
+            // Lấy phần tên trong khu vực tìm kiếm (nếu có)
+            console.log('Tên giảng viên trước khi gán giá trị: ' + tenGvInput.value);
+            console.log('Nhập tìm kiếm: ' + document.querySelector('#nhapTimKiem').value);
+            if(document.querySelector('#nhapTimKiem').value!==null) {
+                tenGvInput.value = document.querySelector('#nhapTimKiem').value;
+            }
+            // Submit the form
+            document.getElementById("sortForm").submit();
+        }
+
+        // tạo UI phân trang
+        const paginationElement = document.querySelector(".soTrang");
+        createPaginationUI(<%= totalPages %>, <%= pageIndex %>);
+        console.log('Total Pages Now: ' + <%= totalPages %>);
+        console.log('Page Index Now: ' + <%= pageIndex %>);
+        function createPaginationUI(totalPages, currentPage) {
+            let liTag = '';
+            let active;
+            let beforePage = currentPage - 1;
+            let afterPage = currentPage + 1;
+            if(currentPage > 2 && totalPages > 4){
+                liTag += `<li class="first numb" onclick="nutTrang(1)"><span>1</span></li>`;
+                if(currentPage > 3 && totalPages!==5){
+                    liTag += `<li class="dots"><span>...</span></li>`;
+                }
+            }
+            if (currentPage === totalPages) {
+                beforePage = beforePage - 2;
+            } else if (currentPage === totalPages - 1) {
+                beforePage = beforePage - 1;
+            }
+            if (currentPage === 1) {
+                beforePage=1;
+                afterPage = afterPage + 2;
+            } else if (currentPage === 2) {
+                beforePage = 1;
+                afterPage = afterPage + 1;
+            }
+            for (var plength = beforePage; plength <= afterPage; plength++) {
+                if (plength > totalPages) {
+                    continue;
+                }
+                if (plength === 0) {
+                    plength = plength + 1;
+                }
+                if(currentPage === plength){
+                    active = "active";
+                }else{
+                    active = "";
+                }
+                liTag = liTag + `<li class="numb ` + active + `" onclick="nutTrang(` + plength + `)" ><span>` + plength + `</span></li>`;
+            }
+            if(currentPage < totalPages - 1 && totalPages>4){
+                if(currentPage < totalPages - 2  && totalPages!==5){
+                    liTag += `<li class="dots"><span>...</span></li>`;
+                }
+                liTag = liTag + `<li class="last numb" onclick="nutTrang(` + totalPages + `)"><span>` + totalPages + `</span></li>`;
+            }
+            paginationElement.innerHTML = liTag;
+        }
+
+        // nút chuyển sang trang trước đó
+        function nutPrev() {
+            const pageIndexInput = document.querySelector('input[name="pageIndex"]');
+            console.log('Page Index Before: ' + pageIndexInput.value);
+
+            // Kiểm tra xem hiện tại có đang ở trang đầu tiên k
+            if(pageIndexInput.value>1) {
+                pageIndexInput.value--;
+                document.getElementById("sortForm").submit();
+            }
+        }
+
+        // nút chuyển sang trang tiếp theo
+        function nutNext() {
+            const sortFieldInput = document.querySelector('input[name="sortField"]');
+            const sortOrderInput = document.querySelector('input[name="sortOrder"]');
+            const pageIndexInput = document.querySelector('input[name="pageIndex"]');
+
+            // Kiểm tra session xem có đang sort cột nào k
+            if('${sessionScope.sortField}'!=='null' && '${sessionScope.sortField}'!=='') {
+                sortFieldInput.value = '${sessionScope.sortField}';
+                sortOrderInput.value = '${sessionScope.sortOrder}';
+            } else {
+                sortFieldInput.value = '';
+                sortOrderInput.value = '';
+            }
+
+            // Kiểm tra xem hiện tại có đang ở trang cuối cùng k
+            if(+pageIndexInput.value < <%= totalPages %>) {
+                pageIndexInput.value = +pageIndexInput.value + 1;
+                document.getElementById("sortForm").submit();
+            }
+        }
+
+        // nút chọn 1 trang
+        function nutTrang(page) {
+            const sortFieldInput = document.querySelector('input[name="sortField"]');
+            const sortOrderInput = document.querySelector('input[name="sortOrder"]');
+            const pageIndexInput = document.querySelector('input[name="pageIndex"]');
+
+            // Kiểm tra session xem có đang sort cột nào k
+            if('${sessionScope.sortField}'!=='null' && '${sessionScope.sortField}'!=='') {
+                sortFieldInput.value = '${sessionScope.sortField}';
+                sortOrderInput.value = '${sessionScope.sortOrder}';
+            } else {
+                sortFieldInput.value = '';
+                sortOrderInput.value = '';
+            }
+
+            pageIndexInput.value = page;
+            document.getElementById("sortForm").submit();
+        }
+
+    </script>
     <script src="../../../assets/js/menu.js"></script>
     <script src="../../../assets/js/admin/add_form.js"></script>
     <script src="../../../assets/js/admin/update_teacher.js"></script>

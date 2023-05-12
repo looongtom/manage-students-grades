@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="boc-modal-xoa" id="modal_xac_nhan_xoa">
+<form class="boc-modal-xoa" id="modal_xac_nhan_xoa" method="post">
   <div class="chua-modal-xoa">
     <div class="dong-modal-xoa" onclick="anXacNhanXoa('modal_xac_nhan_xoa')">
       <i id ="dong-form-btn" class="ti-close"></i>
@@ -15,15 +15,15 @@
       <br>
       Sau khi xóa bạn không thể khôi phục dữ liệu này.
     </div>
+
+    <%--    hidden input to retrieve id--%>
+    <input id ="ma-gv-xoa" name="ma-gv-xoa" type="hidden">
     <!-- modal footer -->
     <div class="cuoi-modal-xoa">
-      <button onclick="anXacNhanXoa('modal_xac_nhan_xoa')" class="huy-btn" type="submit">
+      <button onclick="anXacNhanXoa('modal_xac_nhan_xoa')" class="huy-btn" type="button">
         Hủy
       </button>
-      <button class="xoa-btn" type="submit" onclick="deleteGV(this)">
-        Xóa
-      </button>
+      <input class="xoa-btn" type="submit" onclick="anXacNhanXoa('modal_xac_nhan_xoa')" value="Xóa">
     </div>
   </div>
-</div>
-
+</form>

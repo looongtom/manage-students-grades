@@ -139,6 +139,7 @@
 }
 
 .huy-btn {
+    border-radius: 5px;
     width: 40%;
     background-color: gray;
     color: #fff;
@@ -151,6 +152,7 @@
 
 
 .xoa-btn {
+    border-radius: 5px;
     width: 40%;
     background-color: var(--red-color);
     color: #fff;
