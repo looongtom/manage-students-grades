@@ -4,13 +4,11 @@ import com.example.quanlysv.servlet.dao.IKhoaDao;
 import com.example.quanlysv.servlet.dao.ISubjectDao;
 import com.example.quanlysv.servlet.dao.impl.KhoaDaoImpl;
 import com.example.quanlysv.servlet.dao.impl.SubjectDaoImpl;
-import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.student.StudentDTO;
 import com.example.quanlysv.servlet.dto.request.subject.CreateOrEditSubjectDTO;
 import com.example.quanlysv.servlet.dto.request.subject.SubjectDTO;
 import com.example.quanlysv.servlet.dto.request.subject.SubjectFilter;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
-import com.example.quanlysv.servlet.entity.StudentEntity;
 import com.example.quanlysv.servlet.entity.SubjectEntity;
 import com.example.quanlysv.servlet.service.ISubjectService;
 import com.example.quanlysv.servlet.util.Convert;
@@ -42,10 +40,10 @@ public class SubjectServiceImpl implements ISubjectService {
             }
 
             if (request.getBaseRequest().getSortOrder().isEmpty()) {
-                request.getBaseRequest().setSortOrder("asc");
+                request.getBaseRequest().setSortOrder("desc");
             }
             if(request.getBaseRequest().getSortField().isEmpty()){
-                request.getBaseRequest().setSortField("id_mh");
+                request.getBaseRequest().setSortField("ngaySua");
             }
 
             Integer totalRecords = subjectDao.countTotalRecords(request);

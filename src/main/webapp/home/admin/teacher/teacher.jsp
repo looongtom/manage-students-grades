@@ -37,11 +37,11 @@
     int pageSize = 10;
 
     int pageIndex = 1;
-    if(session.getAttribute("pageIndex")!=null) {
-        pageIndex = (int) session.getAttribute("pageIndex");
+    if(session.getAttribute("pageIndexGV")!=null) {
+        pageIndex = (int) session.getAttribute("pageIndexGV");
     }
 
-    System.out.println(session.getAttribute("pageIndex"));
+    System.out.println(session.getAttribute("pageIndexGV"));
     System.out.println("pageIndex in teacher.jsp: " + pageIndex);
     System.out.println("pageSize in teacher.jsp: " + pageSize);
 
@@ -199,8 +199,8 @@
     %>
     <%
         // sort
-        sortField = request.getParameter("sortField");
-        sortOrder = request.getParameter("sortOrder");
+        sortField = request.getParameter("sortFieldGV");
+        sortOrder = request.getParameter("sortOrderGV");
         if(sortField!=null) {
             tenGv = request.getParameter("tenGv");
             if(tenGv==null) tenGv = "";
@@ -242,12 +242,12 @@
     </div>
 
     <div class="boc-bang">
-        <form id="sortForm" method="post" action="/admin/teacher">
+        <form id="formGV" method="post" action="/admin/teacher">
             <input type="hidden" name="tenGv" value="<%= tenGv %>">
-            <input type="hidden" name="sortField" value="<%= sortField %>">
-            <input type="hidden" name="sortOrder" value="<%= sortOrder %>">
-            <input type="hidden" name="pageIndex" value="<%= pageIndex %>">
-            <input type="hidden" name="pageSize" value="<%= pageSize %>">
+            <input type="hidden" name="sortFieldGV" value="<%= sortField %>">
+            <input type="hidden" name="sortOrderGV" value="<%= sortOrder %>">
+            <input type="hidden" name="pageIndexGV" value="<%= pageIndex %>">
+            <input type="hidden" name="pageSizeGV" value="<%= pageSize %>">
 
             <table id="myTable" class="danhSach">
                 <thead class="hang1">
@@ -262,7 +262,7 @@
                     <th class="hanh-dong">Action</th>
                 </thead>
                 <tbody>
-    <%--            hiển thị ra màn hình--%>
+                <%--            hiển thị ra màn hình--%>
                 <%  if(listResp!=null) {
                     for(int i=0;i<listResp.length();i++) {%>
                 <% JSONObject teacher = listResp.getJSONObject(i); %>
@@ -318,9 +318,9 @@
     <script>
         // do lúc gửi đoạn sort nó hay load lại trang dẫn đến không kịp lưu lại class, hàm này dùng để lấy session đã lưu
         // trong TeacherSessionController, gán nó vào class để hiển thị giao diện mũi tên là đang sort theo cột nào, asc hay desc
-        if('${sessionScope.sortField}'!=='null' && '${sessionScope.sortField}'!=='') {
-            var getTd = document.querySelector('.${sessionScope.sortField}');
-            const asc = '${sessionScope.sortOrder}'==='desc';
+        if('${sessionScope.sortFieldGV}'!=='null' && '${sessionScope.sortFieldGV}'!=='') {
+            var getTd = document.querySelector('.${sessionScope.sortFieldGV}');
+            const asc = '${sessionScope.sortOrderGV}'==='desc';
             getTd.classList[asc ? 'remove' : 'add']('asc');
             getTd.classList[asc ? 'add' : 'remove']('desc');
         }
@@ -328,9 +328,9 @@
         // hàm sort cột
         function sortTable(field, event) {
             const tenGvInput = document.querySelector('input[name="tenGv"]');
-            const sortFieldInput = document.querySelector('input[name="sortField"]');
-            const sortOrderInput = document.querySelector('input[name="sortOrder"]');
-            const pageIndexInput = document.querySelector('input[name="pageIndex"]');
+            const sortFieldInput = document.querySelector('input[name="sortFieldGV"]');
+            const sortOrderInput = document.querySelector('input[name="sortOrderGV"]');
+            const pageIndexInput = document.querySelector('input[name="pageIndexGV"]');
 
             const thead=document.querySelector('thead');
             const hData=[...thead.querySelectorAll('th')]
@@ -362,7 +362,7 @@
                 tenGvInput.value = document.querySelector('#nhapTimKiem').value;
             }
             // Submit the form
-            document.getElementById("sortForm").submit();
+            document.getElementById("formGV").submit();
         }
 
         // tạo UI phân trang
@@ -418,26 +418,26 @@
 
         // nút chuyển sang trang trước đó
         function nutPrev() {
-            const pageIndexInput = document.querySelector('input[name="pageIndex"]');
+            const pageIndexInput = document.querySelector('input[name="pageIndexGV"]');
             console.log('Page Index Before: ' + pageIndexInput.value);
 
             // Kiểm tra xem hiện tại có đang ở trang đầu tiên k
             if(pageIndexInput.value>1) {
                 pageIndexInput.value--;
-                document.getElementById("sortForm").submit();
+                document.getElementById("formGV").submit();
             }
         }
 
         // nút chuyển sang trang tiếp theo
         function nutNext() {
-            const sortFieldInput = document.querySelector('input[name="sortField"]');
-            const sortOrderInput = document.querySelector('input[name="sortOrder"]');
-            const pageIndexInput = document.querySelector('input[name="pageIndex"]');
+            const sortFieldInput = document.querySelector('input[name="sortFieldGV"]');
+            const sortOrderInput = document.querySelector('input[name="sortOrderGV"]');
+            const pageIndexInput = document.querySelector('input[name="pageIndexGV"]');
 
             // Kiểm tra session xem có đang sort cột nào k
-            if('${sessionScope.sortField}'!=='null' && '${sessionScope.sortField}'!=='') {
-                sortFieldInput.value = '${sessionScope.sortField}';
-                sortOrderInput.value = '${sessionScope.sortOrder}';
+            if('${sessionScope.sortFieldGV}'!=='null' && '${sessionScope.sortFieldGV}'!=='') {
+                sortFieldInput.value = '${sessionScope.sortFieldGV}';
+                sortOrderInput.value = '${sessionScope.sortOrderGV}';
             } else {
                 sortFieldInput.value = '';
                 sortOrderInput.value = '';
@@ -446,27 +446,27 @@
             // Kiểm tra xem hiện tại có đang ở trang cuối cùng k
             if(+pageIndexInput.value < <%= totalPages %>) {
                 pageIndexInput.value = +pageIndexInput.value + 1;
-                document.getElementById("sortForm").submit();
+                document.getElementById("formGV").submit();
             }
         }
 
         // nút chọn 1 trang
         function nutTrang(page) {
-            const sortFieldInput = document.querySelector('input[name="sortField"]');
-            const sortOrderInput = document.querySelector('input[name="sortOrder"]');
-            const pageIndexInput = document.querySelector('input[name="pageIndex"]');
+            const sortFieldInput = document.querySelector('input[name="sortFieldGV"]');
+            const sortOrderInput = document.querySelector('input[name="sortOrderGV"]');
+            const pageIndexInput = document.querySelector('input[name="pageIndexGV"]');
 
             // Kiểm tra session xem có đang sort cột nào k
-            if('${sessionScope.sortField}'!=='null' && '${sessionScope.sortField}'!=='') {
-                sortFieldInput.value = '${sessionScope.sortField}';
-                sortOrderInput.value = '${sessionScope.sortOrder}';
+            if('${sessionScope.sortFieldGV}'!=='null' && '${sessionScope.sortFieldGV}'!=='') {
+                sortFieldInput.value = '${sessionScope.sortFieldGV}';
+                sortOrderInput.value = '${sessionScope.sortOrderGV}';
             } else {
                 sortFieldInput.value = '';
                 sortOrderInput.value = '';
             }
 
             pageIndexInput.value = page;
-            document.getElementById("sortForm").submit();
+            document.getElementById("formGV").submit();
         }
 
     </script>

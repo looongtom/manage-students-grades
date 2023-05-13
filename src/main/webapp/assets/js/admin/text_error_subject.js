@@ -8,6 +8,7 @@ closeButton.addEventListener("click", function() {
 })
 
 function validateForm() {
+    let error = false;
     const maMhInput = document.getElementById("ma-mh")
     const maMhError = document.getElementById("ma-mh-error")
     const tenMhInput = document.getElementById("ten-mh")
@@ -17,28 +18,26 @@ function validateForm() {
     const khoaMhInput = document.getElementById("ma-khoa-mh")
     const khoaMhError = document.getElementById("ma-khoa-mh-error")
 
-
-
-    if (maMhInput.value == "") {
+    if (maMhInput.value === "") {
         maMhError.style.display = "block";
     } else {
         maMhError.style.display = "none";
     }
 
-    if (tenMhInput.value == "") {
+    if (tenMhInput.value === "") {
         tenMhError.style.display = "block";
     } else {
         tenMhError.style.display = "none";
     }
 
-    if (soTinChiMhInput.value == "") {
+    if (soTinChiMhInput.value === "") {
         soTinChiMhError.style.display = "block";
     } else {
         soTinChiMhError.style.display = "none";
     }
 
 
-    if (khoaMhInput.value == "") {
+    if (khoaMhInput.value === "") {
         khoaMhError.style.display = "block";
 
     } else {
@@ -58,15 +57,16 @@ function validateForm() {
         soTinChiMhError.style.display = "none"
     })
 
-
     khoaMhInput.addEventListener("input", function() {
         khoaMhError.style.display = "none"
     })
 
+    return !error;
 }
 
 
 function validateFormSua() {
+    var error = false;
     const maMhInput = document.getElementById("ma-mh-sua")
     const maMhError = document.getElementById("ma-mh-error-sua")
     const tenMhInput = document.getElementById("ten-mh-sua")
@@ -76,28 +76,26 @@ function validateFormSua() {
     const khoaMhInput = document.getElementById("ma-khoa-mh-sua")
     const khoaMhError = document.getElementById("ma-khoa-mh-error-sua")
 
-
-
-    if (maMhInput.value == "") {
+    if (maMhInput.value === "") {
         maMhError.style.display = "block";
     } else {
         maMhError.style.display = "none";
     }
 
-    if (tenMhInput.value == "") {
+    if (tenMhInput.value === "") {
         tenMhError.style.display = "block";
     } else {
         tenMhError.style.display = "none";
     }
 
-    if (soTinChiMhInput.value == "") {
+    if (soTinChiMhInput.value === "") {
         soTinChiMhError.style.display = "block";
     } else {
         soTinChiMhError.style.display = "none";
     }
 
 
-    if (khoaMhInput.value == "") {
+    if (khoaMhInput.value === "") {
         khoaMhError.style.display = "block";
 
     } else {
@@ -122,6 +120,7 @@ function validateFormSua() {
         khoaMhError.style.display = "none"
     })
 
+    return !error;
 }
 
 

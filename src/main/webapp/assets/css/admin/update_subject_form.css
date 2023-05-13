@@ -160,13 +160,15 @@
     margin-top: 18px;
 }
 
-
 .nhap-modal {
     border: 1px solid #ccc;
     padding: 10px;
     width: 100%;
     margin-bottom: 5px;
+}
 
+#ma-mh-sua {
+    background-color: aliceblue;
 }
 
 .sua-btn {
@@ -177,6 +179,7 @@
     font-weight: bold;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .sua-btn:hover {
