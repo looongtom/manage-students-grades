@@ -2,17 +2,12 @@ package com.example.quanlysv.servlet.dao.impl;
 
 import com.example.quanlysv.servlet.dao.IHocKyDao;
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
-import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.entity.HocKyEntity;
 import com.example.quanlysv.servlet.mapper.HocKyMapper;
 
 import java.util.List;
 
 public class HocKyDaoImpl extends AbstractDao<HocKyEntity> implements IHocKyDao {
-
-
-
-
     @Override
     public List<HocKyEntity> findSemester(BaseRequest request) {
 
@@ -23,7 +18,7 @@ public class HocKyDaoImpl extends AbstractDao<HocKyEntity> implements IHocKyDao 
                     request.getSortField() + " "+  request.getSortOrder() + " OFFSET ? LIMIT ?";
 
             List<HocKyEntity> list = findByProperties(sql, new HocKyMapper(),
-                    request.getPageIndex() * request.getPageSize(), request.getPageSize());
+                    (request.getPageIndex()-1) * request.getPageSize(), request.getPageSize());
 
 
             return list.isEmpty()? null: list;
@@ -86,7 +81,6 @@ public class HocKyDaoImpl extends AbstractDao<HocKyEntity> implements IHocKyDao 
 
     @Override
     public void createOrEditHocKy(HocKyEntity hocKyEntity) {
-
           try{
               if(hocKyEntity != null){
                   HocKyEntity hocKyEntity1 = findById(hocKyEntity.getIdHk());
@@ -107,7 +101,4 @@ public class HocKyDaoImpl extends AbstractDao<HocKyEntity> implements IHocKyDao 
               throw new RuntimeException("failed: "+ e.getMessage());
           }
     }
-
-
-
 }

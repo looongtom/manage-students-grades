@@ -33,7 +33,8 @@ function validateForm() {
     tenHkInput.addEventListener("input", function() {
         tenHkError.style.display = "none"
     })
-    if(!error) addHK();
+
+    return !error;
 }
 
 function validateFormSua() {
@@ -62,7 +63,8 @@ function validateFormSua() {
     tenHkInput.addEventListener("input", function() {
         tenHkError.style.display = "none"
     })
-    if(!error) updateHK();
+
+    return !error;
 }
 
 

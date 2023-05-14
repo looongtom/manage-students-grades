@@ -1,4 +1,4 @@
-        <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="org.json.*" %>
 <%@ page import="org.apache.http.client.methods.HttpPost" %>
 <%@ page import="org.apache.http.client.HttpClient" %>
@@ -60,7 +60,7 @@
     <%!
         int totalPages;
 
-        // Hàm Refresh lại trang lấy giảng viên
+        // Hàm Refresh lại trang lấy môn học
         public JSONArray getAllMh(HttpClient httpClient, HttpPost httpPost) throws IOException {
             HttpResponse resp = httpClient.execute(httpPost);
             String responseBody = EntityUtils.toString(resp.getEntity());
@@ -100,8 +100,7 @@
                 "\"idKhoa\":\"" + idKhoa + "\"," +
                 "\"flag\":\"" + 1 + "\"" +
                 "}";
-
-        // biến flag: thêm mới là 0, sửa là 1
+        // biến flag: thêm mới là 1, sửa là 0
 
         // send the request and retrieve the response
         boolean exist = false;
@@ -122,7 +121,6 @@
             if (jsonResponseAddMH.getInt("status") != 200) {
                 exist = true;
             }
-            System.out.println(jsonResponseAddMH);
 
             // get all mon hoc
             if(!exist) {
@@ -161,7 +159,7 @@
             JSONObject jsonResponseUpdateMH = new JSONObject(responseBodyUpdateMH);
             System.out.println(jsonResponseUpdateMH);
 
-            // get all giang vien
+            // get all mon hoc
             listResp = getAllMh(httpClient, httpPost);
         }
     %>
@@ -175,7 +173,7 @@
 
             httpClient.execute(httpDelete);
 
-            // get all giang vien
+            // get all mon hoc
             listResp = getAllMh(httpClient, httpPost);
         }
     %>
@@ -306,13 +304,14 @@
     <%@include file="confirm_delete_subject.jsp" %>
 </div>
 </body>
+    <script src="../../../assets/js/pagination.js"></script>
     <script>
         if(<%= exist %>) {
             alert("Mã môn học hoặc môn học đã tồn tại")
         }
 
         // do lúc gửi đoạn sort nó hay load lại trang dẫn đến không kịp lưu lại class, hàm này dùng để lấy session đã lưu
-        // trong TeacherSessionController, gán nó vào class để hiển thị giao diện mũi tên là đang sort theo cột nào, asc hay desc
+        // trong SubjectSessionController, gán nó vào class để hiển thị giao diện mũi tên là đang sort theo cột nào, asc hay desc
         if('${sessionScope.sortFieldMH}'!=='null' && '${sessionScope.sortFieldMH}'!=='') {
             const getTd = document.querySelector('.${sessionScope.sortFieldMH}');
             const asc = '${sessionScope.sortOrderMH}'==='desc';
@@ -361,55 +360,7 @@
         }
 
         // tạo UI phân trang
-        const paginationElement = document.querySelector(".soTrang");
         createPaginationUI(<%= totalPages %>, <%= pageIndex %>);
-        console.log('Total Pages Now: ' + <%= totalPages %>);
-        console.log('Page Index Now: ' + <%= pageIndex %>);
-        function createPaginationUI(totalPages, currentPage) {
-            let liTag = '';
-            let active;
-            let beforePage = currentPage - 1;
-            let afterPage = currentPage + 1;
-            if(currentPage > 2 && totalPages > 4){
-                liTag += `<li class="first numb" onclick="nutTrang(1)"><span>1</span></li>`;
-                if(currentPage > 3 && totalPages!==5){
-                    liTag += `<li class="dots"><span>...</span></li>`;
-                }
-            }
-            if (currentPage === totalPages) {
-                beforePage = beforePage - 2;
-            } else if (currentPage === totalPages - 1) {
-                beforePage = beforePage - 1;
-            }
-            if (currentPage === 1) {
-                beforePage=1;
-                afterPage = afterPage + 2;
-            } else if (currentPage === 2) {
-                beforePage = 1;
-                afterPage = afterPage + 1;
-            }
-            for (var plength = beforePage; plength <= afterPage; plength++) {
-                if (plength > totalPages) {
-                    continue;
-                }
-                if (plength === 0) {
-                    plength = plength + 1;
-                }
-                if(currentPage === plength){
-                    active = "active";
-                }else{
-                    active = "";
-                }
-                liTag = liTag + `<li class="numb ` + active + `" onclick="nutTrang(` + plength + `)" ><span>` + plength + `</span></li>`;
-            }
-            if(currentPage < totalPages - 1 && totalPages>4){
-                if(currentPage < totalPages - 2  && totalPages!==5){
-                    liTag += `<li class="dots"><span>...</span></li>`;
-                }
-                liTag = liTag + `<li class="last numb" onclick="nutTrang(` + totalPages + `)"><span>` + totalPages + `</span></li>`;
-            }
-            paginationElement.innerHTML = liTag;
-        }
 
         // nút chuyển sang trang trước đó
         function nutPrev() {
