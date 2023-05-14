@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="../../../assets/css/admin/add_class_form.css">
   <link rel="stylesheet" href="../../../assets/css/pagination.css">
   <link rel="stylesheet" href="../../../assets/css/page_404.css">
+  <link rel="stylesheet" href="../../../assets/css/admin/update_class_form.css">
+  <link rel="stylesheet" href="../../../assets/css/admin/confirm_delete_form.css">
 </head>
 
 <body>
@@ -83,11 +85,12 @@
             </a>
           </div>
           <div class="hop-hanh-dong">
-            <button class="sua hop-hanh-dong-nut" type="button">
+            <button class="sua hop-hanh-dong-nut" type="button"
+                    onclick="showModalSua('modal_giang_vien_sua', 'D20CQCN11-B', 'Công nghệ 11 khóa D20', 'Công nghệ thông tin')">
               <span class="sua_tieuDe">Sửa</span>
               <i class="fa-solid fa-pencil sua_icon"></i>
             </button>
-            <button class="xoa hop-hanh-dong-nut" type="button">
+            <button class="xoa hop-hanh-dong-nut" type="button" onclick="hienXacNhanXoa('modal_xac_nhan_xoa', 'D20CQCN11-B')">
               <span class="xoa_tieuDe">Xóa</span>
               <i class="fa-solid fa-trash xoa_icon"></i>
             </button>
@@ -110,11 +113,12 @@
             </a>
           </div>
           <div class="hop-hanh-dong">
-            <button class="sua hop-hanh-dong-nut" type="button">
+            <button class="sua hop-hanh-dong-nut" type="button"
+                    onclick="showModalSua('modal_giang_vien_sua', 'D20CQCN12-B', 'Công nghệ 12 khóa D20', 'Công nghệ thông tin')">
               <span class="sua_tieuDe">Sửa</span>
               <i class="fa-solid fa-pencil sua_icon"></i>
             </button>
-            <button class="xoa hop-hanh-dong-nut" type="button">
+            <button class="xoa hop-hanh-dong-nut" type="button" onclick="hienXacNhanXoa('modal_xac_nhan_xoa', 'D20CQCN12-B')">
               <span class="xoa_tieuDe">Xóa</span>
               <i class="fa-solid fa-trash xoa_icon"></i>
             </button>
@@ -129,11 +133,15 @@
   </div>
 </div>
 <%@include file="../class/add_class_form.jsp" %>
-
+<%@include file="confirm_delete_class.jsp" %>
+<%@include file="update_class_form.jsp" %>
 <script src="../../../assets/js/admin/pagination_class.js"></script>
 <script src="../../../assets/js/admin/add_form.js"></script>
 <script src="../../../assets/js/admin/class.js"></script>
 <script src="../../../assets/js/admin/text_error_class.js"></script>
+<script src="../../../assets/js/admin/update_class.js"></script>
+<script src="../../../assets/js/admin/confirm_delete_form.js"></script>
+
 </body>
 
 </html>
