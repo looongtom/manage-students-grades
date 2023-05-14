@@ -11,7 +11,7 @@ public class SubjectSessionController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        String tenMonHoc = request.getParameter("tenGv");
+        String tenMonHoc = request.getParameter("tenMh");
         if(tenMonHoc==null) tenMonHoc="";
 
         String sortField = request.getParameter("sortFieldMH");

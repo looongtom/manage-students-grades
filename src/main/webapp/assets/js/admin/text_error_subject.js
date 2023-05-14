@@ -20,18 +20,21 @@ function validateForm() {
 
     if (maMhInput.value === "") {
         maMhError.style.display = "block";
+        error = true;
     } else {
         maMhError.style.display = "none";
     }
 
     if (tenMhInput.value === "") {
         tenMhError.style.display = "block";
+        error = true;
     } else {
         tenMhError.style.display = "none";
     }
 
     if (soTinChiMhInput.value === "") {
         soTinChiMhError.style.display = "block";
+        error = true;
     } else {
         soTinChiMhError.style.display = "none";
     }
@@ -39,7 +42,7 @@ function validateForm() {
 
     if (khoaMhInput.value === "") {
         khoaMhError.style.display = "block";
-
+        error = true;
     } else {
         khoaMhError.style.display = "none";
     }
@@ -66,7 +69,7 @@ function validateForm() {
 
 
 function validateFormSua() {
-    var error = false;
+    let error = false;
     const maMhInput = document.getElementById("ma-mh-sua")
     const maMhError = document.getElementById("ma-mh-error-sua")
     const tenMhInput = document.getElementById("ten-mh-sua")
@@ -78,18 +81,21 @@ function validateFormSua() {
 
     if (maMhInput.value === "") {
         maMhError.style.display = "block";
+        error = true;
     } else {
         maMhError.style.display = "none";
     }
 
     if (tenMhInput.value === "") {
         tenMhError.style.display = "block";
+        error = true;
     } else {
         tenMhError.style.display = "none";
     }
 
     if (soTinChiMhInput.value === "") {
         soTinChiMhError.style.display = "block";
+        error = true;
     } else {
         soTinChiMhError.style.display = "none";
     }
@@ -97,7 +103,7 @@ function validateFormSua() {
 
     if (khoaMhInput.value === "") {
         khoaMhError.style.display = "block";
-
+        error = true;
     } else {
         khoaMhError.style.display = "none";
     }

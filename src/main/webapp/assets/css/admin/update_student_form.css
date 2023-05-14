@@ -161,6 +161,10 @@
 }
 
 
+#ma-sv-sua {
+    background-color: aliceblue;
+}
+
 .nhap-modal {
     border: 1px solid #ccc;
     padding: 10px;
@@ -176,6 +180,7 @@
     padding: 18px;
     font-weight: bold;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 

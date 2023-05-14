@@ -160,6 +160,9 @@
     margin-top: 18px;
 }
 
+#ma-hk-sua {
+    background-color: aliceblue;
+}
 
 .nhap-modal {
     border: 1px solid #ccc;
@@ -177,6 +180,7 @@
     font-weight: bold;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .sua-btn:hover {

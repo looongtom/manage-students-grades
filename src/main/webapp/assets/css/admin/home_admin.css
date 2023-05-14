@@ -22,23 +22,28 @@ html{
     padding: 0 24px 0 24px;
     display: block;
 }
+
 #nav2 li a{
     text-decoration: none;
     line-height: 50px;
     /* padding: 0 24px 0 24px; */
     display: block;
 }
+
 #nav >li, #nav2 > li{
     display: inline-block;
 }
+
 #nav{
     display: inline-block;
 }
+
 #nav2{
     float: right;
     display: flex;
 
 }
+
 #nav2 > input{
     height: 48px;
     width: 250px;
@@ -46,16 +51,18 @@ html{
 }
 
 #nav li{
-    /* color: #fff; */
     position: relative;
 }
+
 #nav > li:hover > a, #nav2 > li:hover > a{
     color: black;
     background-color: #ccc;
 }
+
 #nav2 a{
     padding: 0 16px;
 }
+
 /* nội dung */
 #noidung{
     margin-left: -30px;
@@ -65,17 +72,22 @@ html{
     padding: 20px;
     font-size: 20px;
 }
+
 .bon-box{
     display: flex;
     justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
+
 .box1, .box2, .box3, .box4{
-    /* background-color:aqua; */
     width: 22%;
+    min-width: 250px;
     min-height: 150px;
     flex-direction: column;
-
+    margin-bottom: 15px;
 }
+
 .box1{
     background-color: #00EE00;
     display: flex;
