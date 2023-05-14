@@ -24,7 +24,9 @@
 <body>
 <div class="lop">
   <header class="phanlop-header">
-    <div class="lop-tieuDe">Danh sách các lớp</div>
+    <div class="lop-tieuDe">Danh sách các lớp
+      <span id="lop-tieuDe-chiTiet"></span>
+    </div>
     <div class="dauTrang">
       <button id="nut_them_lop" onclick="showModal('modal_lop')" class="nutThemlop js-nutThemlop"
               type="button">
@@ -79,7 +81,7 @@
           <div class="hop-hanh-dong">
             <a href="../student/student.jsp">
               <button class="xem hop-hanh-dong-nut" type="button">
-                <span class="sua_tieuDe">Xem danh sách lớp</span>
+                <span class="sua_tieuDe">Xem điểm</span>
                 <i class="fa-solid fa-eye sua_icon"></i>
               </button>
             </a>
@@ -107,7 +109,7 @@
           <div class="hop-hanh-dong">
             <a href="../student/student.jsp">
               <button class="xem hop-hanh-dong-nut" type="button">
-                <span class="sua_tieuDe">Xem danh sách lớp</span>
+                <span class="sua_tieuDe">Xem điểm</span>
                 <i class="fa-solid fa-eye sua_icon"></i>
               </button>
             </a>
