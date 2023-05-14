@@ -16,7 +16,7 @@ I) Thành viên:
 
 3) Lại Ngọc Sơn: 
 - Module làm:
-+ Đăng nhập
++ Đăng nhập/Đăng xuất
 + Đổi mật khẩu
 + Authen/Author
 
