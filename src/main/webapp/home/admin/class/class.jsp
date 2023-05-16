@@ -45,7 +45,6 @@
     <div class="khuVucTimKiem-phanThan">
       <div class="phanTimKiem">
         <input type="search" class="nhapTimKiem" placeholder="Nhập mã lớp">
-        <input type="search" class="nhapTimKiem" placeholder="Nhập tên lớp">
       </div>
       <div class="timKiem-cacNut">
         <button class="nutTimKiem">
