@@ -89,8 +89,7 @@ function validateForm() {
     khoaGvInput.addEventListener("input", function() {
         khoaGvError.style.display = "none"
     })
-
-    if(!error) addGV();
+    return !error;
 }
 
 
@@ -104,51 +103,58 @@ closeButtonSua.addEventListener("click", function() {
 })
 
 function validateFormSua() {
-    var error=false;
-    var maGvInput = document.getElementById("ma-gv-sua")
-    var maGvError = document.getElementById("ma-gv-error-sua")
-    var tenGvInput = document.getElementById("ten-gv-sua")
-    var tenGvError = document.getElementById("ten-gv-error-sua")
-    var emailGvInput = document.getElementById("email-gv-sua")
-    var emailGvError = document.getElementById("email-gv-error-sua")
-    var gioiTinhGvInput = document.getElementById("gioi-tinh-gv-sua")
-    var gioiTinhGvError = document.getElementById("gioi-tinh-gv-error-sua")
-    var sdtGvInput = document.getElementById("sdt-gv-sua")
-    var sdtGvError = document.getElementById("sdt-gv-error-sua")
-    var khoaGvInput = document.getElementById("ma-khoa-gv-sua")
-    var khoaGvError = document.getElementById("ma-khoa-gv-error-sua")
+    let error=false;
+    const maGvInput = document.getElementById("ma-gv-sua")
+    const maGvError = document.getElementById("ma-gv-error-sua")
+    const tenGvInput = document.getElementById("ten-gv-sua")
+    const tenGvError = document.getElementById("ten-gv-error-sua")
+    const emailGvInput = document.getElementById("email-gv-sua")
+    const emailGvError = document.getElementById("email-gv-error-sua")
+    const gioiTinhGvInput = document.getElementById("gioi-tinh-gv-sua")
+    const gioiTinhGvError = document.getElementById("gioi-tinh-gv-error-sua")
+    const sdtGvInput = document.getElementById("sdt-gv-sua")
+    const sdtGvError = document.getElementById("sdt-gv-error-sua")
+    const khoaGvInput = document.getElementById("ma-khoa-gv-sua")
+    const khoaGvError = document.getElementById("ma-khoa-gv-error-sua")
+
     if (maGvInput.value === "") {
         maGvError.style.display = "block";
+        error = true;
     } else {
         maGvError.style.display = "none";
     }
 
     if (tenGvInput.value === "") {
         tenGvError.style.display = "block";
+        error = true;
     } else {
         tenGvError.style.display = "none";
     }
 
     if (emailGvInput.value === "") {
         emailGvError.style.display = "block";
+        error = true;
     } else {
         emailGvError.style.display = "none";
     }
 
     if (gioiTinhGvInput.value === "") {
         gioiTinhGvError.style.display = "block";
+        error = true;
     } else {
         gioiTinhGvError.style.display = "none";
     }
 
     if (sdtGvInput.value === "") {
         sdtGvError.style.display = "block";
+        error = true;
     } else {
         sdtGvError.style.display = "none";
     }
+
     if (khoaGvInput.value === "") {
         khoaGvError.style.display = "block";
-
+        error = true;
     } else {
         khoaGvError.style.display = "none";
     }
@@ -177,5 +183,5 @@ function validateFormSua() {
         khoaGvError.style.display = "none"
     })
 
-    if(!error) updateGV();
+    return !error;
 }

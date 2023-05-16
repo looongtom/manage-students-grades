@@ -35,10 +35,10 @@ public class HocKyServiceImpl implements IHocKyService {
     public BaseResponse<?> findSemester(BaseRequest request) {
         try{
             if ((request.getSortOrder() == null || request.getSortOrder().isEmpty())) {
-                request.setSortOrder("asc");
+                request.setSortOrder("desc");
             }
             if(request.getSortField() == null || request.getSortField().isEmpty()){
-                request.setSortField("id_hk");
+                request.setSortField("idHk");
             }
 
             List<SemesterDTO> dtoList = new ArrayList<>();

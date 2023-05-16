@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<div class="boc-modal" id="modal_mon_hoc_sua" >
+<form class="boc-modal" id="modal_mon_hoc_sua" method="POST" onsubmit="return validateFormSua()">
     <div class="chua-modal">
         <div class="dong-modal" onclick="hideModalSua('modal_mon_hoc_sua')">
             <i id ="dong-form-btn" class="ti-close"></i>
@@ -13,17 +12,15 @@
         <!-- modal body -->
         <div class="than-modal">
             <label for="" class="nhan-hieu-modal">Mã môn học</label>
-            <input id ="ma-mh-sua" type="text" class="nhap-modal" placeholder="Nhập mã ...">
+            <input id ="ma-mh-sua" name="ma-mh-sua" type="text" class="nhap-modal" placeholder="Nhập mã ..." readonly>
             <div id="ma-mh-error-sua" class="tb-loi-nhap-sua">Mã môn học không được để trống </div>
 
-
-
             <label for="" class="nhan-hieu-modal">Tên môn học</label>
-            <input id = "ten-mh-sua" type="text" class="nhap-modal" placeholder="Nhập tên ...">
+            <input id="ten-mh-sua" name="ten-mh-sua" type="text" class="nhap-modal" placeholder="Nhập tên ...">
             <div id="ten-mh-error-sua" class="tb-loi-nhap-sua">Tên môn học không được để trống  </div>
 
             <label for="" class="nhan-hieu-modal">Số tín chỉ</label>
-            <select id="stc-mh-sua" class="nhap-modal" required>
+            <select id="stc-mh-sua" name="stc-mh-sua" class="nhap-modal" required>
                 <option value="">Please select</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -33,7 +30,7 @@
             <div id="stc-mh-error-sua" class="tb-loi-nhap-sua">Chọn số tín chỉ</div>
 
             <label for="" class="nhan-hieu-modal">Mã khoa</label>
-            <select id="ma-khoa-mh-sua" class="nhap-modal" required>
+            <select id="ma-khoa-mh-sua" name="ma-khoa-mh-sua" class="nhap-modal" required>
                 <option value="">Please select</option>
                 <option value="CNTT">Công nghệ thông tin</option>
                 <option value="ATTT">An toàn thông tin</option>
@@ -50,9 +47,7 @@
         </div>
         <!-- modal footer -->
         <div class="cuoi-modal">
-            <button class="sua-btn" type="submit" onclick="validateFormSua()">Thêm</button>
+            <input class="sua-btn" type="submit" value="Sửa">
         </div>
     </div>
-</div>
-<script src="../../../assets/js/admin/text_error_subject.js"></script>
-<script src="../../../assets/js/add_subject.js"></script>
+</form>

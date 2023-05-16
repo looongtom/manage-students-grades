@@ -36,7 +36,7 @@
                                     <i class="ti-user"></i>
                                 </div>
                             </div>
-                            <a href="#" class="small-box-duoicung f1">Xem thêm</a>
+                            <a href="/../../home/admin/student/student.jsp" class="small-box-duoicung f1">Xem thêm</a>
                         </div>
                         <div class="box2">
                             <div class="small-box2">
@@ -48,7 +48,7 @@
                                     <i class="ti-bag"></i>
                                 </div>
                             </div>
-                            <a href="#" class="small-box-duoicung f2">Xem thêm</a>
+                            <a href="/../../home/admin/teacher/teacher.jsp" class="small-box-duoicung f2">Xem thêm</a>
                         </div>
                         <div class="box3">
                             <div class="small-box3">
@@ -60,19 +60,19 @@
                                     <i class="ti-bar-chart"></i>
                                 </div>
                             </div>
-                            <a href="#" class="small-box-duoicung f3">Xem thêm</a>
+                            <a href="/../../home/admin/subject/subject.jsp" class="small-box-duoicung f3">Xem thêm</a>
                         </div>
                         <div class="box4">
                             <div class="small-box4">
                                 <div class="benTrong">
                                     <h3>150</h3>
-                                    <p>Nhập điểm</p>
+                                    <p>Lớp học phần</p>
                                 </div>
                                 <div class="icon i4">
                                     <i class="ti-user"></i>
                                 </div>
                             </div>
-                            <a href="#" class="small-box-duoicung f4">Xem thêm</a>
+                            <a href="/../../home/admin/specialization/specialization.jsp" class="small-box-duoicung f4">Xem thêm</a>
                         </div>
                     </div>
                 </div>
@@ -80,6 +80,6 @@
         </div>
     </div>
     <script src="../../../assets/js/menu.js"></script>
-    <script src="../../../assets/js/home.js"></script>
+    <script src="../../../assets/js/admin/home_admin.js"></script>
 </body>
 </html>

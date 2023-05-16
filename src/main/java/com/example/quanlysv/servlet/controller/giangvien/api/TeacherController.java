@@ -1,13 +1,12 @@
 package com.example.quanlysv.servlet.controller.giangvien.api;
 
-import com.example.quanlysv.servlet.dto.request.BaseRequest;
-import com.example.quanlysv.servlet.dto.request.teacher.TeacherDTO;
 import com.example.quanlysv.servlet.dto.request.teacher.TeacherFilter;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.service.ITeacherService;
 import com.example.quanlysv.servlet.service.impl.TeacherServiceImpl;
 import com.example.quanlysv.servlet.util.HttpUtil;
 import com.example.quanlysv.servlet.util.ResponseUtils;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/api/home/teacher")
+@WebServlet("/api/admin/home/teacher")
 public class TeacherController extends HttpServlet {
     private ITeacherService service;
 

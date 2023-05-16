@@ -4,15 +4,10 @@
     box-sizing: border-box;
 }
 
-
-
-
 /* Common */
-
 .clear {
     clear: both;
 }
-
 
 .text-white {
     color: #fff !important;
@@ -176,8 +171,6 @@
 
 }
 
-
-
 .them-btn {
     width: 100%;
     background-color: var(--red-color);
@@ -185,6 +178,7 @@
     padding: 18px;
     font-weight: bold;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -211,8 +205,6 @@
     color: red;
     margin: auto;
 }
-
-
 
 @keyframes modalFadeIn {
     from {

@@ -1,12 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: NMQ
-  Date: 4/12/2023
-  Time: 9:00 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="boc-modal-xoa" id="modal_xac_nhan_xoa">
+<form class="boc-modal-xoa" id="modal_xac_nhan_xoa" method="post">
   <div class="chua-modal-xoa">
     <div class="dong-modal-xoa" onclick="anXacNhanXoa('modal_xac_nhan_xoa')">
       <i id ="dong-form-btn" class="ti-close"></i>
@@ -22,18 +15,16 @@
       <br>
       Sau khi xóa bạn không thể khôi phục dữ liệu này.
     </div>
+
+    <%--    hidden input to retrieve id--%>
+    <input id ="ma-sv-xoa" name="ma-sv-xoa" type="hidden">
+
     <!-- modal footer -->
     <div class="cuoi-modal-xoa">
       <button onclick="anXacNhanXoa('modal_xac_nhan_xoa')" class="huy-btn" type="submit">
         Hủy
       </button>
-      <button class="xoa-btn" type="submit" onclick="deleteSV(this)">
-        Xóa
-      </button>
+      <input class="xoa-btn" type="submit" onclick="anXacNhanXoa('modal_xac_nhan_xoa')" value="Xóa">
     </div>
   </div>
 </div>
-
-<script src="../../../assets/js/admin/confirm_delete_form.js"></script>
-
-

@@ -34,7 +34,7 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
 
         List<TeacherEntity> list = findByProperties(sql, new TeacherMapper(),
                 request.getTenGv(),
-                request.getBaseRequest().getPageIndex() * request.getBaseRequest().getPageSize(),
+                (request.getBaseRequest().getPageIndex()-1) * request.getBaseRequest().getPageSize(),
                 request.getBaseRequest().getPageSize());
 
         return list.isEmpty() ? null : list;

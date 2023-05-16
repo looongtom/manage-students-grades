@@ -3,7 +3,6 @@ package com.example.quanlysv.servlet.service.impl;
 import com.example.quanlysv.servlet.common.Constant;
 import com.example.quanlysv.servlet.dao.IStudentDao;
 import com.example.quanlysv.servlet.dao.impl.StudentDaoImpl;
-import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.student.CreateOrEditStudentDTO;
 import com.example.quanlysv.servlet.dto.request.student.StudentDTO;
 import com.example.quanlysv.servlet.dto.request.student.StudentFilter;
@@ -12,6 +11,7 @@ import com.example.quanlysv.servlet.entity.StudentEntity;
 import com.example.quanlysv.servlet.service.IStudentService;
 import com.example.quanlysv.servlet.util.Convert;
 import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,10 +33,10 @@ public class StudentServiceImpl implements IStudentService {
         try{
 
             if (request.getBaseRequest().getSortOrder().isEmpty()) {
-                request.getBaseRequest().setSortOrder("asc");
+                request.getBaseRequest().setSortOrder("desc");
             }
             if(request.getBaseRequest().getSortField().isEmpty()){
-                request.getBaseRequest().setSortField("id_sv");
+                request.getBaseRequest().setSortField("ngaySua");
             }
 
             List<StudentEntity> list = studentDao.findStudent(request);
@@ -59,7 +59,7 @@ public class StudentServiceImpl implements IStudentService {
     @Override
     public BaseResponse<?> createOrUpdateStudent(CreateOrEditStudentDTO studentDTO) {
         try {
-            if(studentDTO.getStatus() != 0 || studentDTO.getStatus() != 1){
+            if(studentDTO.getStatus() != 0 && studentDTO.getStatus() != 1){
                 return new BaseResponse.Builder<>()
                         .setStatus(Constant.httpStatusErrorServer)
                         .setMessage(Constant.messageBadRequest)

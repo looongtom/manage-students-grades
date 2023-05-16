@@ -1,7 +1,6 @@
 var storeMenu=(localStorage.getItem('menu')==='true')
 var manHinhChinh=document.querySelector('.manHinhChinh')
 var menu=document.querySelector('.menu')
-console.log(storeMenu)
 if(storeMenu) {
     manHinhChinh.classList.add('dongMenu')
     menu.classList.add('dongMenu')

@@ -139,7 +139,7 @@
 <%@include file="update_class_form.jsp" %>
 <script src="../../../assets/js/admin/pagination_class.js"></script>
 <script src="../../../assets/js/admin/add_form.js"></script>
-<script src="../../../assets/js/class.js"></script>
+<script src="../../../assets/js/admin/class.js"></script>
 <script src="../../../assets/js/admin/text_error_class.js"></script>
 <script src="../../../assets/js/admin/update_class.js"></script>
 <script src="../../../assets/js/admin/confirm_delete_form.js"></script>

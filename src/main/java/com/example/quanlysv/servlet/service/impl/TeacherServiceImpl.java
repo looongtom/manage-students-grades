@@ -16,7 +16,6 @@ import com.example.quanlysv.servlet.util.Convert;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -77,10 +76,10 @@ public class TeacherServiceImpl implements ITeacherService {
         List<TeacherDTO> dtoList;
         try{
             if ((request.getBaseRequest().getSortOrder() == null || request.getBaseRequest().getSortOrder().isEmpty())) {
-                request.getBaseRequest().setSortOrder("asc");
+                request.getBaseRequest().setSortOrder("desc");
             }
             if(request.getBaseRequest().getSortField() == null || request.getBaseRequest().getSortField().isEmpty()){
-                request.getBaseRequest().setSortField("id_gv");
+                request.getBaseRequest().setSortField("ngaySua");
             }
             List<TeacherEntity> list=teacherDao.findTeacher(request);
             Integer totalRecords = teacherDao.countTotalRecords(request);
