@@ -96,3 +96,26 @@ function sortName(event) {
         tbody.appendChild(bRow)
     })
 }
+//Trích xuất tham số từ URL
+const urlParams = new URLSearchParams(window.location.search);
+const type = urlParams.get('type');
+
+// Hiển thị thông tin tương ứng với loại lớp
+const lopTieuDeChiTiet = document.getElementById('lop-tieuDe-chiTiet');
+if (type === 'cb') {
+    lopTieuDeChiTiet.textContent = ' Khoa Cơ bản';
+} else if (type === 'dpt') {
+    lopTieuDeChiTiet.textContent = ' Khoa Đa phương tiện';
+} else if (type === 'cntt') {
+    lopTieuDeChiTiet.textContent = ' Khoa Công nghệ thông tin';
+} else if (type === 'attt') {
+    lopTieuDeChiTiet.textContent = ' Khoa An toàn thông tin';
+} else if (type === 'vt') {
+    lopTieuDeChiTiet.textContent = ' Khoa Viễn thông 1';
+} else if (type === 'dt') {
+    lopTieuDeChiTiet.textContent = ' Khoa Điện tử';
+} else if (type === 'qtkd') {
+    lopTieuDeChiTiet.textContent = ' Khoa Quản trị kinh doanh';
+}else if (type === 'kt') {
+    lopTieuDeChiTiet.textContent = ' Khoa Tài chính - Kế toán';
+}
