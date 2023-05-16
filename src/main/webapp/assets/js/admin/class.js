@@ -96,7 +96,7 @@ function sortName(event) {
         tbody.appendChild(bRow)
     })
 }
-// Trích xuất tham số từ URL
+//Trích xuất tham số từ URL
 const urlParams = new URLSearchParams(window.location.search);
 const type = urlParams.get('type');
 
