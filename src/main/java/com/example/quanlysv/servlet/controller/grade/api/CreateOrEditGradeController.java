@@ -1,6 +1,6 @@
 package com.example.quanlysv.servlet.controller.grade.api;
 
-import com.example.quanlysv.servlet.dto.request.diem.GradeDTO;
+import com.example.quanlysv.servlet.dto.request.diem.CreateOrEditGradeDTO;
 import com.example.quanlysv.servlet.entity.GradeEntity;
 import com.example.quanlysv.servlet.service.IGradeService;
 import com.example.quanlysv.servlet.service.impl.GradeServiceImpl;
@@ -86,21 +86,21 @@ public class CreateOrEditGradeController extends HttpServlet {
 
         for(GradeEntity grade : gradeList) {
             Instant currentTime = Instant.now();
-            GradeDTO gradeDTO = new GradeDTO();
-            gradeDTO.setIdDiem(idDiem);
-            gradeDTO.setIdGv(idGv);
-            gradeDTO.setIdMh(idMh);
-            gradeDTO.setIdHk(idHk);
-            gradeDTO.setIdLop(idLop);
-            gradeDTO.setIdSv(grade.getIdSv());
+            CreateOrEditGradeDTO createOrEditGradeDTO = new CreateOrEditGradeDTO();
+            createOrEditGradeDTO.setIdDiem(idDiem);
+            createOrEditGradeDTO.setIdGv(idGv);
+            createOrEditGradeDTO.setIdMh(idMh);
+            createOrEditGradeDTO.setIdHk(idHk);
+            createOrEditGradeDTO.setIdLop(idLop);
+            createOrEditGradeDTO.setIdSv(grade.getIdSv());
 
-            gradeDTO.setDiemCc(grade.getDiemCc());
-            gradeDTO.setDiemBt(grade.getDiemBt());
-            gradeDTO.setDiemThi(grade.getDiemThi());
-            gradeDTO.setDiemKt(grade.getDiemKt());
-            gradeDTO.setNgayTao(currentTime);
-            gradeDTO.setNgaySua(currentTime);
-            service.createOrUpdateGrade(gradeDTO);
+            createOrEditGradeDTO.setDiemCc(grade.getDiemCc());
+            createOrEditGradeDTO.setDiemBt(grade.getDiemBt());
+            createOrEditGradeDTO.setDiemThi(grade.getDiemThi());
+            createOrEditGradeDTO.setDiemKt(grade.getDiemKt());
+            createOrEditGradeDTO.setNgayTao(currentTime);
+            createOrEditGradeDTO.setNgaySua(currentTime);
+            service.createOrUpdateGrade(createOrEditGradeDTO);
         }
 
         req.setAttribute("showDialog", true);

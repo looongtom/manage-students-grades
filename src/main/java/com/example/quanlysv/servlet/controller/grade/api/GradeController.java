@@ -86,7 +86,8 @@ public class GradeController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         BaseRequest baseRequest = HttpUtil.of(req.getReader()).toModel(BaseRequest.class);
-        BaseResponse<?> baseResponse = service.getGrade(baseRequest);
+        String idLop = req.getParameter("idLop");
+        BaseResponse<?> baseResponse = service.getGrade(baseRequest,idLop);
         ResponseUtils.responseApi(req, resp, baseResponse);
     }
 }
