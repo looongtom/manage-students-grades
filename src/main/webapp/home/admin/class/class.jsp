@@ -28,36 +28,35 @@
       <span id="lop-tieuDe-chiTiet"></span>
     </div>
     <div class="dauTrang">
-      <button id="nut_them_lop" onclick="showModal('modal_lop')" class="nutThemlop js-nutThemlop"
-              type="button">
-        <span class="nutThemlop_tieuDe">Thêm lớp</span>
-        <i class="fa-solid fa-plus"></i>
-      </button>
+<%--      <button id="nut_them_lop" onclick="showModal('modal_lop')" class="nutThemlop js-nutThemlop"--%>
+<%--              type="button">--%>
+<%--        <span class="nutThemlop_tieuDe">Thêm lớp</span>--%>
+<%--        <i class="fa-solid fa-plus"></i>--%>
+<%--      </button>--%>
     </div>
     <div class="phanlop-close js-phanlop-close" class="back" onclick="location.href='../specialization/specialization.jsp'">
       Khoa Chuyên Môn
     </div>
   </header>
-  <div class="khuVucTimKiem">
-    <div class="khuVucTimKiem-dau">
-      <div class="tieuDeTimKiem">Tìm kiếm lớp</div>
-    </div>
-    <div class="khuVucTimKiem-phanThan">
-      <div class="phanTimKiem">
-        <input type="search" class="nhapTimKiem" placeholder="Nhập mã lớp">
-        <input type="search" class="nhapTimKiem" placeholder="Nhập tên lớp">
-      </div>
-      <div class="timKiem-cacNut">
-        <button class="nutTimKiem">
-          <span class="nutTimKiem_tieuDe">Tìm</span>
-          <i class="fa-solid fa-magnifying-glass"></i>
+
+
+<%--  <h1 class="tieuDeTrang">Danh sách giảng viên</h1>--%>
+  <div class="themVaTimKiem">
+    <!-- nut them giang vien -->
+        <button id="nut_them_lop" onclick="showModal('modal_lop')" class="nutThemlop js-nutThemlop"
+                type="button">
+          <span class="nutThemlop_tieuDe">Thêm lớp</span>
+          <i class="fa-solid fa-plus"></i>
         </button>
-        <button class="nutReset">
-          <span class="nutReset_tieuDe">Reset</span>
-          <i class="fa-solid fa-arrow-rotate-back"></i>
-        </button>
-      </div>
-    </div>
+    <form class="timKiem" method="post">
+      <div class="tieuDeTimKiem">Tìm kiếm giảng viên: </div>
+      <input type="search" id="nhapTimKiem" name="nhapTimKiem" placeholder="Nhập mã lớp" >
+<%--      value="<%= idlop %>"--%>
+      <button class="nutTimKiem" type="submit">
+        <span class="nutTimKiem_tieuDe">Tìm</span>
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
   </div>
 
   <div class="boc-bang">

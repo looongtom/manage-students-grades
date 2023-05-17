@@ -97,6 +97,17 @@ button {
     cursor: pointer;
 }
 
+.themVaTimKiem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 20px;
+}
+.timKiem {
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+}
 /* khu vực tìm kiếm */
 .khuVucTimKiem {
     margin: 10px 20px;
@@ -115,7 +126,7 @@ button {
     line-height: 40px;
     align-items: center;
     font-size: 16px;
-    color: white;
+    /* color: white; */
 }
 
 .khuVucTimKiem-phanThan {
@@ -124,8 +135,7 @@ button {
 }
 
 .nutThemlop,
-.nutTimKiem,
-.nutReset {
+.nutTimKiem {
     background-color: var(--red-color);
     color: var(--white-color);
     font-size: 14px;
@@ -135,15 +145,14 @@ button {
 
 .nutTimKiem {
     margin-right: 10px;
+    cursor: pointer;
+    height: 70%;
 }
 
-.nutReset {
-    background-color: rgb(24, 170, 255);
-}
+
 
 .nutThemlop:hover,
-.nutTimKiem:hover,
-.nutReset:hover {
+.nutTimKiem:hover {
     opacity: 0.7;
 }
 
@@ -151,29 +160,40 @@ button {
     margin-right: 10px;
 }
 
+
+.phanTimKiem {
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* justify-content: space-between; */
+    margin-bottom: 20px;
+}
+
+
 .timKiem {
     font-size: 14px;
     display: flex;
     flex-direction: row;
 }
 
-.phanTimKiem {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 20px;
+.tieuDeTimKiem {
+    margin-right: 10px;
+    line-height: 40px;
+    align-items: center;
 }
 
 .nhapTimKiem {
     padding: 10px;
-    width: 49%;
+    width: 20vw;
+    margin-right: 10px;
     border-radius: 5px;
     border-width: 1px;
+    height: 70%;
 }
 
 .nutTimKiem_tieuDe {
     margin-right: 5px;
 }
+
 
 /* table */
 .boc-bang {
@@ -281,7 +301,7 @@ tr:nth-child(even) {
     margin-right: 5px;
     background-color: green;
     border: none;
-    width:85%;
+    width: 85%;
 }
 
 .xem:hover {
