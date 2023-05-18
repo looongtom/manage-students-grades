@@ -64,6 +64,7 @@
       <thead class="hang1">
       <th data-sort onclick="sortTable(0, this)" class="cot-malop">Mã lớp</th>
       <th data-sort onclick="sortName(this)" class="cot-tenlop">Tên lớp</th>
+      <th data-sort onclick="sortName(this)" class="cot-tenHK">Tên học kỳ</th>
       <th data-sort onclick="sortTable(6, this)" class="cot-khoa">Khoa trực thuộc</th>
       <th class="cot-ngayTao">Ngày tạo</th>
       <th class="cot-ngayTao">Ngày cập nhật</th>
@@ -73,6 +74,7 @@
       <tr>
         <td>D20CQCN11-B</td>
         <td>Công nghệ 11 khóa D20</td>
+        <td>Kỳ xuân 2023</td>
         <td>Công nghệ thông tin</td>
         <td>06/04/2023 10:20:00</td>
         <td>06/04/2023 10:20:00</td>
@@ -87,7 +89,7 @@
           </div>
           <div class="hop-hanh-dong">
             <button class="sua hop-hanh-dong-nut" type="button"
-                    onclick="showModalSua('modal_giang_vien_sua', 'D20CQCN11-B', 'Công nghệ 11 khóa D20', 'Công nghệ thông tin')">
+                    onclick="showModalSua('modal_giang_vien_sua', 'D20CQCN11-B', 'Công nghệ 11 khóa D20','Kỳ xuân 2023', 'Công nghệ thông tin')">
               <span class="sua_tieuDe">Sửa</span>
               <i class="fa-solid fa-pencil sua_icon"></i>
             </button>
@@ -101,6 +103,7 @@
       <tr>
         <td>D20CQCN12-B</td>
         <td>Công nghệ 12 khóa D20</td>
+        <td>Kỳ hè 2023</td>
         <td>Công nghệ thông tin</td>
         <td>06/04/2023 10:20:00</td>
         <td>06/04/2023 10:20:00</td>
@@ -115,7 +118,7 @@
           </div>
           <div class="hop-hanh-dong">
             <button class="sua hop-hanh-dong-nut" type="button"
-                    onclick="showModalSua('modal_giang_vien_sua', 'D20CQCN12-B', 'Công nghệ 12 khóa D20', 'Công nghệ thông tin')">
+                    onclick="showModalSua('modal_giang_vien_sua', 'D20CQCN12-B', 'Công nghệ 12 khóa D20','Kỳ hè 2023', 'Công nghệ thông tin')">
               <span class="sua_tieuDe">Sửa</span>
               <i class="fa-solid fa-pencil sua_icon"></i>
             </button>
@@ -133,7 +136,7 @@
     <ul></ul>
   </div>
 </div>
-<%@include file="../class/add_class_form.jsp" %>
+<%@include file="add_class_form.jsp" %>
 <%@include file="confirm_delete_class.jsp" %>
 <%@include file="update_class_form.jsp" %>
 <script src="../../../assets/js/admin/pagination_class.js"></script>

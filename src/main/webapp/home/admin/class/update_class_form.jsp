@@ -23,11 +23,14 @@
       <input id="ma-lop-sua" type="text" class="nhap-modal" placeholder="Nhập mã ...">
       <div id="ma-gv-error-sua" class="tb-loi-nhap-sua">Mã lớp không được để trống</div>
 
-
-
       <label for="" class="nhan-hieu-modal">Tên lớp</label>
       <input id="ten-lop-sua" type="text" class="nhap-modal" placeholder="Nhập tên ...">
       <div id="ten-gv-error-sua" class="tb-loi-nhap-sua">Tên lớp không được để trống</div>
+
+
+      <label for="" class="modal-label">Học kỳ</label>
+      <input id="ten" type="text" class="modal-input" placeholder="Nhập học kỳ ...">
+      <div id="ten-error-sua" class="error-message">Làm ơn nhập vào </div>
 
       <label for="" class="nhan-hieu-modal">Khoa trực thuộc</label>
       <select id="ma-khoacm-sua" class="modal-input" required>
