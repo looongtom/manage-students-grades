@@ -99,6 +99,7 @@
         String sdtGv = request.getParameter("sdt-gv");
         String idKhoa = request.getParameter("ma-khoa-gv");
         String requestBodyAddGV = "{"+
+                "\"status\":\"" + 0 + "\","+
                 "\"idGv\":\"" + idGv + "\","+
                 "\"tenGv\":\"" + nameGv + "\","+
                 "\"sdtGv\":\"" + sdtGv + "\","+
@@ -107,6 +108,7 @@
                 "\"idKhoa\":\"" + idKhoa + "\"" +
                 "}";
 
+        boolean exist = false;
         // send the request and retrieve the response
         if(idGv!=null && nameGv!=null && emailGv!=null && genderGv!=null && sdtGv!=null && idKhoa!=null) {
             System.out.println(requestBodyAddGV);
@@ -122,10 +124,16 @@
             System.out.println(responseBodyAddGV);
 
             JSONObject jsonResponseAddGV = new JSONObject(responseBodyAddGV);
-            System.out.println(jsonResponseAddGV);
 
-            // get all giang vien
-            listResp = getAllGv(httpClient, httpPost);
+            // check if the data is existed or not
+            if (jsonResponseAddGV.getInt("status") != 200) {
+                exist = true;
+            }
+
+            // get all mon hoc
+            if(!exist) {
+                listResp = getAllGv(httpClient, httpPost);
+            }
         }
     %>
     <%
@@ -138,6 +146,7 @@
         String sdtGvU = request.getParameter("sdt-gv-sua");
         String idKhoaU = request.getParameter("ma-khoa-gv-sua");
         String requestBodyUpdateGV ="{"+
+                "\"status\":\"" + 1 + "\","+
                 "\"idGv\":\"" + idGvU + "\","+
                 "\"tenGv\":\"" + tenGvU + "\","+
                 "\"sdtGv\":\"" + sdtGvU + "\","+
@@ -327,6 +336,11 @@
 </body>
     <script src="../../../assets/js/pagination.js"></script>
     <script>
+        // Kiểm tra xem lúc thêm giảng viên thì id, số điện thoại hay email đã tồn tại chưa?
+        if(<%= exist %>) {
+            alert("Mã giảng viên, email hoặc số điện thoại đó đã tồn tại!");
+        }
+
         // do lúc gửi đoạn sort nó hay load lại trang dẫn đến không kịp lưu lại class, hàm này dùng để lấy session đã lưu
         // trong TeacherSessionController, gán nó vào class để hiển thị giao diện mũi tên là đang sort theo cột nào, asc hay desc
         if('${sessionScope.sortFieldGV}'!=='null' && '${sessionScope.sortFieldGV}'!=='') {

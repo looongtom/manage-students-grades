@@ -1,11 +1,20 @@
 package com.example.quanlysv.servlet.dto.request.teacher;
 
 public class CreateOrEditTeacherDTO {
+    private int status;
 
     private String idGv,tenGv,sdtGv,emailGv,genderGv,idKhoa;
 
     public String getIdGv() {
         return idGv;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public void setIdGv(String idGv) {

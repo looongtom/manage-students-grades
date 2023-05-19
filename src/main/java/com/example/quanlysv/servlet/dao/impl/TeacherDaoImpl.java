@@ -25,6 +25,21 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
     }
 
     @Override
+    public boolean existedByIdOrEmailOrPhone(String id, String email, String phoneNum) {
+        try {
+            String sql = "select gv.id_gv as idGv,gv.ten_gv as tenGv,gv.sdt_gv as sdtGv," +
+                    "gv.email_gv as emailGv, gv.gender_gv as genderGv, gv.id_khoa as idKhoa," +
+                    "gv.ngay_tao as ngayTao, gv.ngay_sua as ngaySua from giangvien as gv where gv.id_gv=? " +
+                    "or gv.email_gv=? or gv.sdt_gv=?";
+            TeacherEntity teacher =  findOne(sql,new TeacherMapper(), id, email, phoneNum);
+            if(teacher != null) return true;
+            return false;
+        }catch (Exception e){
+            throw new RuntimeException("error: "+ e.getMessage());
+        }
+    }
+
+    @Override
     public List<TeacherEntity> findTeacher(TeacherFilter request) {
         String sql="select gv.id_gv as idGv,gv.ten_gv as tenGv,gv.sdt_gv as sdtGv," +
                 "gv.email_gv as emailGv, gv.gender_gv as genderGv, gv.id_khoa as idKhoa," +
@@ -38,7 +53,6 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
                 request.getBaseRequest().getPageSize());
 
         return list.isEmpty() ? null : list;
-
     }
 
     @Override
