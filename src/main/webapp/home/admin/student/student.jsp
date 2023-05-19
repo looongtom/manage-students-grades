@@ -11,6 +11,7 @@
 <%@ page import="org.apache.http.client.utils.URIBuilder" %>
 <%@ page import="java.net.URI" %>
 <%@ page import="java.io.IOException" %>
+<%@ page import="java.nio.charset.StandardCharsets" %>
 <html>
 <head>
     <%@include file="../menu/admin_menu_header.jsp" %>
@@ -52,6 +53,18 @@
             "\"pageSize\":" + pageSize +
             "}" +
             "}";
+
+    //get all
+    String uriGetAll = "http://localhost:8080/api/admin/home/student";
+
+    HttpPost httpPost = new HttpPost(uriGetAll);
+    StringEntity entity = new StringEntity(requestBody);
+    httpPost.setEntity(entity);
+
+    httpPost.setHeader("Cookie", value + cookieValue);
+
+    // call function, return data
+    JSONArray listResp;
 %>
 <body>
 <%@include file="../menu/admin_menu.jsp" %>
@@ -71,19 +84,6 @@
                 return null;
             }
         }
-    %>
-    <%
-        //get all
-        String uriGetAll = "http://localhost:8080/api/admin/home/student";
-
-        HttpPost httpPost = new HttpPost(uriGetAll);
-        StringEntity entity = new StringEntity(requestBody);
-        httpPost.setEntity(entity);
-
-        httpPost.setHeader("Cookie", value + cookieValue);
-
-        // call function, return data
-        JSONArray listResp = getAllSv(httpClient, httpPost);
     %>
     <%
         // add SV (status = 0)
@@ -220,6 +220,10 @@
         entity = new StringEntity(requestBody);
         httpPost.setEntity(entity);
         listResp = getAllSv(httpClient, httpPost);
+
+        // return UTF8
+        byte[] bytes = tenSv.getBytes(StandardCharsets.ISO_8859_1);
+        tenSv = new String(bytes, StandardCharsets.UTF_8);
     %>
     <%
         // sort
@@ -250,6 +254,10 @@
             System.out.println("idSv sort: " + idSv);
             System.out.println("tenSv sort: " + tenSv);
             listResp = getAllSv(httpClient, httpPost);
+
+            // return UTF8
+            bytes = tenSv.getBytes(StandardCharsets.ISO_8859_1);
+            tenSv = new String(bytes, StandardCharsets.UTF_8);
         }
     %>
     <div class="dauTrang">

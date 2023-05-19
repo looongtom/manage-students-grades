@@ -14,7 +14,6 @@
     color: #fff !important;
 }
 
-
 .text-center {
     text-align: center !important;
 }
@@ -76,9 +75,6 @@
 .mt-16 {
     margin-top: 16px;
 }
-
-
-
 
 .chua-modal {
     scroll-behavior: smooth;
@@ -156,7 +152,7 @@
 
 .than-modal {
     padding: 15px;
-    height: 65vh;
+    height: fit-content;
     overflow: auto;
 }
 
@@ -173,7 +169,6 @@
     padding: 10px;
     width: 100%;
     margin-bottom: 5px;
-
 }
 
 
@@ -211,8 +206,6 @@
     color: red;
     margin: auto;
 }
-
-
 
 @keyframes modalFadeIn {
     from {

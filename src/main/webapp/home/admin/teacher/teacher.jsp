@@ -11,9 +11,11 @@
 <%@ page import="org.apache.http.client.utils.URIBuilder" %>
 <%@ page import="java.net.URI" %>
 <%@ page import="java.io.IOException" %>
+<%@ page import="java.nio.charset.StandardCharsets" %>
 
 <html>
 <head>
+    <meta charset="UTF-8">
     <%@include file="../menu/admin_menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/admin/teacher.css">
     <link rel="stylesheet" href="../../../assets/css/admin/add_teacher_form.css">
@@ -55,6 +57,18 @@
             "\"pageSize\":" + pageSize +
             "}"+
             "}";
+
+    //get all
+    String uriGetAll = "http://localhost:8080/api/admin/home/teacher";
+
+    HttpPost httpPost = new HttpPost(uriGetAll);
+    StringEntity entity = new StringEntity(requestBody);
+    httpPost.setEntity(entity);
+
+    httpPost.setHeader("Cookie", value + cookieValue);
+
+    // call function, return data
+    JSONArray listResp;
 %>
 <body>
 <%@include file="../menu/admin_menu.jsp" %>
@@ -74,19 +88,6 @@
                 return null;
             }
         }
-    %>
-    <%
-        //get all
-        String uriGetAll = "http://localhost:8080/api/admin/home/teacher";
-
-        HttpPost httpPost = new HttpPost(uriGetAll);
-        StringEntity entity = new StringEntity(requestBody);
-        httpPost.setEntity(entity);
-
-        httpPost.setHeader("Cookie", value + cookieValue);
-
-        // call function, return data
-        JSONArray listResp = getAllGv(httpClient, httpPost);
     %>
     <%
         // add GV
@@ -183,7 +184,7 @@
         // tìm kiếm
         tenGv = request.getParameter("nhapTimKiem");
         if(tenGv==null) tenGv = "";
-        System.out.println("Ten GV: " + tenGv);
+        System.out.println("Ten GV tim kiem: " + tenGv);
         requestBody = "{"+
                 "\"tenGv\":\"" + tenGv + "\","+
                 "\"baseRequest\":{"+
@@ -196,6 +197,10 @@
         entity = new StringEntity(requestBody);
         httpPost.setEntity(entity);
         listResp = getAllGv(httpClient, httpPost);
+
+        // return UTF8
+        byte[] bytes = tenGv.getBytes(StandardCharsets.ISO_8859_1);
+        tenGv = new String(bytes, StandardCharsets.UTF_8);
     %>
     <%
         // sort
@@ -204,6 +209,7 @@
         if(sortField!=null) {
             tenGv = request.getParameter("tenGv");
             if(tenGv==null) tenGv = "";
+            System.out.println("Ten GV sort: " + tenGv);
 
             requestBody = "{"+
                     "\"tenGv\":\"" + tenGv + "\","+
@@ -221,6 +227,10 @@
             System.out.println("Sort Order: " + sortOrder);
             System.out.println("Ten GV sort: " + tenGv);
             listResp = getAllGv(httpClient, httpPost);
+
+            // return UTF8
+            bytes = tenGv.getBytes(StandardCharsets.ISO_8859_1);
+            tenGv = new String(bytes, StandardCharsets.UTF_8);
         }
     %>
     <h1 class="tieuDeTrang">Danh sách giảng viên</h1>
@@ -231,7 +241,7 @@
             <span class="nutThemGV_tieuDe">Thêm giảng viên</span>
             <i class="fa-solid fa-plus"></i>
         </button>
-        <form class="timKiem" method="post">
+        <form class="timKiem" method="post" accept-charset="UTF-8">
             <div class="tieuDeTimKiem">Tìm kiếm giảng viên: </div>
             <input type="search" id="nhapTimKiem" name="nhapTimKiem" placeholder="Nhập tên giảng viên" value="<%= tenGv %>">
             <button class="nutTimKiem" type="submit">
@@ -242,7 +252,7 @@
     </div>
 
     <div class="boc-bang">
-        <form id="formGV" method="post" action="/admin/teacher">
+        <form id="formGV" method="post" action="/admin/teacher" accept-charset="UTF-8">
             <input type="hidden" name="tenGv" value="<%= tenGv %>">
             <input type="hidden" name="sortFieldGV" value="<%= sortField %>">
             <input type="hidden" name="sortOrderGV" value="<%= sortOrder %>">

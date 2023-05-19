@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Personal
-  Date: 4/27/2023
-  Time: 3:39 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 
@@ -27,31 +20,21 @@
     <div class="lop-tieuDe">Danh sách các lớp
       <span id="lop-tieuDe-chiTiet"></span>
     </div>
-    <div class="dauTrang">
-<%--      <button id="nut_them_lop" onclick="showModal('modal_lop')" class="nutThemlop js-nutThemlop"--%>
-<%--              type="button">--%>
-<%--        <span class="nutThemlop_tieuDe">Thêm lớp</span>--%>
-<%--        <i class="fa-solid fa-plus"></i>--%>
-<%--      </button>--%>
-    </div>
     <div class="phanlop-close js-phanlop-close" class="back" onclick="location.href='../specialization/specialization.jsp'">
       Khoa Chuyên Môn
     </div>
   </header>
 
 
-<%--  <h1 class="tieuDeTrang">Danh sách giảng viên</h1>--%>
   <div class="themVaTimKiem">
-    <!-- nut them giang vien -->
-        <button id="nut_them_lop" onclick="showModal('modal_lop')" class="nutThemlop js-nutThemlop"
-                type="button">
+    <!-- nut them lop -->
+        <button id="nut_them_lop" onclick="showModal('modal_lop')" class="nutThemlop js-nutThemlop" type="button">
           <span class="nutThemlop_tieuDe">Thêm lớp</span>
           <i class="fa-solid fa-plus"></i>
         </button>
     <form class="timKiem" method="post">
       <div class="tieuDeTimKiem">Tìm kiếm giảng viên: </div>
       <input type="search" id="nhapTimKiem" name="nhapTimKiem" placeholder="Nhập mã lớp" >
-<%--      value="<%= idlop %>"--%>
       <button class="nutTimKiem" type="submit">
         <span class="nutTimKiem_tieuDe">Tìm</span>
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -65,7 +48,6 @@
       <th data-sort onclick="sortTable(0, this)" class="cot-malop">Mã lớp</th>
       <th data-sort onclick="sortName(this)" class="cot-tenlop">Tên lớp</th>
       <th data-sort onclick="sortName(this)" class="cot-tenHK">Tên học kỳ</th>
-      <th data-sort onclick="sortTable(6, this)" class="cot-khoa">Khoa trực thuộc</th>
       <th class="cot-ngayTao">Ngày tạo</th>
       <th class="cot-ngayTao">Ngày cập nhật</th>
       <th class="hanh-dong">Action</th>
@@ -75,7 +57,6 @@
         <td>D20CQCN11-B</td>
         <td>Công nghệ 11 khóa D20</td>
         <td>Kỳ xuân 2023</td>
-        <td>Công nghệ thông tin</td>
         <td>06/04/2023 10:20:00</td>
         <td>06/04/2023 10:20:00</td>
         <td class="chucNang">
@@ -89,7 +70,7 @@
           </div>
           <div class="hop-hanh-dong">
             <button class="sua hop-hanh-dong-nut" type="button"
-                    onclick="showModalSua('modal_giang_vien_sua', 'D20CQCN11-B', 'Công nghệ 11 khóa D20','Kỳ xuân 2023', 'Công nghệ thông tin')">
+                    onclick="showModalSua('modal_lop_sua', 'D20CQCN11-B', 'Công nghệ 11 khóa D20', 'Kỳ xuân 2023')">
               <span class="sua_tieuDe">Sửa</span>
               <i class="fa-solid fa-pencil sua_icon"></i>
             </button>
@@ -104,7 +85,6 @@
         <td>D20CQCN12-B</td>
         <td>Công nghệ 12 khóa D20</td>
         <td>Kỳ hè 2023</td>
-        <td>Công nghệ thông tin</td>
         <td>06/04/2023 10:20:00</td>
         <td>06/04/2023 10:20:00</td>
         <td class="chucNang">
@@ -118,7 +98,7 @@
           </div>
           <div class="hop-hanh-dong">
             <button class="sua hop-hanh-dong-nut" type="button"
-                    onclick="showModalSua('modal_giang_vien_sua', 'D20CQCN12-B', 'Công nghệ 12 khóa D20','Kỳ hè 2023', 'Công nghệ thông tin')">
+                    onclick="showModalSua('modal_lop_sua', 'D20CQCN12-B', 'Công nghệ 12 khóa D20', 'Kỳ hè 2023')">
               <span class="sua_tieuDe">Sửa</span>
               <i class="fa-solid fa-pencil sua_icon"></i>
             </button>
