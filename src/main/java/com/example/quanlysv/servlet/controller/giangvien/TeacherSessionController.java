@@ -11,9 +11,6 @@ public class TeacherSessionController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        String tenGv = request.getParameter("tenGv");
-        if(tenGv==null) tenGv="";
-
         String sortField = request.getParameter("sortFieldGV");
         if(sortField==null) sortField="";
 
@@ -29,7 +26,6 @@ public class TeacherSessionController extends HttpServlet {
         System.out.println("pageIndex in Session: " + pageIndex);
         System.out.println("pageSize in Session: " + pageSize);
 
-        session.setAttribute("tenGv", tenGv);
         session.setAttribute("sortFieldGV", sortField);
         session.setAttribute("sortOrderGV", sortOrder);
         session.setAttribute("pageIndexGV", Integer.parseInt(pageIndex));

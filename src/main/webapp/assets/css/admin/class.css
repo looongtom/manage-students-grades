@@ -66,8 +66,6 @@ button {
     margin-bottom: 24px;
 }
 
-
-
 @keyframes phanlopFadein {
     from {
         transform: translateY(-200px);
@@ -182,13 +180,12 @@ button {
     align-items: center;
 }
 
-.nhapTimKiem {
+#nhapTimKiem {
     padding: 10px;
     width: 20vw;
     margin-right: 10px;
     border-radius: 5px;
     border-width: 1px;
-    /*height: 70%;*/
 }
 
 .nutTimKiem_tieuDe {
@@ -203,11 +200,6 @@ button {
     padding: 10px 10px 15px 10px;
     margin-left: 10px;
 }
-
-/*.cot-gioiTinhlop,*/
-/*.cot-sdtlop {*/
-/*    width: 100px;*/
-/*}*/
 
 .cot-malop {
     width: 170px;

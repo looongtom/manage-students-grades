@@ -11,6 +11,7 @@
 <%@ page import="org.apache.http.client.utils.URIBuilder" %>
 <%@ page import="java.net.URI" %>
 <%@ page import="java.io.IOException" %>
+<%@ page import="java.nio.charset.StandardCharsets" %>
 <html>
 <head>
     <%@include file="../menu/admin_menu_header.jsp" %>
@@ -53,6 +54,17 @@
             "\"pageSize\":" + pageSize +
             "}" +
             "}";
+
+    //get all
+    String uriGetAll = "http://localhost:8080/api/admin/home/subject/display";
+
+    HttpPost httpPost = new HttpPost(uriGetAll);
+    StringEntity entity = new StringEntity(requestBody);
+    httpPost.setEntity(entity);
+
+    httpPost.setHeader("Cookie", value + cookieValue);
+
+    JSONArray listResp;
 %>
 <body>
 <%@include file="../menu/admin_menu.jsp" %>
@@ -72,19 +84,6 @@
                 return null;
             }
         }
-    %>
-    <%
-        //get all
-        String uriGetAll = "http://localhost:8080/api/admin/home/subject/display";
-
-        HttpPost httpPost = new HttpPost(uriGetAll);
-        StringEntity entity = new StringEntity(requestBody);
-        httpPost.setEntity(entity);
-
-        httpPost.setHeader("Cookie", value + cookieValue);
-
-        // call function, return data
-        JSONArray listResp = getAllMh(httpClient, httpPost);
     %>
     <%
         // add MH
@@ -194,6 +193,10 @@
         entity = new StringEntity(requestBody);
         httpPost.setEntity(entity);
         listResp = getAllMh(httpClient, httpPost);
+
+        // return UTF8
+        byte[] bytes = tenMonHoc.getBytes(StandardCharsets.ISO_8859_1);
+        tenMonHoc = new String(bytes, StandardCharsets.UTF_8);
     %>
     <%
         // sort
@@ -219,6 +222,10 @@
             System.out.println("Sort Order: " + sortOrder);
             System.out.println("Ten MH sort: " + tenMonHoc);
             listResp = getAllMh(httpClient, httpPost);
+
+            // return UTF8
+            bytes = tenMonHoc.getBytes(StandardCharsets.ISO_8859_1);
+            tenMonHoc = new String(bytes, StandardCharsets.UTF_8);
         }
     %>
     <h1 class="tieuDeTrang">Danh sách môn học</h1>
