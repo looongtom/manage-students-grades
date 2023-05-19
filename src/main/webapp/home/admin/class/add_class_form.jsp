@@ -26,6 +26,10 @@
       <input id="ten" type="text" class="modal-input" placeholder="Nhập tên ...">
       <div id="ten-error" class="error-message">Tên lớp không được để trống</div>
 
+      <label for="" class="modal-label">Học kỳ</label>
+      <input id="ten-hk" type="text" class="modal-input" placeholder="Nhập tên ...">
+      <div id="ten-hk-error" class="error-message">Học kỳ không được để trống</div>
+
       <label for="" class="modal-label">Khoa trực thuộc</label>
       <select id="ma-khoa" class="modal-input" required>
         <option value="">Please select</option>

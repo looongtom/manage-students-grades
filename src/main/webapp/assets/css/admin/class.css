@@ -146,7 +146,8 @@ button {
 .nutTimKiem {
     margin-right: 10px;
     cursor: pointer;
-    height: 70%;
+    /*height: 70%;*/
+    margin-left: 5px;
 }
 
 
@@ -187,7 +188,7 @@ button {
     margin-right: 10px;
     border-radius: 5px;
     border-width: 1px;
-    height: 70%;
+    /*height: 70%;*/
 }
 
 .nutTimKiem_tieuDe {
@@ -203,10 +204,10 @@ button {
     margin-left: 10px;
 }
 
-.cot-gioiTinhlop,
-.cot-sdtlop {
-    width: 100px;
-}
+/*.cot-gioiTinhlop,*/
+/*.cot-sdtlop {*/
+/*    width: 100px;*/
+/*}*/
 
 .cot-malop {
     width: 170px;
@@ -215,7 +216,7 @@ button {
 .cot-ngayTao {
     width: 160px;
 }
-
+.cot-tenHK,
 .cot-tenlop,
 .cot-khoa {
     width: 200px;
@@ -301,7 +302,7 @@ tr:nth-child(even) {
     margin-right: 5px;
     background-color: green;
     border: none;
-    width: 85%;
+    width: 80%;
 }
 
 .xem:hover {
@@ -313,6 +314,7 @@ tr:nth-child(even) {
     margin-right: 5px;
     background-color: rgb(24, 170, 255);
     border: none;
+    width: 80%;
 }
 
 .sua:hover {
@@ -325,6 +327,7 @@ tr:nth-child(even) {
 
 .xoa {
     background-color: var(--red-color);
+    width: 80%;
 }
 
 .xoa:hover {
