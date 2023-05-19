@@ -16,6 +16,8 @@ import com.example.quanlysv.servlet.util.Convert;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -25,6 +27,8 @@ public class TeacherServiceImpl implements ITeacherService {
 
     private ITeacherDao teacherDao;
     private IKhoaDao iKhoaDao;
+
+    private final Date date = new Date();
     public TeacherServiceImpl(){
         teacherDao=new TeacherDaoImpl();
         iKhoaDao =  new KhoaDaoImpl();
@@ -37,7 +41,7 @@ public class TeacherServiceImpl implements ITeacherService {
             if(teacherEntity==null){
                 return new BaseResponse.Builder<>()
                         .setStatus(Constant.httpStatusErrorServer)
-                        .setMessage(Constant.messageStudentNotFound).build();
+                        .setMessage(Constant.messageTeacherNotFound).build();
             }
 
             TeacherDTO teacherDTO = Convert.convertEntityToDTO(teacherEntity, TeacherDTO.class);
@@ -49,21 +53,42 @@ public class TeacherServiceImpl implements ITeacherService {
             log.error(e.getMessage());
             return new BaseResponse.Builder<>()
                     .setStatus(Constant.httpStatusErrorServer)
-                    .setMessage(Constant.messageStudentNotFound).build();
+                    .setMessage(Constant.messageTeacherNotFound).build();
         }
     }
 
     @Override
     public BaseResponse<?> createOrEditTeacher(CreateOrEditTeacherDTO teacherDTO) {
         try {
-            TeacherEntity teacherEntity = Convert.convertDTOToEntity(teacherDTO,TeacherEntity.class);
-            teacherDao.createOrEditTeacher(teacherEntity);
-            BaseResponse<TeacherEntity>baseResponse=
-                    new BaseResponse.Builder<TeacherEntity>()
-                            .setMessage("success")
-                            .setStatus(200)
+            if(teacherDTO.getStatus() != 0 && teacherDTO.getStatus() != 1){
+                return new BaseResponse.Builder<>()
+                        .setStatus(Constant.httpStatusErrorServer)
+                        .setMessage(Constant.messageBadRequest)
+                        .build();
+            }
+
+            // status =0 ==> create; status =1 ==> update (tao flag)
+            if(teacherDTO.getStatus() == 0){
+                if(teacherDao.existedByIdOrEmailOrPhone(teacherDTO.getIdGv(), teacherDTO.getEmailGv(), teacherDTO.getSdtGv())){
+                    return new BaseResponse.Builder<>()
+                            .setStatus(Constant.httpStatusErrorServer)
+                            .setMessage(Constant.messageTeacherExist)
                             .build();
-            return baseResponse;
+                };
+            }
+
+            TeacherEntity teacherEntity = Convert.convertDTOToEntity(teacherDTO, TeacherEntity.class);
+            if(teacherEntity != null){
+                teacherEntity.setNgayTao(Instant.now());
+                teacherEntity.setNgaySua(Instant.now());
+                teacherDao.createOrEditTeacher(teacherEntity);
+                return new BaseResponse.Builder<>()
+                        .setStatus(Constant.httpStatusOk)
+                        .setMessage(Constant.messageSuccess).build();
+            }
+            return new BaseResponse.Builder<>()
+                    .setStatus(Constant.httpStatusErrorServer)
+                    .setMessage(Constant.messageFailed).build();
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         } catch (InstantiationException e) {
