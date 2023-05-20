@@ -17,7 +17,7 @@ import java.util.List;
 
 import static com.example.quanlysv.servlet.util.ReadExcelExample.getDataFromExcel;
 
-@WebServlet("/home/grade/create-or-edit")
+@WebServlet("/api/admin/grade/create-or-edit")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 50, // 50MB
         maxRequestSize = 1024 * 1024 * 50) // 50MB

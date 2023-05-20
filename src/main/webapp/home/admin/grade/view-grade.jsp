@@ -74,7 +74,7 @@
     <%
         String idDiem="";
         //get all
-        String uriGetAll = "http://localhost:8080/home/grade/view";
+        String uriGetAll = "http://localhost:8080/api/admin/grade/view";
 
         HttpPost httpPost = new HttpPost(uriGetAll);
         StringEntity entity = new StringEntity(requestBodyDiem);
@@ -95,6 +95,8 @@
             String idSv= infoDiem.getString("idSv");
             uriGetSv+=idSv;
             HttpGet httpGet = new HttpGet(uriGetSv);
+            httpGet.setHeader("Cookie", value + cookieValue);
+
             HttpResponse resp = httpClient.execute(httpGet);
             String responseData = EntityUtils.toString(resp.getEntity());
             ObjectMapper objectMapper = new ObjectMapper();
@@ -106,10 +108,12 @@
     %>
 
     <%
-        String uriGetThanhPhan="http://localhost:8080/home/thanh-phan/get?idDiem=";
+        String uriGetThanhPhan="http://localhost:8080/api/admin/thanh-phan/get?idDiem=";
         uriGetThanhPhan+=idDiem;
         System.out.println("uriGetThanhPhan: "+uriGetThanhPhan);
         HttpGet httpGet = new HttpGet(uriGetThanhPhan);
+        httpGet.setHeader("Cookie", value + cookieValue);
+
         HttpResponse resp = httpClient.execute(httpGet);
         String responseData = EntityUtils.toString(resp.getEntity());
 
