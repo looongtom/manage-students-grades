@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/home/thanh-phan/create-or-edit")
+@WebServlet("/api/admin/thanh-phan/create-or-edit")
 public class CreateThanhPhanController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public ThanhPhanService thanhPhanService;

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/api/home/class")
+@WebServlet("/api/admin/class")
 public class ClassController extends HttpServlet {
     private ILopService service;
 

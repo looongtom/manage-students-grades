@@ -68,7 +68,7 @@
                 <div class="khuVucNhapDiem-dau-tieuDe">Thông tin nhập điểm</div>
             </div>
             <div class="khuVucNhapDiem-phanThan">
-                <form method="post" action="/home/grade/create-or-edit" enctype="multipart/form-data">
+                <form method="post" action="/api/admin/grade/create-or-edit" enctype="multipart/form-data">
                     <input type="hidden" name="idDiem" value="<%= randomID %>" />
                     <div class="phanThongTin">
                         <div class="cot">
