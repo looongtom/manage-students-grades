@@ -39,7 +39,7 @@ public class VerifyCodeController extends HttpServlet {
 
             req.getRequestDispatcher("forgot_pass.jsp").forward(req, resp);
         }
-        else if(!account.getVerification().equals(code)){
+        else if(account.getVerification() == null || !account.getVerification().equals(code)){
             String errorMessage = "Mã xác nhận không đúng !";
             req.setAttribute("message", errorMessage);
             String successMessage = "Code đã được gửi về gmail. Vui lòng xác thực!";
@@ -59,6 +59,7 @@ public class VerifyCodeController extends HttpServlet {
         String username = req.getParameter("username");
         String passNew = req.getParameter("passNew");
         String passAgain = req.getParameter("passAgain");
+        String code = req.getParameter("code");
 
         AccountEntity accountEntity = authService.findAccountByUsernameAndPassword(username);
 
@@ -66,14 +67,23 @@ public class VerifyCodeController extends HttpServlet {
             String message = "Người dùng không tồn tại!";
             req.setAttribute("message", message);
             req.getRequestDispatcher("confirm_pass.jsp").forward(req, resp);
+            return;
+        }
+        else if( accountEntity.getVerification() == null || !accountEntity.getVerification().equals(code)){
+            String message = "Mã xác thực không đúng";
+            req.setAttribute("message", message);
+            req.getRequestDispatcher("confirm_pass.jsp").forward(req, resp);
+            return;
         }
         String message = authService.changePassDefault(accountEntity.getUsername(), passNew, passAgain);
         if(!message.equals("ok")){
             setValueForForm(req, passNew, passAgain, message);
             req.getRequestDispatcher("confirm_pass.jsp").forward(req, resp);
+            return;
         }
         else{
                 resp.sendRedirect("/auth/login");
+                return;
         }
     }
 
