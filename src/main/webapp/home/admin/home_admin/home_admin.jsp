@@ -1,10 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Admins
-  Date: 2/19/2023
-  Time: 3:26 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -14,6 +12,13 @@
 
     <title>Trang chủ</title>
 </head>
+<%
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
+    String url = resourceBundle.getString("url");
+    String username = resourceBundle.getString("username");
+    String password = resourceBundle.getString("password");
+    String driver=resourceBundle.getString("driverName");
+    %>
 <body>
     <%@include file="../menu/admin_menu.jsp" %>
     <div class="manHinhChinh">
@@ -29,8 +34,23 @@
                         <div class="box1">
                             <div class="small-box1">
                                 <div class="benTrong">
-                                    <h3>150</h3>
+                                    <%
+                                        try{
+                                            Class.forName(driver);
+                                            Connection con= DriverManager.getConnection(url,username,password);
+                                            String query="select count(*) from sinhvien ";
+                                            PreparedStatement ps=con.prepareStatement(query);
+                                            ResultSet rs=ps.executeQuery();
+                                            while(rs.next()){
+                                    %>
+                                    <h3><%=rs.getInt(1)%></h3>
                                     <p>Sinh viên</p>
+                                    <% }
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+                                    %>
                                 </div>
                                 <div class="icon i1">
                                     <i class="ti-user"></i>
@@ -41,7 +61,22 @@
                         <div class="box2">
                             <div class="small-box2">
                                 <div class="benTrong">
-                                    <h3>150</h3>
+                                    <%
+                                        try{
+                                            Class.forName(driver);
+                                            Connection con= DriverManager.getConnection(url,username,password);
+                                            String query="select count(*) from giangvien";
+                                            PreparedStatement ps=con.prepareStatement(query);
+                                            ResultSet rs=ps.executeQuery();
+                                            while(rs.next()){
+                                    %>
+                                    <h3><%=rs.getInt(1)%></h3>
+                                    <% }
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+                                    %>
                                     <p>Giảng viên</p>
                                 </div>
                                 <div class="icon i2">
@@ -53,7 +88,22 @@
                         <div class="box3">
                             <div class="small-box3">
                                 <div class="benTrong">
-                                    <h3>150</h3>
+                                    <%
+                                        try{
+                                            Class.forName(driver);
+                                            Connection con= DriverManager.getConnection(url,username,password);
+                                            String query="select count(*) from monhoc";
+                                            PreparedStatement ps=con.prepareStatement(query);
+                                            ResultSet rs=ps.executeQuery();
+                                            while(rs.next()){
+                                    %>
+                                    <h3><%=rs.getInt(1)%></h3>
+                                    <% }
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+                                    %>
                                     <p>Môn học</p>
                                 </div>
                                 <div class="icon i3">
@@ -65,7 +115,22 @@
                         <div class="box4">
                             <div class="small-box4">
                                 <div class="benTrong">
-                                    <h3>150</h3>
+                                    <%
+                                        try{
+                                            Class.forName(driver);
+                                            Connection con= DriverManager.getConnection(url,username,password);
+                                            String query="select count(*) from lop";
+                                            PreparedStatement ps=con.prepareStatement(query);
+                                            ResultSet rs=ps.executeQuery();
+                                            while(rs.next()){
+                                    %>
+                                    <h3><%=rs.getInt(1)%></h3>
+                                    <% }
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+                                    %>
                                     <p>Lớp học phần</p>
                                 </div>
                                 <div class="icon i4">
