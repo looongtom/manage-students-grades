@@ -4,6 +4,8 @@
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.util.ResourceBundle" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -38,7 +40,7 @@
         %>
 
         <!-- Use the generated ID wherever you need it -->
-        <input type="text" name="idDiem" value="<%= randomID %>" />
+        <input type="hidden" name="idDiem" value="<%= randomID %>" />
 
         <% boolean showDialog = false; %>
 
@@ -50,7 +52,12 @@
                 showDialog = true;
             }
         %>
-
+        <%
+            List<Integer>listSoTP=new ArrayList<>();
+            for(int i=0;i<=9;i++){
+                listSoTP.add(i*10);
+            }
+        %>
         <h1 class="tieuDeTrang">Nhập điểm</h1>
         <div id="my-dialog">
             <p>Nhập điểm thành công</p>
@@ -74,8 +81,7 @@
                                     <%
                                         try{
                                             Class.forName(driver);
-                                            Connection con= DriverManager.getConnection(url,
-                                                    username,password);
+                                            Connection con= DriverManager.getConnection(url,username,password);
                                             Statement st=con.createStatement();
                                             String str="select * from hocky ";
                                             ResultSet rs=st.executeQuery(str);
@@ -122,6 +128,31 @@
                                 </select>
 
                             </div>
+
+                            <div class="hang">
+                                <label for="" class="nhanModal">Chuyên cần</label>
+
+                                <select name="chuyen_can" class="nhapModal" required>
+                                    <option value="">Please select</option>
+                                    <% for(Integer heso:listSoTP){ %>
+                                    <option value=<%=heso%>><%=heso+"%"%></option>
+                                    <% }
+                                    %>
+                                </select>
+
+                            </div>
+
+                            <div class="hang">
+                                <label for="" class="nhanModal" >Bài tập</label>
+                                <select name="bai_tap" class="nhapModal" required>
+                                    <option value="">Please select</option>
+                                    <% for(Integer heso:listSoTP){ %>
+                                    <option value=<%=heso%>><%=heso+"%"%></option>
+                                    <% }
+                                    %>
+                                </select>
+                            </div>
+
                         </div>
 
                         <div class="cot">
@@ -185,10 +216,33 @@
                                 </select>
                             </div>
 
-                            <div class="hang" style="display: none;">
-                                <label for="" class="nhanModal">Mã điểm</label>
-                                <input type="text" name="idDiem" class="nhapModal">
+                            <div class="hang">
+                                <label for="" class="nhanModal" >điểm thi</label>
+                                <select name="thi" class="nhapModal" required>
+                                    <option value="">Please select</option>
+                                    <% for(Integer heso:listSoTP){ %>
+                                    <option value=<%=heso%>><%=heso+"%"%></option>
+                                    <% }
+                                    %>
+                                </select>
+
                             </div>
+                            <div class="hang">
+                                <label for="" class="nhanModal" >kiểm tra</label>
+                                <select name="kiem_tra" class="nhapModal" required>
+                                    <option value="">Please select</option>
+                                    <% for(Integer heso:listSoTP){ %>
+                                    <option value=<%=heso%>><%=heso+"%"%></option>
+                                    <% }
+                                    %>
+                                </select>
+                            </div>
+
+
+<%--                            <div class="hang" style="display: none;">--%>
+<%--                                <label for="" class="nhanModal">Mã điểm</label>--%>
+<%--                                <input type="text" name="idDiem" class="nhapModal">--%>
+<%--                            </div>--%>
                         </div>
                     </div>
 
@@ -197,6 +251,7 @@
                         <input class="nutNhapDiem" type="submit" value="Nhập điểm" />
                     </div>
                 </form>
+
             </div>
         </div>
     </div>

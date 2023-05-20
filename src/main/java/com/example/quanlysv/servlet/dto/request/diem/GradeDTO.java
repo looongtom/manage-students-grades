@@ -1,37 +1,42 @@
 package com.example.quanlysv.servlet.dto.request.diem;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 public class GradeDTO {
-    private String idDiem,idGv,idMh,idSv,idHk,idLop;
+    private String idDiem,idGv,idMh,idSv,idHk,idLop, ngayTao,ngaySua;
     private Double diemCc,diemBt,diemThi,diemKt;
-    private Long ngayTao,ngaySua;
-    public Long GetCurrentTime(Instant instant){
-        Long timestamp = instant.toEpochMilli();
-        return timestamp;
-    }
-    public GradeDTO() {
+
+    public String convertTimeFromLongToString(Long timestamp){
+        LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp), ZoneId.systemDefault());
+
+        // Format LocalDateTime as string
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedTime = dateTime.format(formatter);
+
+        return formattedTime;
     }
 
-    public GradeDTO(Double diemCc, Double diemBt, Double diemThi, Double diemKt, Long ngayTao, Long ngaySua) {
-        this.diemCc = diemCc;
-        this.diemBt = diemBt;
-        this.diemThi = diemThi;
-        this.diemKt = diemKt;
-        this.ngayTao = ngayTao;
-        this.ngaySua = ngaySua;
-    }
+//    public GradeDTO(String idDiem, String idGv, String idMh, String idSv, String idHk, String idLop, Long ngayTao, Long ngaySua, Double diemCc, Double diemBt, Double diemThi, Double diemKt) {
+//        this.idDiem = idDiem;
+//        this.idGv = idGv;
+//        this.idMh = idMh;
+//        this.idSv = idSv;
+//        this.idHk = idHk;
+//        this.idLop = idLop;
+//        this.ngayTao = convertTimeFromLongToString(ngayTao);
+//        this.ngaySua = convertTimeFromLongToString(ngaySua);
+//        this.diemCc = diemCc;
+//        this.diemBt = diemBt;
+//        this.diemThi = diemThi;
+//        this.diemKt = diemKt;
+//    }
+
 
     public String getIdDiem() {
         return idDiem;
-    }
-
-    public String getIdLop() {
-        return idLop;
-    }
-
-    public void setIdLop(String idLop) {
-        this.idLop = idLop;
     }
 
     public void setIdDiem(String idDiem) {
@@ -70,6 +75,41 @@ public class GradeDTO {
         this.idHk = idHk;
     }
 
+    public String getIdLop() {
+        return idLop;
+    }
+
+    public void setIdLop(String idLop) {
+        this.idLop = idLop;
+    }
+
+    public String getNgayTao() {
+        return ngayTao;
+    }
+
+//    public void setNgayTao(Long ngayTao) {
+//
+//        this.ngayTao = convertTimeFromLongToString(ngayTao);
+//    }
+
+    public void setNgayTao(String ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+
+    public String getNgaySua() {
+        return ngaySua;
+    }
+
+    public void setNgaySua(String ngaySua) {
+        this.ngaySua = ngaySua;
+    }
+
+
+//    public void setNgaySua(Long ngaySua) {
+//        this.ngaySua = convertTimeFromLongToString(ngaySua);
+//    }
+
     public Double getDiemCc() {
         return diemCc;
     }
@@ -102,22 +142,6 @@ public class GradeDTO {
         this.diemKt = diemKt;
     }
 
-    public Long getNgayTao() {
-        return ngayTao;
-    }
-
-    public void setNgayTao(Instant instant) {
-        this.ngayTao = GetCurrentTime(instant);
-    }
-
-    public Long getNgaySua() {
-        return ngaySua;
-    }
-
-    public void setNgaySua(Instant instant) {
-        this.ngaySua = GetCurrentTime(instant);
-    }
-
     @Override
     public String toString() {
         return "GradeDTO{" +
@@ -127,12 +151,12 @@ public class GradeDTO {
                 ", idSv='" + idSv + '\'' +
                 ", idHk='" + idHk + '\'' +
                 ", idLop='" + idLop + '\'' +
+                ", ngayTao='" + ngayTao + '\'' +
+                ", ngaySua='" + ngaySua + '\'' +
                 ", diemCc=" + diemCc +
                 ", diemBt=" + diemBt +
                 ", diemThi=" + diemThi +
                 ", diemKt=" + diemKt +
-                ", ngayTao=" + ngayTao +
-                ", ngaySua=" + ngaySua +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package com.example.quanlysv.servlet.dao.impl;
 
 import com.example.quanlysv.servlet.dao.IGradeDao;
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
+import com.example.quanlysv.servlet.dto.request.diem.GradeFilter;
 import com.example.quanlysv.servlet.entity.GradeEntity;
 import com.example.quanlysv.servlet.entity.SubjectEntity;
 import com.example.quanlysv.servlet.mapper.GradeMapper;
@@ -77,15 +78,15 @@ public class GradeDaoImpl extends AbstractDao<GradeEntity> implements IGradeDao 
     }
 
     @Override
-    public List<GradeEntity> findDiem(BaseRequest request) {
+    public List<GradeEntity> findDiem(BaseRequest request,String idLop) {
         try {
             String sql="SELECT diem.id_diem as idDiem, " +
                     "diem.diem_cc as diemCc, diem.diem_bt as diemBt, diem.diem_thi as diemThi, diem.diem_kt as diemKt, " +
                     "diem.id_gv as idGv, diem.id_mh as idMh, diem.id_sv as idSv, diem.id_hk as idHk, " +
-                    "diem.ngay_tao as ngayTao, diem.ngay_sua as ngaySua FROM diem ORDER BY "+
+                    "diem.ngay_tao as ngayTao, diem.ngay_sua as ngaySua FROM diem WHERE id_lop=? ORDER BY "+
                     request.getSortField() + " "+  request.getSortOrder() + " OFFSET ? LIMIT ?";
 
-            List<GradeEntity> list = findByProperties(sql, new GradeMapper(),
+            List<GradeEntity> list = findByProperties(sql, new GradeMapper(),idLop,
                     request.getPageIndex() * request.getPageSize(), request.getPageSize());
             System.out.println(list);
             return list.isEmpty()?null:list;
@@ -93,5 +94,28 @@ public class GradeDaoImpl extends AbstractDao<GradeEntity> implements IGradeDao 
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    @Override
+    public List<GradeEntity> viewGradeByIdLop(GradeFilter request) {
+    String sql="SELECT diem.id_diem as idDiem, " +
+                    "diem.diem_cc as diemCc, diem.diem_bt as diemBt, diem.diem_thi as diemThi, diem.diem_kt as diemKt, " +
+                    "diem.id_gv as idGv, diem.id_mh as idMh, diem.id_sv as idSv, diem.id_hk as idHk,diem.id_lop as idLop," +
+                    "diem.ngay_tao as ngayTao, diem.ngay_sua as ngaySua FROM diem WHERE diem.id_lop= ?  ORDER BY "+
+            request.getBaseRequest().getSortField() + " "+  request.getBaseRequest().getSortOrder()  + " OFFSET ? LIMIT ?";
+
+        List<GradeEntity> gradeEntities = findByProperties(sql,new GradeMapper(),
+                request.getIdLop(),
+                (request.getBaseRequest().getPageIndex()-1) * request.getBaseRequest().getPageSize(),
+                request.getBaseRequest().getPageSize());
+        return gradeEntities.isEmpty() ? null : gradeEntities;
+    }
+
+
+    @Override
+    public Integer countTotalRecords(GradeFilter request) {
+        String countSql= "SELECT COUNT(*) FROM diem where diem.id_lop=?";
+        Integer totalRecords=countTotalRecords(countSql,request.getIdLop());
+        return totalRecords;
     }
 }
