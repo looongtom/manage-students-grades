@@ -9,6 +9,16 @@ public class AccountEntity {
 
     private Integer statusPasswordDefault;
 
+    private String verification;
+
+    public String getVerification() {
+        return verification;
+    }
+
+    public void setVerification(String verification) {
+        this.verification = verification;
+    }
+
     public Integer getStatusPasswordDefault() {
         return statusPasswordDefault;
     }
