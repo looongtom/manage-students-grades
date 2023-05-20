@@ -62,6 +62,7 @@ public class AuthServiceImpl implements IAuthService {
         return accountDao.checkPassDefault(username, pass);
     }
 
+
     private String validate(String passNew, String passAgain){
        if(passNew.length() < 8 || passAgain.length() < 8 ) return "Mật khẩu không được nhỏ hơn 8 kí tự!";
        else if(!passNew.equals(passAgain)) return "Mật khẩu nhập lại không trùng khớp!";

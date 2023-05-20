@@ -13,10 +13,20 @@ public class AccountDaoImpl extends AbstractDao<AccountEntity> implements IAccou
     public AccountEntity findAccountByUsernameAndPassword(String username) {
         String sql = "select tk.id as id, tk.username as username, " +
                 "tk.password as password, tk.email as email, " +
-                "tk.role_id as roleId, tk.status_password_default as statusPasswordDefault" +
+                "tk.role_id as roleId, tk.status_password_default as statusPasswordDefault, tk.verification as verification" +
                 " from taikhoan as tk where username=?";
         List<AccountEntity> accountEntities = findByProperties(sql, new AccountMapper(), username);
         return accountEntities.isEmpty() ? null : accountEntities.get(0);
+    }
+
+    @Override
+    public  AccountEntity existEmailUser(String email) {
+        String sql = "select tk.id as id, tk.username as username, " +
+                "tk.password as password, tk.email as email, " +
+                "tk.role_id as roleId, tk.status_password_default as statusPasswordDefault" +
+                " from taikhoan as tk where email=?";
+        AccountEntity accountEntity = findOne(sql, new AccountMapper(), email);
+        return accountEntity;
     }
 
     @Override
@@ -24,6 +34,17 @@ public class AccountDaoImpl extends AbstractDao<AccountEntity> implements IAccou
         try {
             String sql = "update taikhoan set password =? where username = ?";
             return update(sql, pass, username );
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateVerification(String verification, String username) {
+        try {
+            String sql = "update taikhoan set verification =? where username = ?";
+            return update(sql, verification, username );
         }catch (Exception e){
             System.out.println(e.getMessage());
             return false;

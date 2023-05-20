@@ -28,7 +28,7 @@
             </label>
             <input type="password"  value="${password}"  placeholder="Nhập mật khẩu" name="password" required>
             <button type="submit" class="nut-dangNhap">Đăng nhập</button>
-            <a class="quen-mat-khau" href="">Quên mật khẩu?</a>
+            <a class="quen-mat-khau" href="/auth/forgot-password">Quên mật khẩu?</a>
         </div>
     </form>
 </body>
