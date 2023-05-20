@@ -23,10 +23,13 @@ import static com.example.quanlysv.servlet.util.ReadExcelExample.getDataFromExce
         maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class CreateOrEditGradeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    public IGradeService service ;
+    public IGradeService serviceGrade ;
     public CreateOrEditGradeController(){
-        this.service=new GradeServiceImpl();
+        this.serviceGrade=new GradeServiceImpl();
     }
+
+
+
     private String realPath;
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
@@ -64,21 +67,22 @@ public class CreateOrEditGradeController extends HttpServlet {
         String idHk = req.getParameter("idHk");
         String idLop = req.getParameter("idLop");
 
+        Integer cc=Integer.valueOf(req.getParameter("chuyen_can"));
+        Integer bt=Integer.valueOf(req.getParameter("bai_tap"));
+        Integer thi=Integer.valueOf(req.getParameter("thi"));
+        Integer kiem_tra=Integer.valueOf(req.getParameter("kiem_tra"));
 
 
-        System.out.println("idDiem: "+idDiem);
-        System.out.println("idGv: "+idGv);
-        System.out.println("idMh: "+idMh);
-        System.out.println("idHk: "+idHk);
+        System.out.println("cc: "+cc);
+        System.out.println("bt: "+bt);
+        System.out.println("thi: "+thi);
+        System.out.println("kiem_tra: "+kiem_tra);
         System.out.println("idLop: "+idLop);
 
-//        for (Part part : req.getParts()) {
         String fileName = extractFileName(part);
-        // refines the fileName in case it is an absolute path
         fileName = new File(fileName).getName();
         realPath = this.getFolderUpload().getAbsolutePath() + File.separator + fileName;
         part.write(realPath);
-//        }
         System.out.println(realPath);
 
 
@@ -100,11 +104,12 @@ public class CreateOrEditGradeController extends HttpServlet {
             createOrEditGradeDTO.setDiemKt(grade.getDiemKt());
             createOrEditGradeDTO.setNgayTao(currentTime);
             createOrEditGradeDTO.setNgaySua(currentTime);
-            service.createOrUpdateGrade(createOrEditGradeDTO);
+            System.out.println(createOrEditGradeDTO.toString());
+            serviceGrade.createOrUpdateGrade(createOrEditGradeDTO);
         }
 
-        req.setAttribute("showDialog", true);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/home/admin/grade/add_grade.jsp");
+        System.out.println("Line 111: "+gradeList.size());
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/home/thanh-phan/create-or-edit");
         dispatcher.forward(req, resp);
     }
 }
