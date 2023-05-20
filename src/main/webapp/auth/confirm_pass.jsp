@@ -39,6 +39,15 @@
           <input type="text" value="${username}"   name="username" placeholder="">
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label ><strong>Nhập code</strong></label>
+        </div>
+        <div class="col-75">
+          <input type="text"  name="code" placeholder="">
+        </div>
+      </div>
     <div class="row">
       <div class="col-25">
         <label ><strong>Mật khẩu mới</strong></label>
