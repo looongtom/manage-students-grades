@@ -276,6 +276,7 @@
                     <th class="cot-emailGV">Email</th>
                     <th data-sort onclick="sortTable('genderGv', this)" class="cot-gioiTinhGV genderGv">Giới tính</th>
                     <th data-sort onclick="sortTable('idKhoa', this)" class="cot-khoaGV idKhoa">Khoa</th>
+                    <th data-sort onclick="sortTable('trangThai', this)" class="cot-trangThai trangThai">Trạng thái</th>
                     <th data-sort onclick="sortTable('ngayTao', this)" class="cot-ngayTao ngayTao">Ngày tạo</th>
                     <th data-sort onclick="sortTable('ngaySua', this)" class="cot-ngayTao ngaySua">Ngày cập nhật</th>
                     <th class="hanh-dong">Action</th>
@@ -292,6 +293,18 @@
                     <td><%= teacher.getString("emailGv") %></td>
                     <td><%= teacher.getString("genderGv") %></td>
                     <td><%= teacher.getString("tenKhoa") %></td>
+                    <%
+                        if(teacher.getInt("trangThai")==1) {
+                    %>
+                    <td class="dangCongTac">Đang công tác</td>
+                    <%
+                    }
+                    else {
+                    %>
+                    <td class="ngungCongTac">Ngừng công tác</td>
+                    <%
+                        }
+                    %>
                     <td><%= teacher.getString("ngayTao") %></td>
                     <td><%= teacher.getString("ngaySua") %></td>
                     </td>
@@ -301,10 +314,16 @@
                                 <span class="sua_tieuDe">Sửa</span>
                                 <i class="fa-solid fa-pencil sua_icon"></i>
                             </button>
+                            <%
+                                if(teacher.getInt("trangThai")==1) {
+                            %>
                             <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '<%= teacher.getString("idGv") %>', 'ma-gv-xoa')" class="xoa hop-hanh-dong-nut" type="button">
                                 <span class="xoa_tieuDe">Xóa</span>
                                 <i class="fa-solid fa-trash xoa_icon"></i>
                             </button>
+                            <%
+                                }
+                            %>
                         </div>
                     </td>
                 </tr>

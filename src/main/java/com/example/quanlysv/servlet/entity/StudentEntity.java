@@ -9,6 +9,16 @@ public class StudentEntity {
     private String phoneSv;
     private String lopHanhChinhSv;
 
+    public Integer getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(Integer trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    private Integer trangThai;
+
     private Long ngayTao;
     private Long ngaySua;
 

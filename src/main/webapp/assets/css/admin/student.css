@@ -124,6 +124,10 @@ button {
     width: 150px;
 }
 
+.cot-trangThai {
+    width: 130px;
+}
+
 .cot-ngayTao {
     width: 180px;
 }
@@ -134,6 +138,14 @@ button {
 
 .cot-emailSV {
     width: 300px;
+}
+
+.dangHoc {
+    color: green;
+}
+
+.daThoiHoc {
+    color: var(--red-color);
 }
 
 .hanh-dong {

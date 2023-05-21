@@ -1,7 +1,6 @@
 package com.example.quanlysv.servlet.dao.impl;
 
 import com.example.quanlysv.servlet.dao.IStudentDao;
-import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.student.StudentFilter;
 import com.example.quanlysv.servlet.entity.StudentEntity;
 import com.example.quanlysv.servlet.mapper.StudentMapper;
@@ -25,7 +24,7 @@ public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStude
     public List<StudentEntity> findStudent(StudentFilter request) {
         String sql = "SELECT sv.id_sv as idSv, sv.ten_sv as tenSv, sv.email_sv as emailSv," +
                 "sv.dob_sv as dobSv, sv.gender_sv as genderSv, sv.ngay_tao as ngayTao, sv.ngay_sua as ngaySua," +
-                "sv.phone_sv as phoneSv, sv.lop_hanh_chinh_sv as lopHanhChinhSv" +
+                "sv.phone_sv as phoneSv, sv.lop_hanh_chinh_sv as lopHanhChinhSv, sv.trang_thai as trangThai" +
                 " FROM sinhvien as sv where" +
                 " lower(sv.ten_sv) like concat('%',lower(?), '%') and lower(sv.id_sv) like concat('%', lower(?), '%') ORDER BY " +
                 request.getBaseRequest().getSortField() + " "+  request.getBaseRequest().getSortOrder() + " OFFSET ? LIMIT ?";
@@ -55,13 +54,18 @@ public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStude
 
         try {
             StringBuilder sql = new StringBuilder("");
+            StringBuilder sql2 = new StringBuilder("");
             if(studentEntities == null || studentEntities.isEmpty()){
-                sql.append("INSERT INTO sinhvien (id_sv, ten_sv, email_sv, dob_sv, gender_sv, phone_sv, lop_hanh_chinh_sv, ngay_tao, ngay_sua) " +
-                        "Values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                sql.append("INSERT INTO sinhvien (id_sv, ten_sv, email_sv, dob_sv, gender_sv, phone_sv, lop_hanh_chinh_sv, ngay_tao, ngay_sua, trang_thai) " +
+                        "Values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 insertOrUpdateOrDelete(sql.toString(), studentEntity.getIdSv(), studentEntity.getTenSv(), studentEntity.getEmailSv(),
                         studentEntity.getDobSv(), studentEntity.getGenderSv(), studentEntity.getPhoneSv(), studentEntity.getLopHanhChinhSv(),
-                        studentEntity.getNgayTao(), studentEntity.getNgaySua()
+                        studentEntity.getNgayTao(), studentEntity.getNgaySua(), 1
                         );
+                sql2.append("INSERT INTO taikhoan (username, password, email, role_id, status_password_default) " +
+                        "Values(?, ?, ?, ?, ?)");
+                insertOrUpdateOrDelete(sql2.toString(), studentEntity.getIdSv(), studentEntity.getIdSv(),
+                        studentEntity.getEmailSv(), 2, 0);
             }
             else{
                 sql.append("UPDATE sinhvien SET ten_sv = ?, email_sv = ?, dob_sv =?, gender_sv =?, phone_sv =?, lop_hanh_chinh_sv =?, ngay_sua=? " +
@@ -69,6 +73,8 @@ public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStude
                 insertOrUpdateOrDelete(sql.toString(),studentEntity.getTenSv(), studentEntity.getEmailSv(),
                         studentEntity.getDobSv(), studentEntity.getGenderSv(), studentEntity.getPhoneSv(), studentEntity.getLopHanhChinhSv(),
                         studentEntity.getNgaySua(), studentEntity.getIdSv());
+                sql2.append("UPDATE taikhoan SET email = ? WHERE username = ?");
+                insertOrUpdateOrDelete(sql2.toString(), studentEntity.getEmailSv(), studentEntity.getIdSv());
             }
 
 
@@ -114,8 +120,8 @@ public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStude
         try{
 
             if(!id.trim().isEmpty()){
-                String sql = "DELETE FROM sinhvien where id_sv = ?";
-                insertOrUpdateOrDelete(sql, id.trim());
+                String sql = "UPDATE sinhvien SET trang_thai = ? WHERE id_sv = ?";
+                insertOrUpdateOrDelete(sql, 0, id.trim());
             }
         }catch (Exception e){
             throw new RuntimeException("create student failed: "+ e.getMessage());

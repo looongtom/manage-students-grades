@@ -23,6 +23,7 @@ create table MONHOC
     ten_mon_hoc varchar(100),
     tin_chi int,
     id_khoa varchar(25),
+    trang_thai int,
     ngay_tao bigint,
     ngay_sua bigint
 );
@@ -64,6 +65,7 @@ create table SINHVIEN
     gender_sv varchar(20),
     phone_sv varchar(14),
     lop_hanh_chinh_sv varchar(50),
+    trang_thai int,
     ngay_tao bigint,
     ngay_sua bigint
 );
@@ -104,6 +106,7 @@ create table GIANGVIEN
     email_gv varchar(50),
     gender_gv varchar(20),
     id_khoa varchar(25),
+    trang_thai int,
     ngay_tao bigint,
     ngay_sua bigint
 );

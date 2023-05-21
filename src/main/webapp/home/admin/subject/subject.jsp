@@ -258,6 +258,7 @@
                     <th data-sort onclick="sortTable('tenMonHoc', this)" class="cot-tenMH tenMonHoc">Tên môn học</th>
                     <th data-sort onclick="sortTable('tinChi', this)" class="cot-TC tinChi">Số tín chỉ</th>
                     <th data-sort onclick="sortTable('idKhoa', this)" class="cot-khoa idKhoa">Khoa</th>
+                    <th data-sort onclick="sortTable('trangThai', this)" class="cot-trangThai trangThai">Trạng thái</th>
                     <th data-sort onclick="sortTable('ngayTao', this)" class="cot-ngayTao ngayTao">Ngày tạo</th>
                     <th data-sort onclick="sortTable('ngaySua', this)" class="cot-ngayTao ngaySua">Ngày cập nhật</th>
                     <th class="hanh-dong">Action</th>
@@ -272,9 +273,24 @@
                         <td><%=subject.getString("tenMonHoc")%></td>
                         <td class="cot-TC"><%=subject.getInt("tinChi")%></td>
                         <td><%=subject.getString("tenKhoa")%></td>
+                        <%
+                            if(subject.getInt("trangThai")==1) {
+                        %>
+                        <td class="dangGiangDay">Còn giảng dạy</td>
+                        <%
+                        }
+                        else {
+                        %>
+                        <td class="ngungGiangDay">Ngừng giảng dạy</td>
+                        <%
+                            }
+                        %>
                         <td><%=subject.getString("ngayTao")%></td>
                         <td><%=subject.getString("ngaySua")%></td>
                         <td class="chucNang">
+                            <%
+                                if(subject.getInt("trangThai")==1) {
+                            %>
                             <div class="hop-hanh-dong">
                                 <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_mon_hoc_sua', '<%=subject.getString("idMh")%>', '<%=subject.getString("tenMonHoc")%>', '<%=subject.getInt("tinChi")%>', '<%=subject.getString("idKhoa")%>')">
                                     <span class="sua_tieuDe">Sửa</span>
@@ -285,6 +301,9 @@
                                     <i class="fa-solid fa-trash xoa_icon"></i>
                                 </button>
                             </div>
+                            <%
+                                }
+                            %>
                         </td>
                     </tr>
                     <% }
@@ -314,7 +333,7 @@
     <script src="../../../assets/js/pagination.js"></script>
     <script>
         if(<%= exist %>) {
-            alert("Mã môn học hoặc môn học đã tồn tại")
+            alert("Mã môn học hoặc môn học đã tồn tại");
         }
 
         // do lúc gửi đoạn sort nó hay load lại trang dẫn đến không kịp lưu lại class, hàm này dùng để lấy session đã lưu
