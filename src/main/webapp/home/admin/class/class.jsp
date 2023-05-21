@@ -42,15 +42,15 @@
 <%!
   // lấy list học kỳ
   public String GetTenHk(HttpClient httpClient,String idHk,String value,String cookieValue) throws IOException {
-      String uri = "http://localhost:8080/api/admin/home/semester?id="+idHk;
-      HttpGet httpGet = new HttpGet(uri);
-      httpGet.setHeader("Cookie", value + cookieValue);
-      HttpResponse resp = httpClient.execute(httpGet);
+    String uri = "http://localhost:8080/api/admin/home/semester?id="+idHk;
+    HttpGet httpGet = new HttpGet(uri);
+    httpGet.setHeader("Cookie", value + cookieValue);
+    HttpResponse resp = httpClient.execute(httpGet);
     String responseData = EntityUtils.toString(resp.getEntity());
     ObjectMapper objectMapper = new ObjectMapper();
     JsonNode jsonNode = objectMapper.readTree(responseData);
     JsonNode infoHk = jsonNode.get("data");
-      return infoHk.get("tenHocKy").asText();
+    return infoHk.get("tenHocKy").asText();
   }
 %>
 
