@@ -67,7 +67,7 @@ create table SINHVIEN
     lop_hanh_chinh_sv varchar(50),
     ngay_tao bigint,
     ngay_sua bigint,
-    dathoihoc int not null default 0
+    trang_thai int not null default 0
 );
 alter table SINHVIEN add primary key(id_sv);
 
