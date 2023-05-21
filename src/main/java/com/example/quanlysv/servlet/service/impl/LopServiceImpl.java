@@ -5,6 +5,7 @@ import com.example.quanlysv.servlet.dao.impl.AbstractDao;
 import com.example.quanlysv.servlet.dao.impl.LopDaoImpl;
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.lop.LopDTO;
+import com.example.quanlysv.servlet.dto.request.lop.LopFilter;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.entity.LopEntity;
 import com.example.quanlysv.servlet.mapper.LopMapper;
@@ -44,13 +45,13 @@ public class LopServiceImpl implements ILopService {
     }
 
     @Override
-    public BaseResponse<?> findLop(BaseRequest request) {
+    public BaseResponse<?> findLop(LopFilter request) {
         try{
-            if((request.getSortOrder() == null || request.getSortOrder().isEmpty())) {
-                request.setSortOrder("asc");
+            if((request.getBaseRequest().getSortOrder() == null || request.getBaseRequest().getSortOrder().isEmpty())) {
+                request.getBaseRequest().setSortOrder("asc");
             }
-            if(request.getSortField() == null || request.getSortField().isEmpty()){
-                request.setSortField("id_lop");
+            if(request.getBaseRequest().getSortField() == null || request.getBaseRequest().getSortField().isEmpty()){
+                request.getBaseRequest().setSortField("id_lop");
             }
 
 
@@ -100,6 +101,36 @@ public class LopServiceImpl implements ILopService {
         }
     }
 
+    @Override
+    public BaseResponse<?> getLopByIdKhoa(String idKhoa) {
+        try{
+            List<LopDTO>dtoList=new ArrayList<>();
+            List<LopEntity>list=lopDao.getListLopByIdKhoa(idKhoa);
 
+            dtoList=list.stream().map(x->{
+                try {
+                    return Convert.convertEntityToDTO(x,LopDTO.class);
+                }catch (IllegalAccessException e){
+                    System.out.println(e.getCause());
+                    return null;
+                }catch (InstantiationException e){
+                    System.out.println(e.getCause());
+                    return null;
+                } catch (InvocationTargetException e) {
+                    throw new RuntimeException(e);
+                } catch (NoSuchMethodException e) {
+                    throw new RuntimeException(e);
+                }
+            }).filter(Objects::nonNull).collect(Collectors.toList());
 
+            return new BaseResponse.Builder<List<LopDTO>>()
+                    .setData(dtoList)
+                    .setMessage("success")
+                    .setStatus(200).build();
+        }catch (Exception e){
+            return new BaseResponse.Builder<List<LopDTO>>()
+                    .setMessage("failed"+e.getMessage())
+                    .setStatus(500)
+                    .build();
+        }    }
 }

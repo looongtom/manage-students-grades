@@ -1,22 +1,30 @@
 package com.example.quanlysv.servlet.dto.request.lop;
 
 public class LopDTO {
-    private String idLop,tenLop,idKhoa;
-    private Long ngayTao,ngaySua;
+    private String idLop,tenLop,idKhoa,idHk;
+    private String ngayTao,ngaySua;
 
-    public Long getNgayTao() {
+    public String getIdHk() {
+        return idHk;
+    }
+
+    public void setIdHk(String idHk) {
+        this.idHk = idHk;
+    }
+
+    public String getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(Long ngayTao) {
+    public void setNgayTao(String ngayTao) {
         this.ngayTao = ngayTao;
     }
 
-    public Long getNgaySua() {
+    public String getNgaySua() {
         return ngaySua;
     }
 
-    public void setNgaySua(Long ngaySua) {
+    public void setNgaySua(String ngaySua) {
         this.ngaySua = ngaySua;
     }
 

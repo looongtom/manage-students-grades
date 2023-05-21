@@ -2,6 +2,7 @@ package com.example.quanlysv.servlet.controller.lop.api;
 
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.lop.LopDTO;
+import com.example.quanlysv.servlet.dto.request.lop.LopFilter;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.service.ILopService;
 import com.example.quanlysv.servlet.service.impl.LopServiceImpl;
@@ -26,8 +27,8 @@ public class ClassController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        BaseRequest baseRequest = HttpUtil.of(req.getReader()).toModel(BaseRequest.class);
-        BaseResponse<?> baseResponse = service.findLop(baseRequest);
+        String idKhoa = req.getParameter("idKhoa");
+        BaseResponse<?> baseResponse = service.getLopByIdKhoa(idKhoa);
         ResponseUtils.responseApi(req, resp, baseResponse);
     }
 
@@ -35,10 +36,11 @@ public class ClassController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        LopDTO lopDTO = HttpUtil.of(req.getReader()).toModel(LopDTO.class);
-        BaseResponse<?> baseResponse = service.createOrUpdateLop(lopDTO);
+        LopFilter baseRequest = HttpUtil.of(req.getReader()).toModel(LopFilter.class);
+        BaseResponse<?> baseResponse = service.findLop(baseRequest);
         ResponseUtils.responseApi(req, resp, baseResponse);
     }
+
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

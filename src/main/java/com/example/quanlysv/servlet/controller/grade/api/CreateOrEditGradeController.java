@@ -108,8 +108,7 @@ public class CreateOrEditGradeController extends HttpServlet {
             serviceGrade.createOrUpdateGrade(createOrEditGradeDTO);
         }
 
-        System.out.println("Line 111: "+gradeList.size());
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/home/thanh-phan/create-or-edit");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/api/admin/thanh-phan/create-or-edit");
         dispatcher.forward(req, resp);
     }
 }
