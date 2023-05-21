@@ -30,8 +30,10 @@
     HttpSession getSession = request.getSession();
     String cookieValue = (String) getSession.getAttribute("cookie_value");
 
+    String getIdLopFromClassJSP = request.getParameter("idLop");
+
     // variables in request body
-    String idLop = "LOP_001";
+    String idLop = getIdLopFromClassJSP;
     String sortField = "";
     String sortOrder = "";
     int pageSize = 80;
@@ -182,8 +184,8 @@
             <th data-sort onclick="sortTable(1, this)" class="cot-tenSV">Tên sinh viên</th>
             <th data-sort onclick="sortName(2,this)" class="cot-Diem">Chuyên cần</th>
             <th data-sort onclick="sortTable(3, this)" class="cot-Diem">Bài tập</th>
-            <th data-sort onclick="sortTable(4, this)" class="cot-Diem">Kiểm tra</th>
-            <th data-sort onclick="sortTable(5, this)" class="cot-Diem">Cuối kì</th>
+            <th data-sort onclick="sortTable(4, this)" class="cot-Diem">Cuối kì</th>
+            <th data-sort onclick="sortTable(5, this)" class="cot-Diem">Kiểm tra</th>
             <th data-sort onclick="sortTable(6, this)" class="cot-Diem">Tổng kết</th>
             <th data-sort onclick="sortTable(7, this)" class="cot-Diem">Điểm chữ</th>
             <th data-sort onclick="sortTable(8, this)" class="cot-Trangthai">Trạng thái</th>

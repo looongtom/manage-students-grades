@@ -217,7 +217,7 @@
                             </div>
 
                             <div class="hang">
-                                <label for="" class="nhanModal" >điểm thi</label>
+                                <label for="" class="nhanModal" >Điểm thi</label>
                                 <select name="thi" class="nhapModal" required>
                                     <option value="">Please select</option>
                                     <% for(Integer heso:listSoTP){ %>
@@ -228,7 +228,7 @@
 
                             </div>
                             <div class="hang">
-                                <label for="" class="nhanModal" >kiểm tra</label>
+                                <label for="" class="nhanModal" >Kiểm tra</label>
                                 <select name="kiem_tra" class="nhapModal" required>
                                     <option value="">Please select</option>
                                     <% for(Integer heso:listSoTP){ %>

@@ -3,7 +3,7 @@ package com.example.quanlysv.servlet.entity;
 import java.time.Instant;
 
 public class LopEntity {
-    private String idLop,tenLop,idKhoa;
+    private String idLop,tenLop,idKhoa,idHk;
     private Long ngayTao,ngaySua;
     public Long GetCurrentTime(Instant instant){
         Long timestamp = instant.toEpochMilli();
@@ -12,6 +12,15 @@ public class LopEntity {
     public LopEntity(){
 
     }
+
+    public String getIdHk() {
+        return idHk;
+    }
+
+    public void setIdHk(String idHk) {
+        this.idHk = idHk;
+    }
+
     public Long getNgayTao() {
         return ngayTao;
     }

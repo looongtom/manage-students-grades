@@ -78,7 +78,7 @@ public class ReadExcelExample  {
                         grade.setDiemCc( diemCc );
                         break;
                     case COULUMN_INDEX_KT:
-//                        System.out.println(columnIndex+" KT "+ cellValue);
+                        System.out.println(" KT "+ cellValue);
 
                         Double dienKt= (Double)( getCellValue(cell));
 
@@ -86,7 +86,7 @@ public class ReadExcelExample  {
                         break;
                     case COULUMN_INDEX_THI:
                         Double diemThi= (Double)( getCellValue(cell));
-//                        System.out.println(columnIndex+" THI "+ cellValue);
+                        System.out.println(" THI "+ cellValue);
 
                         grade.setDiemThi( diemThi );
                         break;

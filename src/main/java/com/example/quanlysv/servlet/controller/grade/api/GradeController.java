@@ -34,52 +34,52 @@ public class GradeController extends HttpServlet {
     public GradeController(){
         this.service=new GradeServiceImpl();
     }
-    private String realPath="";
-    private String extractFileName(Part part) {
-        String contentDisp = part.getHeader("content-disposition");
-        String[] items = contentDisp.split(";");
-        for (String s : items) {
-            if (s.trim().startsWith("filename")) {
-                return s.substring(s.indexOf("=") + 2, s.length() - 1);
-            }
-        }
-        return "";
-    }
-    public File getFolderUpload() {
-        File folderUpload = new File(System.getProperty("user.home") + "/Uploads");
-        if (!folderUpload.exists()) {
-            folderUpload.mkdirs();
-        }
-        return folderUpload;
-    }
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("application/json");
-        for (Part part : req.getParts()) {
-            String fileName = extractFileName(part);
-            // refines the fileName in case it is an absolute path
-            fileName = new File(fileName).getName();
-            realPath=this.getFolderUpload().getAbsolutePath() + File.separator + fileName;
-            part.write(realPath);
-        }
-        System.out.println(realPath); //test file path
-//        String idDiem = req.getParameter("idDiem");
-//        String idGv = req.getParameter("idGv");
-//        String idMh = req.getParameter("idMh");
-//        String idHk = req.getParameter("idHk");
-//        BaseRequest baseRequest = HttpUtil.of(req.getReader()).toModel(BaseRequest.class);
-//        List<GradeEntity> gradeList= getDataFromExcel(filePath);
-//
-//        for(GradeEntity grade : gradeList){
-//            grade.setIdDiem(idDiem);
-//            grade.setIdGv(idGv);
-//            grade.setIdMh(idMh);
-//            grade.setIdHk(idHk);
-//            BaseResponse<?> baseResponse = service.nhapDiem(grade);
+//    private String realPath="";
+//    private String extractFileName(Part part) {
+//        String contentDisp = part.getHeader("content-disposition");
+//        String[] items = contentDisp.split(";");
+//        for (String s : items) {
+//            if (s.trim().startsWith("filename")) {
+//                return s.substring(s.indexOf("=") + 2, s.length() - 1);
+//            }
 //        }
-//        ResponseUtils.responseApi(req, resp, null);
-    }
+//        return "";
+//    }
+//    public File getFolderUpload() {
+//        File folderUpload = new File(System.getProperty("user.home") + "/Uploads");
+//        if (!folderUpload.exists()) {
+//            folderUpload.mkdirs();
+//        }
+//        return folderUpload;
+//    }
+//    @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        req.setCharacterEncoding("UTF-8");
+//        resp.setContentType("application/json");
+//        for (Part part : req.getParts()) {
+//            String fileName = extractFileName(part);
+//            // refines the fileName in case it is an absolute path
+//            fileName = new File(fileName).getName();
+//            realPath=this.getFolderUpload().getAbsolutePath() + File.separator + fileName;
+//            part.write(realPath);
+//        }
+//        System.out.println(realPath); //test file path
+////        String idDiem = req.getParameter("idDiem");
+////        String idGv = req.getParameter("idGv");
+////        String idMh = req.getParameter("idMh");
+////        String idHk = req.getParameter("idHk");
+////        BaseRequest baseRequest = HttpUtil.of(req.getReader()).toModel(BaseRequest.class);
+////        List<GradeEntity> gradeList= getDataFromExcel(filePath);
+////
+////        for(GradeEntity grade : gradeList){
+////            grade.setIdDiem(idDiem);
+////            grade.setIdGv(idGv);
+////            grade.setIdMh(idMh);
+////            grade.setIdHk(idHk);
+////            BaseResponse<?> baseResponse = service.nhapDiem(grade);
+////        }
+////        ResponseUtils.responseApi(req, resp, null);
+//    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
