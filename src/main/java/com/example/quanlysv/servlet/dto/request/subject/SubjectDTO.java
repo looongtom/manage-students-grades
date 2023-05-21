@@ -1,16 +1,8 @@
 package com.example.quanlysv.servlet.dto.request.subject;
 
 public class SubjectDTO {
-    private String idMh;
-    private String tenMonHoc;
-    private Integer tinChi;
-
-    private String idKhoa;
-
-    private String tenKhoa;
-
-    private String ngayTao;
-    private String ngaySua;
+    private String idMh, tenMonHoc, idKhoa, tenKhoa, ngayTao, ngaySua;
+    private Integer tinChi, trangThai;
 
     public String getNgayTao() {
         return ngayTao;
@@ -26,6 +18,14 @@ public class SubjectDTO {
 
     public void setNgaySua(String ngaySua) {
         this.ngaySua = ngaySua;
+    }
+
+    public Integer getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(Integer trangThai) {
+        this.trangThai = trangThai;
     }
 
     public String getTenKhoa() {
@@ -73,8 +73,12 @@ public class SubjectDTO {
         return "SubjectDTO{" +
                 "idMh='" + idMh + '\'' +
                 ", tenMonHoc='" + tenMonHoc + '\'' +
-                ", tinChi=" + tinChi +
                 ", idKhoa='" + idKhoa + '\'' +
+                ", tenKhoa='" + tenKhoa + '\'' +
+                ", ngayTao='" + ngayTao + '\'' +
+                ", ngaySua='" + ngaySua + '\'' +
+                ", tinChi=" + tinChi +
+                ", trangThai=" + trangThai +
                 '}';
     }
 }

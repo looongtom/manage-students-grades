@@ -94,11 +94,15 @@ h1 {
 }
 
 .cot-tenMH {
-    width: 240px;
+    width: 220px;
+}
+
+.cot-trangThai {
+    width: 150px;
 }
 
 .cot-khoa {
-    width: 250px;
+    width: 200px;
 }
 
 .cot-ngayTao {
@@ -181,6 +185,14 @@ tr:nth-child(even) {
     padding: 8px 12px;
     color: var(--white-color);
     border: none;
+}
+
+.dangGiangDay {
+    color: green;
+}
+
+.ngungGiangDay {
+    color: var(--red-color);
 }
 
 .sua {

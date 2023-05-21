@@ -308,6 +308,7 @@
                 <th data-sort onclick="sortTable('genderSv', this)" class="cot-gioiTinhSV genderSv">Giới tính</th>
                 <th class="cot-sdtSV">Số điện thoại</th>
                 <th data-sort onclick="sortTable('lopHanhChinhSv', this)" class="cot-lopSV lopHanhChinhSv">Lớp hành chính</th>
+                <th data-sort onclick="sortTable('trangThai', this)" class="cot-trangThai trangThai">Trạng thái</th>
                 <th data-sort onclick="sortTable('ngayTao', this)" class="cot-ngayTao ngayTao">Ngày tạo</th>
                 <th data-sort onclick="sortTable('ngaySua', this)" class="cot-ngayTao ngaySua">Ngày cập nhật</th>
                 <th class="hanh-dong">Action</th>
@@ -325,6 +326,18 @@
                         <td><%=student.getString("genderSv")%></td>
                         <td><%=student.getString("phoneSv")%></td>
                         <td><%=student.getString("lopHanhChinhSv")%></td>
+                        <%
+                            if(student.getInt("trangThai")==1) {
+                        %>
+                        <td class="dangHoc">Đang học</td>
+                        <%
+                        }
+                        else {
+                        %>
+                        <td class="daThoiHoc">Đã thôi học</td>
+                        <%
+                            }
+                        %>
                         <td><%=student.getString("ngayTao")%></td>
                         <td><%=student.getString("ngaySua")%></td>
                         <td class="chucNang">
@@ -333,10 +346,16 @@
                                     <span class="sua_tieuDe">Sửa</span>
                                     <i class="fa-solid fa-pencil sua_icon"></i>
                                 </button>
+                                <%
+                                    if(student.getInt("trangThai")==1) {
+                                %>
                                 <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '<%=student.getString("idSv")%>', 'ma-sv-xoa')" class="xoa hop-hanh-dong-nut" type="button">
                                     <span class="xoa_tieuDe">Xóa</span>
                                     <i class="fa-solid fa-trash xoa_icon"></i>
                                 </button>
+                                <%
+                                    }
+                                %>
                             </div>
                         </td>
                     </tr>
