@@ -1,4 +1,14 @@
+<%@ page import="com.example.quanlysv.servlet.entity.StudentEntity" %>
+<%@ page import="com.example.quanlysv.servlet.entity.AccountEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    HttpSession session1 = request.getSession();
+    AccountEntity account = (AccountEntity) session1.getAttribute("ACCOUNT");
+    String tenTaiKhoan = account.getUsername();
+
+%>
+
 <div class="menu">
     <div class="menu-phanTren">
         <div class="tieuDe">
@@ -8,7 +18,7 @@
         <div class="nganCach"></div>
         <div class="taiKhoan">
             <img src="../../../assets/images/avatar.png" alt="avatar" class="avatar">
-            <div class="tenTaiKhoan">User</div>
+            <div class="tenTaiKhoan"> <%=tenTaiKhoan%></div>
         </div>
         <div class="nganCach"></div>
         <a class="menuMuc trangChuMuc" href="/../../home/user/home_user/home_user.jsp">
