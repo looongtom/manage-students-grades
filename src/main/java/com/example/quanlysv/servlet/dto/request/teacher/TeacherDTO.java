@@ -3,6 +3,7 @@ package com.example.quanlysv.servlet.dto.request.teacher;
 public class TeacherDTO {
     private String idGv,tenGv,sdtGv,emailGv,genderGv,idKhoa,tenKhoa;
     private String ngayTao,ngaySua;
+    private Integer trangThai;
 
     public String getTenKhoa() {
         return tenKhoa;
@@ -68,11 +69,35 @@ public class TeacherDTO {
         this.ngayTao = ngayTao;
     }
 
+    public Integer getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(Integer trangThai) {
+        this.trangThai = trangThai;
+    }
+
     public String getNgaySua() {
         return ngaySua;
     }
 
     public void setNgaySua(String ngaySua) {
         this.ngaySua = ngaySua;
+    }
+
+    @Override
+    public String toString() {
+        return "TeacherDTO{" +
+                "idGv='" + idGv + '\'' +
+                ", tenGv='" + tenGv + '\'' +
+                ", sdtGv='" + sdtGv + '\'' +
+                ", emailGv='" + emailGv + '\'' +
+                ", genderGv='" + genderGv + '\'' +
+                ", idKhoa='" + idKhoa + '\'' +
+                ", tenKhoa='" + tenKhoa + '\'' +
+                ", ngayTao='" + ngayTao + '\'' +
+                ", ngaySua='" + ngaySua + '\'' +
+                ", trangThai=" + trangThai +
+                '}';
     }
 }

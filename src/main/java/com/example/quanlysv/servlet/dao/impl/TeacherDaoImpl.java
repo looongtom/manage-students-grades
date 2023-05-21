@@ -25,9 +25,24 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
     }
 
     @Override
+    public boolean existedByIdOrEmailOrPhone(String id, String email, String phoneNum) {
+        try {
+            String sql = "select gv.id_gv as idGv,gv.ten_gv as tenGv,gv.sdt_gv as sdtGv," +
+                    "gv.email_gv as emailGv, gv.gender_gv as genderGv, gv.id_khoa as idKhoa," +
+                    "gv.ngay_tao as ngayTao, gv.ngay_sua as ngaySua from giangvien as gv where gv.id_gv=? " +
+                    "or gv.email_gv=? or gv.sdt_gv=?";
+            TeacherEntity teacher =  findOne(sql,new TeacherMapper(), id, email, phoneNum);
+            if(teacher != null) return true;
+            return false;
+        }catch (Exception e){
+            throw new RuntimeException("error: "+ e.getMessage());
+        }
+    }
+
+    @Override
     public List<TeacherEntity> findTeacher(TeacherFilter request) {
         String sql="select gv.id_gv as idGv,gv.ten_gv as tenGv,gv.sdt_gv as sdtGv," +
-                "gv.email_gv as emailGv, gv.gender_gv as genderGv, gv.id_khoa as idKhoa," +
+                "gv.email_gv as emailGv, gv.gender_gv as genderGv, gv.id_khoa as idKhoa, gv.trang_thai as trangThai, " +
                 "gv.ngay_tao as ngayTao, gv.ngay_sua as ngaySua from giangvien as gv where " +
                 "lower(gv.ten_gv) like concat('%',lower(?), '%') ORDER BY " +
                 request.getBaseRequest().getSortField() + " "+  request.getBaseRequest().getSortOrder() + " OFFSET ? LIMIT ?";
@@ -38,7 +53,6 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
                 request.getBaseRequest().getPageSize());
 
         return list.isEmpty() ? null : list;
-
     }
 
     @Override
@@ -60,11 +74,11 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
             if(teacherEntities==null||teacherEntities.isEmpty()){
                 Instant instant = Instant.now();
                 teacherEntity.setNgayTao(instant);
-                sql.append("insert into giangvien (id_gv,ten_gv,sdt_gv,email_gv," +
-                "gender_gv,id_khoa,ngay_tao,ngay_sua) values(?,?,?,?,?,?,?,?)");
+                sql.append("insert into giangvien (id_gv, ten_gv, sdt_gv, email_gv," +
+                "gender_gv, id_khoa, ngay_tao, ngay_sua, trang_thai) values(?,?,?,?,?,?,?,?,?)");
                 insertOrUpdateOrDelete(sql.toString(),teacherEntity.getIdGv(),teacherEntity.getTenGv(),
                 teacherEntity.getSdtGv(),teacherEntity.getEmailGv(),teacherEntity.getGenderGv(),
-                teacherEntity.getIdKhoa(),teacherEntity.getNgayTao(),teacherEntity.getNgayTao()
+                teacherEntity.getIdKhoa(),teacherEntity.getNgayTao(),teacherEntity.getNgayTao(), 1
                 );
             }
             else{
@@ -93,8 +107,8 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
             String sqlQuery="SELECT * FROM giangvien as gv where gv.id_gv=?";
             List<TeacherEntity>teacherEntities = findByProperties(sqlQuery,new TeacherMapper(),id.trim());
             if (teacherEntities!=null){
-                String sql="DELETE FROM giangvien where id_gv=?";
-                insertOrUpdateOrDelete(sql,id.trim());
+                String sql="UPDATE giangvien SET trang_thai = ? WHERE id_gv=?";
+                insertOrUpdateOrDelete(sql, 0, id.trim());
             }
         }catch (Exception e){
             System.out.println(e.getMessage());

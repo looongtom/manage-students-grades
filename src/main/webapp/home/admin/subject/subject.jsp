@@ -11,6 +11,7 @@
 <%@ page import="org.apache.http.client.utils.URIBuilder" %>
 <%@ page import="java.net.URI" %>
 <%@ page import="java.io.IOException" %>
+<%@ page import="java.nio.charset.StandardCharsets" %>
 <html>
 <head>
     <%@include file="../menu/admin_menu_header.jsp" %>
@@ -53,6 +54,17 @@
             "\"pageSize\":" + pageSize +
             "}" +
             "}";
+
+    //get all
+    String uriGetAll = "http://localhost:8080/api/admin/home/subject/display";
+
+    HttpPost httpPost = new HttpPost(uriGetAll);
+    StringEntity entity = new StringEntity(requestBody);
+    httpPost.setEntity(entity);
+
+    httpPost.setHeader("Cookie", value + cookieValue);
+
+    JSONArray listResp;
 %>
 <body>
 <%@include file="../menu/admin_menu.jsp" %>
@@ -72,19 +84,6 @@
                 return null;
             }
         }
-    %>
-    <%
-        //get all
-        String uriGetAll = "http://localhost:8080/api/admin/home/subject/display";
-
-        HttpPost httpPost = new HttpPost(uriGetAll);
-        StringEntity entity = new StringEntity(requestBody);
-        httpPost.setEntity(entity);
-
-        httpPost.setHeader("Cookie", value + cookieValue);
-
-        // call function, return data
-        JSONArray listResp = getAllMh(httpClient, httpPost);
     %>
     <%
         // add MH
@@ -194,6 +193,10 @@
         entity = new StringEntity(requestBody);
         httpPost.setEntity(entity);
         listResp = getAllMh(httpClient, httpPost);
+
+        // return UTF8
+        byte[] bytes = tenMonHoc.getBytes(StandardCharsets.ISO_8859_1);
+        tenMonHoc = new String(bytes, StandardCharsets.UTF_8);
     %>
     <%
         // sort
@@ -219,6 +222,10 @@
             System.out.println("Sort Order: " + sortOrder);
             System.out.println("Ten MH sort: " + tenMonHoc);
             listResp = getAllMh(httpClient, httpPost);
+
+            // return UTF8
+            bytes = tenMonHoc.getBytes(StandardCharsets.ISO_8859_1);
+            tenMonHoc = new String(bytes, StandardCharsets.UTF_8);
         }
     %>
     <h1 class="tieuDeTrang">Danh sách môn học</h1>
@@ -251,6 +258,7 @@
                     <th data-sort onclick="sortTable('tenMonHoc', this)" class="cot-tenMH tenMonHoc">Tên môn học</th>
                     <th data-sort onclick="sortTable('tinChi', this)" class="cot-TC tinChi">Số tín chỉ</th>
                     <th data-sort onclick="sortTable('idKhoa', this)" class="cot-khoa idKhoa">Khoa</th>
+                    <th data-sort onclick="sortTable('trangThai', this)" class="cot-trangThai trangThai">Trạng thái</th>
                     <th data-sort onclick="sortTable('ngayTao', this)" class="cot-ngayTao ngayTao">Ngày tạo</th>
                     <th data-sort onclick="sortTable('ngaySua', this)" class="cot-ngayTao ngaySua">Ngày cập nhật</th>
                     <th class="hanh-dong">Action</th>
@@ -265,9 +273,24 @@
                         <td><%=subject.getString("tenMonHoc")%></td>
                         <td class="cot-TC"><%=subject.getInt("tinChi")%></td>
                         <td><%=subject.getString("tenKhoa")%></td>
+                        <%
+                            if(subject.getInt("trangThai")==1) {
+                        %>
+                        <td class="dangGiangDay">Còn giảng dạy</td>
+                        <%
+                        }
+                        else {
+                        %>
+                        <td class="ngungGiangDay">Ngừng giảng dạy</td>
+                        <%
+                            }
+                        %>
                         <td><%=subject.getString("ngayTao")%></td>
                         <td><%=subject.getString("ngaySua")%></td>
                         <td class="chucNang">
+                            <%
+                                if(subject.getInt("trangThai")==1) {
+                            %>
                             <div class="hop-hanh-dong">
                                 <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_mon_hoc_sua', '<%=subject.getString("idMh")%>', '<%=subject.getString("tenMonHoc")%>', '<%=subject.getInt("tinChi")%>', '<%=subject.getString("idKhoa")%>')">
                                     <span class="sua_tieuDe">Sửa</span>
@@ -278,6 +301,9 @@
                                     <i class="fa-solid fa-trash xoa_icon"></i>
                                 </button>
                             </div>
+                            <%
+                                }
+                            %>
                         </td>
                     </tr>
                     <% }
@@ -307,7 +333,7 @@
     <script src="../../../assets/js/pagination.js"></script>
     <script>
         if(<%= exist %>) {
-            alert("Mã môn học hoặc môn học đã tồn tại")
+            alert("Mã môn học hoặc môn học đã tồn tại");
         }
 
         // do lúc gửi đoạn sort nó hay load lại trang dẫn đến không kịp lưu lại class, hàm này dùng để lấy session đã lưu

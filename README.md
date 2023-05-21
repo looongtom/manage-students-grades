@@ -18,6 +18,7 @@ I) Thành viên:
 - Module làm:
 + Đăng nhập/Đăng xuất
 + Đổi mật khẩu
++ Quên mật khẩu xác thực email
 + Authen/Author
 
 4) Nguyễn Minh Quân:
@@ -25,7 +26,7 @@ I) Thành viên:
 + Trang chủ User
 + Xem điểm của user đó
 + Giao diện các form thêm + xóa ở phần Admin
-+ Trang 404
++ Giao diện trang 404
 
 5) Đào Xuân Đồng:
 - Module làm:

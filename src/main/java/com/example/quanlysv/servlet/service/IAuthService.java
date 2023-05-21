@@ -14,4 +14,5 @@ public interface IAuthService {
 
     boolean checkPassDefault(String username, String pass);
 
+
 }

@@ -1,6 +1,5 @@
 package com.example.quanlysv.servlet.dao;
 
-import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.teacher.TeacherFilter;
 import com.example.quanlysv.servlet.entity.TeacherEntity;
 
@@ -13,5 +12,5 @@ public interface ITeacherDao extends IGenericDao<TeacherEntity> {
     void deleteTeacher(String id);
     TeacherEntity getById(String id);
 
-
+    boolean existedByIdOrEmailOrPhone(String id, String email, String phoneNum);
 }

@@ -11,6 +11,7 @@
 <%@ page import="org.apache.http.client.utils.URIBuilder" %>
 <%@ page import="java.net.URI" %>
 <%@ page import="java.io.IOException" %>
+<%@ page import="java.nio.charset.StandardCharsets" %>
 <html>
 <head>
     <%@include file="../menu/admin_menu_header.jsp" %>
@@ -52,6 +53,18 @@
             "\"pageSize\":" + pageSize +
             "}" +
             "}";
+
+    //get all
+    String uriGetAll = "http://localhost:8080/api/admin/home/student";
+
+    HttpPost httpPost = new HttpPost(uriGetAll);
+    StringEntity entity = new StringEntity(requestBody);
+    httpPost.setEntity(entity);
+
+    httpPost.setHeader("Cookie", value + cookieValue);
+
+    // call function, return data
+    JSONArray listResp;
 %>
 <body>
 <%@include file="../menu/admin_menu.jsp" %>
@@ -71,19 +84,6 @@
                 return null;
             }
         }
-    %>
-    <%
-        //get all
-        String uriGetAll = "http://localhost:8080/api/admin/home/student";
-
-        HttpPost httpPost = new HttpPost(uriGetAll);
-        StringEntity entity = new StringEntity(requestBody);
-        httpPost.setEntity(entity);
-
-        httpPost.setHeader("Cookie", value + cookieValue);
-
-        // call function, return data
-        JSONArray listResp = getAllSv(httpClient, httpPost);
     %>
     <%
         // add SV (status = 0)
@@ -220,6 +220,10 @@
         entity = new StringEntity(requestBody);
         httpPost.setEntity(entity);
         listResp = getAllSv(httpClient, httpPost);
+
+        // return UTF8
+        byte[] bytes = tenSv.getBytes(StandardCharsets.ISO_8859_1);
+        tenSv = new String(bytes, StandardCharsets.UTF_8);
     %>
     <%
         // sort
@@ -250,6 +254,10 @@
             System.out.println("idSv sort: " + idSv);
             System.out.println("tenSv sort: " + tenSv);
             listResp = getAllSv(httpClient, httpPost);
+
+            // return UTF8
+            bytes = tenSv.getBytes(StandardCharsets.ISO_8859_1);
+            tenSv = new String(bytes, StandardCharsets.UTF_8);
         }
     %>
     <div class="dauTrang">
@@ -300,6 +308,7 @@
                 <th data-sort onclick="sortTable('genderSv', this)" class="cot-gioiTinhSV genderSv">Giới tính</th>
                 <th class="cot-sdtSV">Số điện thoại</th>
                 <th data-sort onclick="sortTable('lopHanhChinhSv', this)" class="cot-lopSV lopHanhChinhSv">Lớp hành chính</th>
+                <th data-sort onclick="sortTable('trangThai', this)" class="cot-trangThai trangThai">Trạng thái</th>
                 <th data-sort onclick="sortTable('ngayTao', this)" class="cot-ngayTao ngayTao">Ngày tạo</th>
                 <th data-sort onclick="sortTable('ngaySua', this)" class="cot-ngayTao ngaySua">Ngày cập nhật</th>
                 <th class="hanh-dong">Action</th>
@@ -317,6 +326,18 @@
                         <td><%=student.getString("genderSv")%></td>
                         <td><%=student.getString("phoneSv")%></td>
                         <td><%=student.getString("lopHanhChinhSv")%></td>
+                        <%
+                            if(student.getInt("trangThai")==1) {
+                        %>
+                        <td class="dangHoc">Đang học</td>
+                        <%
+                        }
+                        else {
+                        %>
+                        <td class="daThoiHoc">Đã thôi học</td>
+                        <%
+                            }
+                        %>
                         <td><%=student.getString("ngayTao")%></td>
                         <td><%=student.getString("ngaySua")%></td>
                         <td class="chucNang">
@@ -325,10 +346,16 @@
                                     <span class="sua_tieuDe">Sửa</span>
                                     <i class="fa-solid fa-pencil sua_icon"></i>
                                 </button>
+                                <%
+                                    if(student.getInt("trangThai")==1) {
+                                %>
                                 <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '<%=student.getString("idSv")%>', 'ma-sv-xoa')" class="xoa hop-hanh-dong-nut" type="button">
                                     <span class="xoa_tieuDe">Xóa</span>
                                     <i class="fa-solid fa-trash xoa_icon"></i>
                                 </button>
+                                <%
+                                    }
+                                %>
                             </div>
                         </td>
                     </tr>

@@ -11,9 +11,11 @@
 <%@ page import="org.apache.http.client.utils.URIBuilder" %>
 <%@ page import="java.net.URI" %>
 <%@ page import="java.io.IOException" %>
+<%@ page import="java.nio.charset.StandardCharsets" %>
 
 <html>
 <head>
+    <meta charset="UTF-8">
     <%@include file="../menu/admin_menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/admin/teacher.css">
     <link rel="stylesheet" href="../../../assets/css/admin/add_teacher_form.css">
@@ -55,6 +57,18 @@
             "\"pageSize\":" + pageSize +
             "}"+
             "}";
+
+    //get all
+    String uriGetAll = "http://localhost:8080/api/admin/home/teacher";
+
+    HttpPost httpPost = new HttpPost(uriGetAll);
+    StringEntity entity = new StringEntity(requestBody);
+    httpPost.setEntity(entity);
+
+    httpPost.setHeader("Cookie", value + cookieValue);
+
+    // call function, return data
+    JSONArray listResp;
 %>
 <body>
 <%@include file="../menu/admin_menu.jsp" %>
@@ -76,19 +90,6 @@
         }
     %>
     <%
-        //get all
-        String uriGetAll = "http://localhost:8080/api/admin/home/teacher";
-
-        HttpPost httpPost = new HttpPost(uriGetAll);
-        StringEntity entity = new StringEntity(requestBody);
-        httpPost.setEntity(entity);
-
-        httpPost.setHeader("Cookie", value + cookieValue);
-
-        // call function, return data
-        JSONArray listResp = getAllGv(httpClient, httpPost);
-    %>
-    <%
         // add GV
         String uriAddGV = "http://localhost:8080/api/admin/home/teacher/create-or-edit";
         String idGv = request.getParameter("ma-gv");
@@ -98,6 +99,7 @@
         String sdtGv = request.getParameter("sdt-gv");
         String idKhoa = request.getParameter("ma-khoa-gv");
         String requestBodyAddGV = "{"+
+                "\"status\":\"" + 0 + "\","+
                 "\"idGv\":\"" + idGv + "\","+
                 "\"tenGv\":\"" + nameGv + "\","+
                 "\"sdtGv\":\"" + sdtGv + "\","+
@@ -106,6 +108,7 @@
                 "\"idKhoa\":\"" + idKhoa + "\"" +
                 "}";
 
+        boolean exist = false;
         // send the request and retrieve the response
         if(idGv!=null && nameGv!=null && emailGv!=null && genderGv!=null && sdtGv!=null && idKhoa!=null) {
             System.out.println(requestBodyAddGV);
@@ -121,10 +124,16 @@
             System.out.println(responseBodyAddGV);
 
             JSONObject jsonResponseAddGV = new JSONObject(responseBodyAddGV);
-            System.out.println(jsonResponseAddGV);
 
-            // get all giang vien
-            listResp = getAllGv(httpClient, httpPost);
+            // check if the data is existed or not
+            if (jsonResponseAddGV.getInt("status") != 200) {
+                exist = true;
+            }
+
+            // get all mon hoc
+            if(!exist) {
+                listResp = getAllGv(httpClient, httpPost);
+            }
         }
     %>
     <%
@@ -137,6 +146,7 @@
         String sdtGvU = request.getParameter("sdt-gv-sua");
         String idKhoaU = request.getParameter("ma-khoa-gv-sua");
         String requestBodyUpdateGV ="{"+
+                "\"status\":\"" + 1 + "\","+
                 "\"idGv\":\"" + idGvU + "\","+
                 "\"tenGv\":\"" + tenGvU + "\","+
                 "\"sdtGv\":\"" + sdtGvU + "\","+
@@ -183,7 +193,7 @@
         // tìm kiếm
         tenGv = request.getParameter("nhapTimKiem");
         if(tenGv==null) tenGv = "";
-        System.out.println("Ten GV: " + tenGv);
+        System.out.println("Ten GV tim kiem: " + tenGv);
         requestBody = "{"+
                 "\"tenGv\":\"" + tenGv + "\","+
                 "\"baseRequest\":{"+
@@ -196,6 +206,10 @@
         entity = new StringEntity(requestBody);
         httpPost.setEntity(entity);
         listResp = getAllGv(httpClient, httpPost);
+
+        // return UTF8
+        byte[] bytes = tenGv.getBytes(StandardCharsets.ISO_8859_1);
+        tenGv = new String(bytes, StandardCharsets.UTF_8);
     %>
     <%
         // sort
@@ -204,6 +218,7 @@
         if(sortField!=null) {
             tenGv = request.getParameter("tenGv");
             if(tenGv==null) tenGv = "";
+            System.out.println("Ten GV sort: " + tenGv);
 
             requestBody = "{"+
                     "\"tenGv\":\"" + tenGv + "\","+
@@ -221,6 +236,10 @@
             System.out.println("Sort Order: " + sortOrder);
             System.out.println("Ten GV sort: " + tenGv);
             listResp = getAllGv(httpClient, httpPost);
+
+            // return UTF8
+            bytes = tenGv.getBytes(StandardCharsets.ISO_8859_1);
+            tenGv = new String(bytes, StandardCharsets.UTF_8);
         }
     %>
     <h1 class="tieuDeTrang">Danh sách giảng viên</h1>
@@ -231,7 +250,7 @@
             <span class="nutThemGV_tieuDe">Thêm giảng viên</span>
             <i class="fa-solid fa-plus"></i>
         </button>
-        <form class="timKiem" method="post">
+        <form class="timKiem" method="post" accept-charset="UTF-8">
             <div class="tieuDeTimKiem">Tìm kiếm giảng viên: </div>
             <input type="search" id="nhapTimKiem" name="nhapTimKiem" placeholder="Nhập tên giảng viên" value="<%= tenGv %>">
             <button class="nutTimKiem" type="submit">
@@ -242,7 +261,7 @@
     </div>
 
     <div class="boc-bang">
-        <form id="formGV" method="post" action="/admin/teacher">
+        <form id="formGV" method="post" action="/admin/teacher" accept-charset="UTF-8">
             <input type="hidden" name="tenGv" value="<%= tenGv %>">
             <input type="hidden" name="sortFieldGV" value="<%= sortField %>">
             <input type="hidden" name="sortOrderGV" value="<%= sortOrder %>">
@@ -257,6 +276,7 @@
                     <th class="cot-emailGV">Email</th>
                     <th data-sort onclick="sortTable('genderGv', this)" class="cot-gioiTinhGV genderGv">Giới tính</th>
                     <th data-sort onclick="sortTable('idKhoa', this)" class="cot-khoaGV idKhoa">Khoa</th>
+                    <th data-sort onclick="sortTable('trangThai', this)" class="cot-trangThai trangThai">Trạng thái</th>
                     <th data-sort onclick="sortTable('ngayTao', this)" class="cot-ngayTao ngayTao">Ngày tạo</th>
                     <th data-sort onclick="sortTable('ngaySua', this)" class="cot-ngayTao ngaySua">Ngày cập nhật</th>
                     <th class="hanh-dong">Action</th>
@@ -273,6 +293,18 @@
                     <td><%= teacher.getString("emailGv") %></td>
                     <td><%= teacher.getString("genderGv") %></td>
                     <td><%= teacher.getString("tenKhoa") %></td>
+                    <%
+                        if(teacher.getInt("trangThai")==1) {
+                    %>
+                    <td class="dangCongTac">Đang công tác</td>
+                    <%
+                    }
+                    else {
+                    %>
+                    <td class="ngungCongTac">Ngừng công tác</td>
+                    <%
+                        }
+                    %>
                     <td><%= teacher.getString("ngayTao") %></td>
                     <td><%= teacher.getString("ngaySua") %></td>
                     </td>
@@ -282,10 +314,16 @@
                                 <span class="sua_tieuDe">Sửa</span>
                                 <i class="fa-solid fa-pencil sua_icon"></i>
                             </button>
+                            <%
+                                if(teacher.getInt("trangThai")==1) {
+                            %>
                             <button onclick="hienXacNhanXoa('modal_xac_nhan_xoa', '<%= teacher.getString("idGv") %>', 'ma-gv-xoa')" class="xoa hop-hanh-dong-nut" type="button">
                                 <span class="xoa_tieuDe">Xóa</span>
                                 <i class="fa-solid fa-trash xoa_icon"></i>
                             </button>
+                            <%
+                                }
+                            %>
                         </div>
                     </td>
                 </tr>
@@ -317,6 +355,11 @@
 </body>
     <script src="../../../assets/js/pagination.js"></script>
     <script>
+        // Kiểm tra xem lúc thêm giảng viên thì id, số điện thoại hay email đã tồn tại chưa?
+        if(<%= exist %>) {
+            alert("Mã giảng viên, email hoặc số điện thoại đó đã tồn tại!");
+        }
+
         // do lúc gửi đoạn sort nó hay load lại trang dẫn đến không kịp lưu lại class, hàm này dùng để lấy session đã lưu
         // trong TeacherSessionController, gán nó vào class để hiển thị giao diện mũi tên là đang sort theo cột nào, asc hay desc
         if('${sessionScope.sortFieldGV}'!=='null' && '${sessionScope.sortFieldGV}'!=='') {

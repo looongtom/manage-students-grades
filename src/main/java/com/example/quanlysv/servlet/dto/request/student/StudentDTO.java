@@ -9,6 +9,16 @@ public class StudentDTO {
     private String phoneSv;
     private String lopHanhChinhSv;
 
+    public Integer getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(Integer trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    private Integer trangThai;
+
     private String ngayTao;
     private String ngaySua;
 
@@ -94,6 +104,9 @@ public class StudentDTO {
                 ", genderSv='" + genderSv + '\'' +
                 ", phoneSv='" + phoneSv + '\'' +
                 ", lopHanhChinhSv='" + lopHanhChinhSv + '\'' +
+                ", trangThai=" + trangThai +
+                ", ngayTao='" + ngayTao + '\'' +
+                ", ngaySua='" + ngaySua + '\'' +
                 '}';
     }
 }

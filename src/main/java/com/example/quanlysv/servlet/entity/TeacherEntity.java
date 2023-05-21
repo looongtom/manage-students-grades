@@ -5,6 +5,8 @@ import java.time.Instant;
 public class TeacherEntity {
     private String idGv,tenGv,sdtGv,emailGv,genderGv,idKhoa,tenKhoa;
     private Long ngayTao,ngaySua;
+    private Integer trangThai;
+
     public Long GetCurrentTime(Instant instant){
         Long timestamp = instant.toEpochMilli();
         return timestamp;
@@ -67,6 +69,14 @@ public class TeacherEntity {
 
     public void setIdKhoa(String idKhoa) {
         this.idKhoa = idKhoa;
+    }
+
+    public Integer getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(Integer trangThai) {
+        this.trangThai = trangThai;
     }
 
     public Long getNgayTao() {

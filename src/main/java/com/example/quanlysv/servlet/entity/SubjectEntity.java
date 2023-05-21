@@ -1,16 +1,10 @@
 package com.example.quanlysv.servlet.entity;
 
 public class SubjectEntity {
-    private String idMh;
-    private String tenMonHoc;
+    private String idMh, tenMonHoc, idKhoa, tenKhoa;
     private Integer tinChi;
-    private String idKhoa;
-
-    private String tenKhoa;
-
-    private Long ngayTao;
-
-    private Long ngaySua;
+    private Long ngayTao, ngaySua;
+    private Integer trangThai;
 
     public Long getNgayTao() {
         return ngayTao;
@@ -50,6 +44,14 @@ public class SubjectEntity {
 
     public void setTinChi(Integer tinChi) {
         this.tinChi = tinChi;
+    }
+
+    public Integer getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(Integer trangThai) {
+        this.trangThai = trangThai;
     }
 
     public String getIdKhoa() {
