@@ -132,5 +132,11 @@ public class LopServiceImpl implements ILopService {
                     .setMessage("failed"+e.getMessage())
                     .setStatus(500)
                     .build();
-        }    }
+        }
+    }
+
+    @Override
+    public List<LopEntity> getAllLop() {
+        return lopDao.getAllLop();
+    }
 }

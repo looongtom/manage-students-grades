@@ -6,6 +6,10 @@
 <%@ page import="java.util.ResourceBundle" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.quanlysv.servlet.entity.HocKyEntity" %>
+<%@ page import="com.example.quanlysv.servlet.entity.TeacherEntity" %>
+<%@ page import="com.example.quanlysv.servlet.entity.SubjectEntity" %>
+<%@ page import="com.example.quanlysv.servlet.entity.LopEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -73,57 +77,40 @@
                     <div class="phanThongTin">
                         <div class="cot">
                             <div class="hang">
+                                <%
+                                    List<HocKyEntity>listHK =(List<HocKyEntity>) request.getAttribute("listHocKy");
+                                %>
                                 <label for="" class="nhanModal">Học kỳ</label>
                                 <select name="idHk" class="nhapModal" required>
                                     <option value="">Please select</option>
 <%--                                    <option value="Class A">Học kì 1 năm 2020-2021</option>--%>
 <%--                                    <option value="Class B">Học kì 2 năm 2020-2021</option>--%>
                                     <%
-                                        try{
-                                            Class.forName(driver);
-                                            Connection con= DriverManager.getConnection(url,username,password);
-                                            Statement st=con.createStatement();
-                                            String str="select * from hocky ";
-                                            ResultSet rs=st.executeQuery(str);
-                                            while(rs.next()){
+                                        for(HocKyEntity hocKyEachRow : listHK){
                                     %>
-                                    <option value=<%=rs.getString("id_hk")%>><%=rs.getString("ten_hoc_ky")%></option>
+                                    <option value=<%=hocKyEachRow.getIdHk()%>><%=hocKyEachRow.getTenHocKy()%></option>
                                 <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
                                     <%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
                                     <% }
-
-                                    }catch (Exception e){
-
-                                    }
                                     %>
                                 </select>
                             </div>
 
                             <div class="hang">
+                                <%
+                                    List<TeacherEntity>listGv =(List<TeacherEntity>) request.getAttribute("listGiangVien");
+                                %>
                                 <label for="" class="nhanModal">Giảng viên</label>
 
                                 <select name="idGv" class="nhapModal" required>
                                     <option value="">Please select</option>
                                     <%
-                                        try{
-                                            Class.forName(driver);
-                                            Connection con= DriverManager.getConnection(url,
-                                                    username,password);
-                                            Statement st=con.createStatement();
-                                            String str="select * from giangvien ";
-                                            ResultSet rs=st.executeQuery(str);
-                                            while(rs.next()){
+                                        for(TeacherEntity giangVienEachRow : listGv){
                                     %>
-                                    <option value=<%=rs.getString("id_gv")%>><%=rs.getString("ten_gv")%></option>
-<%--                                    <input type="hidden" name="idGv" value=<%=rs.getString("id_gv")%> />--%>
-
-                                <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
-<%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
+                                    <option value=<%=giangVienEachRow.getIdGv()%>><%=giangVienEachRow.getTenGv()%></option>
+                                    <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
+                                    <%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
                                     <% }
-
-                                    }catch (Exception e){
-
-                                    }
                                     %>
                                 </select>
 
@@ -157,61 +144,41 @@
 
                         <div class="cot">
                             <div class="hang">
+                                <%
+                                    List<SubjectEntity>listMh =(List<SubjectEntity>) request.getAttribute("listMonHoc");
+                                %>
                                 <label for="" class="nhanModal">Môn học</label>
                                 <select  name="idMh" class="nhapModal" required>
                                     <option value="">Please select</option>
 <%--                                    <option value="Class A">Lập trình Web</option>--%>
 <%--                                    <option value="Class B">Cơ sở dữ liệu phân tán</option>--%>
                                     <%
-                                        try{
-                                            Class.forName(driver);
-                                            Connection con= DriverManager.getConnection(url,
-                                                    username,password);
-                                            Statement st=con.createStatement();
-                                            String str="select * from monhoc ";
-                                            ResultSet rs=st.executeQuery(str);
-                                            while(rs.next()){
+                                        for(SubjectEntity monHocEachRow : listMh){
                                     %>
-                                    <option value=<%=rs.getString("id_mh")%>><%=rs.getString("ten_mon_hoc")%></option>
-<%--                                    <input type="hidden" name="idMh" value=<%=rs.getString("id_mh")%> />--%>
-
-                                <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
+                                    <option value=<%=monHocEachRow.getIdMh()%>><%=monHocEachRow.getTenMonHoc()%></option>
+                                    <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
                                     <%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
                                     <% }
-
-                                    }catch (Exception e){
-
-                                    }
                                     %>
                                 </select>
                             </div>
 
                             <div class="hang">
+                                <%
+                                    List<LopEntity>listLop =(List<LopEntity>) request.getAttribute("listLop");
+                                %>
                                 <label for="" class="nhanModal">Lớp</label>
                                 <select  name="idLop" class="nhapModal" required>
                                     <option value="">Please select</option>
                                     <%--                                    <option value="Class A">Lập trình Web</option>--%>
                                     <%--                                    <option value="Class B">Cơ sở dữ liệu phân tán</option>--%>
                                     <%
-                                        try{
-                                            Class.forName(driver);
-                                            Connection con= DriverManager.getConnection(url,
-                                                    username,password);
-                                            Statement st=con.createStatement();
-                                            String str="select * from lop ";
-                                            ResultSet rs=st.executeQuery(str);
-                                            while(rs.next()){
+                                        for(LopEntity lopEachRow : listLop){
                                     %>
-                                    <option value=<%=rs.getString("id_lop")%>><%=rs.getString("ten_lop")%></option>
-                                    <%--                                    <input type="hidden" name="idMh" value=<%=rs.getString("id_mh")%> />--%>
-
+                                    <option value=<%=lopEachRow.getIdLop()%>><%=lopEachRow.getTenLop()%></option>
                                     <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
                                     <%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
                                     <% }
-
-                                    }catch (Exception e){
-
-                                    }
                                     %>
                                 </select>
                             </div>

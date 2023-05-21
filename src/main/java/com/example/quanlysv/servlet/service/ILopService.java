@@ -9,6 +9,7 @@ import com.example.quanlysv.servlet.entity.LopEntity;
 import java.util.List;
 
 public interface ILopService {
+    List<LopEntity> getAllLop();
     BaseResponse<?>  createOrUpdateLop(LopDTO lopDTO);
 
     BaseResponse<?> findLop(LopFilter baseRequest);

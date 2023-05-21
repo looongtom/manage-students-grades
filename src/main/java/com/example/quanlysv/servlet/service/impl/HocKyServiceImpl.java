@@ -152,4 +152,8 @@ public class HocKyServiceImpl implements IHocKyService {
         }
     }
 
+    @Override
+    public List<HocKyEntity> getAllHocKy() {
+        return hocKyDao.getAllHocKy();
+    }
 }

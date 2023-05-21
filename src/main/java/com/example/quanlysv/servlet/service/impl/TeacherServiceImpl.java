@@ -151,4 +151,9 @@ public class TeacherServiceImpl implements ITeacherService {
             return new BaseResponse.Builder<List<TeacherDTO>>()
                     .setMessage("failed"+e.getMessage()).setStatus(500).build();
         }    }
+
+    @Override
+    public List<TeacherEntity> getAllGiangVien() {
+        return teacherDao.getAllGiangVien();
+    }
 }

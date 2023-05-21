@@ -6,6 +6,8 @@ import com.example.quanlysv.servlet.entity.TeacherEntity;
 import java.util.List;
 
 public interface ITeacherDao extends IGenericDao<TeacherEntity> {
+
+    List<TeacherEntity>getAllGiangVien();
     void createOrEditTeacher(TeacherEntity teacherEntity);
     List<TeacherEntity> findTeacher(TeacherFilter baseRequest);
     Integer countTotalRecords(TeacherFilter request);

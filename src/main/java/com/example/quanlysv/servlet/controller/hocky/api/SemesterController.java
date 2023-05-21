@@ -43,4 +43,6 @@ public class SemesterController extends HttpServlet {
         BaseResponse<?> baseResponse = service.findSemesterById(id);
         ResponseUtils.responseApi(req, resp, baseResponse);
     }
+
+
 }

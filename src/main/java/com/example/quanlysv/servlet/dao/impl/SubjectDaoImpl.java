@@ -2,7 +2,9 @@ package com.example.quanlysv.servlet.dao.impl;
 
 import com.example.quanlysv.servlet.dao.ISubjectDao;
 import com.example.quanlysv.servlet.dto.request.subject.SubjectFilter;
+import com.example.quanlysv.servlet.entity.HocKyEntity;
 import com.example.quanlysv.servlet.entity.SubjectEntity;
+import com.example.quanlysv.servlet.mapper.HocKyMapper;
 import com.example.quanlysv.servlet.mapper.SubjectMapper;
 
 import java.util.List;
@@ -88,5 +90,22 @@ public class SubjectDaoImpl extends AbstractDao<SubjectEntity> implements ISubje
               System.out.println(e.getMessage());
               throw  new RuntimeException(e.getMessage());
           }
+    }
+
+    @Override
+    public List<SubjectEntity> getAllMonHoc() {
+        try{
+            String query="SELECT mh.id_mh as idMh, mh.ten_mon_hoc as tenMonHoc," +
+                    " mh.tin_chi as tinChi, mh.ngay_tao as ngayTao," +
+                    " mh.ngay_sua as ngaySua, mh.trang_thai as trangThai," +
+                    "mh.id_khoa as idKhoa, k.ten_khoa as tenKhoa FROM monhoc mh join khoa k on mh.id_khoa = k.id_khoa where 1=?";
+            List<SubjectEntity> list = findByProperties(query, new SubjectMapper(),1);
+
+            return list.isEmpty()? null: list;
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 }
