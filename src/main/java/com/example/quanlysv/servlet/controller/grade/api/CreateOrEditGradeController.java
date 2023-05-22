@@ -56,8 +56,6 @@ public class CreateOrEditGradeController extends HttpServlet {
         HttpSession session = req.getSession();
         String cookieName = (String) session.getAttribute("cookie_name");
         String cookieValue = (String) session.getAttribute("cookie_value");
-        System.out.println("cookieName: "+cookieName);
-        System.out.println("cookieValue: "+cookieValue);
         resp.setHeader( cookieName,cookieValue );
 
         Part part = req.getPart("file");
@@ -72,12 +70,6 @@ public class CreateOrEditGradeController extends HttpServlet {
         Integer thi=Integer.valueOf(req.getParameter("thi"));
         Integer kiem_tra=Integer.valueOf(req.getParameter("kiem_tra"));
 
-
-        System.out.println("cc: "+cc);
-        System.out.println("bt: "+bt);
-        System.out.println("thi: "+thi);
-        System.out.println("kiem_tra: "+kiem_tra);
-        System.out.println("idLop: "+idLop);
 
         String fileName = extractFileName(part);
         fileName = new File(fileName).getName();
@@ -104,8 +96,13 @@ public class CreateOrEditGradeController extends HttpServlet {
             createOrEditGradeDTO.setDiemKt(grade.getDiemKt());
             createOrEditGradeDTO.setNgayTao(currentTime);
             createOrEditGradeDTO.setNgaySua(currentTime);
-            System.out.println(createOrEditGradeDTO.toString());
-            serviceGrade.createOrUpdateGrade(createOrEditGradeDTO);
+            if(createOrEditGradeDTO.getIdSv()!=null && createOrEditGradeDTO.getIdDiem()!=null &&
+                    createOrEditGradeDTO.getIdGv()!=null && createOrEditGradeDTO.getIdMh()!=null &&
+                    createOrEditGradeDTO.getIdHk()!=null && createOrEditGradeDTO.getIdLop()!=null &&
+                    createOrEditGradeDTO.getDiemCc()!=null && createOrEditGradeDTO.getDiemBt()!=null &&
+                    createOrEditGradeDTO.getDiemThi()!=null && createOrEditGradeDTO.getDiemKt()!=null){
+                serviceGrade.createOrUpdateGrade(createOrEditGradeDTO);
+            }
         }
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/api/admin/thanh-phan/create-or-edit");

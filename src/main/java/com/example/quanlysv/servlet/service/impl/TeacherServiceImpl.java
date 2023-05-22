@@ -23,7 +23,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TeacherServiceImpl implements ITeacherService {
-    private static final org.apache.log4j.Logger log = Logger.getLogger(StudentServiceImpl.class.getName());
+    private static final org.apache.log4j.Logger log = Logger.getLogger(TeacherServiceImpl.class.getName());
 
     private ITeacherDao teacherDao;
     private IKhoaDao iKhoaDao;

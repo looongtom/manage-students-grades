@@ -25,6 +25,9 @@
     <title>Danh sách điểm</title>
 </head>
 <%
+    String khoa = request.getParameter("khoa");
+%>
+<%
     HttpClient httpClient = HttpClientBuilder.create().build();
 
     // get session id
@@ -59,7 +62,7 @@
     String requestBodyThanhPhan ="";
 %>
 <body>
-<%@include file="../menu/admin_menu.jsp" %>
+<%@include file="../menu/menu_view_grade.jsp" %>
 <div class="manHinhChinh">
     <%!
         // Hàm Refresh lại trang lấy sinh vien
@@ -182,16 +185,17 @@
     <h1 class="tieuDeTrang">Danh sách điểm lớp: <%=getIdLopFromClassJSP%></h1>
     <div class="themVaTimKiem">
         <!-- nut them sinh vien -->
+        <a class="nutTimKiem" href="../class/class.jsp?khoa=<%=khoa%>">Quay lại</a>
 
-        <div class="timKiem">
-            <div class="tieuDeTimKiem">Tìm kiếm: </div>
-            <input type="search" class="nhapTimKiem" placeholder="Nhập mã sinh viên">
-            <input type="search" class="nhapTimKiem" placeholder="Nhập trạng thái">
-            <button class="nutTimKiem">
-                <span class="nutTimKiem_tieuDe">Tìm</span>
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </div>
+<%--        <div class="timKiem">--%>
+<%--            <div class="tieuDeTimKiem">Tìm kiếm: </div>--%>
+<%--            <input type="search" class="nhapTimKiem" placeholder="Nhập mã sinh viên">--%>
+<%--            <input type="search" class="nhapTimKiem" placeholder="Nhập trạng thái">--%>
+<%--            <button class="nutTimKiem">--%>
+<%--                <span class="nutTimKiem_tieuDe">Tìm</span>--%>
+<%--                <i class="fa-solid fa-magnifying-glass"></i>--%>
+<%--            </button>--%>
+<%--        </div>--%>
     </div>
     <div class="boc-bang">
         <table class="danhSach">

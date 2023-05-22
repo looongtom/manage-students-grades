@@ -36,7 +36,9 @@ public class CreateThanhPhanController extends HttpServlet {
 
         req.setAttribute("showDialog", true);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/home/admin/grade/add_grade.jsp");
+        req.setAttribute("idLop", idLop);
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/api/admin/home/info-to-add-grade");
         dispatcher.forward(req, resp);
     }
 }
