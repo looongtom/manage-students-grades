@@ -16,6 +16,8 @@
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.net.URI" %>
+<%@ page import="org.apache.http.client.utils.URIBuilder" %>
 <html>
 <head>
     <link rel="stylesheet" href="../../../assets/css/admin/view_grade.css">
@@ -75,58 +77,72 @@
 <%--        Lấy tất cả điểm sv của lớp--%>
     <%
         String idDiem="";
-        //get all
         String uriGetAll = "http://localhost:8080/api/admin/grade/view";
-
-        HttpPost httpPost = new HttpPost(uriGetAll);
-        StringEntity entity = new StringEntity(requestBodyDiem);
-        httpPost.setEntity(entity);
-
-        httpPost.setHeader("Cookie", value + cookieValue);
-
-        // call function, return data
-        JSONArray listResp = getAllDiem(httpClient, httpPost);
-//        System.out.println("diem: "+ idDiem.toString());
-        JSONObject diem = listResp.getJSONObject(1);
-        idDiem = diem.getString("idDiem"); // set idDiem
-
         List<String>listTenSv = new ArrayList<>();
-        for (int i = 0; i < listResp.length(); i++) {
-            String uriGetSv="http://localhost:8080/api/admin/home/student?idSv=";
-            JSONObject infoDiem = listResp.getJSONObject(i);
-            String idSv= infoDiem.getString("idSv");
-            uriGetSv+=idSv;
-            HttpGet httpGet = new HttpGet(uriGetSv);
-            httpGet.setHeader("Cookie", value + cookieValue);
+        JSONArray listResp = new JSONArray();
+        try{
+            HttpPost httpPost = new HttpPost(uriGetAll);
+            StringEntity entity = new StringEntity(requestBodyDiem);
+            httpPost.setEntity(entity);
 
-            HttpResponse resp = httpClient.execute(httpGet);
-            String responseData = EntityUtils.toString(resp.getEntity());
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonNode = objectMapper.readTree(responseData);
-            JsonNode thongTinSv = jsonNode.get("data");
-            System.out.println( thongTinSv.get("tenSv").asText() );
-            listTenSv.add( String.valueOf( thongTinSv.get("tenSv").asText() ) );
+            httpPost.setHeader("Cookie", value + cookieValue);
+
+             listResp = getAllDiem(httpClient, httpPost);
+            JSONObject diem = listResp.getJSONObject(1);
+            idDiem = diem.getString("idDiem"); // set idDiem
+
+            for (int i = 0; i < listResp.length(); i++) {
+                JSONObject infoDiem = listResp.getJSONObject(i);
+                String idSv= infoDiem.getString("idSv");
+                URI uriGetInfoSV = new URIBuilder("http://localhost:8080/api/admin/home/student").setParameter("idSv",idSv).build();
+
+                try{
+                    HttpGet httpGet = new HttpGet(uriGetInfoSV);
+
+                    httpGet.setHeader("Cookie", value + cookieValue);
+
+                    HttpResponse resp = httpClient.execute(httpGet);
+                    String responseData = EntityUtils.toString(resp.getEntity());
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    JsonNode jsonNode = objectMapper.readTree(responseData);
+                    JsonNode thongTinSv = jsonNode.get("data");
+                    listTenSv.add( String.valueOf( thongTinSv.get("tenSv").asText() ) );
+                }catch (Exception e){
+
+                }
+
+            }
+        }catch (Exception e){
+
         }
     %>
 
     <%
-        String uriGetThanhPhan="http://localhost:8080/api/admin/thanh-phan/get?idDiem=";
-        uriGetThanhPhan+=idDiem;
-        System.out.println("uriGetThanhPhan: "+uriGetThanhPhan);
-        HttpGet httpGet = new HttpGet(uriGetThanhPhan);
-        httpGet.setHeader("Cookie", value + cookieValue);
+        URI uriGetHeSoTP = new URIBuilder("http://localhost:8080/api/admin/thanh-phan/get").setParameter("idDiem",idDiem).build();
+        JsonNode heSoThanhPhan = null;
+        Integer hesoDiemCc = null;
+        Integer hesoDiemBt = null;
+        Integer hesoDiemThi = null;
+        Integer hesoDiemKt = null;
+        try{
+            HttpGet httpGet = new HttpGet(uriGetHeSoTP);
+            httpGet.setHeader("Cookie", value + cookieValue);
 
-        HttpResponse resp = httpClient.execute(httpGet);
-        String responseData = EntityUtils.toString(resp.getEntity());
+            HttpResponse resp = httpClient.execute(httpGet);
+            String responseData = EntityUtils.toString(resp.getEntity());
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(responseData);
-        JsonNode heSoThanhPhan = jsonNode.get("data");
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = objectMapper.readTree(responseData);
+            heSoThanhPhan = jsonNode.get("data");
 
-        Integer hesoDiemCc = Integer.valueOf(heSoThanhPhan.get("diemCc").asInt());
-        Integer hesoDiemBt = Integer.valueOf(heSoThanhPhan.get("diemBt").asInt());
-        Integer hesoDiemThi = Integer.valueOf(heSoThanhPhan.get("diemThi").asInt());
-        Integer hesoDiemKt = Integer.valueOf(heSoThanhPhan.get("diemKt").asInt());
+             hesoDiemCc = Integer.valueOf(heSoThanhPhan.get("diemCc").asInt());
+             hesoDiemBt = Integer.valueOf(heSoThanhPhan.get("diemBt").asInt());
+             hesoDiemThi = Integer.valueOf(heSoThanhPhan.get("diemThi").asInt());
+             hesoDiemKt = Integer.valueOf(heSoThanhPhan.get("diemKt").asInt());
+        }catch (Exception e){
+
+        }
+
 
 
     %>
@@ -163,7 +179,7 @@
            return "A+";
        }
     %>
-    <h1 class="tieuDeTrang">Danh sách điểm lớp: CNPM_01</h1>
+    <h1 class="tieuDeTrang">Danh sách điểm lớp: <%=getIdLopFromClassJSP%></h1>
     <div class="themVaTimKiem">
         <!-- nut them sinh vien -->
 

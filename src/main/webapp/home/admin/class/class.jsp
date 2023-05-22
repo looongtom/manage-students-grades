@@ -11,6 +11,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.IOException" %>
+<%@ page import="java.net.URI" %>
+<%@ page import="org.apache.http.client.utils.URIBuilder" %>
+<%@ page import="java.net.URISyntaxException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 
@@ -42,8 +45,13 @@
 <%!
   // lấy list học kỳ
   public String GetTenHk(HttpClient httpClient,String idHk,String value,String cookieValue) throws IOException {
-      String uri = "http://localhost:8080/api/admin/home/semester?id="+idHk;
-      HttpGet httpGet = new HttpGet(uri);
+    URI uriGetTenHk = null;
+    try {
+      uriGetTenHk = new URIBuilder("http://localhost:8080/api/admin/home/semester").setParameter("id",idHk).build();
+    } catch (URISyntaxException e) {
+      throw new RuntimeException(e);
+    }
+    HttpGet httpGet = new HttpGet(uriGetTenHk);
       httpGet.setHeader("Cookie", value + cookieValue);
       HttpResponse resp = httpClient.execute(httpGet);
     String responseData = EntityUtils.toString(resp.getEntity());
@@ -56,24 +64,25 @@
 
 <%
   //get all
-  String uriGetAll = "http://localhost:8080/api/admin/class?idKhoa="+khoa;
-
-  HttpGet httpGet = new HttpGet(uriGetAll);
-  httpGet.setHeader("Cookie", value + cookieValue);
-
-  HttpResponse resp = httpClient.execute(httpGet);
-  String responseBody = EntityUtils.toString(resp.getEntity());
-  JSONObject jsonResponse = new JSONObject(responseBody);
-  JSONArray listLop = jsonResponse.getJSONArray("data");
-
+  URI uriGetLop= new URIBuilder("http://localhost:8080/api/admin/class").setParameter("idKhoa",khoa).build();
+  JSONArray listLop  = new JSONArray();
   List<String> listHk = new ArrayList<>();
-  for(int i=0;i<listLop.length();i++){
-    JSONObject infoLop = listLop.getJSONObject(i);
-    listHk.add(GetTenHk(httpClient, String.valueOf(infoLop.getString("idHk")),value,cookieValue ) );
+
+  try{
+    HttpGet httpGet = new HttpGet(uriGetLop);
+    httpGet.setHeader("Cookie", value + cookieValue);
+
+    HttpResponse resp = httpClient.execute(httpGet);
+    String responseBody = EntityUtils.toString(resp.getEntity());
+    JSONObject jsonResponse = new JSONObject(responseBody);
+    listLop = jsonResponse.getJSONArray("data");
+    for(int i=0;i<listLop.length();i++){
+      JSONObject infoLop = listLop.getJSONObject(i);
+      listHk.add(GetTenHk(httpClient, String.valueOf(infoLop.getString("idHk")),value,cookieValue ) );
+    }
+  }catch (Exception e){
   }
-  for(int i=0;i< listHk.size();i++){
-    System.out.println( listHk.get(i) );
-  }
+
 %>
 
 
