@@ -68,7 +68,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("cookie_value",cookie.getValue());
 
             if(accountEntity.getRoleId() == 1)
-                req.getRequestDispatcher("/home/admin/home_admin/home_admin.jsp").forward(req, resp);
+                req.getRequestDispatcher("/admin/home").forward(req, resp);
             else if (accountEntity.getRoleId() == 2) {
                 req.getRequestDispatcher("/home/user/home_user/home_user.jsp").forward(req, resp);
             }

@@ -12,13 +12,6 @@
 
     <title>Trang chủ</title>
 </head>
-<%
-    ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
-    String url = resourceBundle.getString("url");
-    String username = resourceBundle.getString("username");
-    String password = resourceBundle.getString("password");
-    String driver=resourceBundle.getString("driverName");
-%>
 <body>
 <%@include file="../menu/admin_menu.jsp" %>
 <div class="manHinhChinh">
@@ -34,23 +27,8 @@
                     <div class="box1">
                         <div class="small-box1">
                             <div class="benTrong">
-                                <%
-                                    try{
-                                        Class.forName(driver);
-                                        Connection con= DriverManager.getConnection(url,username,password);
-                                        String query="select count(*) from sinhvien where trang_thai=1";
-                                        PreparedStatement ps=con.prepareStatement(query);
-                                        ResultSet rs=ps.executeQuery();
-                                        while(rs.next()){
-                                %>
-                                <h3><%=rs.getInt(1)%></h3>
+                                <h3>${studentDashboard}</h3>
                                 <p>Sinh viên</p>
-                                <% }
-
-                                }catch (Exception e){
-                                    e.printStackTrace();
-                                }
-                                %>
                             </div>
                             <div class="icon i1">
                                 <i class="ti-user"></i>
@@ -61,22 +39,7 @@
                     <div class="box2">
                         <div class="small-box2">
                             <div class="benTrong">
-                                <%
-                                    try{
-                                        Class.forName(driver);
-                                        Connection con= DriverManager.getConnection(url,username,password);
-                                        String query="select count(*) from giangvien where trang_thai=1";
-                                        PreparedStatement ps=con.prepareStatement(query);
-                                        ResultSet rs=ps.executeQuery();
-                                        while(rs.next()){
-                                %>
-                                <h3><%=rs.getInt(1)%></h3>
-                                <% }
-
-                                }catch (Exception e){
-                                    e.printStackTrace();
-                                }
-                                %>
+                                <h3>${teacherDashboard}</h3>
                                 <p>Giảng viên</p>
                             </div>
                             <div class="icon i2">
@@ -88,22 +51,7 @@
                     <div class="box3">
                         <div class="small-box3">
                             <div class="benTrong">
-                                <%
-                                    try{
-                                        Class.forName(driver);
-                                        Connection con= DriverManager.getConnection(url,username,password);
-                                        String query="select count(*) from monhoc where trang_thai=1";
-                                        PreparedStatement ps=con.prepareStatement(query);
-                                        ResultSet rs=ps.executeQuery();
-                                        while(rs.next()){
-                                %>
-                                <h3><%=rs.getInt(1)%></h3>
-                                <% }
-
-                                }catch (Exception e){
-                                    e.printStackTrace();
-                                }
-                                %>
+                                <h3>${subjectDashboard}</h3>
                                 <p>Môn học</p>
                             </div>
                             <div class="icon i3">
@@ -115,22 +63,7 @@
                     <div class="box4">
                         <div class="small-box4">
                             <div class="benTrong">
-                                <%
-                                    try{
-                                        Class.forName(driver);
-                                        Connection con= DriverManager.getConnection(url,username,password);
-                                        String query="select count(*) from lop";
-                                        PreparedStatement ps=con.prepareStatement(query);
-                                        ResultSet rs=ps.executeQuery();
-                                        while(rs.next()){
-                                %>
-                                <h3><%=rs.getInt(1)%></h3>
-                                <% }
-
-                                }catch (Exception e){
-                                    e.printStackTrace();
-                                }
-                                %>
+                                <h3>${lopDashboard}</h3>
                                 <p>Lớp học phần</p>
                             </div>
                             <div class="icon i4">
