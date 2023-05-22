@@ -1,11 +1,8 @@
 package com.example.quanlysv.servlet.dao.impl;
 
 import com.example.quanlysv.servlet.dao.ILopDao;
-import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.lop.LopFilter;
-import com.example.quanlysv.servlet.entity.HocKyEntity;
 import com.example.quanlysv.servlet.entity.LopEntity;
-import com.example.quanlysv.servlet.mapper.HocKyMapper;
 import com.example.quanlysv.servlet.mapper.LopMapper;
 
 import java.time.Instant;
@@ -30,9 +27,9 @@ public class LopDaoImpl extends AbstractDao<LopEntity> implements ILopDao {
             if(lopEntities==null||lopEntities.isEmpty()){
                 Instant instant = Instant.now();
                 lopEntity.setNgayTao(instant);
-                sql.append("INSERT INTO lop (id_lop, ten_lop, id_khoa,id_hk,ngay_tao,ngay_sua) Values (?,?,?,?,?)");
+                sql.append("INSERT INTO lop (id_lop, ten_lop, id_khoa,id_hk,ngay_tao,ngay_sua) Values (?,?,?,?,?,?)");
                 insertOrUpdateOrDelete(sql.toString(),lopEntity.getIdLop(),
-                        lopEntity.getTenLop(),lopEntity.getIdKhoa(),lopEntity.getNgayTao(),lopEntity.getNgayTao()
+                        lopEntity.getTenLop(),lopEntity.getIdKhoa(), lopEntity.getIdHk(),lopEntity.getNgayTao(),lopEntity.getNgayTao()
                 );
             }
             else{
@@ -40,7 +37,7 @@ public class LopDaoImpl extends AbstractDao<LopEntity> implements ILopDao {
                 lopEntity.setNgaySua(instant);
                 sql.append("UPDATE lop SET ten_lop= ?,id_khoa= ?,id_hk=?,ngay_sua=? WHERE id_lop=?");
                 insertOrUpdateOrDelete(sql.toString(),lopEntity.getTenLop(),
-                        lopEntity.getIdKhoa(),lopEntity.getNgaySua(),lopEntity.getIdLop()
+                        lopEntity.getIdKhoa(), lopEntity.getIdHk(), lopEntity.getNgaySua(),lopEntity.getIdLop()
                 );
             }
         }catch (Exception e){
