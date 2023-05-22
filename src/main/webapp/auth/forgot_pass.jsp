@@ -45,7 +45,7 @@
         if (successMessage == null) { %>
       <div class="row">
         <div class="col-25">
-          <label><strong>Gmail</strong></label>
+          <label><strong>Mail</strong></label>
         </div>
         <div class="col-75">
           <input type="text"  value="${gmail}"  name="gmail" placeholder="">
@@ -77,6 +77,11 @@
       <div class="row">
         <input style="margin-right: 45%;"  type="submit" value="Xác thực code">
       </div>
+      <br>
+     <div class="row">
+       <a href="/auth/forgot-password" style="text-decoration: underline; cursor: pointer; margin-left: 39%; color: red" >
+         Bạn chưa nhận được code. Gửi lại !</a>
+     </div>
       <% } %>
   </form>
 </div>
