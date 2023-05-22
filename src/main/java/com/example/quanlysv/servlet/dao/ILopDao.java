@@ -7,6 +7,8 @@ import com.example.quanlysv.servlet.entity.LopEntity;
 import java.util.List;
 
 public interface ILopDao extends IGenericDao<LopEntity> {
+
+    List<LopEntity>getAllLop();
     void createOrUpdateLop(LopEntity lopEntity);
 
     List<LopEntity>findLop(LopFilter request);

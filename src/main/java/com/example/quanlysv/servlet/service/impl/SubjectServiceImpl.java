@@ -132,4 +132,9 @@ public class SubjectServiceImpl implements ISubjectService {
 
         }
     }
+
+    @Override
+    public List<SubjectEntity> getAllMonHoc() {
+        return subjectDao.getAllMonHoc();
+    }
 }

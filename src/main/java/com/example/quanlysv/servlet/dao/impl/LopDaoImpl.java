@@ -3,7 +3,9 @@ package com.example.quanlysv.servlet.dao.impl;
 import com.example.quanlysv.servlet.dao.ILopDao;
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.lop.LopFilter;
+import com.example.quanlysv.servlet.entity.HocKyEntity;
 import com.example.quanlysv.servlet.entity.LopEntity;
+import com.example.quanlysv.servlet.mapper.HocKyMapper;
 import com.example.quanlysv.servlet.mapper.LopMapper;
 
 import java.time.Instant;
@@ -82,5 +84,20 @@ public class LopDaoImpl extends AbstractDao<LopEntity> implements ILopDao {
         }
     }
 
+    @Override
+    public List<LopEntity> getAllLop() {
+        try{
+            String query="SELECT lop.id_lop as idLop, lop.ten_lop as tenLop, " +
+                    "lop.id_khoa as idKhoa, lop.id_hk as idHk," +
+                    "lop.ngay_tao as ngayTao, lop.ngay_sua as ngaySua" +
+                    " FROM lop where 1=?";
+            List<LopEntity> list = findByProperties(query, new LopMapper(),1);
 
+            return list.isEmpty()? null: list;
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }

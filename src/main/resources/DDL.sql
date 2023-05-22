@@ -23,7 +23,6 @@ create table MONHOC
     ten_mon_hoc varchar(100),
     tin_chi int,
     id_khoa varchar(25),
-    trang_thai int,
     ngay_tao bigint,
     ngay_sua bigint
 );
@@ -50,6 +49,7 @@ create table DIEM
     id_mh varchar(25),
     id_sv varchar(25) not null,
     id_hk varchar(25),
+    id_lop varchar(25),
     ngay_tao bigint,
     ngay_sua bigint,
     PRIMARY KEY(id_diem,id_sv)
@@ -65,9 +65,9 @@ create table SINHVIEN
     gender_sv varchar(20),
     phone_sv varchar(14),
     lop_hanh_chinh_sv varchar(50),
-    trang_thai int,
     ngay_tao bigint,
-    ngay_sua bigint
+    ngay_sua bigint,
+    trang_thai int not null default 0
 );
 alter table SINHVIEN add primary key(id_sv);
 
@@ -76,6 +76,7 @@ create table LOP
     id_lop varchar(25) not null,
     ten_lop varchar(20),
     id_khoa varchar(25),
+    id_hk varchar(25),
     ngay_tao bigint,
     ngay_sua bigint
 );
@@ -93,6 +94,7 @@ create table KHOA
 (
     id_khoa varchar(25) not null,
     ten_khoa varchar(26),
+    id_hk varchar(25),
     ngay_tao bigint,
     ngay_sua bigint
 );
@@ -106,7 +108,6 @@ create table GIANGVIEN
     email_gv varchar(50),
     gender_gv varchar(20),
     id_khoa varchar(25),
-    trang_thai int,
     ngay_tao bigint,
     ngay_sua bigint
 );
@@ -127,6 +128,7 @@ create table taikhoan
     password varchar(200),
     email varchar(100),
     status_password_default int not null ,
+    verification varchar(100),
     role_id bigint
 );
 
@@ -146,7 +148,18 @@ alter table DIEM add foreign key(id_gv) references GIANGVIEN(id_gv);
 alter table DIEM add foreign key(id_mh) references MONHOC(id_mh);
 alter table DIEM add foreign key(id_sv) references SINHVIEN(id_sv);
 alter table DIEM add foreign key(id_hk) references HOCKY(id_hk);
+alter table DIEM add foreign key(id_lop) references LOP(id_lop);
 alter table HOC add foreign key(id_sv) references SINHVIEN(id_sv);
 alter table HOC add foreign key(id_lop) references LOP(id_lop);
 alter table LOP add foreign key(id_khoa) references KHOA(id_khoa);
+alter table LOP add foreign key(id_hk) references HOCKY(id_hk);
+
+alter table monhoc add column trang_thai int;
+alter table giangvien add column trang_thai int;
+alter table sinhvien add column trang_thai int;
+
+update sinhvien set trang_thai = 1;
+update giangvien set trang_thai = 1;
+update monhoc set trang_thai = 1;
+
 -- alter table THANHPHAN add foreign key(id_diem) references DIEM(id_diem)

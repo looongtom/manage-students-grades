@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ISubjectDao {
 
+    List<SubjectEntity>getAllMonHoc();
     List<SubjectEntity> findSubject(SubjectFilter baseRequest);
 
     Integer countTotalRecords(SubjectFilter baseRequest);

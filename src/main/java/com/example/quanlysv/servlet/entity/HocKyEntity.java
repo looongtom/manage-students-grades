@@ -39,4 +39,14 @@ public class HocKyEntity {
     public void setTenHocKy(String tenHocKy) {
         this.tenHocKy = tenHocKy;
     }
+
+    @Override
+    public String toString() {
+        return "HocKyEntity{" +
+                "idHk='" + idHk + '\'' +
+                ", tenHocKy='" + tenHocKy + '\'' +
+                ", ngayTao=" + ngayTao +
+                ", ngaySua=" + ngaySua +
+                '}';
+    }
 }

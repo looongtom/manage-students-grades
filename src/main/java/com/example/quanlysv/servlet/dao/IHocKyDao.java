@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface IHocKyDao {
 
+    List<HocKyEntity>getAllHocKy();
     void createOrEditHocKy(HocKyEntity hocKyEntity);
 
     List<HocKyEntity> findSemester(BaseRequest baseRequest);

@@ -114,4 +114,19 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
             System.out.println(e.getMessage());
         }
     }
+
+    @Override
+    public List<TeacherEntity> getAllGiangVien() {
+        try{
+            String sql="select gv.id_gv as idGv,gv.ten_gv as tenGv,gv.sdt_gv as sdtGv," +
+                    "gv.email_gv as emailGv, gv.gender_gv as genderGv, gv.id_khoa as idKhoa, gv.trang_thai as trangThai, " +
+                    "gv.ngay_tao as ngayTao, gv.ngay_sua as ngaySua from giangvien gv Where 1=?" ;
+
+            List<TeacherEntity>list =findByProperties(sql,new TeacherMapper(),1);
+            return list.isEmpty()? null: list;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }
