@@ -38,7 +38,7 @@ public class ChangePasswordDefaultController extends HttpServlet {
             }
             else{
                 if(accountEntity.getRoleId() == 1) {
-                    resp.sendRedirect("/home/admin/home_admin/home_admin.jsp");
+                    resp.sendRedirect("/admin/home");
                     return;
                 }
                 else if (accountEntity.getRoleId() == 2) {

@@ -27,7 +27,7 @@
             } else {
                 if(account.getRoleId() == 1) {
             %>
-            <a href="/home/admin/home_admin/home_admin.jsp" class="tro-ve-trang chu">Quay về trang chủ admin</a>
+            <a href="/admin/home" class="tro-ve-trang chu">Quay về trang chủ admin</a>
             <%
             } else {
             %>
