@@ -88,41 +88,38 @@
 
 <div class="lop">
   <header class="phanlop-header">
-    <div class="lop-tieuDe">Danh sách các lớp
-      <span id="lop-tieuDe-chiTiet"></span>
+    <div class="lop-tieuDe">Danh sách các lớp khoa
+      <% if(khoa.equals("CNTT")) { %>
+        <span id="lop-tieuDe-chiTiet">Công nghệ thông tin</span>
+      <% } else if(khoa.equals("ATTT")) { %>
+      <span id="lop-tieuDe-chiTiet">An toàn thông tin</span>
+      <% } else if(khoa.equals("DTVT")) { %>
+      <span id="lop-tieuDe-chiTiet">Điện tử viễn thông</span>
+      <% } else if(khoa.equals("DPT")) { %>
+      <span id="lop-tieuDe-chiTiet">Đa phương tiện</span>
+      <% } else if(khoa.equals("KCB")) { %>
+      <span id="lop-tieuDe-chiTiet">Cơ bản</span>
+      <% } %>
     </div>
 
-    <div class="dauTrang">
-      <button id="nut_them_lop" onclick="showModal('modal_lop')" class="nutThemlop js-nutThemlop"
-              type="button">
-        <span class="nutThemlop_tieuDe">Thêm lớp</span>
-        <i class="fa-solid fa-plus"></i>
-      </button>
-    </div>
     <div class="phanlop-close js-phanlop-close" class="back" onclick="location.href='../specialization/specialization.jsp'">
       Khoa Chuyên Môn
     </div>
   </header>
-  <div class="khuVucTimKiem">
-    <div class="khuVucTimKiem-dau">
-      <div class="tieuDeTimKiem">Tìm kiếm lớp</div>
-    </div>
-    <div class="khuVucTimKiem-phanThan">
-      <div class="phanTimKiem">
-        <input type="search" class="nhapTimKiem" placeholder="Nhập mã lớp">
-        <input type="search" class="nhapTimKiem" placeholder="Nhập tên lớp">
-      </div>
-      <div class="timKiem-cacNut">
-        <button class="nutTimKiem">
-          <span class="nutTimKiem_tieuDe">Tìm</span>
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <button class="nutReset">
-          <span class="nutReset_tieuDe">Reset</span>
-          <i class="fa-solid fa-arrow-rotate-back"></i>
-        </button>
-      </div>
-    </div>
+  <div class="themVaTimKiem">
+    <!-- nut them lop -->
+    <button id="nut_them_lop" onclick="showModal('modal_lop')" class="nutThemlop js-nutThemlop" type="button">
+      <span class="nutThemlop_tieuDe">Thêm lớp</span>
+      <i class="fa-solid fa-plus"></i>
+    </button>
+    <form class="timKiem" method="post">
+      <div class="tieuDeTimKiem">Tìm kiếm giảng viên: </div>
+      <input type="search" id="nhapTimKiem" name="nhapTimKiem" placeholder="Nhập mã lớp" >
+      <button class="nutTimKiem" type="submit">
+        <span class="nutTimKiem_tieuDe">Tìm</span>
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
   </div>
 
   <div class="boc-bang">
@@ -162,13 +159,9 @@
           </div>
           <div class="hop-hanh-dong">
             <button class="sua hop-hanh-dong-nut" type="button"
-                    onclick="showModalSua('modal_giang_vien_sua', 'D20CQCN11-B', 'Công nghệ 11 khóa D20', 'Công nghệ thông tin')">
+                    onclick="showModalSua('modal_lop_sua', 'D20CQCN11-B', 'Công nghệ 11 khóa D20', 'Học kì 2')">
               <span class="sua_tieuDe">Sửa</span>
               <i class="fa-solid fa-pencil sua_icon"></i>
-            </button>
-            <button class="xoa hop-hanh-dong-nut" type="button" onclick="hienXacNhanXoa('modal_xac_nhan_xoa', 'D20CQCN11-B')">
-              <span class="xoa_tieuDe">Xóa</span>
-              <i class="fa-solid fa-trash xoa_icon"></i>
             </button>
           </div>
         </td>
