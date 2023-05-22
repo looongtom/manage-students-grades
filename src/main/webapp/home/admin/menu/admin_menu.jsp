@@ -15,7 +15,7 @@
       <img src="../../../assets/images/home.png" alt="Trang chủ" class="icon-Muc">
       <div class="menuMuc-tieuDe">Trang chủ</div>
     </a>
-      <a class="menuMuc nhapDiemMuc" href="/api/admin/home/semester-direct">
+      <a class="menuMuc nhapDiemMuc" href="/api/admin/home/info-to-add-grade">
       <img src="../../../assets/images/score.png" alt="Điểm" class="icon-Muc">
       <div class="menuMuc-tieuDe">Nhập điểm</div>
     </a>

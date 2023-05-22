@@ -63,8 +63,14 @@
             }
         %>
         <h1 class="tieuDeTrang">Nhập điểm</h1>
+        <%
+            String malop = (String) request.getAttribute("idLop");
+        %>
         <div id="my-dialog">
             <p>Nhập điểm thành công</p>
+            <a href="/home/admin/grade/view-grade-after-add.jsp?idLop=<%=malop%>">
+                <button class="xem hop-hanh-dong-nut" type="button">Xem điểm vừa nhập</button>
+            </a>
             <button class="nutDong" onclick="closeDialog()">Đóng</button>
         </div>
         <div class="khuVucNhapDiem">
