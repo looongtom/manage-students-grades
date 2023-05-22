@@ -39,7 +39,7 @@
   HttpSession getSession = request.getSession();
   String cookieValue = (String) getSession.getAttribute("cookie_value");
 
-  String khoa = request.getParameter("type");
+  String khoa = request.getParameter("khoa");
 %>
 
 <%!
@@ -153,7 +153,7 @@
         <td><%=ngaySua%></td>
         <td class="chucNang">
           <div class="hop-hanh-dong">
-            <a href="../grade/view-grade.jsp?idLop=<%=maLop%>">
+            <a href="../grade/view-grade.jsp?idLop=<%=maLop%>&khoa=<%=khoa%>">
               <button class="xem hop-hanh-dong-nut" type="button">
                 <span class="sua_tieuDe">Xem điểm</span>
                 <i class="fa-solid fa-eye sua_icon"></i>

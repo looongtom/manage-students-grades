@@ -28,9 +28,9 @@ h1 {
 .nutTimKiem {
     background-color: var(--red-color);
     color: var(--white-color);
-    font-size: 14px;
-    padding: 10px;
-    border: none;
+    font-size: 12px;
+    padding: 3px;
+    border: none
 }
 
 .nutTimKiem {
