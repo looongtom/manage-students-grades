@@ -16,7 +16,7 @@ import java.util.Properties;
 
 public class ForgotPassServiceImpl implements IForgotPassService {
 
-    private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    private static final String CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@#$";
 
     private final IAccountDao accountDao;
 
@@ -39,6 +39,7 @@ public class ForgotPassServiceImpl implements IForgotPassService {
     @Override
     public boolean sendEmail(String emailFinish) {
         try {
+            // Sử dụng mail này làm mail hệ thống
             final String fromEmail = "ggdriversfin01@gmail.com";
             // Mat khai email cua ban
             final String password = "ziaoaqkvumbqthir";
