@@ -29,7 +29,8 @@ public class UpdateUserController extends HttpServlet {
         String email = req.getParameter("email");
         AccountEntity account = (AccountEntity) SessionUtils.getInstance().getValue(req,"ACCOUNT");
         if(service.updateUser(account, phoneNumber, email)){
-            req.getRequestDispatcher("/home/user/home_user/home_user.jsp").forward(req, resp);
+            resp.sendRedirect("/user/detail-user");
+            return;
         }
         req.setAttribute("error", "Cập nhật thông tin thất bại");
         req.getRequestDispatcher("/home/user/home_user/home_user.jsp").forward(req, resp);

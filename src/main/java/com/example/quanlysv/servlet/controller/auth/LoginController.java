@@ -70,7 +70,7 @@ public class LoginController extends HttpServlet {
             if(accountEntity.getRoleId() == 1)
                 req.getRequestDispatcher("/admin/home").forward(req, resp);
             else if (accountEntity.getRoleId() == 2) {
-                req.getRequestDispatcher("/home/user/home_user/home_user.jsp").forward(req, resp);
+                  resp.sendRedirect("/user/detail-user");
             }
                 else {
                     String errorMessage = "Người dùng chưa được phân quyền!";
