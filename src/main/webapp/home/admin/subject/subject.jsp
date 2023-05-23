@@ -55,8 +55,12 @@
             "}" +
             "}";
 
+    // get baseUrl
+    ServletContext context = request.getServletContext();
+    String baseUrl = context.getInitParameter("apiUrl");
+
     //get all
-    String uriGetAll = "http://localhost:8080/api/admin/home/subject/display";
+    String uriGetAll = baseUrl + "/admin/home/subject/display";
 
     HttpPost httpPost = new HttpPost(uriGetAll);
     StringEntity entity = new StringEntity(requestBody);
@@ -87,7 +91,7 @@
     %>
     <%
         // add MH
-        String uriAddMH = "http://localhost:8080/api/admin/home/subject/create-or-edit";
+        String uriAddMH = baseUrl + "/admin/home/subject/create-or-edit";
         String idMh = request.getParameter("ma-mh");
         String tenMh = request.getParameter("ten-mh");
         String tinChi = request.getParameter("stc-mh");
@@ -129,7 +133,7 @@
     %>
     <%
         // update MH
-        String uriUpdateMH = "http://localhost:8080/api/admin/home/subject/create-or-edit";
+        String uriUpdateMH = baseUrl + "/admin/home/subject/create-or-edit";
         String idMhU = request.getParameter("ma-mh-sua");
         String tenMhU = request.getParameter("ten-mh-sua");
         String tinChiU = request.getParameter("stc-mh-sua");
@@ -165,7 +169,8 @@
     <%
         // delete
         String idMhD = request.getParameter("ma-mh-xoa");
-        URI uriDeleteMH = new URIBuilder("http://localhost:8080/api/admin/home/subject/display").setParameter("idMh", idMhD).build();
+        String url = baseUrl + "/admin/home/subject/display";
+        URI uriDeleteMH = new URIBuilder(url).setParameter("idMh", idMhD).build();
         if (idMhD != null) {
             HttpDelete httpDelete = new HttpDelete(uriDeleteMH);
             httpDelete.setHeader("Cookie", value + cookieValue);

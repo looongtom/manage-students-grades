@@ -45,6 +45,10 @@
             "\"pageIndex\":" + pageIndex + "," +
             "\"pageSize\":" + pageSize +
             "}";
+
+    // get baseUrl
+    ServletContext context = request.getServletContext();
+    String baseUrl = context.getInitParameter("apiUrl");
 %>
 <body>
 <%@include file="../menu/admin_menu.jsp" %>
@@ -67,7 +71,7 @@
     %>
     <%
         //get all
-        String uriGetAll = "http://localhost:8080/api/admin/home/semester";
+        String uriGetAll = baseUrl + "/admin/home/semester";
 
         HttpPost httpPost = new HttpPost(uriGetAll);
         StringEntity entity = new StringEntity(requestBody);
@@ -80,7 +84,7 @@
     %>
     <%
         // add HK
-        String uriAddHK = "http://localhost:8080/api/admin/home/semester/create-or-edit";
+        String uriAddHK = baseUrl + "/admin/home/semester/create-or-edit";
         String idHk = request.getParameter("ma-hk");
         String tenHk = request.getParameter("ten-hk");
         String requestBodyAddHK = "{"+
@@ -116,7 +120,7 @@
     %>
     <%
         // update HK
-        String uriUpdateHK = "http://localhost:8080/api/admin/home/semester/create-or-edit";
+        String uriUpdateHK = baseUrl + "/admin/home/semester/create-or-edit";
         String idHkU = request.getParameter("ma-hk-sua");
         String tenHkU = request.getParameter("ten-hk-sua");
         String requestBodyUpdateHK = "{"+

@@ -54,8 +54,13 @@
             "}" +
             "}";
 
+
+    // get baseUrl
+    ServletContext context = request.getServletContext();
+    String baseUrl = context.getInitParameter("apiUrl");
+
     //get all
-    String uriGetAll = "http://localhost:8080/api/admin/home/student";
+    String uriGetAll = baseUrl + "/admin/home/student";
 
     HttpPost httpPost = new HttpPost(uriGetAll);
     StringEntity entity = new StringEntity(requestBody);
@@ -87,7 +92,7 @@
     %>
     <%
         // add SV (status = 0)
-        String uriAddSV = "http://localhost:8080/api/admin/home/student/create-or-edit";
+        String uriAddSV = baseUrl + "/admin/home/student/create-or-edit";
         String idSvAdd = request.getParameter("ma-sv");
         String tenSvAdd = request.getParameter("ten-sv");
         String emailSv = request.getParameter("email-sv");
@@ -140,7 +145,7 @@
     %>
     <%
         // update SV (status = 1)
-        String uriUpdateSV = "http://localhost:8080/api/admin/home/student/create-or-edit";
+        String uriUpdateSV = baseUrl + "/admin/home/student/create-or-edit";
         String idSvUpdate = request.getParameter("ma-sv-sua");
         String tenSvUpdate = request.getParameter("ten-sv-sua");
         String emailSvU = request.getParameter("email-sv-sua");
@@ -186,7 +191,8 @@
     <%
         // delete
         String idSvD = request.getParameter("ma-sv-xoa");
-        URI uriDeleteSV = new URIBuilder("http://localhost:8080/api/admin/home/student").setParameter("idSv", idSvD).build();
+        String url = baseUrl + "/admin/home/student";
+        URI uriDeleteSV = new URIBuilder(url).setParameter("idSv", idSvD).build();
         if (idSvD != null) {
             HttpDelete httpDelete = new HttpDelete(uriDeleteSV);
             httpDelete.setHeader("Cookie", value + cookieValue);
