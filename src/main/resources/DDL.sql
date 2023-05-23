@@ -74,7 +74,7 @@ alter table SINHVIEN add primary key(id_sv);
 create table LOP
 (
     id_lop varchar(25) not null,
-    ten_lop varchar(20),
+    ten_lop varchar(100),
     id_khoa varchar(25),
     id_hk varchar(25),
     ngay_tao bigint,
@@ -123,7 +123,7 @@ create table DAYHOC
 
 create table taikhoan
 (
-    id bigint primary key,
+    id SERIAL primary key,
     username varchar(50),
     password varchar(200),
     email varchar(100),

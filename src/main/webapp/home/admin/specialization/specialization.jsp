@@ -26,7 +26,7 @@
                             <a class="btn" href="../class/class.jsp?khoa=CB">Xem danh sách các lớp</a>
 <%--                            <form action="class.jsp"  method ="post">--%>
 <%--                                <input type="hidden" name="idKhoa" value=KCB>--%>
-<%--                                <input type="submit" value=" Xem danh sách lớp "/>--%>
+<%--                                <input type="submit" value=" Xem danh sách các lớp "/>--%>
 <%--                            </form >--%>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                         <img src="../../../assets/images/cntt.jpg" alt="San Francisco" class="khoa-img">
                         <div class="khoa">
                             <h3 class="phandau-khoa">Khoa An toàn Thông tin</h3>
-                            <p class="diachi-khoa">Tầng 9, nhà A2, Km10, Nguyễn Trãi, Hà Đông, Hà Nội</p>
+                            <p class="diachi-khoa">Sun 29 Nov 2016</p>
                             <p class="thongtin-khoa">Khoa An toàn thông tin là đơn vị đào tạo thuộc Học viện Công nghệ Bưu chính Viễn thông; có chức năng đào tạo và nghiên cứu khoa học trong lĩnh vực An toàn thông tin với nhiệm vụ quản lý, tổ chức giảng dạy các môn học, học phần do khoa quản lý cho các hệ đào tạo của Học viện.</p>
                             <a class="btn" href="../class/class.jsp?khoa=ATTT">Xem danh sách các lớp</a>
                         </div>
