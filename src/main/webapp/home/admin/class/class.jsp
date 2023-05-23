@@ -95,7 +95,85 @@
     }
   }
 %>
+<%
+    // add lop
+    String uriAddLop = baseUrl + "/admin/home/class";
+    String idlop = request.getParameter("ma");
+    String namelop = request.getParameter("ten");
+    String idHk = request.getParameter("ten-hk");
+//    String idKhoa = request.getParameter("ma-khoa-gv");
+    String requestBodyAddLop = "{"+
+            "\"status\":\"" + 0 + "\","+
+            "\"idLop\":\"" + idlop + "\","+
+            "\"tenLop\":\"" + namelop + "\","+
+            "\"idHk\":\"" + idHk + "\","+
+            "\"idKhoa\":\"" + khoa + "\"" +
+            "}";
 
+    boolean exist = false;
+// send the request and retrieve the response
+    if(idlop!=null && namelop!=null && idHk!=null ) {
+        System.out.println(requestBodyAddLop);
+
+        HttpPost httpPostAddLop = new HttpPost(uriAddLop);
+//      HttpPost httpPostAddGV = new HttpPost(uriAddGV);
+        StringEntity entityAddLop = new StringEntity(requestBodyAddLop);
+        httpPostAddLop.setEntity(entityAddLop);
+
+        httpPostAddLop.setHeader("Cookie",value+cookieValue);
+
+        HttpResponse respAddLop = httpClient.execute(httpPostAddLop);
+        String responseBodyAddLop = EntityUtils.toString(respAddLop.getEntity());
+        System.out.println(responseBodyAddLop);
+
+        JSONObject jsonResponseAddLop = new JSONObject(responseBodyAddLop);
+
+        // check if the data is existed or not
+        if (jsonResponseAddLop.getInt("status") != 200) {
+            exist = true;
+        }
+
+        // get all mon hoc
+        if(!exist) {
+            listResp = getAllLop(httpClient, httpPost);
+        }
+    }
+%>
+<%
+    // update lop
+    String uriUpdatelop = baseUrl + "/admin/home/class";
+    String idlopU = request.getParameter("ma-lop-sua");
+    String tenlopU = request.getParameter("ten-lop-sua");
+    String idHkU = request.getParameter("hoc-ky-sua");
+
+    String requestBodyUpdatelop ="{"+
+            "\"status\":\"" + 1 + "\","+
+            "\"idLop\":\"" + idlopU + "\","+
+            "\"tenLop\":\"" + tenlopU + "\","+
+            "\"idHk\":\"" + idHkU + "\","+
+            "\"idKhoa\":\"" + khoa + "\"" +
+            "}";
+// send the request and retrieve the response
+    if(idlopU!=null && tenlopU!=null && idHkU != null ) {
+        System.out.println(requestBodyUpdatelop);
+
+        HttpPost httpPostUpdatelop = new HttpPost(uriUpdatelop);
+        StringEntity entityUpdatelop = new StringEntity(requestBodyUpdatelop);
+        httpPostUpdatelop.setEntity(entityUpdatelop);
+
+        httpPostUpdatelop.setHeader("Cookie",value+cookieValue);
+
+        HttpResponse respUpdatelop = httpClient.execute(httpPostUpdatelop);
+        String responseBodyUpdatelop = EntityUtils.toString(respUpdatelop.getEntity());
+        System.out.println(responseBodyUpdatelop);
+
+        JSONObject jsonResponseUpdatelop = new JSONObject(responseBodyUpdatelop);
+        System.out.println(jsonResponseUpdatelop);
+
+        // get all lop
+        listResp = getAllLop(httpClient, httpPost);
+    }
+%>
 <%
   // tìm kiếm
   tenLop = request.getParameter("nhapTimKiem");
@@ -119,21 +197,57 @@
   byte[] bytes = tenLop.getBytes(StandardCharsets.ISO_8859_1);
   tenLop = new String(bytes, StandardCharsets.UTF_8);
 %>
+<%--<%--%>
+<%--    // sort--%>
+<%--    sortField = request.getParameter("sortFieldGV");--%>
+<%--    sortOrder = request.getParameter("sortOrderGV");--%>
+<%--    if(sortField!=null) {--%>
+<%--        tenLop = request.getParameter("tenLop");--%>
+<%--        if(tenLop==null) tenLop = "";--%>
+<%--        System.out.println("Ten GV sort: " + tenLop);--%>
 
+<%--        requestBody = "{"+--%>
+<%--                "\"tenGv\":\"" + tenLop + "\","+--%>
+<%--                "\"baseRequest\":{"+--%>
+<%--                "\"sortField\":\"" + sortField + "\","+--%>
+<%--                "\"sortOrder\":\"" + sortOrder + "\","+--%>
+<%--                "\"pageIndex\":" + pageIndex + ","+--%>
+<%--                "\"pageSize\":" + pageSize +--%>
+<%--                "}"+--%>
+<%--                "}";--%>
+<%--        entity = new StringEntity(requestBody);--%>
+<%--        httpPost.setEntity(entity);--%>
+
+<%--        System.out.println("Sort Field: " + sortField);--%>
+<%--        System.out.println("Sort Order: " + sortOrder);--%>
+<%--        System.out.println("Ten GV sort: " + tenLop);--%>
+<%--        listResp = getAllLop(httpClient, httpPost);--%>
+
+<%--        // return UTF8--%>
+<%--        bytes = tenLop.getBytes(StandardCharsets.ISO_8859_1);--%>
+<%--        tenLop = new String(bytes, StandardCharsets.UTF_8);--%>
+<%--    }--%>
+<%--%>--%>
 <div class="lop">
   <header class="phanlop-header">
     <div class="lop-tieuDe">Danh sách các lớp khoa
-      <% if(khoa.equals("CNTT")) { %>
+        <% if(khoa.equals("CNTT")) { %>
         <span id="lop-tieuDe-chiTiet">Công nghệ thông tin</span>
-      <% } else if(khoa.equals("ATTT")) { %>
-      <span id="lop-tieuDe-chiTiet">An toàn thông tin</span>
-      <% } else if(khoa.equals("DTVT")) { %>
-      <span id="lop-tieuDe-chiTiet">Điện tử viễn thông</span>
-      <% } else if(khoa.equals("DPT")) { %>
-      <span id="lop-tieuDe-chiTiet">Đa phương tiện</span>
-      <% } else if(khoa.equals("KCB")) { %>
-      <span id="lop-tieuDe-chiTiet">Cơ bản</span>
-      <% } %>
+        <% } else if(khoa.equals("ATTT")) { %>
+        <span id="lop-tieuDe-chiTiet">An toàn thông tin</span>
+        <% } else if(khoa.equals("VT")) { %>
+        <span id="lop-tieuDe-chiTiet">Viễn thông 1</span>
+        <% } else if(khoa.equals("TCKT")) { %>
+        <span id="lop-tieuDe-chiTiet">Tài chính kế toán</span>
+        <% } else if(khoa.equals("QTKD")) { %>
+        <span id="lop-tieuDe-chiTiet">Quản trị kinh doanh</span>
+        <% } else if(khoa.equals("KTDT")) { %>
+        <span id="lop-tieuDe-chiTiet">Kỹ thuật điện tử 1</span>
+        <% } else if(khoa.equals("DPT")) { %>
+        <span id="lop-tieuDe-chiTiet">Đa phương tiện</span>
+        <% } else if(khoa.equals("CB")) { %>
+        <span id="lop-tieuDe-chiTiet">Cơ bản</span>
+        <% } %>
     </div>
 
     <div class="phanlop-close js-phanlop-close" class="back" onclick="location.href='../specialization/specialization.jsp'">
@@ -157,65 +271,84 @@
   </div>
 
   <div class="boc-bang">
-    <table class="danhSach">
-      <thead class="hang1">
-      <th data-sort onclick="sortTable(0, this)" class="cot-malop">Mã lớp</th>
-      <th data-sort onclick="sortName(1,this)" class="cot-tenlop">Tên lớp</th>
-      <th data-sort onclick="sortName(2,this)" class="cot-tenHK">Tên học kỳ</th>
-      <th data-sort onclick="sortName(3,this)" class="cot-ngayTao">Ngày tạo</th>
-      <th data-sort onclick="sortName(4,this)" class="cot-ngayTao">Ngày cập nhật</th>
-      <th data-sort onclick="sortName(5,this)" class="hanh-dong">Action</th>
-      </thead>
-      <tbody>
-      <%--            hiển thị ra màn hình--%>
-      <%  if(listResp!=null) {
-        for(int i=0;i<listResp.length();i++) {%>
-      <% JSONObject lop = listResp.getJSONObject(i); %>
-      <tr>
-        <td> <%= lop.getString("idLop") %> </td>
-        <td><%= lop.getString("tenLop") %></td>
-        <td><%= lop.getString("idHk") %></td>
-        <td><%= lop.getString("ngayTao") %></td>
-        <td><%= lop.getString("ngaySua") %></td>
-        <td class="chucNang">
-          <div class="hop-hanh-dong">
-            <a href="../grade/view-grade.jsp?idLop=<%=lop.getString("idLop")%>&khoa=<%=khoa%>">
-              <button class="xem hop-hanh-dong-nut" type="button">
-                <span class="sua_tieuDe">Xem điểm</span>
-                <i class="fa-solid fa-eye sua_icon"></i>
-              </button>
-            </a>
-          </div>
-          <div class="hop-hanh-dong">
-            <button class="sua hop-hanh-dong-nut" type="button"
-                    onclick="showModalSua('modal_lop_sua', '<%= lop.getString("idLop") %>', '<%= lop.getString("tenLop") %>', '<%= lop.getString("idHk") %>')">
-              <span class="sua_tieuDe">Sửa</span>
-              <i class="fa-solid fa-pencil sua_icon"></i>
-            </button>
-          </div>
-        </td>
-      </tr>
-      <%
-          }
-        }
-      %>
-      </tbody>
-    </table>
+<%--      <form id="formlop" method="post" action="/admin/class" accept-charset="UTF-8">--%>
+<%--          <input type="hidden" name="tenGv" value="<%= tenLop %>">--%>
+<%--          <input type="hidden" name="sortFieldGV" value="<%= sortField %>">--%>
+<%--          <input type="hidden" name="sortOrderGV" value="<%= sortOrder %>">--%>
+<%--          <input type="hidden" name="pageIndexGV" value="<%= pageIndex %>">--%>
+<%--          <input type="hidden" name="pageSizeGV" value="<%= pageSize %>">--%>
+
+          <table class="danhSach">
+              <thead class="hang1">
+              <th data-sort onclick="sortTable('idlop', this)" class="cot-malop idlop">Mã lớp</th>
+              <th data-sort onclick="sortName('tenlop',this)" class="cot-tenlop tenlop">Tên lớp</th>
+              <th data-sort onclick="sortName('idHk',this)" class="cot-tenHK idHk">Mã học kỳ</th>
+<%--              <th data-sort onclick="sortTable('idKhoa', this)" class="cot-khoa idKhoa">Khoa</th>--%>
+              <th data-sort onclick="sortTable('ngayTao', this)" class="cot-ngayTao ngayTao">Ngày tạo</th>
+              <th data-sort onclick="sortTable('ngaySua', this)" class="cot-ngayTao ngaySua">Ngày cập nhật</th>
+              <th class="hanh-dong">Action</th>
+              </thead>
+              <tbody>
+              <%--            hiển thị ra màn hình--%>
+              <%  if(listResp!=null) {
+                for(int i=0;i<listResp.length();i++) {%>
+              <% JSONObject lop = listResp.getJSONObject(i); %>
+              <tr>
+                <td> <%= lop.getString("idLop") %> </td>
+                <td><%= lop.getString("tenLop") %></td>
+                <td><%= lop.getString("idHk") %></td>
+                <td><%= lop.getString("ngayTao") %></td>
+                <td><%= lop.getString("ngaySua") %></td>
+                <td class="chucNang">
+                  <div class="hop-hanh-dong">
+                    <a href="../grade/view-grade.jsp?idLop=<%=lop.getString("idLop")%>&khoa=<%=khoa%>">
+                      <button class="xem hop-hanh-dong-nut" type="button">
+                        <span class="sua_tieuDe">Xem điểm</span>
+                        <i class="fa-solid fa-eye sua_icon"></i>
+                      </button>
+                    </a>
+                  </div>
+                  <div class="hop-hanh-dong">
+                    <button class="sua hop-hanh-dong-nut" type="button"
+                            onclick="showModalSua('modal_lop_sua', '<%= lop.getString("idLop") %>', '<%= lop.getString("tenLop") %>', '<%= lop.getString("idHk") %>')">
+                      <span class="sua_tieuDe">Sửa</span>
+                      <i class="fa-solid fa-pencil sua_icon"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <%
+                  }
+                }
+              %>
+              </tbody>
+          </table>
+<%--      </form>--%>
   </div>
   <div class="phanTrang">
-    <ul></ul>
+    <ul>
+        <li class="nutPaginate prev" style="color: white" onclick="nutPrev()">
+            <span><i class="fas fa-angle-left"></i></span>
+        </li>
+        <span class="soTrang">
+
+            </span>
+        <li class="nutPaginate next" style="color: white" onclick="nutNext()">
+            <span><i class="fas fa-angle-right"></i></span>
+        </li>
+    </ul>
   </div>
 </div>
 <%@include file="add_class_form.jsp" %>
 <%@include file="confirm_delete_class.jsp" %>
 <%@include file="update_class_form.jsp" %>
-<script src="../../../assets/js/admin/pagination_class.js"></script>
-<script src="../../../assets/js/admin/add_form.js"></script>
-<script src="../../../assets/js/admin/class.js"></script>
-<script src="../../../assets/js/admin/text_error_class.js"></script>
-<script src="../../../assets/js/admin/update_class.js"></script>
-<script src="../../../assets/js/admin/confirm_delete_form.js"></script>
+
 
 </body>
-
+    <script src="../../../assets/js/admin/pagination_class.js"></script>
+    <script src="../../../assets/js/admin/add_form.js"></script>
+    <script src="../../../assets/js/admin/class.js"></script>
+    <script src="../../../assets/js/admin/text_error_class.js"></script>
+    <script src="../../../assets/js/admin/update_class.js"></script>
+    <script src="../../../assets/js/admin/confirm_delete_form.js"></script>
 </html>
