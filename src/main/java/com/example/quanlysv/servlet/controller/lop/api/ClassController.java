@@ -42,14 +42,6 @@ public class ClassController extends HttpServlet {
     }
 
 
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("application/json");
-        LopDTO lopDTO = HttpUtil.of(req.getReader()).toModel(LopDTO.class);
-        BaseResponse<?> baseResponse = service.createOrUpdateLop(lopDTO);
-        ResponseUtils.responseApi(req, resp, baseResponse);
-    }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

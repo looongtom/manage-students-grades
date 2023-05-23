@@ -1,6 +1,7 @@
 package com.example.quanlysv.servlet.service;
 
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
+import com.example.quanlysv.servlet.dto.request.lop.CreateOrEditLopDTO;
 import com.example.quanlysv.servlet.dto.request.lop.LopDTO;
 import com.example.quanlysv.servlet.dto.request.lop.LopFilter;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public interface ILopService {
     List<LopEntity> getAllLop();
-    BaseResponse<?>  createOrUpdateLop(LopDTO lopDTO);
+    BaseResponse<?>  createOrUpdateLop(CreateOrEditLopDTO request);
 
     BaseResponse<?> findLop(LopFilter baseRequest);
 
@@ -18,5 +19,6 @@ public interface ILopService {
 
 
     BaseResponse<?>  deleteLopById(String id);
+
 
 }
