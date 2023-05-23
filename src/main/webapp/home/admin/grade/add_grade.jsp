@@ -1,8 +1,4 @@
 <%@ page import="java.util.Random" %>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.util.ResourceBundle" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
@@ -23,12 +19,6 @@
     <div class="manHinhChinh">
 
         <%
-            ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
-            String url = resourceBundle.getString("url");
-            String username = resourceBundle.getString("username");
-            String password = resourceBundle.getString("password");
-            String driver=resourceBundle.getString("driverName");
-
             String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             int length = 8; // Change this to set the length of the generated ID
             StringBuilder idBuilder = new StringBuilder();
@@ -92,12 +82,13 @@
 <%--                                    <option value="Class A">Học kì 1 năm 2020-2021</option>--%>
 <%--                                    <option value="Class B">Học kì 2 năm 2020-2021</option>--%>
                                     <%
+                                        if(listHK!=null){
                                         for(HocKyEntity hocKyEachRow : listHK){
                                     %>
                                     <option value=<%=hocKyEachRow.getIdHk()%>><%=hocKyEachRow.getTenHocKy()%></option>
                                 <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
                                     <%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
-                                    <% }
+                                    <% }}
                                     %>
                                 </select>
                             </div>
@@ -111,12 +102,13 @@
                                 <select name="idGv" class="nhapModal" required>
                                     <option value="">Please select</option>
                                     <%
+                                        if(listGv!=null){
                                         for(TeacherEntity giangVienEachRow : listGv){
                                     %>
                                     <option value=<%=giangVienEachRow.getIdGv()%>><%=giangVienEachRow.getTenGv()%></option>
                                     <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
                                     <%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
-                                    <% }
+                                    <% }}
                                     %>
                                 </select>
 
@@ -159,12 +151,13 @@
 <%--                                    <option value="Class A">Lập trình Web</option>--%>
 <%--                                    <option value="Class B">Cơ sở dữ liệu phân tán</option>--%>
                                     <%
+                                        if(listMh!=null){
                                         for(SubjectEntity monHocEachRow : listMh){
                                     %>
                                     <option value=<%=monHocEachRow.getIdMh()%>><%=monHocEachRow.getTenMonHoc()%></option>
                                     <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
                                     <%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
-                                    <% }
+                                    <% }}
                                     %>
                                 </select>
                             </div>
@@ -179,12 +172,13 @@
                                     <%--                                    <option value="Class A">Lập trình Web</option>--%>
                                     <%--                                    <option value="Class B">Cơ sở dữ liệu phân tán</option>--%>
                                     <%
+                                        if(listLop!=null){
                                         for(LopEntity lopEachRow : listLop){
                                     %>
                                     <option value=<%=lopEachRow.getIdLop()%>><%=lopEachRow.getTenLop()%></option>
                                     <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
                                     <%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
-                                    <% }
+                                    <% }}
                                     %>
                                 </select>
                             </div>
