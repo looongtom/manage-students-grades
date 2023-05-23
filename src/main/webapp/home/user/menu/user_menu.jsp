@@ -21,11 +21,11 @@
             <div class="tenTaiKhoan"> <%=tenTaiKhoan%></div>
         </div>
         <div class="nganCach"></div>
-        <a class="menuMuc trangChuMuc" href="/../../home/user/home_user/home_user.jsp">
+        <a class="menuMuc trangChuMuc" href="/user/detail-user">
             <img src="../../../assets/images/home.png" alt="Trang chủ" class="icon-Muc">
             <div class="menuMuc-tieuDe">Trang chủ</div>
         </a>
-        <a class="menuMuc xemDiemMuc" href="/../../home/user/grade/watch_grade.jsp">
+        <a class="menuMuc xemDiemMuc" href="/user/grade">
             <img src="../../../assets/images/score.png" alt="Điểm" class="icon-Muc">
             <div class="menuMuc-tieuDe">Xem điểm</div>
         </a>
