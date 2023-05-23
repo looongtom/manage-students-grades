@@ -106,7 +106,7 @@ public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStude
                     "sv.dob_sv as dobSv, sv.gender_sv as genderSv, " +
                     "sv.phone_sv as phoneSv, sv.lop_hanh_chinh_sv as" +
                     " lopHanhChinhSv, sv.ngay_tao as ngayTao, sv.ngay_sua" +
-                    " as ngaySua from sinhvien as sv where sv.id_sv = ?";
+                    " as ngaySua, trang_thai as trangThai from sinhvien as sv where sv.id_sv = ?";
             StudentEntity student =  findOne(sqlQuery,new StudentMapper(), id);
             if(student != null) return student;
             return null;
