@@ -1,11 +1,8 @@
 package com.example.quanlysv.servlet.dao.impl;
 
 import com.example.quanlysv.servlet.dao.ILopDao;
-import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.lop.LopFilter;
-import com.example.quanlysv.servlet.entity.HocKyEntity;
 import com.example.quanlysv.servlet.entity.LopEntity;
-import com.example.quanlysv.servlet.mapper.HocKyMapper;
 import com.example.quanlysv.servlet.mapper.LopMapper;
 
 import java.time.Instant;
@@ -62,7 +59,7 @@ public class LopDaoImpl extends AbstractDao<LopEntity> implements ILopDao {
                         request.getBaseRequest().getSortField() + " " + request.getBaseRequest().getSortOrder() + " OFFSET ? LIMIT ?";
                  list = findByProperties(sql, new LopMapper(),
                         request.getIdKhoa(),request.getTenLop(),
-                        request.getBaseRequest().getPageIndex() * request.getBaseRequest().getPageSize(), request.getBaseRequest().getPageSize());
+                         (request.getBaseRequest().getPageIndex()-1) * request.getBaseRequest().getPageSize(), request.getBaseRequest().getPageSize());
 
                 return list.isEmpty() ? null : list;
             }
@@ -73,7 +70,7 @@ public class LopDaoImpl extends AbstractDao<LopEntity> implements ILopDao {
                         request.getBaseRequest().getSortField() + " " + request.getBaseRequest().getSortOrder() + " OFFSET ? LIMIT ?";
                  list = findByProperties(sql, new LopMapper(),
                         request.getTenLop(),
-                        request.getBaseRequest().getPageIndex() * request.getBaseRequest().getPageSize(), request.getBaseRequest().getPageSize());
+                         (request.getBaseRequest().getPageIndex()-1) * request.getBaseRequest().getPageSize(), request.getBaseRequest().getPageSize());
 
             }
             return list.isEmpty() ? null : list;
