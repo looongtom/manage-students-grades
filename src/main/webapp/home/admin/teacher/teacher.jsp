@@ -58,8 +58,12 @@
             "}"+
             "}";
 
+    // get baseUrl
+    ServletContext context = request.getServletContext();
+    String baseUrl = context.getInitParameter("apiUrl");
+
     //get all
-    String uriGetAll = "http://localhost:8080/api/admin/home/teacher";
+    String uriGetAll = baseUrl + "/admin/home/teacher";
 
     HttpPost httpPost = new HttpPost(uriGetAll);
     StringEntity entity = new StringEntity(requestBody);
@@ -91,7 +95,7 @@
     %>
     <%
         // add GV
-        String uriAddGV = "http://localhost:8080/api/admin/home/teacher/create-or-edit";
+        String uriAddGV = baseUrl + "/admin/home/teacher/create-or-edit";
         String idGv = request.getParameter("ma-gv");
         String nameGv = request.getParameter("ten-gv");
         String emailGv = request.getParameter("email-gv");
@@ -138,7 +142,7 @@
     %>
     <%
         // update GV
-        String uriUpdateGV = "http://localhost:8080/api/admin/home/teacher/create-or-edit";
+        String uriUpdateGV = baseUrl + "/admin/home/teacher/create-or-edit";
         String idGvU = request.getParameter("ma-gv-sua");
         String tenGvU = request.getParameter("ten-gv-sua");
         String emailGvU = request.getParameter("email-gv-sua");
@@ -178,7 +182,8 @@
     <%
         // delete
         String idGvD = request.getParameter("ma-gv-xoa");
-        URI uriDeleteGV = new URIBuilder("http://localhost:8080/api/admin/home/teacher").setParameter("id", idGvD).build();
+        String url = baseUrl + "/admin/home/teacher";
+        URI uriDeleteGV = new URIBuilder(url).setParameter("id", idGvD).build();
         if(idGvD!=null) {
             HttpDelete httpDelete = new HttpDelete(uriDeleteGV);
             httpDelete.setHeader("Cookie",value+cookieValue);
