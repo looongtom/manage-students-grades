@@ -1,7 +1,3 @@
---drop database quanlysinhvien
--- create database quanlysinhvien
-
--- use quanlysinhvien
 
 create table THANHPHAN
 (
@@ -66,8 +62,7 @@ create table SINHVIEN
     phone_sv varchar(14),
     lop_hanh_chinh_sv varchar(50),
     ngay_tao bigint,
-    ngay_sua bigint,
-    trang_thai int not null default 0
+    ngay_sua bigint
 );
 alter table SINHVIEN add primary key(id_sv);
 
@@ -94,7 +89,6 @@ create table KHOA
 (
     id_khoa varchar(25) not null,
     ten_khoa varchar(26),
-    id_hk varchar(25),
     ngay_tao bigint,
     ngay_sua bigint
 );
@@ -123,7 +117,7 @@ create table DAYHOC
 
 create table taikhoan
 (
-    id SERIAL primary key,
+    id bigint primary key,
     username varchar(50),
     password varchar(200),
     email varchar(100),
@@ -162,4 +156,3 @@ update sinhvien set trang_thai = 1;
 update giangvien set trang_thai = 1;
 update monhoc set trang_thai = 1;
 
--- alter table THANHPHAN add foreign key(id_diem) references DIEM(id_diem)
