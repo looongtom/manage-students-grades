@@ -4,16 +4,11 @@
 <%@ page import="org.apache.http.entity.StringEntity" %>
 <%@ page import="org.apache.http.HttpResponse" %>
 <%@ page import="org.apache.http.util.EntityUtils" %>
-<%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
-<%@ page import="com.fasterxml.jackson.databind.JsonNode" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="org.json.JSONArray" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.IOException" %>
-<%@ page import="java.net.URI" %>
-<%@ page import="org.apache.http.client.utils.URIBuilder" %>
-<%@ page import="java.net.URISyntaxException" %>
+<%@ page import="org.apache.http.client.methods.HttpPost" %>
+<%@ page import="java.nio.charset.StandardCharsets" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 
@@ -39,52 +34,91 @@
   HttpSession getSession = request.getSession();
   String cookieValue = (String) getSession.getAttribute("cookie_value");
 
+  // variables in request body
   String khoa = request.getParameter("khoa");
+  String tenLop = "";
+  String sortField = "";
+  String sortOrder = "";
+  int pageSize = 10;
+
+  int pageIndex = 1;
+  if(session.getAttribute("pageIndexGV")!=null) {
+    pageIndex = (int) session.getAttribute("pageIndexGV");
+  }
+
+  System.out.println(session.getAttribute("pageIndexGV"));
+  System.out.println("pageIndex in teacher.jsp: " + pageIndex);
+  System.out.println("pageSize in teacher.jsp: " + pageSize);
+
+  // request body for getAll, finding and sorting
+  String requestBody ="{"+
+          "\"idKhoa\":\"" + khoa + "\","+
+          "\"tenLop\":\"" + tenLop + "\","+
+          "\"baseRequest\":{"+
+          "\"sortField\":\"" + sortField + "\","+
+          "\"sortOrder\":\"" + sortOrder + "\","+
+          "\"pageIndex\":" + pageIndex + ","+
+          "\"pageSize\":" + pageSize +
+          "}"+
+          "}";
+
+  // get baseUrl
+  ServletContext context = request.getServletContext();
+  String baseUrl = context.getInitParameter("apiUrl");
+
+  //get all
+  String uriGetAll = baseUrl + "/admin/class";
+
+  HttpPost httpPost = new HttpPost(uriGetAll);
+  StringEntity entity = new StringEntity(requestBody);
+  httpPost.setEntity(entity);
+
+  httpPost.setHeader("Cookie", value + cookieValue);
+
+  // call function, return data
+  JSONArray listResp;
 %>
 
 <%!
-  // lấy list học kỳ
-  public String GetTenHk(HttpClient httpClient,String idHk,String value,String cookieValue) throws IOException {
-    URI uriGetTenHk = null;
-    try {
-      uriGetTenHk = new URIBuilder("http://localhost:8080/api/admin/home/semester").setParameter("id",idHk).build();
-    } catch (URISyntaxException e) {
-      throw new RuntimeException(e);
+  int totalPages;
+
+  // Hàm Refresh lại trang lấy lớp
+  public JSONArray getAllLop(HttpClient httpClient, HttpPost httpPost) throws IOException {
+    HttpResponse resp  = httpClient.execute(httpPost);
+    String responseBody = EntityUtils.toString(resp.getEntity());
+    JSONObject jsonResponse = new JSONObject(responseBody);
+    if(jsonResponse.getInt("status")==200) {
+      totalPages = jsonResponse.getInt("totalPages");
+      return jsonResponse.getJSONArray("data");
+    } else {
+      return null;
     }
-    HttpGet httpGet = new HttpGet(uriGetTenHk);
-      httpGet.setHeader("Cookie", value + cookieValue);
-      HttpResponse resp = httpClient.execute(httpGet);
-    String responseData = EntityUtils.toString(resp.getEntity());
-    ObjectMapper objectMapper = new ObjectMapper();
-    JsonNode jsonNode = objectMapper.readTree(responseData);
-    JsonNode infoHk = jsonNode.get("data");
-      return infoHk.get("tenHocKy").asText();
   }
 %>
 
 <%
-  //get all
-  URI uriGetLop= new URIBuilder("http://localhost:8080/api/admin/class").setParameter("idKhoa",khoa).build();
-  JSONArray listLop  = new JSONArray();
-  List<String> listHk = new ArrayList<>();
+  // tìm kiếm
+  tenLop = request.getParameter("nhapTimKiem");
+  if(tenLop==null) tenLop = "";
+  System.out.println("Ten Lop tim kiem: " + tenLop);
+  requestBody = "{"+
+          "\"idKhoa\":\"" + khoa + "\","+
+          "\"tenLop\":\"" + tenLop + "\","+
+          "\"baseRequest\":{"+
+          "\"sortField\":\"" + sortField + "\","+
+          "\"sortOrder\":\"" + sortOrder + "\","+
+          "\"pageIndex\":" + pageIndex + ","+
+          "\"pageSize\":" + pageSize +
+          "}"+
+          "}";
+  entity = new StringEntity(requestBody);
+  httpPost.setEntity(entity);
+  listResp = getAllLop(httpClient, httpPost);
 
-  try{
-    HttpGet httpGet = new HttpGet(uriGetLop);
-    httpGet.setHeader("Cookie", value + cookieValue);
-
-    HttpResponse resp = httpClient.execute(httpGet);
-    String responseBody = EntityUtils.toString(resp.getEntity());
-    JSONObject jsonResponse = new JSONObject(responseBody);
-    listLop = jsonResponse.getJSONArray("data");
-    for(int i=0;i<listLop.length();i++){
-      JSONObject infoLop = listLop.getJSONObject(i);
-      listHk.add(GetTenHk(httpClient, String.valueOf(infoLop.getString("idHk")),value,cookieValue ) );
-    }
-  }catch (Exception e){
-  }
-
+  // return UTF8
+  byte[] bytes = tenLop.getBytes(StandardCharsets.ISO_8859_1);
+  tenLop = new String(bytes, StandardCharsets.UTF_8);
 %>
-
 
 <div class="lop">
   <header class="phanlop-header">
@@ -113,8 +147,8 @@
       <i class="fa-solid fa-plus"></i>
     </button>
     <form class="timKiem" method="post">
-      <div class="tieuDeTimKiem">Tìm kiếm giảng viên: </div>
-      <input type="search" id="nhapTimKiem" name="nhapTimKiem" placeholder="Nhập mã lớp" >
+      <div class="tieuDeTimKiem">Tìm kiếm lớp: </div>
+      <input type="search" id="nhapTimKiem" name="nhapTimKiem" placeholder="Nhập tên lớp" >
       <button class="nutTimKiem" type="submit">
         <span class="nutTimKiem_tieuDe">Tìm</span>
         <i class="fa-solid fa-magnifying-glass"></i>
@@ -133,24 +167,19 @@
       <th data-sort onclick="sortName(5,this)" class="hanh-dong">Action</th>
       </thead>
       <tbody>
-      <%
-        for(int i=0;i<listLop.length();i++){
-          JSONObject infoLop = listLop.getJSONObject(i);
-          String maLop = infoLop.getString("idLop");
-          String tenLop = infoLop.getString("tenLop");
-          String tenHk = listHk.get(i);
-          String ngayTao = infoLop.getString("ngayTao");
-          String ngaySua = infoLop.getString("ngaySua");
-      %>
+      <%--            hiển thị ra màn hình--%>
+      <%  if(listResp!=null) {
+        for(int i=0;i<listResp.length();i++) {%>
+      <% JSONObject lop = listResp.getJSONObject(i); %>
       <tr>
-        <td> <%=maLop%> </td>
-        <td><%=tenLop%></td>
-        <td><%=tenHk%></td>
-        <td><%=ngayTao%></td>
-        <td><%=ngaySua%></td>
+        <td> <%= lop.getString("idLop") %> </td>
+        <td><%= lop.getString("tenLop") %></td>
+        <td><%= lop.getString("idHk") %></td>
+        <td><%= lop.getString("ngayTao") %></td>
+        <td><%= lop.getString("ngaySua") %></td>
         <td class="chucNang">
           <div class="hop-hanh-dong">
-            <a href="../grade/view-grade.jsp?idLop=<%=maLop%>&khoa=<%=khoa%>">
+            <a href="../grade/view-grade.jsp?idLop=<%=lop.getString("idLop")%>&khoa=<%=khoa%>">
               <button class="xem hop-hanh-dong-nut" type="button">
                 <span class="sua_tieuDe">Xem điểm</span>
                 <i class="fa-solid fa-eye sua_icon"></i>
@@ -159,7 +188,7 @@
           </div>
           <div class="hop-hanh-dong">
             <button class="sua hop-hanh-dong-nut" type="button"
-                    onclick="showModalSua('modal_lop_sua', 'D20CQCN11-B', 'Công nghệ 11 khóa D20', 'Học kì 2')">
+                    onclick="showModalSua('modal_lop_sua', '<%= lop.getString("idLop") %>', '<%= lop.getString("tenLop") %>', '<%= lop.getString("idHk") %>')">
               <span class="sua_tieuDe">Sửa</span>
               <i class="fa-solid fa-pencil sua_icon"></i>
             </button>
@@ -167,6 +196,7 @@
         </td>
       </tr>
       <%
+          }
         }
       %>
       </tbody>
@@ -176,7 +206,7 @@
     <ul></ul>
   </div>
 </div>
-<%@include file="../class/add_class_form.jsp" %>
+<%@include file="add_class_form.jsp" %>
 <%@include file="confirm_delete_class.jsp" %>
 <%@include file="update_class_form.jsp" %>
 <script src="../../../assets/js/admin/pagination_class.js"></script>
