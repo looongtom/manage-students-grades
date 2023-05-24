@@ -15,7 +15,7 @@
       <img src="../../../assets/images/home.png" alt="Trang chủ" class="icon-Muc">
       <div class="menuMuc-tieuDe">Trang chủ</div>
     </a>
-    <a class="menuMuc nhapDiemMuc" href="">
+    <a class="menuMuc nhapDiemMuc" href="" onclick="exportToExcel(); return false;">
       <img src="../../../assets/images/score.png" alt="Xuất file Excel" class="icon-Muc">
       <div class="menuMuc-tieuDe" id="exportBtn">Xuất file Excel</div>
     </a>
