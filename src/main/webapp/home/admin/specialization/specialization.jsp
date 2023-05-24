@@ -18,7 +18,7 @@
             <div class="hangngang">
                 <div class="hop hop1">
                     <div class="cac-khoa">
-                        <img src="../../../assets/images/cntt.jpg" alt="New York" class="khoa-img">
+                        <img src="../../../assets/images/cb.png" alt="New York" class="khoa-img">
                         <div class="khoa">
                             <h3 class="phandau-khoa">Khoa Cơ bản 1</h3>
                             <p class="diachi-khoa"> Tầng 10, nhà A2, Km10, Nguyễn Trãi, Hà Đông, Hà Nội</p>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="hop hop2">
                     <div class="cac-khoa">
-                        <img src="../../../assets/images/cntt.jpg" alt="San Francisco" class="khoa-img">
+                        <img src="../../../assets/images/dpt.jpg" alt="San Francisco" class="khoa-img">
                         <div class="khoa">
                             <h3 class="phandau-khoa">Khoa Đa Phương tiện</h3>
                             <p class="diachi-khoa"> Tầng 1, nhà A1, Km10, Nguyễn Trãi, Hà Đông, Hà Nội</p>
@@ -46,7 +46,7 @@
             <div class="hangngang">
                 <div class="hop hop3">
                     <div class="cac-khoa">
-                        <img src="../../../assets/images/cntt.jpg" alt="San Francisco" class="khoa-img">
+                        <img src="../../../assets/images/dtvt.jpg" alt="San Francisco" class="khoa-img">
                         <div class="khoa">
                             <h3 class="phandau-khoa">Khoa Viễn Thông 1</h3>
                             <p class="diachi-khoa">Tầng 10, nhà A2, Km10, Nguyễn Trãi, Hà Đông, Hà Nội</p>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="hop hop4">
                     <div class="cac-khoa">
-                        <img src="../../../assets/images/cntt.jpg" alt="San Francisco" class="khoa-img">
+                        <img src="../../../assets/images/ktdt.jpg" alt="San Francisco" class="khoa-img">
                         <div class="khoa">
                             <h3 class="phandau-khoa">Khoa Kỹ thuật điện tử 1</h3>
                             <p class="diachi-khoa">Tầng 9, nhà A2, Km10, Nguyễn Trãi, Hà Đông, Hà Nội</p>
@@ -70,7 +70,7 @@
             <div class="hangngang">
                 <div class="hop hop5">
                     <div class="cac-khoa">
-                        <img src="../../../assets/images/cntt.jpg" alt="San Francisco" class="khoa-img">
+                        <img src="../../../assets/images/qtkd.png" alt="San Francisco" class="khoa-img">
                         <div class="khoa">
                             <h3 class="phandau-khoa">Khoa Quản trị kinh doanh 1</h3>
                             <p class="diachi-khoa">Tầng 9, nhà A2, Km10, Nguyễn Trãi, Hà Đông, Hà Nội</p>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="hop hop6">
                     <div class="cac-khoa">
-                        <img src="../../../assets/images/cntt.jpg" alt="San Francisco" class="khoa-img">
+                        <img src="../../../assets/images/tckt.png" alt="San Francisco" class="khoa-img">
                         <div class="khoa">
                             <h3 class="phandau-khoa">Khoa Tài chính kế toán</h3>
                             <p class="diachi-khoa"> Tầng 10, nhà A2, Km10, Nguyễn Trãi, Hà Đông, Hà Nội</p>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="hop hop8">
                     <div class="cac-khoa">
-                        <img src="../../../assets/images/cntt.jpg" alt="San Francisco" class="khoa-img">
+                        <img src="../../../assets/images/attt.jpg" alt="San Francisco" class="khoa-img">
                         <div class="khoa">
                             <h3 class="phandau-khoa">Khoa An toàn Thông tin</h3>
                             <p class="diachi-khoa">Sun 29 Nov 2016</p>

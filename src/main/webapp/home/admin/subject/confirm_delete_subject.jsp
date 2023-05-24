@@ -21,7 +21,7 @@
 
     <!-- modal footer -->
     <div class="cuoi-modal-xoa">
-      <button onclick="anXacNhanXoa('modal_xac_nhan_xoa')" class="huy-btn" type="submit">
+      <button onclick="anXacNhanXoa('modal_xac_nhan_xoa')" class="huy-btn" type="button">
         Hủy
       </button>
       <input class="xoa-btn" type="submit" onclick="anXacNhanXoa('modal_xac_nhan_xoa')" value="Xóa">

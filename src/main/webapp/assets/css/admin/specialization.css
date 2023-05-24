@@ -139,7 +139,7 @@ html {
 .khoa-img {
     width: 100%;
     display: block;
-    /* chặn khoảng đen */
+    height: 350px;
 }
 
 .khoa {

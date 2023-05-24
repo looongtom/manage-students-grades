@@ -2,11 +2,10 @@ package com.example.quanlysv.servlet.dao.impl;
 
 import com.example.quanlysv.servlet.dao.ISubjectDao;
 import com.example.quanlysv.servlet.dto.request.subject.SubjectFilter;
-import com.example.quanlysv.servlet.entity.HocKyEntity;
 import com.example.quanlysv.servlet.entity.SubjectEntity;
-import com.example.quanlysv.servlet.mapper.HocKyMapper;
 import com.example.quanlysv.servlet.mapper.SubjectMapper;
 
+import java.util.Date;
 import java.util.List;
 
 public class SubjectDaoImpl extends AbstractDao<SubjectEntity> implements ISubjectDao {
@@ -77,13 +76,14 @@ public class SubjectDaoImpl extends AbstractDao<SubjectEntity> implements ISubje
 
     @Override
     public void deleteSubject(String id) {
+        Date date = new Date();
           try {
               String sqlQuery = "SELECT mh.id_mh as idMh, mh.ten_mon_hoc as tenMonHoc, mh.tin_chi as tinChi," +
                       "mh.id_khoa as idKhoa FROM monhoc mh where mh.id_mh =?";
               List<SubjectEntity> list = findByProperties(sqlQuery, new SubjectMapper(), id.trim());
               if(list != null && !list.isEmpty()){
-                  String sql = "UPDATE monhoc SET trang_thai = ? WHERE id_mh = ?";
-                  insertOrUpdateOrDelete(sql, 0, id.trim());
+                  String sql = "UPDATE monhoc SET trang_thai = ?, ngay_sua = ? WHERE id_mh = ?";
+                  insertOrUpdateOrDelete(sql, 0, date.getTime(), id.trim());
               }
 
           }catch (Exception e){

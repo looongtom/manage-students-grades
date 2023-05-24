@@ -6,6 +6,7 @@ import com.example.quanlysv.servlet.entity.TeacherEntity;
 import com.example.quanlysv.servlet.mapper.TeacherMapper;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeacherDao {
@@ -103,12 +104,13 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
 
     @Override
     public void deleteTeacher(String id) {
+        Date date = new Date();
         try{
             String sqlQuery="SELECT * FROM giangvien as gv where gv.id_gv=?";
             List<TeacherEntity>teacherEntities = findByProperties(sqlQuery,new TeacherMapper(),id.trim());
             if (teacherEntities!=null){
-                String sql="UPDATE giangvien SET trang_thai = ? WHERE id_gv=?";
-                insertOrUpdateOrDelete(sql, 0, id.trim());
+                String sql="UPDATE giangvien SET trang_thai = ?, ngay_sua = ? WHERE id_gv=?";
+                insertOrUpdateOrDelete(sql, 0, date.getTime(), id.trim());
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
