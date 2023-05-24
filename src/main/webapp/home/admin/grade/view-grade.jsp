@@ -198,7 +198,7 @@
 <%--        </div>--%>
     </div>
     <div class="boc-bang">
-        <table class="danhSach">
+        <table class="danhSach" id="excelTable">
             <thead class="hang1">
             <th data-sort onclick="sortTable(0, this)" class="cot-maSV">Mã sinh viên</th>
             <th data-sort onclick="sortTable(1, this)" class="cot-tenSV">Tên sinh viên</th>
@@ -246,20 +246,28 @@
 </div>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../../../assets/js/menu.js"></script>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-<script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
+
 <script>
-    $(document).ready(function() {
-        $('#exportBtn').click(function() {
-            var table = $('.danhSach').get(0);
-            var workbook = XLSX.utils.table_to_book(table);
-            var workbookOutput = XLSX.write(workbook, { bookType: 'xlsx', bookSST: true, type: 'array' });
-            var file = new Blob([workbookOutput], { type: 'application/octet-stream' });
-            saveAs(file, 'table.xlsx');
+    function exportToExcel() {
+        var table = document.getElementById("excelTable");
+        var sheetName = "Sheet1";
+
+        var workbook = XLSX.utils.table_to_book(table, { sheet: sheetName });
+        var workbookOutput = XLSX.write(workbook, { bookType: 'xlsx', bookSST: true, type: 'array' });
+
+        var blob = new Blob([workbookOutput], {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         });
-    });
+
+        var url = URL.createObjectURL(blob);
+
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "File điểm lớp <%=idLop%> .xlsx";
+        a.click();
+    }
 </script>
 
 </html>
