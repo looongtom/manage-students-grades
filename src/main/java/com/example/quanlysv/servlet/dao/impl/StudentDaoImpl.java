@@ -5,6 +5,7 @@ import com.example.quanlysv.servlet.dto.request.student.StudentFilter;
 import com.example.quanlysv.servlet.entity.StudentEntity;
 import com.example.quanlysv.servlet.mapper.StudentMapper;
 
+import java.util.Date;
 import java.util.List;
 
 public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStudentDao {
@@ -117,11 +118,11 @@ public class StudentDaoImpl extends AbstractDao<StudentEntity> implements IStude
 
     @Override
     public void deleteStudentById(String id) {
+        Date date = new Date();
         try{
-
             if(!id.trim().isEmpty()){
-                String sql = "UPDATE sinhvien SET trang_thai = ? WHERE id_sv = ?";
-                insertOrUpdateOrDelete(sql, 0, id.trim());
+                String sql = "UPDATE sinhvien SET trang_thai = ?, ngay_sua = ? WHERE id_sv = ?";
+                insertOrUpdateOrDelete(sql, 0, date.getTime(), id.trim());
             }
         }catch (Exception e){
             throw new RuntimeException("create student failed: "+ e.getMessage());
