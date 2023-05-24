@@ -11,6 +11,12 @@
       <div class="tenTaiKhoan">Admin</div>
     </div>
     <div class="nganCach"></div>
+
+    <a class="menuMuc trangChuMuc" href="../class/class.jsp?khoa=<%=khoa%>">
+      <img src="../../../assets/images/back.png" alt="Quay lại" class="icon-Muc">
+      <div class="menuMuc-tieuDe">Quay lại</div>
+    </a>
+
     <a class="menuMuc trangChuMuc" href="/admin/home">
       <img src="../../../assets/images/home.png" alt="Trang chủ" class="icon-Muc">
       <div class="menuMuc-tieuDe">Trang chủ</div>

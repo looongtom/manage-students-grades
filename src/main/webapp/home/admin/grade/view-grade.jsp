@@ -185,7 +185,7 @@
     <h1 class="tieuDeTrang">Danh sách điểm lớp: <%=getIdLopFromClassJSP%></h1>
     <div class="themVaTimKiem">
         <!-- nut them sinh vien -->
-        <a class="nutTimKiem" href="../class/class.jsp?khoa=<%=khoa%>">Quay lại</a>
+<%--        <a class="nutTimKiem" href="../class/class.jsp?khoa=<%=khoa%>">Quay lại</a>--%>
 
 <%--        <div class="timKiem">--%>
 <%--            <div class="tieuDeTimKiem">Tìm kiếm: </div>--%>
