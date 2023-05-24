@@ -17,7 +17,7 @@
     </a>
     <a class="menuMuc nhapDiemMuc" href="">
       <img src="../../../assets/images/score.png" alt="Xuất file Excel" class="icon-Muc">
-      <div class="menuMuc-tieuDe">Xuất file Excel</div>
+      <div class="menuMuc-tieuDe" id="exportBtn">Xuất file Excel</div>
     </a>
 <%--    <a class="menuMuc sinhVienMuc" href="/../../home/admin/student/student.jsp">--%>
 <%--      <img src="../../../assets/images/student.svg" alt="Sinh viên" class="icon-Muc">--%>
