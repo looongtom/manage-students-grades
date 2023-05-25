@@ -97,6 +97,19 @@ public class GradeDaoImpl extends AbstractDao<GradeEntity> implements IGradeDao 
     }
 
     @Override
+    public void updateGrade(GradeEntity gradeEntity) {
+        try{
+            String sqlQuery="UPDATE public.diem SET diem_cc=?, diem_bt=?, diem_thi=?, diem_kt=?,ngay_sua=? " +
+                    " WHERE id_diem=? and id_sv=?";
+            insertOrUpdateOrDelete(sqlQuery,
+                    gradeEntity.getDiemCc(),gradeEntity.getDiemBt(),gradeEntity.getDiemThi(),gradeEntity.getDiemKt(),
+                    gradeEntity.getNgaySua(),gradeEntity.getIdDiem(),gradeEntity.getIdSv());
+        }catch (Exception e) {
+            throw new RuntimeException("update update failed: "+ e.getMessage());
+        }
+    }
+
+    @Override
     public List<GradeEntity> viewGradeByIdLop(GradeFilter request) {
     String sql="SELECT diem.id_diem as idDiem, " +
                     "diem.diem_cc as diemCc, diem.diem_bt as diemBt, diem.diem_thi as diemThi, diem.diem_kt as diemKt, " +

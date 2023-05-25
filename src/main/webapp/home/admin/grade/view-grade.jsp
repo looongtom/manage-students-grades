@@ -9,9 +9,7 @@
 <%@ page import="org.apache.http.impl.client.HttpClientBuilder" %>
 <%@ page import="java.io.IOException" %>
 <%@ page import="org.apache.http.client.methods.HttpGet" %>
-<%@ page import="com.example.quanlysv.servlet.entity.ThanhPhanEntity" %>
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
-<%@ page import="com.example.quanlysv.servlet.dto.request.thanhphan.ThanhPhanDTO" %>
 <%@ page import="com.fasterxml.jackson.databind.JsonNode" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.util.List" %>
@@ -20,13 +18,17 @@
 <%@ page import="org.apache.http.client.utils.URIBuilder" %>
 <html>
 <head>
-    <link rel="stylesheet" href="../../../assets/css/admin/view_grade.css">
     <%@include file="../menu/admin_menu_header.jsp" %>
+    <link rel="stylesheet" href="../../../assets/css/admin/view_grade.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/update_grade_form.css">
     <title>Danh sách điểm</title>
 </head>
 <%
+    ServletContext context = request.getServletContext();
+    String baseUrl = context.getInitParameter("apiUrl");
     String khoa = request.getParameter("khoa");
 %>
+
 <%
     HttpClient httpClient = HttpClientBuilder.create().build();
 
@@ -64,8 +66,8 @@
 <body>
 <%@include file="../menu/menu_view_grade.jsp" %>
 <div class="manHinhChinh">
+<%--     Hàm Refresh lại trang lấy sinh vien--%>
     <%!
-        // Hàm Refresh lại trang lấy sinh vien
         public JSONArray getAllDiem(HttpClient httpClient, HttpPost httpPost) throws IOException {
             HttpResponse resp = httpClient.execute(httpPost);
             String responseBody = EntityUtils.toString(resp.getEntity());
@@ -83,8 +85,9 @@
         String uriGetAll = "http://localhost:8080/api/admin/grade/view";
         List<String>listTenSv = new ArrayList<>();
         JSONArray listResp = new JSONArray();
+        HttpPost httpPost = new HttpPost();
         try{
-            HttpPost httpPost = new HttpPost(uriGetAll);
+            httpPost = new HttpPost(uriGetAll);
             StringEntity entity = new StringEntity(requestBodyDiem);
             httpPost.setEntity(entity);
 
@@ -119,7 +122,7 @@
 
         }
     %>
-
+<%--    Lấy hệ số thành phần--%>
     <%
         URI uriGetHeSoTP = new URIBuilder("http://localhost:8080/api/admin/thanh-phan/get").setParameter("idDiem",idDiem).build();
         JsonNode heSoThanhPhan = null;
@@ -147,8 +150,8 @@
         }
 
 
-
     %>
+<%--    Chuyển sang điểm hệ 4--%>
     <%!
         public Double ConvertDiemTB( Double x) {
             if(Double.compare(4.0,x)>0)return 0.0;
@@ -162,12 +165,14 @@
             return 4.0;
         }
     %>
+<%--    Chuyển sang trạng thái--%>
     <%!
        public String ConvertTrangThai ( Double x ){
            if(Double.compare(1.0,x)>0)return "Trượt môn";
            return "Qua môn";
        }
     %>
+<%--    Chuyển sang điểm chữ--%>
     <%!
        public String ConvertDiemChu (Double x){
            Double tolerance = 0.001;
@@ -182,21 +187,69 @@
            return "A+";
        }
     %>
-    <h1 class="tieuDeTrang">Danh sách điểm lớp: <%=getIdLopFromClassJSP%></h1>
-    <div class="themVaTimKiem">
-        <!-- nut them sinh vien -->
-<%--        <a class="nutTimKiem" href="../class/class.jsp?khoa=<%=khoa%>">Quay lại</a>--%>
+<%--    update diem--%>
+    <%
+        String uriUpdateDiem = baseUrl + "/admin/grade/update";
+        String idDiemUpdate = request.getParameter("id-diem-sua");
+        String idGvUpdate = request.getParameter("id-gv-sua");
+        String idMhUpdate = request.getParameter("id-mh-sua");
+        String idSvUpdate = request.getParameter("id-sv-sua");
+        String idHkUpdate = request.getParameter("id-hk-sua");
+        String idLopUpdate = request.getParameter("id-lop-sua");
 
-<%--        <div class="timKiem">--%>
-<%--            <div class="tieuDeTimKiem">Tìm kiếm: </div>--%>
-<%--            <input type="search" class="nhapTimKiem" placeholder="Nhập mã sinh viên">--%>
-<%--            <input type="search" class="nhapTimKiem" placeholder="Nhập trạng thái">--%>
-<%--            <button class="nutTimKiem">--%>
-<%--                <span class="nutTimKiem_tieuDe">Tìm</span>--%>
-<%--                <i class="fa-solid fa-magnifying-glass"></i>--%>
-<%--            </button>--%>
-<%--        </div>--%>
-    </div>
+        String diemCcUpdateString = (request.getParameter("diem-cc-sua"));
+        String diemBtUpdateString = (request.getParameter("diem-bt-sua"));
+        String diemThiUpdateString = (request.getParameter("diem-thi-sua"));
+        String diemKtUpdateString = (request.getParameter("diem-kt-sua"));
+
+        Double diemCcUpdate = -1.0;
+        Double diemBtUpdate = -1.0;
+        Double diemThiUpdate = -1.0;
+        Double diemKtUpdate = -1.0;
+
+
+
+        try {
+            if(diemCcUpdateString!= null && Double.parseDouble(diemCcUpdateString)>0)diemCcUpdate = Double.valueOf(diemCcUpdateString);
+            if(diemBtUpdateString!= null && Double.parseDouble(diemBtUpdateString)>0)diemBtUpdate = Double.valueOf(diemBtUpdateString);
+            if(diemThiUpdateString!= null && Double.parseDouble(diemThiUpdateString)>0)diemThiUpdate = Double.valueOf(diemThiUpdateString);
+            if(diemKtUpdateString!= null && Double.parseDouble(diemKtUpdateString)>0)diemKtUpdate = Double.valueOf(diemKtUpdateString);
+        } catch (NumberFormatException e) {
+
+        }
+
+        if ( diemCcUpdate >0 && diemBtUpdate >0 && diemThiUpdate >0 && diemKtUpdate >0) {
+//        if (idDiemUpdate != null && idGvUpdate != null && idMhUpdate != null
+//                && idSvUpdate != null && idHkUpdate != null  && idLopUpdate != null) {
+            String requestUpdateDiem ="{"+
+                    "\"idDiem\":\"" + idDiemUpdate + "\"," +
+                    "\"idGv\":\"" + idGvUpdate + "\"," +
+                    "\"idMh\":\"" + idMhUpdate + "\"," +
+                    "\"idSv\":\"" + idSvUpdate + "\"," +
+                    "\"idHk\":\"" + idHkUpdate + "\"," +
+                    "\"idLop\":\"" + idLopUpdate + "\"," +
+                    "\"diemCc\":" + diemCcUpdate + "," +
+                    "\"diemBt\":" +diemBtUpdate + "," +
+                    "\"diemThi\":" +diemThiUpdate + "," +
+                    "\"diemKt\":" +diemKtUpdate +
+                    "}";
+
+
+            HttpPost httpPostUpdateDiem = new HttpPost(uriUpdateDiem);
+            StringEntity entityUpdateDiem = new StringEntity(requestUpdateDiem);
+            httpPostUpdateDiem.setEntity(entityUpdateDiem);
+
+            httpPostUpdateDiem.setHeader("Cookie", value + cookieValue);
+
+
+            HttpResponse respUpdateSV = httpClient.execute(httpPostUpdateDiem);
+            String responseBodyUpdateSV = EntityUtils.toString(respUpdateSV.getEntity());
+            // get all sinh vien
+            listResp = getAllDiem(httpClient, httpPost);
+        }
+    %>
+    <h1 class="tieuDeTrang">Danh sách điểm lớp: <%=getIdLopFromClassJSP%></h1>
+
     <div class="boc-bang">
         <table class="danhSach" id="excelTable">
             <thead class="hang1">
@@ -208,7 +261,12 @@
             <th data-sort onclick="sortTable(5, this)" class="cot-Diem">Kiểm tra</th>
             <th data-sort onclick="sortTable(6, this)" class="cot-Diem">Tổng kết</th>
             <th data-sort onclick="sortTable(7, this)" class="cot-Diem">Điểm chữ</th>
-            <th data-sort onclick="sortTable(8, this)" class="cot-Trangthai">Trạng thái</th>
+
+            <th data-sort onclick="sortTable(8, this)" class="cot-Diem">Thời gian tạo</th>
+            <th data-sort onclick="sortTable(9, this)" class="cot-Diem">Thời gian sửa</th>
+
+            <th data-sort onclick="sortTable(10, this)" class="cot-Trangthai">Trạng thái</th>
+            <th class="hanh-dong">Action</th>
 
             </thead>
             <tbody>
@@ -221,7 +279,7 @@
                 Double diemThi = diemTungHang.getDouble("diemThi");
                 Double diemKt = diemTungHang.getDouble("diemKt");
                 Double diemTb = ConvertDiemTB( (diemCc*hesoDiemCc+diemBt*hesoDiemBt+diemThi*hesoDiemThi+diemKt*hesoDiemKt)/100 ) ;
-                System.out.println((diemCc*hesoDiemCc+diemBt*hesoDiemBt+diemThi*hesoDiemThi+diemKt*hesoDiemKt)/100+" "+diemTb);
+//                System.out.println((diemCc*hesoDiemCc+diemBt*hesoDiemBt+diemThi*hesoDiemThi+diemKt*hesoDiemKt)/100+" "+diemTb);
                 String diemChu = ConvertDiemChu(diemTb);
                 String trangThai = ConvertTrangThai(diemTb);
                 String tenSv= listTenSv.get(i);
@@ -235,26 +293,44 @@
                 <td class="cot-Diem"><%= decimalFormat.format(diemKt) %></td>
                 <td class="cot-Diem"><%= decimalFormat.format(diemTb) %></td>
                 <td class="cot-Diem"><%= diemChu %></td>
+                <td class="cot-Diem"><%= diemTungHang.getString("ngayTao") %></td>
+                <td class="cot-Diem"><%= diemTungHang.getString("ngaySua") %></td>
+
                 <td class="cot-Trangthai" id="<%= trangThai.equals("Qua môn") ? "ttQua" : "ttTruot" %>"><%=trangThai %></td>
+                <td class="chucNang">
+                    <div class="hop-hanh-dong">
+                        <button class="sua hop-hanh-dong-nut" type="button" onclick="showModalSua('modal_sua_diem', '<%=idDiem%>', '<%=diemTungHang.getString("idSv")%>', '<%=diemCc%>','<%=diemBt%>', '<%=diemThi%>', '<%=diemKt%>', '<%=diemTungHang.getString("idMh")%>','<%=diemTungHang.getString("idHk")%>','<%=diemTungHang.getString("idLop")%>','<%=diemTungHang.getString("idGv")%>')">
+                            <span class="sua_tieuDe">Sửa</span>
+                            <i class="fa-solid fa-pencil sua_icon"></i>
+                        </button>
+                    </div>
+                </td>
             </tr>
             <% }
             }%>
             </tbody>
         </table>
     </div>
+    <%@include file="update_grade_form.jsp" %>
 
 </div>
 
 </body>
-<script src="../../../assets/js/menu.js"></script>
-<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
 <script>
     function exportToExcel() {
         var table = document.getElementById("excelTable");
         var sheetName = "Sheet1";
 
-        var workbook = XLSX.utils.table_to_book(table, { sheet: sheetName });
+        // Clone the table and remove the last column
+        var tableClone = table.cloneNode(true);
+        var rows = tableClone.rows;
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].cells;
+            cells[cells.length - 1].remove();
+        }
+
+        var workbook = XLSX.utils.table_to_book(tableClone, { sheet: sheetName });
         var workbookOutput = XLSX.write(workbook, { bookType: 'xlsx', bookSST: true, type: 'array' });
 
         var blob = new Blob([workbookOutput], {
@@ -265,9 +341,14 @@
 
         var a = document.createElement("a");
         a.href = url;
-        a.download = "File điểm lớp <%=idLop%> .xlsx";
+        a.download = "File điểm lớp <%=idLop%>.xlsx";
         a.click();
     }
 </script>
+<script src="../../../assets/js/menu.js"></script>
+<script src="../../../assets/js/admin/update_grade.js"></script>
+<script src="../../../assets/js/admin/text_error_grade.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
 
 </html>
