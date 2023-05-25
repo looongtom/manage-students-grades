@@ -1,4 +1,4 @@
-package com.example.quanlysv.servlet.controller.add_grade;
+package com.example.quanlysv.servlet.controller.info_to_add_grade;
 
 import com.example.quanlysv.servlet.service.IAddGradeService;
 import com.example.quanlysv.servlet.service.impl.AddGradeServiceImpl;
@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/api/admin/home/info-to-add-grade")
-public class AddGradeController extends HttpServlet {
+public class InfoToAddGradeController extends HttpServlet {
     private IAddGradeService service;
-    public AddGradeController() {
+    public InfoToAddGradeController() {
         this.service = new AddGradeServiceImpl();
     }
 

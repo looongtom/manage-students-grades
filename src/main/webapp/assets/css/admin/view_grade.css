@@ -73,7 +73,9 @@ h1 {
 
 /* table */
 .hanh-dong {
-    width: 170px;
+    width: 115px;
+    align-items: center;
+
 }
 
 
@@ -173,30 +175,36 @@ tr:nth-child(even) {
 }
 
 .chucNang {
-    display: flex;
-    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
 }
 
 .hop-hanh-dong-nut {
+    align-items: center;
     font-size: 12px;
     padding: 8px 12px;
     color: var(--white-color);
+    text-align: center;
     border: none;
+
 }
 
 .sua {
-    margin-bottom: 5px;
-    margin-right: 5px;
+    align-items: center;
     background-color: rgb(24, 170, 255);
+    text-align: center;
     border: none;
 }
 
 .sua:hover {
     background-color: rgba(24, 170, 255, 0.8);
+    text-align: center;
+
 }
 
 .sua_tieuDe {
-    margin-right: 5px;
+    text-align: center;
 }
 
 .xoa {

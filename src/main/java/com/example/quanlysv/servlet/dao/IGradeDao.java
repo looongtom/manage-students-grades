@@ -12,6 +12,7 @@ public interface IGradeDao extends IGenericDao<GradeEntity> {
     List<GradeEntity> findDiem(BaseRequest request,String idLop);
 
     List<GradeEntity>viewGradeByIdLop(GradeFilter request);
+    void updateGrade (GradeEntity gradeEntity);
 
     Integer countTotalRecords(GradeFilter request);
 }

@@ -1,11 +1,13 @@
 package com.example.quanlysv.servlet.service.impl;
 
+import com.example.quanlysv.servlet.common.Constant;
 import com.example.quanlysv.servlet.dao.IGradeDao;
 import com.example.quanlysv.servlet.dao.impl.GradeDaoImpl;
 import com.example.quanlysv.servlet.dto.request.BaseRequest;
 import com.example.quanlysv.servlet.dto.request.diem.CreateOrEditGradeDTO;
 import com.example.quanlysv.servlet.dto.request.diem.GradeDTO;
 import com.example.quanlysv.servlet.dto.request.diem.GradeFilter;
+import com.example.quanlysv.servlet.dto.request.diem.UpdateGradeDTO;
 import com.example.quanlysv.servlet.dto.request.student.StudentDTO;
 import com.example.quanlysv.servlet.dto.response.BaseResponse;
 import com.example.quanlysv.servlet.entity.GradeEntity;
@@ -13,6 +15,7 @@ import com.example.quanlysv.servlet.service.IGradeService;
 import com.example.quanlysv.servlet.util.Convert;
 import org.apache.log4j.Logger;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,8 +107,24 @@ public class GradeServiceImpl implements IGradeService {
         }
     }
 
-
-
+    @Override
+    public BaseResponse<?> UpdateGrade(UpdateGradeDTO updateGradeDTO) {
+        GradeEntity gradeEntity = null;
+        try {
+            gradeEntity = Convert.convertDTOToEntity(updateGradeDTO, GradeEntity.class);
+            Instant currentTime = Instant.now();
+            gradeEntity.setNgaySua(currentTime);
+            gradeDao.updateGrade(gradeEntity);
+            return new BaseResponse.Builder<>()
+                    .setStatus(Constant.httpStatusOk)
+                    .setMessage(Constant.messageSuccess).build();
+        } catch (IllegalAccessException | InstantiationException e) {
+            log.error("failed by =>", e.getCause());
+            return new BaseResponse.Builder<>()
+                    .setStatus(Constant.httpStatusErrorServer)
+                    .setMessage(Constant.messageFailed).build();
+        }
+    }
 }
 
     //    @Override
