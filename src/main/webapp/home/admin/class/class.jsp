@@ -40,15 +40,15 @@
   String sortField = "";
   String sortOrder = "";
   int pageSize = 10;
-
+    System.out.println("khoa:"+ khoa);
   int pageIndex = 1;
-  if(session.getAttribute("pageIndexGV")!=null) {
-    pageIndex = (int) session.getAttribute("pageIndexGV");
+  if(session.getAttribute("pageIndexLop")!=null) {
+    pageIndex = (int) session.getAttribute("pageIndexLop");
   }
 
-  System.out.println(session.getAttribute("pageIndexGV"));
-  System.out.println("pageIndex in teacher.jsp: " + pageIndex);
-  System.out.println("pageSize in teacher.jsp: " + pageSize);
+  System.out.println(session.getAttribute("pageIndexLop"));
+  System.out.println("pageIndex in class.jsp: " + pageIndex);
+  System.out.println("pageSize in class.jsp: " + pageSize);
 
   // request body for getAll, finding and sorting
   String requestBody ="{"+
@@ -197,37 +197,38 @@
   byte[] bytes = tenLop.getBytes(StandardCharsets.ISO_8859_1);
   tenLop = new String(bytes, StandardCharsets.UTF_8);
 %>
-<%--<%--%>
-<%--    // sort--%>
-<%--    sortField = request.getParameter("sortFieldGV");--%>
-<%--    sortOrder = request.getParameter("sortOrderGV");--%>
-<%--    if(sortField!=null) {--%>
-<%--        tenLop = request.getParameter("tenLop");--%>
-<%--        if(tenLop==null) tenLop = "";--%>
-<%--        System.out.println("Ten GV sort: " + tenLop);--%>
+<%
+    // sort
+    sortField = request.getParameter("sortFieldLop");
+    sortOrder = request.getParameter("sortOrderLop");
+    if(sortField!=null) {
+        tenLop = request.getParameter("tenLop");
+        if(tenLop==null) tenLop = "";
+        System.out.println("Ten Lop sort: " + tenLop);
 
-<%--        requestBody = "{"+--%>
-<%--                "\"tenGv\":\"" + tenLop + "\","+--%>
-<%--                "\"baseRequest\":{"+--%>
-<%--                "\"sortField\":\"" + sortField + "\","+--%>
-<%--                "\"sortOrder\":\"" + sortOrder + "\","+--%>
-<%--                "\"pageIndex\":" + pageIndex + ","+--%>
-<%--                "\"pageSize\":" + pageSize +--%>
-<%--                "}"+--%>
-<%--                "}";--%>
-<%--        entity = new StringEntity(requestBody);--%>
-<%--        httpPost.setEntity(entity);--%>
+        requestBody = "{"+
+                "\"idKhoa\":\"" + khoa + "\","+
+                "\"tenLop\":\"" + tenLop + "\","+
+                "\"baseRequest\":{"+
+                "\"sortField\":\"" + sortField + "\","+
+                "\"sortOrder\":\"" + sortOrder + "\","+
+                "\"pageIndex\":" + pageIndex + ","+
+                "\"pageSize\":" + pageSize +
+                "}"+
+                "}";
+        entity = new StringEntity(requestBody);
+        httpPost.setEntity(entity);
 
-<%--        System.out.println("Sort Field: " + sortField);--%>
-<%--        System.out.println("Sort Order: " + sortOrder);--%>
-<%--        System.out.println("Ten GV sort: " + tenLop);--%>
-<%--        listResp = getAllLop(httpClient, httpPost);--%>
+        System.out.println("Sort Field: " + sortField);
+        System.out.println("Sort Order: " + sortOrder);
+        System.out.println("Ten Lop sort: " + tenLop);
+        listResp = getAllLop(httpClient, httpPost);
 
-<%--        // return UTF8--%>
-<%--        bytes = tenLop.getBytes(StandardCharsets.ISO_8859_1);--%>
-<%--        tenLop = new String(bytes, StandardCharsets.UTF_8);--%>
-<%--    }--%>
-<%--%>--%>
+        // return UTF8
+        bytes = tenLop.getBytes(StandardCharsets.ISO_8859_1);
+        tenLop = new String(bytes, StandardCharsets.UTF_8);
+    }
+%>
 <div class="lop">
   <header class="phanlop-header">
     <div class="lop-tieuDe">Danh sách các lớp khoa
@@ -271,18 +272,19 @@
   </div>
 
   <div class="boc-bang">
-<%--      <form id="formlop" method="post" action="/admin/class" accept-charset="UTF-8">--%>
-<%--          <input type="hidden" name="tenGv" value="<%= tenLop %>">--%>
-<%--          <input type="hidden" name="sortFieldGV" value="<%= sortField %>">--%>
-<%--          <input type="hidden" name="sortOrderGV" value="<%= sortOrder %>">--%>
-<%--          <input type="hidden" name="pageIndexGV" value="<%= pageIndex %>">--%>
-<%--          <input type="hidden" name="pageSizeGV" value="<%= pageSize %>">--%>
+      <form id="formlop" method="post" action="/admin/class" accept-charset="UTF-8">
+          <input type="hidden" name="tenLop" value="<%= tenLop %>">
+          <input type="hidden" name="khoa" value="<%= khoa %>">
+          <input type="hidden" name="sortFieldLop" value="<%= sortField %>">
+          <input type="hidden" name="sortOrderLop" value="<%= sortOrder %>">
+          <input type="hidden" name="pageIndexLop" value="<%= pageIndex %>">
+          <input type="hidden" name="pageSizeLop" value="<%= pageSize %>">
 
           <table class="danhSach">
               <thead class="hang1">
               <th data-sort onclick="sortTable('idlop', this)" class="cot-malop idlop">Mã lớp</th>
-              <th data-sort onclick="sortName('tenlop',this)" class="cot-tenlop tenlop">Tên lớp</th>
-              <th data-sort onclick="sortName('idHk',this)" class="cot-tenHK idHk">Mã học kỳ</th>
+              <th data-sort onclick="sortTable('tenlop',this)" class="cot-tenlop tenlop">Tên lớp</th>
+              <th data-sort onclick="sortTable('idHk',this)" class="cot-tenHK idHk">Mã học kỳ</th>
 <%--              <th data-sort onclick="sortTable('idKhoa', this)" class="cot-khoa idKhoa">Khoa</th>--%>
               <th data-sort onclick="sortTable('ngayTao', this)" class="cot-ngayTao ngayTao">Ngày tạo</th>
               <th data-sort onclick="sortTable('ngaySua', this)" class="cot-ngayTao ngaySua">Ngày cập nhật</th>
@@ -294,7 +296,7 @@
                 for(int i=0;i<listResp.length();i++) {%>
               <% JSONObject lop = listResp.getJSONObject(i); %>
               <tr>
-                <td> <%= lop.getString("idLop") %> </td>
+                <td><%= lop.getString("idLop") %></td>
                 <td><%= lop.getString("tenLop") %></td>
                 <td><%= lop.getString("idHk") %></td>
                 <td><%= lop.getString("ngayTao") %></td>
@@ -323,16 +325,14 @@
               %>
               </tbody>
           </table>
-<%--      </form>--%>
+      </form>
   </div>
   <div class="phanTrang">
     <ul>
         <li class="nutPaginate prev" style="color: white" onclick="nutPrev()">
             <span><i class="fas fa-angle-left"></i></span>
         </li>
-        <span class="soTrang">
-
-            </span>
+        <span class="soTrang"></span>
         <li class="nutPaginate next" style="color: white" onclick="nutNext()">
             <span><i class="fas fa-angle-right"></i></span>
         </li>
@@ -345,9 +345,122 @@
 
 
 </body>
-    <script src="../../../assets/js/admin/pagination_class.js"></script>
+<script src="../../../assets/js/pagination.js"></script>
+<script>
+    // Kiểm tra xem lúc thêm lớp thì id, mã hay email đã tồn tại chưa?
+    if(<%= exist %>) {
+        alert("Mã lớp, Tên lớp đó đã tồn tại!");
+    }
+
+    // do lúc gửi đoạn sort nó hay load lại trang dẫn đến không kịp lưu lại class, hàm này dùng để lấy session đã lưu
+    // trong TeacherSessionController, gán nó vào class để hiển thị giao diện mũi tên là đang sort theo cột nào, asc hay desc
+    if('${sessionScope.sortFieldLop}'!=='null' && '${sessionScope.sortFieldLop}'!=='') {
+        var getTd = document.querySelector('.${sessionScope.sortFieldLop}');
+        const asc = '${sessionScope.sortOrderLop}'==='desc';
+        getTd.classList[asc ? 'remove' : 'add']('asc');
+        getTd.classList[asc ? 'add' : 'remove']('desc');
+    }
+
+    // hàm sort cột
+    function sortTable(field, event) {
+        const tenLopInput = document.querySelector('input[name="tenLop"]');
+        const sortFieldInput = document.querySelector('input[name="sortFieldLop"]');
+        const sortOrderInput = document.querySelector('input[name="sortOrderLop"]');
+        const pageIndexInput = document.querySelector('input[name="pageIndexLop"]');
+
+        const thead=document.querySelector('thead');
+        const hData=[...thead.querySelectorAll('th')]
+
+        hData.map((head) => {
+            if(head!==event) {
+                head.classList.remove('asc', 'desc')
+            }
+        });
+
+        if (sortFieldInput.value === field) {
+            const asc = sortOrderInput.value === "asc"
+            event.classList[asc ? 'remove' : 'add']('asc');
+            event.classList[asc ? 'add' : 'remove']('desc');
+            sortOrderInput.value = sortOrderInput.value === "asc" ? "desc" : "asc";
+        } else {
+            event.classList.add('asc');
+            sortFieldInput.value = field;
+            sortOrderInput.value = "asc";
+        }
+
+        // sau khi sort, quay trở lại trang đầu tiên
+        pageIndexInput.value = 1;
+
+        // Lấy phần tên trong khu vực tìm kiếm (nếu có)
+        console.log('Tên lớp trước khi gán giá trị: ' + tenLopInput.value);
+        console.log('Nhập tìm kiếm: ' + document.querySelector('#nhapTimKiem').value);
+        if(document.querySelector('#nhapTimKiem').value!==null) {
+            tenLopInput.value = document.querySelector('#nhapTimKiem').value;
+        }
+        // Submit the form
+        document.getElementById("formlop").submit();
+    }
+
+    // tạo UI phân trang
+    createPaginationUI(<%= totalPages %>, <%= pageIndex %>);
+
+    // nút chuyển sang trang trước đó
+    function nutPrev() {
+        const pageIndexInput = document.querySelector('input[name="pageIndexLop"]');
+        console.log('Page Index Before: ' + pageIndexInput.value);
+
+        // Kiểm tra xem hiện tại có đang ở trang đầu tiên k
+        if(pageIndexInput.value>1) {
+            pageIndexInput.value--;
+            document.getElementById("formlop").submit();
+        }
+    }
+
+    // nút chuyển sang trang tiếp theo
+    function nutNext() {
+        const sortFieldInput = document.querySelector('input[name="sortFieldLop"]');
+        const sortOrderInput = document.querySelector('input[name="sortOrderLop"]');
+        const pageIndexInput = document.querySelector('input[name="pageIndexLop"]');
+
+        // Kiểm tra session xem có đang sort cột nào k
+        if('${sessionScope.sortFieldLop}'!=='null' && '${sessionScope.sortFieldLop}'!=='') {
+            sortFieldInput.value = '${sessionScope.sortFieldLop}';
+            sortOrderInput.value = '${sessionScope.sortOrderLop}';
+        } else {
+            sortFieldInput.value = '';
+            sortOrderInput.value = '';
+        }
+
+        // Kiểm tra xem hiện tại có đang ở trang cuối cùng k
+        if(+pageIndexInput.value < <%= totalPages %>) {
+            pageIndexInput.value = +pageIndexInput.value + 1;
+            document.getElementById("formlop").submit();
+        }
+    }
+
+    // nút chọn 1 trang
+    function nutTrang(page) {
+        const sortFieldInput = document.querySelector('input[name="sortFieldLop"]');
+        const sortOrderInput = document.querySelector('input[name="sortOrderLop"]');
+        const pageIndexInput = document.querySelector('input[name="pageIndexLop"]');
+
+        // Kiểm tra session xem có đang sort cột nào k
+        if('${sessionScope.sortFieldLop}'!=='null' && '${sessionScope.sortFieldLop}'!=='') {
+            sortFieldInput.value = '${sessionScope.sortFieldLop}';
+            sortOrderInput.value = '${sessionScope.sortOrderLop}';
+        } else {
+            sortFieldInput.value = '';
+            sortOrderInput.value = '';
+        }
+
+        pageIndexInput.value = page;
+        document.getElementById("formlop").submit();
+    }
+
+</script>
+<%--    <script src="../../../assets/js/admin/pagination_class.js"></script>--%>
     <script src="../../../assets/js/admin/add_form.js"></script>
-    <script src="../../../assets/js/admin/class.js"></script>
+<%--    <script src="../../../assets/js/admin/class.js"></script>--%>
     <script src="../../../assets/js/admin/text_error_class.js"></script>
     <script src="../../../assets/js/admin/update_class.js"></script>
     <script src="../../../assets/js/admin/confirm_delete_form.js"></script>
