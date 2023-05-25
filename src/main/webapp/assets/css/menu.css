@@ -15,6 +15,7 @@ body {
     position: fixed;
     margin: 0;
     overflow-y: auto;
+    transition: width 0.3s ease;
 }
 
 .manHinhChinh {
@@ -22,6 +23,7 @@ body {
     padding-left: 30px;
     margin-left: 20%;
     margin-right: 30px;
+    transition: width 0.3s ease, margin-left 0.3s ease;
 }
 
 .menu-phanTren {
@@ -50,6 +52,8 @@ body {
     padding-left: 10px;
     font-size: 1.8rem;
     line-height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .taiKhoan {
@@ -93,6 +97,8 @@ body {
     padding-left: 10px;
     font-size: 1.4rem;
     line-height: 24px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .menu-phanDuoi {
@@ -127,6 +133,8 @@ body {
     padding-left: 12px;
     line-height: 30px;
     font-size: 1.6rem;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .thongTin-cacMucCon,
@@ -163,6 +171,11 @@ body {
     width: 70px;
 }
 
+.menu.dongMenu + .manHinhChinh {
+    width: 100%; /* Final width */
+    margin-left: 70px; /* Final position */
+}
+
 .menu.dongMenu .menuMuc-tieuDe {
     display: none;
 }
@@ -195,6 +208,7 @@ body {
 .manHinhChinh.dongMenu {
     width: 100%;
     margin-left: 70px;
+    transition: width 0.3s ease;
 }
 
 @media screen and (max-width: 740px) {
@@ -227,6 +241,7 @@ body {
         width: 86%;
         margin-left: 70px;
         padding-left: 15px;
+        transition: width 0.3s ease;
     }
 }
 
@@ -240,4 +255,10 @@ body {
         margin-left: 5px;
         padding-left: 5px;
     }
+}
+
+/*animation for the menu text*/
+@keyframes fadeAnimation {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
