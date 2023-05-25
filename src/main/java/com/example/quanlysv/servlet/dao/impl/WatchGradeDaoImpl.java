@@ -13,6 +13,15 @@ import java.util.ResourceBundle;
 public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWatchGradeDAO {
 
 
+    public Double LamTron2ChuSo(Double x)
+    {
+        return (double) Math.round(x *100)/100;
+    }
+
+    public Double LamTron1ChuSo(Double x)
+    {
+        return (double) Math.round(x * 10)/10;
+    }
 
     public Double ConvertDiemTB( Double x) {
         if(Double.compare(4.0,x)>0)return 0.0;
@@ -27,8 +36,8 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
     }
 
     public String ConvertTrangThai ( Double x ){
-        if(Double.compare(1.0,x)>0)return "Trượt môn";
-        return "Qua môn";
+        if(Double.compare(1.0,x)>0)return "Trượt";
+        return "Đạt";
     }
 
     public String ConvertDiemChu (Double x){
@@ -52,19 +61,23 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
         String url = resourceBundle.getString("url");
         String username = resourceBundle.getString("username");
         String password = resourceBundle.getString("password");
-        String query = "SELECT DISTINCT  ten_mon_hoc,tin_chi, diem_cc, diem_bt, diem_kt,diem_thi, chuyen_can, bai_tap,kiem_tra, thi  FROM diem, monhoc, taikhoan , thanhphan WHERE diem.id_sv =  ? and diem.id_mh = monhoc.id_mh and diem.id_diem = thanhphan.id_tp";
+        String query = "SELECT DISTINCT  id_hk,ten_mon_hoc,tin_chi, diem_cc, diem_bt, diem_kt,diem_thi, chuyen_can, bai_tap,kiem_tra, thi  FROM diem, monhoc, taikhoan , thanhphan WHERE diem.id_sv =  ? and diem.id_mh = monhoc.id_mh and diem.id_diem = thanhphan.id_tp ORDER BY id_hk ASC ";
         try (Connection con = DriverManager.getConnection(url, username, password);
              PreparedStatement statement = con.prepareStatement(query)) {
             statement.setString(1, studentId);
             ResultSet resultSet = statement.executeQuery();
             Integer stt = 1;
+            double tongTinChi = 0;
+            double tongDiemCacMon = 0;
+            WacthGradeEntity Gpa = new WacthGradeEntity();
             while (resultSet.next()) {
                 WacthGradeEntity grade = new WacthGradeEntity();
-                 String tenMonHoc = resultSet.getString("ten_mon_hoc");
-                 Double diemBaiTap = resultSet.getDouble("diem_bt");
-                 Double diemChuyenCan = resultSet.getDouble("diem_cc");
-                 Double diemKiemTra = resultSet.getDouble("diem_kt");
-                 Double diemThi = resultSet.getDouble("diem_thi");
+                String hocKy = resultSet.getString("id_hk");
+                String tenMonHoc = resultSet.getString("ten_mon_hoc");
+                Double diemBaiTap = resultSet.getDouble("diem_bt");
+                Double diemChuyenCan = resultSet.getDouble("diem_cc");
+                Double diemKiemTra = resultSet.getDouble("diem_kt");
+                Double diemThi = resultSet.getDouble("diem_thi");
 
                 Integer soTinChi = resultSet.getInt("tin_chi");
                 Integer ptChuyenCan = resultSet.getInt("chuyen_can");
@@ -72,13 +85,16 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
                 Integer ptKiemTra = resultSet.getInt("kiem_tra");
                 Integer ptThi = resultSet.getInt("thi");
 
-                Double diemTBthang10 = (diemChuyenCan*ptChuyenCan + diemBaiTap * ptBaiTap + diemThi * ptThi + diemKiemTra * ptKiemTra) /100;
+
+                Double diemTBthang10 = LamTron1ChuSo((diemChuyenCan*ptChuyenCan + diemBaiTap * ptBaiTap + diemThi * ptThi + diemKiemTra * ptKiemTra )/100);
                 Double diemTBthang4 = ConvertDiemTB(diemTBthang10);
                 String diemTBChu = ConvertDiemChu(diemTBthang4);
                 String trangThai = ConvertTrangThai(diemTBthang4);
-
+                tongTinChi += soTinChi;
+                tongDiemCacMon += soTinChi * diemTBthang4;
 
                 grade.setStt(stt);
+                grade.setHocKy(hocKy);
                 grade.setTenMonHoc(tenMonHoc);
                 grade.setSoTinChi(soTinChi);
                 grade.setPtCC(ptChuyenCan);
@@ -93,17 +109,18 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
                 grade.setDiemTBdangChu(diemTBChu);
                 grade.setDiemTBthang4(diemTBthang4);
                 grade.setTrangThai(trangThai);
-
-
                 stt++;
-//                System.out.println(grade.toString());
-
                 grades.add(grade);
             }
+            Gpa.setGPA(LamTron2ChuSo(tongDiemCacMon/tongTinChi));
+            grades.add(Gpa);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return grades;
     }
+
+
+
 
 }

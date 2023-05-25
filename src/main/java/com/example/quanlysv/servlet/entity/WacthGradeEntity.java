@@ -2,6 +2,8 @@ package com.example.quanlysv.servlet.entity;
 
 public class WacthGradeEntity {
     private int stt;
+
+    private  String hocKy;
     private String tenMonHoc;
     private int soTinChi;
 
@@ -20,6 +22,15 @@ public class WacthGradeEntity {
     private double diemTBthang4;
     private String diemTBdangChu;
     private String trangThai;
+    private double GPA;
+
+    public double getGPA() {
+        return GPA;
+    }
+
+    public void setGPA(double GPA) {
+        this.GPA = GPA;
+    }
 
     public int getPtCC() {
         return ptCC;
@@ -56,8 +67,9 @@ public class WacthGradeEntity {
     public WacthGradeEntity() {
     }
 
-    public WacthGradeEntity(int stt, String tenMonHoc, int soTinChi, int ptCC, int ptBT, int ptKT, int ptThi, double diemCC, double diemBT, double diemKT, double diemThi, double diemTBthang10, double diemTBthang4, String diemTBdangChu, String trangThai) {
+    public WacthGradeEntity(int stt, String hocKy, String tenMonHoc, int soTinChi, int ptCC, int ptBT, int ptKT, int ptThi, double diemCC, double diemBT, double diemKT, double diemThi, double diemTBthang10, double diemTBthang4, String diemTBdangChu, String trangThai) {
         this.stt = stt;
+        this.hocKy = hocKy;
         this.tenMonHoc = tenMonHoc;
         this.soTinChi = soTinChi;
         this.ptCC = ptCC;
@@ -181,5 +193,15 @@ public class WacthGradeEntity {
                 ", diemTBdangChu='" + diemTBdangChu + '\'' +
                 ", trangThai='" + trangThai + '\'' +
                 '}';
+    }
+
+
+
+    public String getHocKy() {
+        return hocKy;
+    }
+
+    public void setHocKy(String hocKy) {
+        this.hocKy = hocKy;
     }
 }
