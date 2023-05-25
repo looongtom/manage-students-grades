@@ -13,6 +13,8 @@ I) Thành viên:
 - Module làm:
 + Nhập điểm sinh viên bằng file excel
 + Xem điểm của lớp học phần ở trang Admin
++ Xuất điểm ra file excel
+
 
 3) Lại Ngọc Sơn: 
 - Module làm:
