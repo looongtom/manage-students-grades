@@ -30,7 +30,6 @@ public class DetailUserController extends HttpServlet {
         String tenTaiKhoan = account.getUsername();
 
         StudentDTO student = (StudentDTO) service.getStudentById(tenTaiKhoan).getData();
-        System.out.println(student.getEmailSv());
         req.setAttribute("student", student);
         req.getRequestDispatcher("/home/user/home_user/home_user.jsp").forward(req, resp);
 

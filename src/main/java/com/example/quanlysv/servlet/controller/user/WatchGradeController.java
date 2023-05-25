@@ -2,6 +2,7 @@ package com.example.quanlysv.servlet.controller.user;
 
 import com.example.quanlysv.servlet.entity.AccountEntity;
 import com.example.quanlysv.servlet.entity.GradeEntity;
+import com.example.quanlysv.servlet.entity.HocKyEntity;
 import com.example.quanlysv.servlet.entity.WacthGradeEntity;
 import com.example.quanlysv.servlet.service.IWatchGradeService;
 import com.example.quanlysv.servlet.service.impl.HomeAdminServiceImpl;
@@ -28,7 +29,9 @@ public class WatchGradeController extends HttpServlet {
         HttpSession session1 = request.getSession();
         AccountEntity account = (AccountEntity) session1.getAttribute("ACCOUNT");
         String tenTaiKhoan = account.getUsername();
-        System.out.println(tenTaiKhoan);
+
+
+
         List<WacthGradeEntity> grades = watchGradeService.getGradesByStudentId(tenTaiKhoan);
         request.setAttribute("grades", grades);
         request.getRequestDispatcher("/home/user/grade/watch_grade.jsp").forward(request, response);

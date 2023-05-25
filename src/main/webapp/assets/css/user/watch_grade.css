@@ -5,10 +5,17 @@
     background-color: var(--red-color);
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+:root {
+    --white-color: #fff;
+    --black-color: #000;
+    --red-color: #cc0d00;
+    --text-color: #333;
+    --subtext-color: #756f6e;
+    --hover-noti-color: #dbdbdb;
+    --menu-color: #001529;
+    --hover-color: rgba(255, 255, 255, 0.3);
 }
+
 
 th, td {
     padding: 8px;
@@ -16,10 +23,39 @@ th, td {
     border-bottom: 1px solid #ddd;
 }
 
-th {
-    background-color: #f2f2f2;
-}
 
 h1 {
     font-size:30px;
+    text-align: center;
+    padding: 10px;
+}
+
+
+.scrollable-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Định dạng nội dung bảng */
+.scrollable-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Định dạng các ô trong bảng */
+.scrollable-table td, .scrollable-table th {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.semester-heading {
+    font-weight: bold;
+}
+
+.hang1{
+    line-height: 40px;
+    margin-bottom: 10px;
+    background-color: var(--red-color);
+    color: var(--white-color);
+    font-weight: bold;
 }
