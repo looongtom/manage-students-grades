@@ -66,7 +66,7 @@
 <body>
 <%@include file="../menu/menu_view_grade.jsp" %>
 <div class="manHinhChinh">
-<%--     Hàm Refresh lại trang lấy sinh vien--%>
+    <%--     Hàm Refresh lại trang lấy sinh vien--%>
     <%!
         public JSONArray getAllDiem(HttpClient httpClient, HttpPost httpPost) throws IOException {
             HttpResponse resp = httpClient.execute(httpPost);
@@ -79,7 +79,7 @@
             }
         }
     %>
-<%--        Lấy tất cả điểm sv của lớp--%>
+    <%--        Lấy tất cả điểm sv của lớp--%>
     <%
         String idDiem="";
         String uriGetAll = "http://localhost:8080/api/admin/grade/view";
@@ -93,7 +93,7 @@
 
             httpPost.setHeader("Cookie", value + cookieValue);
 
-             listResp = getAllDiem(httpClient, httpPost);
+            listResp = getAllDiem(httpClient, httpPost);
             JSONObject diem = listResp.getJSONObject(1);
             idDiem = diem.getString("idDiem"); // set idDiem
 
@@ -122,7 +122,7 @@
 
         }
     %>
-<%--    Lấy hệ số thành phần--%>
+    <%--    Lấy hệ số thành phần--%>
     <%
         URI uriGetHeSoTP = new URIBuilder("http://localhost:8080/api/admin/thanh-phan/get").setParameter("idDiem",idDiem).build();
         JsonNode heSoThanhPhan = null;
@@ -141,17 +141,17 @@
             JsonNode jsonNode = objectMapper.readTree(responseData);
             heSoThanhPhan = jsonNode.get("data");
 
-             hesoDiemCc = Integer.valueOf(heSoThanhPhan.get("diemCc").asInt());
-             hesoDiemBt = Integer.valueOf(heSoThanhPhan.get("diemBt").asInt());
-             hesoDiemThi = Integer.valueOf(heSoThanhPhan.get("diemThi").asInt());
-             hesoDiemKt = Integer.valueOf(heSoThanhPhan.get("diemKt").asInt());
+            hesoDiemCc = Integer.valueOf(heSoThanhPhan.get("diemCc").asInt());
+            hesoDiemBt = Integer.valueOf(heSoThanhPhan.get("diemBt").asInt());
+            hesoDiemThi = Integer.valueOf(heSoThanhPhan.get("diemThi").asInt());
+            hesoDiemKt = Integer.valueOf(heSoThanhPhan.get("diemKt").asInt());
         }catch (Exception e){
 
         }
 
 
     %>
-<%--    Chuyển sang điểm hệ 4--%>
+    <%--    Chuyển sang điểm hệ 4--%>
     <%!
         public Double ConvertDiemTB( Double x) {
             if(Double.compare(4.0,x)>0)return 0.0;
@@ -165,29 +165,36 @@
             return 4.0;
         }
     %>
-<%--    Chuyển sang trạng thái--%>
+    <%--    Chuyển sang trạng thái--%>
     <%!
-       public String ConvertTrangThai ( Double x ){
-           if(Double.compare(1.0,x)>0)return "Trượt môn";
-           return "Qua môn";
-       }
+        public String ConvertTrangThai ( Double x ){
+            if(Double.compare(1.0,x)>0)return "Trượt môn";
+            return "Qua môn";
+        }
     %>
-<%--    Chuyển sang điểm chữ--%>
+    <%--    Chuyển sang điểm chữ--%>
     <%!
-       public String ConvertDiemChu (Double x){
-           Double tolerance = 0.001;
-           if(Math.abs( 0.0 - x ) <= tolerance) return "F";
-           else if(Math.abs( 1.0 - x ) <= tolerance)return "D";
-           else if(Math.abs( 1.5 - x ) <= tolerance)return "D+";
-           else if(Math.abs( 2.0 - x ) <= tolerance)return "C";
-           else if(Math.abs( 2.5 - x ) <= tolerance)return "C+";
-           else if(Math.abs( 3.0 - x ) <= tolerance)return "B";
-           else if(Math.abs( 3.5 - x ) <= tolerance)return "B+";
-           else if(Math.abs( 3.7 - x ) <= tolerance)return "A";
-           return "A+";
-       }
+        public String ConvertDiemChu (Double x){
+            Double tolerance = 0.001;
+            if(Math.abs( 0.0 - x ) <= tolerance) return "F";
+            else if(Math.abs( 1.0 - x ) <= tolerance)return "D";
+            else if(Math.abs( 1.5 - x ) <= tolerance)return "D+";
+            else if(Math.abs( 2.0 - x ) <= tolerance)return "C";
+            else if(Math.abs( 2.5 - x ) <= tolerance)return "C+";
+            else if(Math.abs( 3.0 - x ) <= tolerance)return "B";
+            else if(Math.abs( 3.5 - x ) <= tolerance)return "B+";
+            else if(Math.abs( 3.7 - x ) <= tolerance)return "A";
+            return "A+";
+        }
     %>
-<%--    update diem--%>
+
+    <%!
+        public Boolean CheckDiem0(Double cc, Double bt, Double kt, Double thi){
+            return cc == 0 || bt == 0 || kt == 0 || thi == 0;
+        }
+    %>
+
+    <%--    update diem--%>
     <%
         String uriUpdateDiem = baseUrl + "/admin/grade/update";
         String idDiemUpdate = request.getParameter("id-diem-sua");
@@ -210,15 +217,15 @@
 
 
         try {
-            if(diemCcUpdateString!= null && Double.parseDouble(diemCcUpdateString)>0)diemCcUpdate = Double.valueOf(diemCcUpdateString);
-            if(diemBtUpdateString!= null && Double.parseDouble(diemBtUpdateString)>0)diemBtUpdate = Double.valueOf(diemBtUpdateString);
-            if(diemThiUpdateString!= null && Double.parseDouble(diemThiUpdateString)>0)diemThiUpdate = Double.valueOf(diemThiUpdateString);
-            if(diemKtUpdateString!= null && Double.parseDouble(diemKtUpdateString)>0)diemKtUpdate = Double.valueOf(diemKtUpdateString);
+            if(diemCcUpdateString!= null && Double.parseDouble(diemCcUpdateString)>=0)diemCcUpdate = Double.valueOf(diemCcUpdateString);
+            if(diemBtUpdateString!= null && Double.parseDouble(diemBtUpdateString)>=0)diemBtUpdate = Double.valueOf(diemBtUpdateString);
+            if(diemThiUpdateString!= null && Double.parseDouble(diemThiUpdateString)>=0)diemThiUpdate = Double.valueOf(diemThiUpdateString);
+            if(diemKtUpdateString!= null && Double.parseDouble(diemKtUpdateString)>=0)diemKtUpdate = Double.valueOf(diemKtUpdateString);
         } catch (NumberFormatException e) {
 
         }
 
-        if ( diemCcUpdate >0 && diemBtUpdate >0 && diemThiUpdate >0 && diemKtUpdate >0) {
+        if ( diemCcUpdate >=0 && diemBtUpdate >=0 && diemThiUpdate >=0 && diemKtUpdate >=0) {
 //        if (idDiemUpdate != null && idGvUpdate != null && idMhUpdate != null
 //                && idSvUpdate != null && idHkUpdate != null  && idLopUpdate != null) {
             String requestUpdateDiem ="{"+
@@ -274,6 +281,7 @@
             <% if(listResp!=null){
                 for (int i = 0; i < listResp.length(); i++) {%>
             <% JSONObject diemTungHang = listResp.getJSONObject(i);
+                Boolean checkZero = false;
                 Double diemCc = diemTungHang.getDouble("diemCc");
                 Double diemBt = diemTungHang.getDouble("diemBt");
                 Double diemThi = diemTungHang.getDouble("diemThi");
@@ -281,7 +289,10 @@
                 Double diemTb = ConvertDiemTB( (diemCc*hesoDiemCc+diemBt*hesoDiemBt+diemThi*hesoDiemThi+diemKt*hesoDiemKt)/100 ) ;
 //                System.out.println((diemCc*hesoDiemCc+diemBt*hesoDiemBt+diemThi*hesoDiemThi+diemKt*hesoDiemKt)/100+" "+diemTb);
                 String diemChu = ConvertDiemChu(diemTb);
-                String trangThai = ConvertTrangThai(diemTb);
+                checkZero=CheckDiem0(diemCc,diemBt,diemThi,diemKt);
+                String trangThai ;
+                if (checkZero) trangThai="Trượt môn";
+                else trangThai = ConvertTrangThai(diemTb);
                 String tenSv= listTenSv.get(i);
             %>
             <tr>
@@ -295,7 +306,6 @@
                 <td class="cot-Diem"><%= diemChu %></td>
                 <td class="cot-Diem"><%= diemTungHang.getString("ngayTao") %></td>
                 <td class="cot-Diem"><%= diemTungHang.getString("ngaySua") %></td>
-
                 <td class="cot-Trangthai" id="<%= trangThai.equals("Qua môn") ? "ttQua" : "ttTruot" %>"><%=trangThai %></td>
                 <td class="chucNang">
                     <div class="hop-hanh-dong">
