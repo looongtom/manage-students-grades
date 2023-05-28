@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface IWatchGradeService {
     List<WacthGradeEntity> getGradesByStudentId(String studentId);
-
+    List<WacthGradeEntity> getGpaByStudentId(String studentId);
 }

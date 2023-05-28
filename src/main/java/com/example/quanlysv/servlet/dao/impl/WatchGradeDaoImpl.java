@@ -3,11 +3,8 @@ package com.example.quanlysv.servlet.dao.impl;
 import com.example.quanlysv.servlet.dao.IWatchGradeDAO;
 import com.example.quanlysv.servlet.entity.GradeEntity;
 import com.example.quanlysv.servlet.entity.WacthGradeEntity;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWatchGradeDAO {
@@ -39,7 +36,6 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
         if(Double.compare(1.0,x)>0)return "Trượt";
         return "Đạt";
     }
-
     public String ConvertDiemChu (Double x){
         Double tolerance = 0.001;
         if(Math.abs( 0.0 - x ) <= tolerance) return "F";
@@ -53,7 +49,6 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
         return "A+";
     }
     ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
-
     @Override
     public List<WacthGradeEntity> getGradeByStudentId(String studentId) {
         List<WacthGradeEntity> grades = new ArrayList<>();
@@ -61,7 +56,11 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
         String url = resourceBundle.getString("url");
         String username = resourceBundle.getString("username");
         String password = resourceBundle.getString("password");
-        String query = "SELECT DISTINCT  id_hk,ten_mon_hoc,tin_chi, diem_cc, diem_bt, diem_kt,diem_thi, chuyen_can, bai_tap,kiem_tra, thi  FROM diem, monhoc, taikhoan , thanhphan WHERE diem.id_sv =  ? and diem.id_mh = monhoc.id_mh and diem.id_diem = thanhphan.id_tp ORDER BY id_hk ASC ";
+        String query = "SELECT DISTINCT  id_hk,ten_mon_hoc,tin_chi, diem_cc, diem_bt, diem_kt,diem_thi, chuyen_can, bai_tap,kiem_tra, thi  " +
+                "FROM diem, monhoc, taikhoan , thanhphan " +
+                "WHERE diem.id_sv =  ? and diem.id_mh = monhoc.id_mh and diem.id_diem = thanhphan.id_tp " +
+                "ORDER BY id_hk ASC ";
+
         try (Connection con = DriverManager.getConnection(url, username, password);
              PreparedStatement statement = con.prepareStatement(query)) {
             statement.setString(1, studentId);
@@ -85,11 +84,11 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
                 Integer ptKiemTra = resultSet.getInt("kiem_tra");
                 Integer ptThi = resultSet.getInt("thi");
 
-
                 Double diemTBthang10 = LamTron1ChuSo((diemChuyenCan*ptChuyenCan + diemBaiTap * ptBaiTap + diemThi * ptThi + diemKiemTra * ptKiemTra )/100);
                 Double diemTBthang4 = ConvertDiemTB(diemTBthang10);
                 String diemTBChu = ConvertDiemChu(diemTBthang4);
                 String trangThai = ConvertTrangThai(diemTBthang4);
+
                 tongTinChi += soTinChi;
                 tongDiemCacMon += soTinChi * diemTBthang4;
 
@@ -112,6 +111,7 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
                 stt++;
                 grades.add(grade);
             }
+
             Gpa.setGPA(LamTron2ChuSo(tongDiemCacMon/tongTinChi));
             grades.add(Gpa);
         } catch (SQLException e) {
@@ -120,7 +120,73 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
         return grades;
     }
 
+    @Override
+    public List<WacthGradeEntity> getGpaByStudentId(String studentId) {
+        List<WacthGradeEntity> gpas = new ArrayList<>();
+        List<WacthGradeEntity>GpaByStudentId= new ArrayList<>();
 
+        String url = resourceBundle.getString("url");
+        String username = resourceBundle.getString("username");
+        String password = resourceBundle.getString("password");
+        String query = "SELECT DISTINCT  id_hk ,tin_chi, diem_cc, diem_bt, diem_kt,diem_thi, chuyen_can, bai_tap,kiem_tra, thi " +
+                " FROM diem, monhoc, taikhoan , thanhphan " +
+                "WHERE diem.id_sv =  ? and diem.id_mh = monhoc.id_mh and diem.id_diem = thanhphan.id_tp " +
+                "ORDER BY id_hk ASC ";
 
+        try (Connection con = DriverManager.getConnection(url, username, password);
+             PreparedStatement statement = con.prepareStatement(query)) {
+            statement.setString(1, studentId);
+            ResultSet resultSet = statement.executeQuery();
 
+            while (resultSet.next()) {
+                WacthGradeEntity gpa = new WacthGradeEntity();
+                String hocKy = resultSet.getString("id_hk");
+                Double diemBaiTap = resultSet.getDouble("diem_bt");
+                Double diemChuyenCan = resultSet.getDouble("diem_cc");
+                Double diemKiemTra = resultSet.getDouble("diem_kt");
+                Double diemThi = resultSet.getDouble("diem_thi");
+
+                Integer soTinChi = resultSet.getInt("tin_chi");
+                Integer ptChuyenCan = resultSet.getInt("chuyen_can");
+                Integer ptBaiTap = resultSet.getInt("bai_tap");
+                Integer ptKiemTra = resultSet.getInt("kiem_tra");
+                Integer ptThi = resultSet.getInt("thi");
+
+                Double diemTBthang10 = LamTron1ChuSo((diemChuyenCan*ptChuyenCan + diemBaiTap * ptBaiTap + diemThi * ptThi + diemKiemTra * ptKiemTra )/100);
+                Double diemTBthang4 = ConvertDiemTB(diemTBthang10);
+
+                gpa.setHocKy(hocKy);
+                gpa.setSoTinChi(soTinChi);
+                gpa.setDiemTBthang4(diemTBthang4);
+                gpas.add(gpa);
+            }
+
+            Set<String> SemesterNames = new LinkedHashSet<>();
+            for (int i = 0; i < gpas.size(); i++)
+            {
+                SemesterNames.add(gpas.get(i).getHocKy());
+            }
+
+            double tongTinChi = 0;
+            double tongDiemCacMon = 0;
+            for(String x : SemesterNames) {
+                WacthGradeEntity gpaBySemester = new WacthGradeEntity();
+                for (int i = 0; i < gpas.size(); i++) {
+                    String HK = gpas.get(i).getHocKy();
+                    if (HK.equals(x)) {
+                        tongTinChi += gpas.get(i).getSoTinChi();
+                        tongDiemCacMon += gpas.get(i).getDiemTBthang4() * gpas.get(i).getSoTinChi();
+                    }
+                }
+                gpaBySemester.setHocKy(x);
+                gpaBySemester.setGPA(LamTron2ChuSo(tongDiemCacMon/tongTinChi));
+                GpaByStudentId.add(gpaBySemester);
+                tongTinChi = 0;
+                tongDiemCacMon = 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return GpaByStudentId;
+    }
 }

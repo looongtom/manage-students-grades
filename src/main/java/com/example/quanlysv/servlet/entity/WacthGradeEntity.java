@@ -64,28 +64,6 @@ public class WacthGradeEntity {
         this.ptThi = ptThi;
     }
 
-    public WacthGradeEntity() {
-    }
-
-    public WacthGradeEntity(int stt, String hocKy, String tenMonHoc, int soTinChi, int ptCC, int ptBT, int ptKT, int ptThi, double diemCC, double diemBT, double diemKT, double diemThi, double diemTBthang10, double diemTBthang4, String diemTBdangChu, String trangThai) {
-        this.stt = stt;
-        this.hocKy = hocKy;
-        this.tenMonHoc = tenMonHoc;
-        this.soTinChi = soTinChi;
-        this.ptCC = ptCC;
-        this.ptBT = ptBT;
-        this.ptKT = ptKT;
-        this.ptThi = ptThi;
-        this.diemCC = diemCC;
-        this.diemBT = diemBT;
-        this.diemKT = diemKT;
-        this.diemThi = diemThi;
-        this.diemTBthang10 = diemTBthang10;
-        this.diemTBthang4 = diemTBthang4;
-        this.diemTBdangChu = diemTBdangChu;
-        this.trangThai = trangThai;
-    }
-
     public int getStt() {
         return stt;
     }
@@ -94,6 +72,13 @@ public class WacthGradeEntity {
         this.stt = stt;
     }
 
+    public String getHocKy() {
+        return hocKy;
+    }
+
+    public void setHocKy(String hocKy) {
+        this.hocKy = hocKy;
+    }
     public String getTenMonHoc() {
         return tenMonHoc;
     }
@@ -174,10 +159,34 @@ public class WacthGradeEntity {
         this.trangThai = trangThai;
     }
 
+    public WacthGradeEntity() {
+    }
+
+    public WacthGradeEntity(int stt, String hocKy, String tenMonHoc, int soTinChi, int ptCC, int ptBT, int ptKT, int ptThi, double diemCC, double diemBT, double diemKT, double diemThi, double diemTBthang10, double diemTBthang4, String diemTBdangChu, String trangThai, double GPA) {
+        this.stt = stt;
+        this.hocKy = hocKy;
+        this.tenMonHoc = tenMonHoc;
+        this.soTinChi = soTinChi;
+        this.ptCC = ptCC;
+        this.ptBT = ptBT;
+        this.ptKT = ptKT;
+        this.ptThi = ptThi;
+        this.diemCC = diemCC;
+        this.diemBT = diemBT;
+        this.diemKT = diemKT;
+        this.diemThi = diemThi;
+        this.diemTBthang10 = diemTBthang10;
+        this.diemTBthang4 = diemTBthang4;
+        this.diemTBdangChu = diemTBdangChu;
+        this.trangThai = trangThai;
+        this.GPA = GPA;
+    }
+
     @Override
     public String toString() {
         return "WacthGradeEntity{" +
                 "stt=" + stt +
+                ", hocKy='" + hocKy + '\'' +
                 ", tenMonHoc='" + tenMonHoc + '\'' +
                 ", soTinChi=" + soTinChi +
                 ", ptCC=" + ptCC +
@@ -192,16 +201,7 @@ public class WacthGradeEntity {
                 ", diemTBthang4=" + diemTBthang4 +
                 ", diemTBdangChu='" + diemTBdangChu + '\'' +
                 ", trangThai='" + trangThai + '\'' +
+                ", GPA=" + GPA +
                 '}';
-    }
-
-
-
-    public String getHocKy() {
-        return hocKy;
-    }
-
-    public void setHocKy(String hocKy) {
-        this.hocKy = hocKy;
     }
 }

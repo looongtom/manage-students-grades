@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IWatchGradeDAO {
     List<WacthGradeEntity> getGradeByStudentId(String studentId);
+    List<WacthGradeEntity> getGpaByStudentId(String studentId);
+
 }
