@@ -25,30 +25,6 @@
       <img src="../../../assets/images/score.png" alt="Xuất file Excel" class="icon-Muc">
       <div class="menuMuc-tieuDe" id="exportBtn">Xuất file Excel</div>
     </a>
-<%--    <a class="menuMuc sinhVienMuc" href="/../../home/admin/student/student.jsp">--%>
-<%--      <img src="../../../assets/images/student.svg" alt="Sinh viên" class="icon-Muc">--%>
-<%--      <div class="menuMuc-tieuDe">Sinh viên</div>--%>
-<%--    </a>--%>
-<%--    <a class="menuMuc giangVienMuc" href="/../../home/admin/teacher/teacher.jsp">--%>
-<%--      <img src="../../../assets/images/teacher.png" alt="Giảng vien" class="icon-Muc">--%>
-<%--      <div class="menuMuc-tieuDe">Giảng viên</div>--%>
-<%--    </a>--%>
-<%--    <a class="menuMuc hocKyMuc" href="/../../home/admin/semester/semester.jsp">--%>
-<%--      <img src="../../../assets/images/general_info.png" alt="Học kỳ" class="icon-Muc">--%>
-<%--      <div class="menuMuc-tieuDe">Học kỳ</div>--%>
-<%--    </a>--%>
-<%--    <a class="menuMuc monHocMuc" href="/../../home/admin/subject/subject.jsp">--%>
-<%--      <img src="../../../assets/images/subject.jpg" alt="Thông tin mon hoc" class="icon-Muc">--%>
-<%--      <div class="menuMuc-tieuDe">Thông tin môn học</div>--%>
-<%--    </a>--%>
-<%--    <a class="menuMuc khoaMuc" href="/../../home/admin/specialization/specialization.jsp">--%>
-<%--      <img src="../../../assets/images/school.png" alt="Khoa" class="icon-Muc">--%>
-<%--      <div class="menuMuc-tieuDe">Khoa chuyên môn</div>--%>
-<%--    </a>--%>
-<%--    <a class="menuMuc doiMatKhauMuc" href="/../home/common/change_password.jsp">--%>
-<%--      <img src="../../../assets/images/change_password.png" alt="Người dùng" class="icon-Muc">--%>
-<%--      <div class="menuMuc-tieuDe">Đổi mật khẩu</div>--%>
-<%--    </a>--%>
   </div>
   <div class="menu-phanDuoi">
     <div class="dongMenuMuc" onclick="closeMenu()">

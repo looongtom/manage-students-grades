@@ -62,7 +62,7 @@
   String requestBodyThanhPhan ="";
 %>
 <body>
-<%@include file="../menu/menu_view_grade.jsp" %>
+<%@include file="../menu/menu_view_grade_after_add.jsp" %>
 <div class="manHinhChinh">
   <%!
     // Hàm Refresh lại trang lấy sinh vien
@@ -185,7 +185,7 @@
   <h1 class="tieuDeTrang">Danh sách điểm lớp: <%=getIdLopFromClassJSP%></h1>
   <div class="themVaTimKiem">
     <!-- nut them sinh vien -->
-    <a class="nutTimKiem" href="/api/admin/home/info-to-add-grade">Quay lại</a>
+<%--    <a class="nutTimKiem" href="/api/admin/home/info-to-add-grade">Quay lại</a>--%>
 
     <%--        <div class="timKiem">--%>
     <%--            <div class="tieuDeTimKiem">Tìm kiếm: </div>--%>
