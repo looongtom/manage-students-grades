@@ -103,7 +103,7 @@ public class LopDaoImpl extends AbstractDao<LopEntity> implements ILopDao {
             String query="SELECT lop.id_lop as idLop, lop.ten_lop as tenLop, " +
                     "lop.id_khoa as idKhoa, lop.id_hk as idHk," +
                     "lop.ngay_tao as ngayTao, lop.ngay_sua as ngaySua" +
-                    " FROM lop where 1=?";
+                    " FROM lop where 1=? ORDER BY lop.ten_lop ASC";
             List<LopEntity> list = findByProperties(query, new LopMapper(),1);
 
             return list.isEmpty()? null: list;

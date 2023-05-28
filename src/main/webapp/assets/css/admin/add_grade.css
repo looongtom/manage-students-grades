@@ -130,3 +130,8 @@ label {
 .hien-thi-modal {
     display: flex !important;
 }
+
+.inputSearch{
+    width: 100px;
+    height: 35px;
+}

@@ -107,7 +107,7 @@ public class HocKyDaoImpl extends AbstractDao<HocKyEntity> implements IHocKyDao 
         try{
             String query="SELECT hocky.id_hk as idHk, hocky.ten_hoc_ky as tenHocKy," +
                     " hocky.ngay_tao as ngayTao, hocky.ngay_sua as ngaySua" +
-                " FROM hocky where 1=?";
+                " FROM hocky where 1=?  order by hocky.ten_hoc_ky ASC";
         List<HocKyEntity> list = findByProperties(query, new HocKyMapper(),1);
 
         return list.isEmpty()? null: list;

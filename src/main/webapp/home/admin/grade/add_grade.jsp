@@ -77,20 +77,32 @@
                                     List<HocKyEntity>listHK =(List<HocKyEntity>) request.getAttribute("listHocKy");
                                 %>
                                 <label for="" class="nhanModal">Học kỳ</label>
-                                <select name="idHk" class="nhapModal" required>
+
+                                <input type="text" id="searchInputHk" class="inputSearch" placeholder="Tìm kiếm">
+                                <!-- Create the select dropdown -->
+                                <select id="hkSelect" name="idHk" class="nhapModal" required>
                                     <option value="">Please select</option>
-<%--                                    <option value="Class A">Học kì 1 năm 2020-2021</option>--%>
-<%--                                    <option value="Class B">Học kì 2 năm 2020-2021</option>--%>
                                     <%
                                         if(listHK!=null){
-                                        for(HocKyEntity hocKyEachRow : listHK){
+                                            for(HocKyEntity hocKyEachRow : listHK){
                                     %>
                                     <option value=<%=hocKyEachRow.getIdHk()%>><%=hocKyEachRow.getTenHocKy()%></option>
-                                <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
-                                    <%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
-                                    <% }}
+                                    <% }
+                                    }
                                     %>
                                 </select>
+
+<%--                                <select id="mySelect" name="idHk" class="nhapModal" required>--%>
+<%--                                    <option value="">Please select</option>--%>
+<%--                                    <%--%>
+<%--                                        if(listHK!=null){--%>
+<%--                                        for(HocKyEntity hocKyEachRow : listHK){--%>
+<%--                                    %>--%>
+<%--                                    <option value=<%=hocKyEachRow.getIdHk()%>><%=hocKyEachRow.getTenHocKy()%></option>--%>
+<%--                                    <% }--%>
+<%--                                        }--%>
+<%--                                    %>--%>
+<%--                                </select>--%>
                             </div>
 
                             <div class="hang">
@@ -99,7 +111,9 @@
                                 %>
                                 <label for="" class="nhanModal">Giảng viên</label>
 
-                                <select name="idGv" class="nhapModal" required>
+                                <input type="text" id="searchInputGv" class="inputSearch" placeholder="Tìm kiếm">
+
+                                <select id="gvSelect" name="idGv" class="nhapModal" required>
                                     <option value="">Please select</option>
                                     <%
                                         if(listGv!=null){
@@ -146,7 +160,10 @@
                                     List<SubjectEntity>listMh =(List<SubjectEntity>) request.getAttribute("listMonHoc");
                                 %>
                                 <label for="" class="nhanModal">Môn học</label>
-                                <select  name="idMh" class="nhapModal" required>
+
+                                <input type="text" id="searchInputMh" class="inputSearch" placeholder="Tìm kiếm">
+
+                                <select id="mhSelect"  name="idMh" class="nhapModal" required>
                                     <option value="">Please select</option>
 <%--                                    <option value="Class A">Lập trình Web</option>--%>
 <%--                                    <option value="Class B">Cơ sở dữ liệu phân tán</option>--%>
@@ -167,7 +184,10 @@
                                     List<LopEntity>listLop =(List<LopEntity>) request.getAttribute("listLop");
                                 %>
                                 <label for="" class="nhanModal">Lớp</label>
-                                <select  name="idLop" class="nhapModal" required>
+
+                                <input type="text" id="searchInputLh" class="inputSearch" placeholder="Tìm kiếm">
+
+                                <select id="lhSelect" name="idLop" class="nhapModal" required>
                                     <option value="">Please select</option>
                                     <%--                                    <option value="Class A">Lập trình Web</option>--%>
                                     <%--                                    <option value="Class B">Cơ sở dữ liệu phân tán</option>--%>
@@ -236,4 +256,5 @@
     }
 </script>
 <script src="../../../assets/js/menu.js"></script>
+<script src="../../../assets/js/admin/add_grade.js"></script>
 </html>
