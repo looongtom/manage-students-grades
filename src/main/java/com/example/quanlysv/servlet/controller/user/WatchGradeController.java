@@ -33,7 +33,9 @@ public class WatchGradeController extends HttpServlet {
 
 
         List<WacthGradeEntity> grades = watchGradeService.getGradesByStudentId(tenTaiKhoan);
+        List<WacthGradeEntity> GpaByStudentId = watchGradeService.getGpaByStudentId(tenTaiKhoan);
         request.setAttribute("grades", grades);
+        request.setAttribute("GpaByStudentId",GpaByStudentId);
         request.getRequestDispatcher("/home/user/grade/watch_grade.jsp").forward(request, response);
     }
 }

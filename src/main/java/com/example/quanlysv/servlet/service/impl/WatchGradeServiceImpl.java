@@ -20,4 +20,8 @@ public class WatchGradeServiceImpl implements IWatchGradeService {
     public List<WacthGradeEntity> getGradesByStudentId(String studentId) {
         return watchGradeDAO.getGradeByStudentId(studentId);
     }
+
+    public List<WacthGradeEntity> getGpaByStudentId(String studentId) {
+        return watchGradeDAO.getGpaByStudentId(studentId);
+    }
 }

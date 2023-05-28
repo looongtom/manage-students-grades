@@ -7,8 +7,11 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-
+            /*background-color: #f2f2f2;*/
+            background-image: url("../../../assets/images/student_study_user.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
         }
         h1{
             font-size: 30px;
@@ -96,38 +99,45 @@
             <div class="left-column">
                 <h2>Thông tin tài khoản</h2>
                 <div class="student-info">
+                    <span>
+                        <i class ="ti-id-badge"></i>
+                    </span>
                     <span class="label">Mã sinh viên:</span>
                     <span class="value">${student.idSv}</span>
                 </div>
 
                 <div class="student-info">
+                    <i class ="ti-user"></i>
                     <span class="label">Tên sinh viên:</span>
                     <span class="value">${student.tenSv}</span>
                 </div>
 
                 <div class="student-info">
+                    <i class ="ti-email"></i>
                     <span class="label">Email:</span>
                     <span class="value">${student.emailSv}</span>
                 </div>
 
                 <div class="student-info">
+                    <i class ="ti-calendar"></i>
                     <span class="label">Ngày sinh:</span>
                     <span class="value">${student.dobSv}</span>
                 </div>
 
-
-
                 <div class="student-info">
+                    <i class ="ti-infinite"></i>
                     <span class="label">Giới tính:</span>
                     <span class="value">${student.genderSv}</span>
                 </div>
 
                 <div class="student-info">
+                    <i class ="ti-mobile"></i>
                     <span class="label">Số điện thoại:</span>
                     <span class="value">${student.phoneSv}</span>
                 </div>
 
                 <div class="student-info">
+                    <i class ="ti-bag"></i>
                     <span class="label">Lớp hành chính:</span>
                     <span class="value">${student.lopHanhChinhSv}</span>
                 </div>
@@ -167,7 +177,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 

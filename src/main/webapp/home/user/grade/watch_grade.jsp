@@ -61,8 +61,12 @@
                                 <td>${grade.trangThai}</td>
                             </c:if>
                         </tr>
+                    </c:forEach>
 
-
+                    <c:forEach items="${GpaByStudentId}" var="gpaBySemester">
+                        <tr>
+                            <td colspan="16"> GPA kì học ${gpaBySemester.hocKy} :  ${gpaBySemester.GPA} </td>
+                        </tr>
                     </c:forEach>
 
                     <c:forEach items="${grades}" var="Gpa" varStatus="loop1">
@@ -72,6 +76,8 @@
                             </c:if>
                         </tr>
                     </c:forEach>
+
+
                 </tbody>
 
             </table>
