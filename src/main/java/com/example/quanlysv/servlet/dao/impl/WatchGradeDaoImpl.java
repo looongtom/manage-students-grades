@@ -20,6 +20,9 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
         return (double) Math.round(x * 10)/10;
     }
 
+    public Boolean CheckDiem0(Double cc, Double bt, Double kt, Double thi){
+        return cc == 0 || bt == 0 || kt == 0 || thi == 0;
+    }
     public Double ConvertDiemTB( Double x) {
         if(Double.compare(4.0,x)>0)return 0.0;
         else if(Double.compare(5.0,x)>0)return 1.0;
@@ -78,16 +81,31 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
                 Double diemKiemTra = resultSet.getDouble("diem_kt");
                 Double diemThi = resultSet.getDouble("diem_thi");
 
+                Boolean checkZero = false;
                 Integer soTinChi = resultSet.getInt("tin_chi");
                 Integer ptChuyenCan = resultSet.getInt("chuyen_can");
                 Integer ptBaiTap = resultSet.getInt("bai_tap");
                 Integer ptKiemTra = resultSet.getInt("kiem_tra");
                 Integer ptThi = resultSet.getInt("thi");
+                Double diemTBthang10;
+                Double diemTBthang4;
+                String diemTBChu;
+                String trangThai ;
 
-                Double diemTBthang10 = LamTron1ChuSo((diemChuyenCan*ptChuyenCan + diemBaiTap * ptBaiTap + diemThi * ptThi + diemKiemTra * ptKiemTra )/100);
-                Double diemTBthang4 = ConvertDiemTB(diemTBthang10);
-                String diemTBChu = ConvertDiemChu(diemTBthang4);
-                String trangThai = ConvertTrangThai(diemTBthang4);
+                checkZero=CheckDiem0(diemChuyenCan,diemBaiTap,diemThi,diemKiemTra);
+                if (checkZero) {
+                    trangThai = "Trượt";
+                    diemTBthang10 = 0.0;
+                    diemTBthang4 = 0.0;
+                    diemTBChu = ConvertDiemChu(diemTBthang4);
+                }
+                else {
+                    diemTBthang10 = LamTron1ChuSo((diemChuyenCan*ptChuyenCan + diemBaiTap * ptBaiTap + diemThi * ptThi + diemKiemTra * ptKiemTra )/100);
+                    diemTBthang4 = ConvertDiemTB(diemTBthang10);
+                    trangThai = ConvertTrangThai(diemTBthang4);
+                    diemTBChu = ConvertDiemChu(diemTBthang4);
+
+                }
 
                 tongTinChi += soTinChi;
                 tongDiemCacMon += soTinChi * diemTBthang4;
@@ -146,14 +164,31 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
                 Double diemKiemTra = resultSet.getDouble("diem_kt");
                 Double diemThi = resultSet.getDouble("diem_thi");
 
+                Boolean checkZero = false;
                 Integer soTinChi = resultSet.getInt("tin_chi");
                 Integer ptChuyenCan = resultSet.getInt("chuyen_can");
                 Integer ptBaiTap = resultSet.getInt("bai_tap");
                 Integer ptKiemTra = resultSet.getInt("kiem_tra");
                 Integer ptThi = resultSet.getInt("thi");
 
-                Double diemTBthang10 = LamTron1ChuSo((diemChuyenCan*ptChuyenCan + diemBaiTap * ptBaiTap + diemThi * ptThi + diemKiemTra * ptKiemTra )/100);
-                Double diemTBthang4 = ConvertDiemTB(diemTBthang10);
+                Double diemTBthang10;
+                Double diemTBthang4;
+                String diemTBChu;
+                String trangThai ;
+
+                checkZero=CheckDiem0(diemChuyenCan,diemBaiTap,diemThi,diemKiemTra);
+                if (checkZero) {
+                    trangThai = "Trượt";
+                    diemTBthang10 = 0.0;
+                    diemTBthang4 = 0.0;
+                    diemTBChu = ConvertDiemChu(diemTBthang4);
+                }
+                else {
+                    diemTBthang10 = LamTron1ChuSo((diemChuyenCan*ptChuyenCan + diemBaiTap * ptBaiTap + diemThi * ptThi + diemKiemTra * ptKiemTra )/100);
+                    diemTBthang4 = ConvertDiemTB(diemTBthang10);
+                    trangThai = ConvertTrangThai(diemTBthang4);
+                    diemTBChu = ConvertDiemChu(diemTBthang4);
+                }
 
                 gpa.setHocKy(hocKy);
                 gpa.setSoTinChi(soTinChi);

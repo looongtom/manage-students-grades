@@ -7,7 +7,6 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            /*background-color: #f2f2f2;*/
             background-image: url("../../../assets/images/student_study_user.jpg");
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -31,17 +30,17 @@
             line-height: 2;
         }
 
-        .left-column {
+        .cot_trai {
             flex: 30%;
             padding: 20px;
         }
 
-        .right-column {
+        .cot_phai {
             flex: 70%;
             padding: 20px;
         }
 
-        .student-info {
+        .thong_tin_sv {
             margin-bottom: 15px;
         }
 
@@ -53,27 +52,27 @@
             margin-left: 10px;
         }
 
-        .account-info {
+        .thong_tin_tk {
             margin-top: 20px;
         }
 
-        .form-group {
+        .form-nhom {
             margin-bottom: 10px;
         }
 
-        .form-group label {
+        .form-nhom label {
             display: block;
             font-weight: bold;
         }
 
-        .form-group input {
+        .form-nhom input {
             width: 100%;
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 3px;
         }
 
-        .update-button button {
+        .cap-nhat-button button {
             position: relative;
             display: inline-block;
             text-align: center;
@@ -84,7 +83,6 @@
             background: #cc0d00;
             padding: 5px;
         }
-
     </style>
 </head>
 <body>
@@ -92,13 +90,12 @@
 
     <div class="manHinhChinh">
 
-
         <h1 class = "tieuDeTrang">Quản lý thông tin tài khoản</h1>
 
         <div class="container">
-            <div class="left-column">
+            <div class="cot_trai">
                 <h2>Thông tin tài khoản</h2>
-                <div class="student-info">
+                <div class="thong_tin_sv">
                     <span>
                         <i class ="ti-id-badge"></i>
                     </span>
@@ -106,71 +103,71 @@
                     <span class="value">${student.idSv}</span>
                 </div>
 
-                <div class="student-info">
+                <div class="thong_tin_sv">
                     <i class ="ti-user"></i>
                     <span class="label">Tên sinh viên:</span>
                     <span class="value">${student.tenSv}</span>
                 </div>
 
-                <div class="student-info">
+                <div class="thong_tin_sv">
                     <i class ="ti-email"></i>
                     <span class="label">Email:</span>
                     <span class="value">${student.emailSv}</span>
                 </div>
 
-                <div class="student-info">
+                <div class="thong_tin_sv">
                     <i class ="ti-calendar"></i>
                     <span class="label">Ngày sinh:</span>
                     <span class="value">${student.dobSv}</span>
                 </div>
 
-                <div class="student-info">
+                <div class="thong_tin_sv">
                     <i class ="ti-infinite"></i>
                     <span class="label">Giới tính:</span>
                     <span class="value">${student.genderSv}</span>
                 </div>
 
-                <div class="student-info">
+                <div class="thong_tin_sv">
                     <i class ="ti-mobile"></i>
                     <span class="label">Số điện thoại:</span>
                     <span class="value">${student.phoneSv}</span>
                 </div>
 
-                <div class="student-info">
+                <div class="thong_tin_sv">
                     <i class ="ti-bag"></i>
                     <span class="label">Lớp hành chính:</span>
                     <span class="value">${student.lopHanhChinhSv}</span>
                 </div>
             </div>
-            <div class="right-column">
+            <div class="cot_phai">
                 <h2>Cập nhật thông tin</h2>
-                <div class="account-info">
+                <div class="thong_tin_tk">
                     <% String errorMessage = (String) request.getAttribute("error");
                         if (errorMessage != null) { %>
                     <div style="color: red"><%= errorMessage %></div>
                     <% } %>
                     <form action="/user/update-user" method="post" >
-                        <div class="form-group">
+                        <div class="form-nhom">
                             <label for="username">Tên sinh viên</label>
                             <input type="text" id="username" value="${student.tenSv}" disabled>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-nhom">
                             <label for="date">Ngày sinh: </label>
                             <input type="date" id="date" value="${student.dobSv}" disabled>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-nhom">
                             <label for="phone">Số điện thoại:</label>
                             <input type="text" id="phone" name = "phone" value="${student.phoneSv}" required >
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-nhom">
                             <label for="email">Email:</label>
                             <input type="email" id="email"  name = "email" value="${student.emailSv}" required>
                         </div>
 
-                        <div class="update-button">
+                        <div class="cap-nhat-button">
                             <button type = "submit">Cập nhật</button>
                         </div>
                     </form>
@@ -178,10 +175,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 </body>
 <script src="../../../assets/js/menu.js"></script>
 </html>
