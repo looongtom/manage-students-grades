@@ -130,7 +130,7 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
                 grades.add(grade);
             }
 
-            Gpa.setGPA(LamTron2ChuSo(tongDiemCacMon/tongTinChi));
+            Gpa.setGpaTichLuy(LamTron2ChuSo(tongDiemCacMon/tongTinChi));
             grades.add(Gpa);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -146,10 +146,7 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
         String url = resourceBundle.getString("url");
         String username = resourceBundle.getString("username");
         String password = resourceBundle.getString("password");
-        String query = "SELECT DISTINCT  id_hk ,tin_chi, diem_cc, diem_bt, diem_kt,diem_thi, chuyen_can, bai_tap,kiem_tra, thi " +
-                " FROM diem, monhoc, taikhoan , thanhphan " +
-                "WHERE diem.id_sv =  ? and diem.id_mh = monhoc.id_mh and diem.id_diem = thanhphan.id_tp " +
-                "ORDER BY id_hk ASC ";
+        String query = "SELECT DISTINCT  diem.id_hk ,ten_hoc_ky ,tin_chi, diem_cc, diem_bt, diem_kt,diem_thi, chuyen_can, bai_tap,kiem_tra, thi FROM diem, monhoc, taikhoan , thanhphan, hocky WHERE diem.id_sv =  ? and diem.id_mh = monhoc.id_mh and diem.id_diem = thanhphan.id_tp and diem.id_hk = hocky.id_hk ORDER BY id_hk ASC";
 
         try (Connection con = DriverManager.getConnection(url, username, password);
              PreparedStatement statement = con.prepareStatement(query)) {
@@ -159,6 +156,7 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
             while (resultSet.next()) {
                 WacthGradeEntity gpa = new WacthGradeEntity();
                 String hocKy = resultSet.getString("id_hk");
+                String tenHocKy = resultSet.getString("ten_hoc_ky");
                 Double diemBaiTap = resultSet.getDouble("diem_bt");
                 Double diemChuyenCan = resultSet.getDouble("diem_cc");
                 Double diemKiemTra = resultSet.getDouble("diem_kt");
@@ -191,6 +189,7 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
                 }
 
                 gpa.setHocKy(hocKy);
+                gpa.setTenHocKy(tenHocKy);
                 gpa.setSoTinChi(soTinChi);
                 gpa.setDiemTBthang4(diemTBthang4);
                 gpas.add(gpa);
@@ -209,12 +208,13 @@ public class WatchGradeDaoImpl  extends AbstractDao<GradeEntity>  implements IWa
                 for (int i = 0; i < gpas.size(); i++) {
                     String HK = gpas.get(i).getHocKy();
                     if (HK.equals(x)) {
+                        gpaBySemester.setTenHocKy(gpas.get(i).getTenHocKy());
                         tongTinChi += gpas.get(i).getSoTinChi();
                         tongDiemCacMon += gpas.get(i).getDiemTBthang4() * gpas.get(i).getSoTinChi();
                     }
                 }
                 gpaBySemester.setHocKy(x);
-                gpaBySemester.setGPA(LamTron2ChuSo(tongDiemCacMon/tongTinChi));
+                gpaBySemester.setGpaTungKy(LamTron2ChuSo(tongDiemCacMon/tongTinChi));
                 GpaByStudentId.add(gpaBySemester);
                 tongTinChi = 0;
                 tongDiemCacMon = 0;

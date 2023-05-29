@@ -4,6 +4,11 @@ public class WacthGradeEntity {
     private int stt;
 
     private  String hocKy;
+
+    private  String tenHocKy;
+
+
+
     private String tenMonHoc;
     private int soTinChi;
 
@@ -22,14 +27,24 @@ public class WacthGradeEntity {
     private double diemTBthang4;
     private String diemTBdangChu;
     private String trangThai;
-    private double GPA;
+    private double GpaTichLuy;
 
-    public double getGPA() {
-        return GPA;
+    private double GpaTungKy;
+
+    public double getGpaTichLuy() {
+        return GpaTichLuy;
     }
 
-    public void setGPA(double GPA) {
-        this.GPA = GPA;
+    public void setGpaTichLuy(double gpaTichLuy) {
+        GpaTichLuy = gpaTichLuy;
+    }
+
+    public double getGpaTungKy() {
+        return GpaTungKy;
+    }
+
+    public void setGpaTungKy(double gpaTungKy) {
+        GpaTungKy = gpaTungKy;
     }
 
     public int getPtCC() {
@@ -78,6 +93,14 @@ public class WacthGradeEntity {
 
     public void setHocKy(String hocKy) {
         this.hocKy = hocKy;
+    }
+
+    public String getTenHocKy() {
+        return tenHocKy;
+    }
+
+    public void setTenHocKy(String tenHocKy) {
+        this.tenHocKy = tenHocKy;
     }
     public String getTenMonHoc() {
         return tenMonHoc;
@@ -162,9 +185,10 @@ public class WacthGradeEntity {
     public WacthGradeEntity() {
     }
 
-    public WacthGradeEntity(int stt, String hocKy, String tenMonHoc, int soTinChi, int ptCC, int ptBT, int ptKT, int ptThi, double diemCC, double diemBT, double diemKT, double diemThi, double diemTBthang10, double diemTBthang4, String diemTBdangChu, String trangThai, double GPA) {
+    public WacthGradeEntity(int stt, String hocKy, String tenHocKy, String tenMonHoc, int soTinChi, int ptCC, int ptBT, int ptKT, int ptThi, double diemCC, double diemBT, double diemKT, double diemThi, double diemTBthang10, double diemTBthang4, String diemTBdangChu, String trangThai, double gpaTichLuy, double gpaTungKy) {
         this.stt = stt;
         this.hocKy = hocKy;
+        this.tenHocKy = tenHocKy;
         this.tenMonHoc = tenMonHoc;
         this.soTinChi = soTinChi;
         this.ptCC = ptCC;
@@ -179,7 +203,8 @@ public class WacthGradeEntity {
         this.diemTBthang4 = diemTBthang4;
         this.diemTBdangChu = diemTBdangChu;
         this.trangThai = trangThai;
-        this.GPA = GPA;
+        GpaTichLuy = gpaTichLuy;
+        GpaTungKy = gpaTungKy;
     }
 
     @Override
@@ -187,6 +212,7 @@ public class WacthGradeEntity {
         return "WacthGradeEntity{" +
                 "stt=" + stt +
                 ", hocKy='" + hocKy + '\'' +
+                ", tenHocKy='" + tenHocKy + '\'' +
                 ", tenMonHoc='" + tenMonHoc + '\'' +
                 ", soTinChi=" + soTinChi +
                 ", ptCC=" + ptCC +
@@ -201,7 +227,8 @@ public class WacthGradeEntity {
                 ", diemTBthang4=" + diemTBthang4 +
                 ", diemTBdangChu='" + diemTBdangChu + '\'' +
                 ", trangThai='" + trangThai + '\'' +
-                ", GPA=" + GPA +
+                ", GpaTichLuy=" + GpaTichLuy +
+                ", GpaTungKy=" + GpaTungKy +
                 '}';
     }
 }

@@ -65,14 +65,14 @@
 
                     <c:forEach items="${GpaByStudentId}" var="gpaBySemester">
                         <tr>
-                            <td colspan="16"> GPA kì học ${gpaBySemester.hocKy} :  ${gpaBySemester.GPA} </td>
+                            <td colspan="16"> GPA ${gpaBySemester.tenHocKy} (${gpaBySemester.hocKy}) : ${gpaBySemester.gpaTungKy} </td>
                         </tr>
                     </c:forEach>
 
                     <c:forEach items="${grades}" var="Gpa" varStatus="loop1">
                         <tr>
                             <c:if test="${loop1.last}">
-                                <td colspan="16">GPA tích lũy: ${Gpa.GPA} </td>
+                                <td colspan="16">GPA tích lũy: ${Gpa.gpaTichLuy} </td>
                             </c:if>
                         </tr>
                     </c:forEach>
