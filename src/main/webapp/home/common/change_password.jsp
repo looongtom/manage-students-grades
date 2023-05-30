@@ -51,7 +51,7 @@
                     <label >Mật khẩu cũ</label>
                 </div>
                 <div class="col-75">
-                    <input value="${passOld}" type="password" style="font-size: 16px" name="passOld"  placeholder="">
+                    <input value="${passOld}" type="password" style="font-size: 16px" name="passOld"  placeholder="Nhập mật khẩu cũ" required>
                 </div>
             </div>
             <div class="row">
@@ -59,7 +59,7 @@
                     <label >Mật khẩu mới</label>
                 </div>
                 <div class="col-75">
-                    <input value="${passNew}" type="password" style="font-size: 16px" name="passNew"   placeholder="">
+                    <input value="${passNew}" type="password" style="font-size: 16px" name="passNew"   placeholder="Nhập mật khẩu mới" required>
                 </div>
             </div>
             <div class="row">
@@ -67,7 +67,7 @@
                     <label >Nhập lại mật khẩu</label>
                 </div>
                 <div class="col-75">
-                    <input value="${passAgain}" type="password" style="font-size: 16px" name="passAgain"  placeholder="">
+                    <input value="${passAgain}" type="password" style="font-size: 16px" name="passAgain"  placeholder="Nhập lại mật khẩu mới" required>
                 </div>
             </div>
             <br>
