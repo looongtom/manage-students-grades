@@ -89,6 +89,7 @@
                 totalPages = jsonResponse.getInt("totalPages");
                 return jsonResponse.getJSONArray("data");
             } else {
+                totalPages = jsonResponse.getInt("totalPages");
                 return null;
             }
         }
