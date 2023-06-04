@@ -25,8 +25,6 @@ public class StudentServiceImpl implements IStudentService {
         studentDao = new StudentDaoImpl();
     }
 
-    private final Date date = new Date();
-
     @Override
     public BaseResponse<?> findStudent(StudentFilter request) {
         List<StudentDTO> result = new ArrayList<>();
@@ -58,6 +56,7 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public BaseResponse<?> createOrUpdateStudent(CreateOrEditStudentDTO studentDTO) {
+        Date date = new Date();
         try {
             if(studentDTO.getStatus() != 0 && studentDTO.getStatus() != 1){
                 return new BaseResponse.Builder<>()
