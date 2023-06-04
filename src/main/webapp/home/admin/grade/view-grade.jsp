@@ -262,7 +262,7 @@
             <thead class="hang1">
             <th data-sort onclick="sortTable(0, this)" class="cot-maSV">Mã sinh viên</th>
             <th data-sort onclick="sortTable(1, this)" class="cot-tenSV">Tên sinh viên</th>
-            <th data-sort onclick="sortName(2,this)" class="cot-Diem">Chuyên cần</th>
+            <th data-sort onclick="sortTable(2,this)" class="cot-Diem">Chuyên cần</th>
             <th data-sort onclick="sortTable(3, this)" class="cot-Diem">Bài tập</th>
             <th data-sort onclick="sortTable(4, this)" class="cot-Diem">Cuối kì</th>
             <th data-sort onclick="sortTable(5, this)" class="cot-Diem">Kiểm tra</th>
@@ -287,9 +287,10 @@
                 Double diemThi = diemTungHang.getDouble("diemThi");
                 Double diemKt = diemTungHang.getDouble("diemKt");
                 Double diemTb = ConvertDiemTB( (diemCc*hesoDiemCc+diemBt*hesoDiemBt+diemThi*hesoDiemThi+diemKt*hesoDiemKt)/100 ) ;
-//                System.out.println((diemCc*hesoDiemCc+diemBt*hesoDiemBt+diemThi*hesoDiemThi+diemKt*hesoDiemKt)/100+" "+diemTb);
-                String diemChu = ConvertDiemChu(diemTb);
                 checkZero=CheckDiem0(diemCc,diemBt,diemThi,diemKt);
+                String diemChu ;
+                if (checkZero) diemChu="F";
+                else diemChu = ConvertDiemChu(diemTb);
                 String trangThai ;
                 if (checkZero) trangThai="Trượt môn";
                 else trangThai = ConvertTrangThai(diemTb);

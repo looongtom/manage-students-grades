@@ -122,7 +122,7 @@ public class TeacherDaoImpl extends AbstractDao<TeacherEntity> implements ITeach
         try{
             String sql="select gv.id_gv as idGv,gv.ten_gv as tenGv,gv.sdt_gv as sdtGv," +
                     "gv.email_gv as emailGv, gv.gender_gv as genderGv, gv.id_khoa as idKhoa, gv.trang_thai as trangThai, " +
-                    "gv.ngay_tao as ngayTao, gv.ngay_sua as ngaySua from giangvien gv Where trang_thai=?" ;
+                    "gv.ngay_tao as ngayTao, gv.ngay_sua as ngaySua from giangvien gv Where trang_thai=? ORDER BY gv.ten_gv ASC" ;
 
             List<TeacherEntity>list =findByProperties(sql,new TeacherMapper(),1);
             return list.isEmpty()? null: list;

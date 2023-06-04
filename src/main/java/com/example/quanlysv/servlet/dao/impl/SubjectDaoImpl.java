@@ -98,7 +98,8 @@ public class SubjectDaoImpl extends AbstractDao<SubjectEntity> implements ISubje
             String query="SELECT mh.id_mh as idMh, mh.ten_mon_hoc as tenMonHoc," +
                     " mh.tin_chi as tinChi, mh.ngay_tao as ngayTao," +
                     " mh.ngay_sua as ngaySua, mh.trang_thai as trangThai," +
-                    "mh.id_khoa as idKhoa, k.ten_khoa as tenKhoa FROM monhoc mh join khoa k on mh.id_khoa = k.id_khoa where trang_thai=?";
+                    "mh.id_khoa as idKhoa, k.ten_khoa as tenKhoa FROM monhoc mh join khoa k on mh.id_khoa = k.id_khoa where trang_thai=?" +
+                    " ORDER BY mh.ten_mon_hoc ASC";
             List<SubjectEntity> list = findByProperties(query, new SubjectMapper(),1);
 
             return list.isEmpty()? null: list;

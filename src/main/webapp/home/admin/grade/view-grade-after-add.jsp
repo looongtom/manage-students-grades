@@ -182,6 +182,13 @@
       return "A+";
     }
   %>
+
+  <%!
+    public Boolean CheckDiem0(Double cc, Double bt, Double kt, Double thi){
+      return cc == 0 || bt == 0 || kt == 0 || thi == 0;
+    }
+  %>
+
   <h1 class="tieuDeTrang">Danh sách điểm lớp: <%=getIdLopFromClassJSP%></h1>
   <div class="themVaTimKiem">
     <!-- nut them sinh vien -->
@@ -216,14 +223,19 @@
       <% if(listResp!=null){
         for (int i = 0; i < listResp.length(); i++) {%>
       <% JSONObject diemTungHang = listResp.getJSONObject(i);
+        Boolean checkZero = false;
         Double diemCc = diemTungHang.getDouble("diemCc");
         Double diemBt = diemTungHang.getDouble("diemBt");
         Double diemThi = diemTungHang.getDouble("diemThi");
         Double diemKt = diemTungHang.getDouble("diemKt");
         Double diemTb = ConvertDiemTB( (diemCc*hesoDiemCc+diemBt*hesoDiemBt+diemThi*hesoDiemThi+diemKt*hesoDiemKt)/100 ) ;
-        System.out.println((diemCc*hesoDiemCc+diemBt*hesoDiemBt+diemThi*hesoDiemThi+diemKt*hesoDiemKt)/100+" "+diemTb);
-        String diemChu = ConvertDiemChu(diemTb);
-        String trangThai = ConvertTrangThai(diemTb);
+        checkZero=CheckDiem0(diemCc,diemBt,diemThi,diemKt);
+        String diemChu ;
+        if (checkZero) diemChu="F";
+        else diemChu = ConvertDiemChu(diemTb);
+        String trangThai ;
+        if (checkZero) trangThai="Trượt môn";
+        else trangThai = ConvertTrangThai(diemTb);
         String tenSv= listTenSv.get(i);
       %>
       <tr>
@@ -246,7 +258,6 @@
 </div>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../../../assets/js/menu.js"></script>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 <script src="https://unpkg.com/file-saver/dist/FileSaver.min.js"></script>
