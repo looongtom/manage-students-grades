@@ -51,7 +51,7 @@
                             <h3 class="phandau-khoa">Khoa Viễn Thông 1</h3>
                             <p class="diachi-khoa">Tầng 10, nhà A2, Km10, Nguyễn Trãi, Hà Đông, Hà Nội</p>
                             <p class="thongtin-khoa">Khoa Viễn thông 1 là đơn vị đào tạo trực thuộc Học viện Công nghệ Bưu chính Viễn thông (dưới đây gọi tắt là Học viện) có chức năng đào tạo và nghiên cứu khoa học thuộc lĩnh vực điện tử truyền thông.</p>
-                            <a class="btn" href="../class/class.jsp?khoa=VT">Xem danh sách các lớp</a>
+                            <a class="btn" href="../class/class.jsp?khoa=DTVT">Xem danh sách các lớp</a>
                         </div>
                     </div>
                 </div>
