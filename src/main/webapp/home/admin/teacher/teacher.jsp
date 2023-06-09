@@ -248,6 +248,18 @@
             tenGv = new String(bytes, StandardCharsets.UTF_8);
         }
     %>
+    <%!
+        public String getTenKhoa(String idKhoa){
+            if(idKhoa.equals("CNTT")) return "Công nghệ thông tin";
+            else if(idKhoa.equals("CB")) return "Cơ bản";
+            else if(idKhoa.equals("DPT")) return "Đa phương tiện";
+            else if(idKhoa.equals("DTVT")) return "Viễn Thông";
+            else if(idKhoa.equals("KTDT")) return "Kỹ thuật điện tử";
+            else if(idKhoa.equals("QTKD")) return "Quản trị kinh doanh";
+            else if(idKhoa.equals("TCKT")) return "Tài chính kế toán";
+            return "An toàn Thông tin";
+        }
+    %>
     <h1 class="tieuDeTrang">Danh sách giảng viên</h1>
     <div class="themVaTimKiem">
         <!-- nut them giang vien -->
@@ -298,7 +310,7 @@
                     <td><%= teacher.getString("sdtGv") %></td>
                     <td><%= teacher.getString("emailGv") %></td>
                     <td><%= teacher.getString("genderGv") %></td>
-                    <td><%= teacher.getString("tenKhoa") %></td>
+                    <td><%=  getTenKhoa(teacher.getString("idKhoa")) %></td>
                     <%
                         if(teacher.getInt("trangThai")==1) {
                     %>

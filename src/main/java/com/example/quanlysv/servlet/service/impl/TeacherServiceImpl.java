@@ -110,10 +110,10 @@ public class TeacherServiceImpl implements ITeacherService {
             Integer totalRecords = teacherDao.countTotalRecords(request);
             int totalPages = totalRecords!= null?(int) Math.ceil((double)
                     totalRecords / request.getBaseRequest().getPageSize()): null;
-            for(TeacherEntity tmp:list){
-                KhoaEntity khoaEntity = iKhoaDao.getById( tmp.getIdKhoa() );
-                tmp.setTenKhoa(khoaEntity.getTenKhoa());
-            }
+//            for(TeacherEntity tmp:list){
+//                KhoaEntity khoaEntity = iKhoaDao.getById( tmp.getIdKhoa() );
+//                tmp.setTenKhoa(khoaEntity.getTenKhoa());
+//            }
             dtoList=list.stream().map(x->{
                 try{
                     return Convert.convertEntityToDTO(x,TeacherDTO.class);

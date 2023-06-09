@@ -82,7 +82,7 @@
     <%--        Lấy tất cả điểm sv của lớp--%>
     <%
         String idDiem="";
-        String uriGetAll = "http://localhost:8080/api/admin/grade/view";
+        String uriGetAll = baseUrl + "/admin/grade/view";
         List<String>listTenSv = new ArrayList<>();
         JSONArray listResp = new JSONArray();
         HttpPost httpPost = new HttpPost();
@@ -100,7 +100,7 @@
             for (int i = 0; i < listResp.length(); i++) {
                 JSONObject infoDiem = listResp.getJSONObject(i);
                 String idSv= infoDiem.getString("idSv");
-                URI uriGetInfoSV = new URIBuilder("http://localhost:8080/api/admin/home/student").setParameter("idSv",idSv).build();
+                URI uriGetInfoSV = new URIBuilder(baseUrl + "/admin/home/student").setParameter("idSv",idSv).build();
 
                 try{
                     HttpGet httpGet = new HttpGet(uriGetInfoSV);
@@ -124,7 +124,7 @@
     %>
     <%--    Lấy hệ số thành phần--%>
     <%
-        URI uriGetHeSoTP = new URIBuilder("http://localhost:8080/api/admin/thanh-phan/get").setParameter("idDiem",idDiem).build();
+        URI uriGetHeSoTP = new URIBuilder(baseUrl + "/admin/thanh-phan/get").setParameter("idDiem",idDiem).build();
         JsonNode heSoThanhPhan = null;
         Integer hesoDiemCc = null;
         Integer hesoDiemBt = null;
