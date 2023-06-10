@@ -40,10 +40,13 @@
     int pageSize = 10;
 
     String khoa = request.getParameter("khoa");
+
+    // set session attribute để fix bug chuyển trang bị mất parameters khoa
     if(khoa != null) {
         getSession.setAttribute("khoa", khoa);
     }
 
+    // đoạn này lấy attribute đã set
     if(khoa == null && getSession.getAttribute("khoa") != null) {
         khoa = (String) getSession.getAttribute("khoa");
     }
