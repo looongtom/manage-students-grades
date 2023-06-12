@@ -16,10 +16,13 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.net.URI" %>
 <%@ page import="org.apache.http.client.utils.URIBuilder" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
 <html>
 <head>
     <%@include file="../menu/admin_menu_header.jsp" %>
     <link rel="stylesheet" href="../../../assets/css/admin/view_grade.css">
+    <link rel="stylesheet" href="../../../assets/css/admin/char_view_grade.css">
     <link rel="stylesheet" href="../../../assets/css/admin/update_grade_form.css">
     <title>Danh sách điểm</title>
 </head>
@@ -255,9 +258,16 @@
             listResp = getAllDiem(httpClient, httpPost);
         }
     %>
+        <%
+//            data for pie chart
+            int countTruot=0;
+            int countQuaMon=0;
+            Map<String, Integer> listDiemChu = new HashMap<>();
+
+        %>
     <h1 class="tieuDeTrang">Danh sách điểm lớp: <%=getIdLopFromClassJSP%></h1>
 
-    <div class="boc-bang">
+        <div class="boc-bang">
         <table class="danhSach" id="excelTable">
             <thead class="hang1">
             <th data-sort onclick="sortTable(0, this)" class="cot-maSV">Mã sinh viên</th>
@@ -291,12 +301,19 @@
 
 
                 checkZero=CheckDiem0(diemCc,diemBt,diemThi,diemKt);
+
                 String diemChu ;
                 if (checkZero) diemChu="F";
                 else diemChu = ConvertDiemChu(diemTb);
+                listDiemChu.put(diemChu, listDiemChu.getOrDefault(diemChu, 0) + 1);
+
                 String trangThai ;
-                if (checkZero) trangThai="Trượt môn";
+                if (checkZero)trangThai="Trượt môn";
                 else trangThai = ConvertTrangThai(diemTb);
+
+                if(trangThai.equals("Trượt môn")) countTruot++;
+                else countQuaMon++;
+
                 String tenSv= listTenSv.get(i);
             %>
             <tr>
@@ -325,9 +342,67 @@
             </tbody>
         </table>
     </div>
-    <%@include file="update_grade_form.jsp" %>
+
+        <div class="bieudoPie">
+
+            <div id="bieudo-TruotDo"></div>
+
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                // Load biểu đồ google
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+
+                // vẽ biểu đồ và set giá trị
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['Task', 'Hours per Day'],
+                        ['Qua môn', <%=countQuaMon%>],
+                        ['Trượt', <%=countTruot%>],
+                    ]);
+                    //Thêm title và set width, height
+                    var options = {'title':'Tỉ lệ sinh viên qua môn', 'width':550, 'height':400};
+
+                    // Hiển thị hiểu đồ
+                    var chart = new google.visualization.PieChart(document.getElementById('bieudo-TruotDo'));
+                    chart.draw(data, options);
+                }
+
+            </script>
+
+
+            <div id="bieudo-Diem"></div>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChartDiem);
+
+                function drawChartDiem() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['Task', 'Hours per Day'],
+                        ['A+', <%=listDiemChu.get("A+")%>],
+                        ['A', <%=listDiemChu.get("A")%>],
+                        ['B+', <%=listDiemChu.get("B+")%>],
+                        ['B', <%=listDiemChu.get("B")%>],
+                        ['C+', <%=listDiemChu.get("C+")%>],
+                        ['C', <%=listDiemChu.get("C")%>],
+                        ['D+', <%=listDiemChu.get("D+")%>],
+                        ['D', <%=listDiemChu.get("D")%>],
+                        ['F', <%=listDiemChu.get("F")%>],
+
+                    ]);
+                    var options = {'title':'Thống kê điểm', 'width':550, 'height':400};
+                    var chart = new google.visualization.PieChart(document.getElementById('bieudo-Diem'));
+                    chart.draw(data, options);
+                }
+            </script>
+
+
+        </div>
 
 </div>
+
+        <%@include file="update_grade_form.jsp" %>
 
 </body>
 
@@ -364,6 +439,5 @@
 <script src="../../../assets/js/admin/text_error_grade.js"></script>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 <script src="../../../assets/js/admin/view_grade.js"></script>
-
 
 </html>
