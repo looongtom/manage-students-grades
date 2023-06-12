@@ -85,12 +85,17 @@ h1 {
 }
 
 .cot-Diem{
-    width: 120px;
+    width: 109px;
     text-align: center;
 }
 
 .cot-Trangthai{
     width: 100px;
+    text-align: center;
+}
+
+.cot-thoi-gian{
+    width: 115px;
     text-align: center;
 }
 
