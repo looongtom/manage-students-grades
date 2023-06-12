@@ -69,3 +69,32 @@ searchInputLh.addEventListener("input", function() {
         }
     }
 });
+
+
+function validateForm() {
+    // Retrieve form fields and perform validation
+    // Example validation logic
+    var selectElementChuyenCan = document.getElementById("chuyenCan");
+    var selectedValueChuyenCan = parseInt(selectElementChuyenCan.value);
+
+    var selectElementBaiTap = document.getElementById("baiTap");
+    var selectedValueBaiTap = parseInt(selectElementBaiTap.value);
+
+    var selectElementThi = document.getElementById("thi");
+    var selectedValueThi = parseInt(selectElementThi.value);
+
+    var selectElementKiemTra = document.getElementById("kiemTra");
+    var selectedValueKiemTra = parseInt(selectElementKiemTra.value);
+
+    var sum = selectedValueChuyenCan + selectedValueBaiTap + selectedValueThi + selectedValueKiemTra;
+
+    if (sum !== 100) {
+        alert("Tổng các hệ số thành phần phải bằng 100%");
+        return false; // Prevent form submission
+    }
+
+    // Additional validation logic goes here
+
+    // If all validations pass, allow form submission
+    return true;
+}

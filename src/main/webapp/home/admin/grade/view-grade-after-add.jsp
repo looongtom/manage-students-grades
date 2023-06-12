@@ -211,12 +211,12 @@
       <thead class="hang1">
       <th data-sort onclick="sortTable(0, this)" class="cot-maSV">Mã sinh viên</th>
       <th data-sort onclick="sortTable(1, this)" class="cot-tenSV">Tên sinh viên</th>
-      <th data-sort onclick="sortName(2,this)" class="cot-Diem">Chuyên cần</th>
-      <th data-sort onclick="sortTable(3, this)" class="cot-Diem">Bài tập</th>
-      <th data-sort onclick="sortTable(4, this)" class="cot-Diem">Cuối kì</th>
-      <th data-sort onclick="sortTable(5, this)" class="cot-Diem">Kiểm tra</th>
+      <th data-sort onclick="sortTable(2,this)" class="cot-Diem">Chuyên cần (<%=String.valueOf(hesoDiemCc)%>%)</th>
+      <th data-sort onclick="sortTable(3, this)" class="cot-Diem">Bài tập (<%=String.valueOf(hesoDiemBt)%>%)</th>
+      <th data-sort onclick="sortTable(4, this)" class="cot-Diem">Cuối kì (<%=String.valueOf(hesoDiemThi)%>%)</th>
+      <th data-sort onclick="sortTable(5, this)" class="cot-Diem">Kiểm tra (<%=String.valueOf(hesoDiemKt)%>%)</th>
       <th data-sort onclick="sortTable(6, this)" class="cot-Diem">Tổng kết</th>
-      <th data-sort onclick="sortTable(7, this)" class="cot-Diem">Điểm chữ</th>
+      <th data-sort onclick="sortTable(6, this)" class="cot-Diem">Điểm chữ</th>
       <th data-sort onclick="sortTable(8, this)" class="cot-Trangthai">Trạng thái</th>
 
       </thead>
@@ -274,5 +274,6 @@
     });
   });
 </script>
+<script src="../../../assets/js/admin/view_grade.js"></script>
 
 </html>

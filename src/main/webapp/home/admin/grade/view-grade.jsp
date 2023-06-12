@@ -262,15 +262,15 @@
             <thead class="hang1">
             <th data-sort onclick="sortTable(0, this)" class="cot-maSV">Mã sinh viên</th>
             <th data-sort onclick="sortTable(1, this)" class="cot-tenSV">Tên sinh viên</th>
-            <th data-sort onclick="sortTable(2,this)" class="cot-Diem">Chuyên cần</th>
-            <th data-sort onclick="sortTable(3, this)" class="cot-Diem">Bài tập</th>
-            <th data-sort onclick="sortTable(4, this)" class="cot-Diem">Cuối kì</th>
-            <th data-sort onclick="sortTable(5, this)" class="cot-Diem">Kiểm tra</th>
+            <th data-sort onclick="sortTable(2,this)" class="cot-Diem">Chuyên cần (<%=String.valueOf(hesoDiemCc)%>%)</th>
+            <th data-sort onclick="sortTable(3, this)" class="cot-Diem">Bài tập (<%=String.valueOf(hesoDiemBt)%>%)</th>
+            <th data-sort onclick="sortTable(4, this)" class="cot-Diem">Cuối kì (<%=String.valueOf(hesoDiemThi)%>%)</th>
+            <th data-sort onclick="sortTable(5, this)" class="cot-Diem">Kiểm tra (<%=String.valueOf(hesoDiemKt)%>%)</th>
             <th data-sort onclick="sortTable(6, this)" class="cot-Diem">Tổng kết</th>
-            <th data-sort onclick="sortTable(7, this)" class="cot-Diem">Điểm chữ</th>
+            <th data-sort onclick="sortTable(6, this)" class="cot-Diem">Điểm chữ</th>
 
-            <th data-sort onclick="sortTable(8, this)" class="cot-Diem">Thời gian tạo</th>
-            <th data-sort onclick="sortTable(9, this)" class="cot-Diem">Thời gian sửa</th>
+            <th data-sort onclick="sortTable(8, this)" class="cot-thoi-gian">Thời gian tạo</th>
+            <th data-sort onclick="sortTable(9, this)" class="cot-thoi-gian">Thời gian sửa</th>
 
             <th data-sort onclick="sortTable(10, this)" class="cot-Trangthai">Trạng thái</th>
             <th class="hanh-dong">Action</th>
@@ -286,7 +286,10 @@
                 Double diemBt = diemTungHang.getDouble("diemBt");
                 Double diemThi = diemTungHang.getDouble("diemThi");
                 Double diemKt = diemTungHang.getDouble("diemKt");
+
                 Double diemTb = ConvertDiemTB( (diemCc*hesoDiemCc+diemBt*hesoDiemBt+diemThi*hesoDiemThi+diemKt*hesoDiemKt)/100 ) ;
+
+
                 checkZero=CheckDiem0(diemCc,diemBt,diemThi,diemKt);
                 String diemChu ;
                 if (checkZero) diemChu="F";
@@ -305,8 +308,8 @@
                 <td class="cot-Diem"><%= decimalFormat.format(diemKt) %></td>
                 <td class="cot-Diem"><%= decimalFormat.format(diemTb) %></td>
                 <td class="cot-Diem"><%= diemChu %></td>
-                <td class="cot-Diem"><%= diemTungHang.getString("ngayTao") %></td>
-                <td class="cot-Diem"><%= diemTungHang.getString("ngaySua") %></td>
+                <td class="cot-thoi-gian"><%= diemTungHang.getString("ngayTao") %></td>
+                <td class="cot-thoi-gian"><%= diemTungHang.getString("ngaySua") %></td>
                 <td class="cot-Trangthai" id="<%= trangThai.equals("Qua môn") ? "ttQua" : "ttTruot" %>"><%=trangThai %></td>
                 <td class="chucNang">
                     <div class="hop-hanh-dong">
@@ -360,6 +363,7 @@
 <script src="../../../assets/js/admin/update_grade.js"></script>
 <script src="../../../assets/js/admin/text_error_grade.js"></script>
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="../../../assets/js/admin/view_grade.js"></script>
 
 
 </html>

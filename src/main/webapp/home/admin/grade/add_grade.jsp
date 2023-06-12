@@ -48,7 +48,7 @@
         %>
         <%
             List<Integer>listSoTP=new ArrayList<>();
-            for(int i=0;i<=9;i++){
+            for(int i=1;i<=9;i++){
                 listSoTP.add(i*10);
             }
         %>
@@ -68,7 +68,7 @@
                 <div class="khuVucNhapDiem-dau-tieuDe">Thông tin nhập điểm</div>
             </div>
             <div class="khuVucNhapDiem-phanThan">
-                <form method="post" action="/api/admin/grade/create-or-edit" enctype="multipart/form-data">
+                <form method="post" action="/api/admin/grade/create-or-edit" enctype="multipart/form-data"  onsubmit="return validateForm()">
                     <input type="hidden" name="idDiem" value="<%= randomID %>" />
                     <div class="phanThongTin">
                         <div class="cot">
@@ -120,8 +120,6 @@
                                         for(TeacherEntity giangVienEachRow : listGv){
                                     %>
                                     <option value=<%=giangVienEachRow.getIdGv()%>><%=giangVienEachRow.getTenGv()%></option>
-                                    <%--                                    <option value="Class A">Trần Quang Minh</option>--%>
-                                    <%--                                    <option value="Class B">Trịnh Minh Tuấn</option>--%>
                                     <% }}
                                     %>
                                 </select>
@@ -131,7 +129,7 @@
                             <div class="hang">
                                 <label for="" class="nhanModal">Chuyên cần</label>
 
-                                <select name="chuyen_can" class="nhapModal" required>
+                                <select id="chuyenCan" name="chuyen_can" class="nhapModal"required >
                                     <option value="">Please select</option>
                                     <% for(Integer heso:listSoTP){ %>
                                     <option value=<%=heso%>><%=heso+"%"%></option>
@@ -143,7 +141,7 @@
 
                             <div class="hang">
                                 <label for="" class="nhanModal" >Bài tập</label>
-                                <select name="bai_tap" class="nhapModal" required>
+                                <select id="baiTap" name="bai_tap" class="nhapModal" required>
                                     <option value="">Please select</option>
                                     <% for(Integer heso:listSoTP){ %>
                                     <option value=<%=heso%>><%=heso+"%"%></option>
@@ -205,7 +203,7 @@
 
                             <div class="hang">
                                 <label for="" class="nhanModal" >Điểm thi</label>
-                                <select name="thi" class="nhapModal" required>
+                                <select id="thi" name="thi" class="nhapModal" required>
                                     <option value="">Please select</option>
                                     <% for(Integer heso:listSoTP){ %>
                                     <option value=<%=heso%>><%=heso+"%"%></option>
@@ -216,7 +214,7 @@
                             </div>
                             <div class="hang">
                                 <label for="" class="nhanModal" >Kiểm tra</label>
-                                <select name="kiem_tra" class="nhapModal" required>
+                                <select id="kiemTra" name="kiem_tra" class="nhapModal" required>
                                     <option value="">Please select</option>
                                     <% for(Integer heso:listSoTP){ %>
                                     <option value=<%=heso%>><%=heso+"%"%></option>
