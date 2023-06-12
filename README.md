@@ -15,7 +15,6 @@ I) Thành viên:
 + Xem điểm của lớp học phần ở trang Admin
 + Xuất điểm ra file excel
 
-
 3) Lại Ngọc Sơn: 
 - Module làm:
 + Đăng nhập/Đăng xuất
@@ -24,10 +23,10 @@ I) Thành viên:
 + Authen/Author
 
 4) Nguyễn Minh Quân:
-- Module làm: 
+- Module làm: User
 + Trang chủ User
 + Xem điểm của user đó
-+ Giao diện các form thêm + xóa ở phần Admin
++ Tính GPA tổng, GPA từng kì của user
 + Giao diện trang 404
 
 5) Đào Xuân Đồng:
