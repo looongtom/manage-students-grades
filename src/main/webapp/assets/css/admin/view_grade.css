@@ -2,13 +2,6 @@ button {
     border-radius: 5px;
 }
 
-.monHocMuc,
-.monHocMuc:hover {
-    padding-left: 20px;
-    margin-left: -20px;
-    background-color: var(--red-color);
-}
-
 h1 {
     font-size: 30px;
 }
@@ -17,68 +10,12 @@ h1 {
     margin-left: 20px;
 }
 
-.themVaTimKiem {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 10px 20px;
-}
-
-.nutThemMH,
-.nutTimKiem {
-    background-color: var(--red-color);
-    color: var(--white-color);
-    font-size: 12px;
-    padding: 3px;
-    border: none
-}
-
-.nutTimKiem {
-    margin-right: 10px;
-}
-
-.nutThemMH:hover,
-.nutTimKiem:hover {
-    background-color: var(--red-color);
-    opacity: 0.7;
-}
-
-.nutThemMH_tieuDe {
-    margin-right: 10px;
-}
-
-.timKiem {
-    font-size: 14px;
-    display: flex;
-    flex-direction: row;
-}
-
-.tieuDeTimKiem {
-    margin-right: 10px;
-    line-height: 40px;
-    align-items: center;
-}
-
-.nhapTimKiem {
-    padding: 10px;
-    width: 20vw;
-    margin-right: 10px;
-    border-radius: 5px;
-    border-width: 1px;
-}
-
-.nutTimKiem_tieuDe {
-    margin-right: 5px;
-}
-
 /* table */
 .hanh-dong {
     width: 115px;
     align-items: center;
 
 }
-
-
 
 .cot-maSV {
     width: 109px;
@@ -118,6 +55,9 @@ h1 {
     overflow-x: auto;
     padding: 10px 10px 15px 10px;
     margin-left: 10px;
+
+    order: 2;
+
 }
 
 .danhSach {
@@ -212,22 +152,14 @@ tr:nth-child(even) {
     text-align: center;
 }
 
-.xoa {
-    background-color: var(--red-color);
-}
-
-.xoa:hover {
-    background-color: var(--red-color);
-    opacity: 0.8;
-}
-
-.xoa_tieuDe {
-    margin-right: 5px;
-}
 
 /* đóng menu */
 .manHinhChinh.dongMenu .boc-bang {
     width: 90vw;
+}
+.manHinhChinh{
+    display: flex;
+    flex-direction: column;
 }
 
 @media screen and (max-width: 740px) {
