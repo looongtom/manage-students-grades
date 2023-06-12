@@ -42,7 +42,7 @@
 
     String getIdLopFromClassJSP = request.getParameter("idLop");
 
-    // variables in request body
+    //get idLop từ request
     String idLop = getIdLopFromClassJSP;
     String sortField = "";
     String sortOrder = "";
@@ -53,7 +53,7 @@
         pageIndex = (int) session.getAttribute("pageIndexSV");
     }
 
-    // request body for getAll, finding and sorting
+    // request body getAll,tìm kiếm và lọc
     String requestBodyDiem = "{" +
             "\"idLop\":\"" + idLop + "\"," +
             "\"baseRequest\":{" +
@@ -411,7 +411,7 @@
         var table = document.getElementById("excelTable");
         var sheetName = "Sheet1";
 
-        // Clone the table and remove the last column
+
         var tableClone = table.cloneNode(true);
         var rows = tableClone.rows;
         for (var i = 0; i < rows.length; i++) {

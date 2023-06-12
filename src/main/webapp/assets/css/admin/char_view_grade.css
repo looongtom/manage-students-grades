@@ -2,10 +2,10 @@
     font-family: Helvetica, sans-serif;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
+
 
     width: 100%;
-    max-width: 950px; /* Adjust the maximum width as needed */
+    max-width: 950px;
     margin: 0 auto;
 
     order: 1;
