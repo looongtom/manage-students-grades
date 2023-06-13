@@ -7,11 +7,12 @@
 
 body {
     font-family: Arial, sans-serif;
-    /*background-color: #f2f2f2;*/
     background-image: url("../../../assets/images/student_study_with_lap.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+
+
 }
 
 :root {
@@ -49,6 +50,7 @@ h1 {
 .scrollable-table table {
     width: 100%;
     border-collapse: collapse;
+    backdrop-filter: blur(10px);
 }
 
 /* Định dạng các ô trong bảng */
