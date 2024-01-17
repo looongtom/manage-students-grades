@@ -53,7 +53,7 @@
         pageIndex = (int) session.getAttribute("pageIndexSV");
     }
 
-    // request body getAll,tìm kiếm và lọc
+    // request body getAll và lọc
     String requestBodyDiem = "{" +
             "\"idLop\":\"" + idLop + "\"," +
             "\"baseRequest\":{" +
@@ -98,7 +98,7 @@
 
             listResp = getAllDiem(httpClient, httpPost);
             JSONObject diem = listResp.getJSONObject(1);
-            idDiem = diem.getString("idDiem"); // set idDiem
+            idDiem = diem.getString("idDiem"); // get idDiem
 
             for (int i = 0; i < listResp.length(); i++) {
                 JSONObject infoDiem = listResp.getJSONObject(i);

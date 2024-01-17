@@ -53,10 +53,10 @@ public class CreateOrEditGradeController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
 
-        HttpSession session = req.getSession();
-        String cookieName = (String) session.getAttribute("cookie_name");
-        String cookieValue = (String) session.getAttribute("cookie_value");
-        resp.setHeader( cookieName,cookieValue );
+//        HttpSession session = req.getSession();
+//        String cookieName = (String) session.getAttribute("cookie_name");
+//        String cookieValue = (String) session.getAttribute("cookie_value");
+//        resp.setHeader( cookieName,cookieValue );
 
         Part part = req.getPart("file");
         String idDiem = req.getParameter("idDiem");

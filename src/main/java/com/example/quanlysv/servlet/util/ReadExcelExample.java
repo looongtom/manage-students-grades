@@ -56,7 +56,7 @@ public class ReadExcelExample  {
             // Get all cells
             Iterator<Cell> cellIterator = nextRow.cellIterator();
 
-            // Read cells and set value for book object
+            // Read cells and và set value cho điểm
             GradeEntity grade = new GradeEntity();
             while (cellIterator.hasNext()) {
                 //Read cell

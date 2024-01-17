@@ -20,7 +20,7 @@
 
         <%
             String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            int length = 8; // Change this to set the length of the generated ID
+            int length = 8; // độ dài ID điểm
             StringBuilder idBuilder = new StringBuilder();
             Random random = new Random();
 
@@ -33,16 +33,16 @@
             String randomID = "Diem_"+idBuilder.toString();
         %>
 
-        <!-- Use the generated ID wherever you need it -->
+        <!--  giá trị id điểm -->
         <input type="hidden" name="idDiem" value="<%= randomID %>" />
 
         <% boolean showDialog = false; %>
 
         <%
-            // Get the "showDialog" attribute from the request
+            // Thông báo nhâp điểm thành công
             Boolean showDialogAttribute = (Boolean) request.getAttribute("showDialog");
             if (showDialogAttribute != null && showDialogAttribute.booleanValue()) {
-                // Set the "showDialog" variable to true if the attribute is set to true
+//                Set giá trị showDialog = true nếu attribute showDialog được set = true
                 showDialog = true;
             }
         %>
@@ -54,6 +54,7 @@
         %>
         <h1 class="tieuDeTrang">Nhập điểm</h1>
         <%
+//            gán giá trị malop từ attribute idlop
             String malop = (String) request.getAttribute("idLop");
         %>
         <div id="my-dialog">
@@ -68,6 +69,7 @@
                 <div class="khuVucNhapDiem-dau-tieuDe">Thông tin nhập điểm</div>
             </div>
             <div class="khuVucNhapDiem-phanThan">
+<%--                gọi api method post, validateForm dùng js, nếu validate true thì mới gọi api--%>
                 <form method="post" action="/api/admin/grade/create-or-edit" enctype="multipart/form-data"  onsubmit="return validateForm()">
                     <input type="hidden" name="idDiem" value="<%= randomID %>" />
                     <div class="phanThongTin">
@@ -79,7 +81,7 @@
                                 <label for="" class="nhanModal">Học kỳ</label>
 
                                 <input type="text" id="searchInputHk" class="inputSearch" placeholder="Tìm kiếm">
-                                <!-- Create the select dropdown -->
+                                <!--Học kỳ dropdown -->
                                 <select id="hkSelect" name="idHk" class="nhapModal" required>
                                     <option value="">Please select</option>
                                     <%
@@ -91,18 +93,6 @@
                                     }
                                     %>
                                 </select>
-
-<%--                                <select id="mySelect" name="idHk" class="nhapModal" required>--%>
-<%--                                    <option value="">Please select</option>--%>
-<%--                                    <%--%>
-<%--                                        if(listHK!=null){--%>
-<%--                                        for(HocKyEntity hocKyEachRow : listHK){--%>
-<%--                                    %>--%>
-<%--                                    <option value=<%=hocKyEachRow.getIdHk()%>><%=hocKyEachRow.getTenHocKy()%></option>--%>
-<%--                                    <% }--%>
-<%--                                        }--%>
-<%--                                    %>--%>
-<%--                                </select>--%>
                             </div>
 
                             <div class="hang">

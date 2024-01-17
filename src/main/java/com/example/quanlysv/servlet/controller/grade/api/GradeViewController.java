@@ -22,15 +22,15 @@ public class GradeViewController extends HttpServlet {
     public IGradeService service ;
     public GradeViewController() { this.service=new GradeServiceImpl();
     }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("application/json");
-        GradeFilter baseRequest = HttpUtil.of(req.getReader()).toModel(GradeFilter.class);
-        BaseResponse<?> baseResponse = service.viewGradeByIdLop(baseRequest);
-        ResponseUtils.responseApi(req, resp, baseResponse);
-    }
+//
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        req.setCharacterEncoding("UTF-8");
+//        resp.setContentType("application/json");
+//        GradeFilter baseRequest = HttpUtil.of(req.getReader()).toModel(GradeFilter.class);
+//        BaseResponse<?> baseResponse = service.viewGradeByIdLop(baseRequest);
+//        ResponseUtils.responseApi(req, resp, baseResponse);
+//    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
